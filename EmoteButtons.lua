@@ -1,5 +1,23 @@
-﻿
---[[
+﻿--[[
+
+Tubtubs
+Looking to expand this EmoteButtons addon to include support for future expansions emotes.
+
+
+TODO:
+Expand the left/right wing to a size of 8. [CHECK]
+Make the wings dynamically sized (can have less than 8 buttons)
+Add another level of depth to the buttons
+Add action type to the button info, so they can be: Emotes, slash commands, or accessing a Deck
+
+	DEFAULT_CHAT_FRAME:AddMessage("TEST")
+]]--
+
+
+
+
+
+--[[ Old comment header, leaving in for credits. They probably don't want to be contacted about this addon though.
 
 EmoteButtons
 
@@ -25,18 +43,20 @@ EmoteButtons_FirstLevel =
 	 "EmoteButtons_05", "EmoteButtons_06", "EmoteButtons_07", "EmoteButtons_08"};
 EmoteButtons_FirstLevelCount = getn(EmoteButtons_FirstLevel);
 
-EmoteButtons_WingCount = 6;
+EmoteButtons_WingCount = 8;
 
-EmoteButtons_LeftWingCount = 6;
+EmoteButtons_LeftWingCount = 8;
 EmoteButtons_LeftWing = 
 	{"EmoteButtons_10", "EmoteButtons_11", "EmoteButtons_12",
-	 "EmoteButtons_14", "EmoteButtons_15", "EmoteButtons_16"};
+	 "EmoteButtons_14", "EmoteButtons_15", "EmoteButtons_16",
+	"EmoteButtons_18","EmoteButtons_19"};
 EmoteButtons_LeftWing_Deck = "#0";
 
-EmoteButtons_RightWingCount = 6;
+EmoteButtons_RightWingCount = 8;
 EmoteButtons_RightWing = 
 	{"EmoteButtons_20", "EmoteButtons_21", "EmoteButtons_22",
-	 "EmoteButtons_24", "EmoteButtons_25", "EmoteButtons_26"};
+	 "EmoteButtons_24", "EmoteButtons_25", "EmoteButtons_26",
+	"EmoteButtons_28", "EmoteButtons_29"};
 EmoteButtons_RightWing_Deck = "#0";
 
 EmoteButtons_DeckList =
@@ -59,6 +79,7 @@ EmoteButtons_LastSlide = 0;
 
 
 function EmoteButtons_WipeVars()
+	DEFAULT_CHAT_FRAME:AddMessage("EMOTEBUTTONS_TEST")
 	local i,j;
 	local inr = EmoteButtons_ImageCount;
 EmoteButtons_Vars = {
@@ -77,8 +98,12 @@ EmoteButtons_Vars = {
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""} },
 		["Deck 2"] = { {action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
@@ -89,8 +114,12 @@ EmoteButtons_Vars = {
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""} },
 		["Deck 4"] = { {action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
@@ -101,8 +130,12 @@ EmoteButtons_Vars = {
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""} },
 		["Deck 6"] = { {action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
@@ -113,8 +146,12 @@ EmoteButtons_Vars = {
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""} },
 		["Deck 8"] = { {action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
+				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
@@ -233,10 +270,11 @@ function EmoteButtons_ArrangeFrames()
 	
 	--left wing
 	size = EmoteButtons_LeftWingCount+3;
-	deg = floor(180/size)
+	--deg = floor(180/size+1)
+	deg = 20
 	shift = -1;
-	for i=2, size-2 do
-		obj = getglobal(EmoteButtons_LeftWing[i+shift]);
+	for i=1, size-3 do
+		obj = getglobal(EmoteButtons_LeftWing[i]);
 		obj:SetPoint("CENTER", EmoteButtons_Main, "CENTER", - wr*sin(i*deg+ws),wr*cos(i*deg+ws));
 		obj:SetWidth(mra);
 		obj:SetHeight(mra);
@@ -247,10 +285,10 @@ function EmoteButtons_ArrangeFrames()
 
 	--right wing
 	size = EmoteButtons_RightWingCount+3;
-	deg = floor(180/size)
+	deg = 20
 	shift = -1;
-	for i=2, size-2 do
-		obj = getglobal(EmoteButtons_RightWing[i+shift]);
+	for i=1, size-3 do
+		obj = getglobal(EmoteButtons_RightWing[i]);
 		obj:SetPoint("CENTER", EmoteButtons_Main, "CENTER", wr*sin(i*deg-ws),wr*cos(i*deg-ws));
 		obj:SetWidth(mra);
 		obj:SetHeight(mra);
