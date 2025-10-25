@@ -6,9 +6,16 @@ Looking to expand this EmoteButtons addon to include support for future expansio
 
 TODO:
 Expand the left/right wing to a size of 8. [CHECK]
-Make the wings dynamically sized (can have less than 8 buttons)
+Make the wings dynamically sized (can have less than 8 buttons) [IN PROGRESS, LEFT SIDE DONE]
 Add another level of depth to the buttons
 Add action type to the button info, so they can be: Emotes, slash commands, or accessing a Deck
+Add image to button info, so it doesn't get randomzied. lol
+Make the decks and buttons customizable
+Can I get around the decks being pre-rendedered as left vs right? I guess I don't want them duplicated?
+
+DEPARTING NOTES: 
+	Have left side wing setup to handle 0-8 arguments. Maybe I can arrange where they are more dynamically, so theyre closer
+	to center, even if theres fewer than 8 items in a deck.
 
 	DEFAULT_CHAT_FRAME:AddMessage("TEST")
 ]]--
@@ -93,14 +100,15 @@ EmoteButtons_Vars = {
 				{action="", tooltip="", image="", wing="Right"},
 				{action="", tooltip="", image="", wing="Right"},
 				{action="", tooltip="", image="", wing="Right"} },
-		["Deck 1"] = { {action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""} },
+		["Deck 1"] = { --{action="", tooltip="", image=""},
+				--{action="", tooltip="", image=""},
+				--{action="", tooltip="", image=""},
+				--{action="", tooltip="", image=""},
+				--{action="", tooltip="", image=""},
+				--{action="", tooltip="", image=""},
+				--{action="", tooltip="", image=""},
+				--{action="", tooltip="", image=""} 
+			},
 		["Deck 2"] = { {action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
@@ -109,14 +117,7 @@ EmoteButtons_Vars = {
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""} },
-		["Deck 3"] = { {action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""} },
+		["Deck 3"] = {},
 		["Deck 4"] = { {action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
@@ -169,7 +170,8 @@ EmoteButtons_Vars = {
 	end
 
 	for i=1, EmoteButtons_DecksCount do
-		for j=1, EmoteButtons_WingCount do
+		for j=1, getn(EMOTEBUTTONS_SE[EmoteButtons_DeckList[i]]) do
+			EmoteButtons_Vars.Actions[EmoteButtons_DeckList[i]][j] = {action="", tooltip="", image=""}
 			EmoteButtons_Vars.Actions[EmoteButtons_DeckList[i]][j].action = EMOTEBUTTONS_SE[EmoteButtons_DeckList[i]][j].action;
 			EmoteButtons_Vars.Actions[EmoteButtons_DeckList[i]][j].tooltip = EMOTEBUTTONS_SE[EmoteButtons_DeckList[i]][j].tooltip;
 			EmoteButtons_Vars.Actions[EmoteButtons_DeckList[i]][j].image = EmoteButtons_ImageList[math.random(inr)];
@@ -396,7 +398,8 @@ function EmoteButtons_ToggleLeftWing()
 		obj = getglobal(EmoteButtons_LeftWing[i]);
 		if ((EmoteButtons_LevelShown == 3) or (EmoteButtons_LevelShown == 6)) then
 			FadeOutFrame(obj, 0.1*i);
-		else
+		elseif (EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][i]~=nil and 
+		EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][i].action~=nil) then
 			FadeInFrame(obj,0.15*(lwc-i));
 		end
 	end
@@ -415,7 +418,8 @@ function EmoteButtons_ToggleRightWing()
 		obj = getglobal(EmoteButtons_RightWing[i]);
 		if ((EmoteButtons_LevelShown == 4) or (EmoteButtons_LevelShown == 6)) then
 			FadeOutFrame(obj, 0.1*i);
-		else
+		elseif (EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][i]~=nil and 
+		EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][i].action~=nil) then
 			FadeInFrame(obj,0.15*(rwc-i));
 		end
 	end
@@ -438,7 +442,19 @@ function EmoteButtons_FadeWing(wing)
 	wingC=getn(wingT);
 	for i=1, wingC do
 		obj=getglobal(wingT[i]);
-		FadeInFrame(obj, 0.1*i);
+		if (wing == "left") then
+			if (EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][i]~=nil) then
+				FadeInFrame(obj, 0.1*i);
+			else
+				FadeOutFrame(obj, 0.1*i);
+			end
+		elseif (wing == "right") then
+			if (EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][i]~=nil) then
+				FadeInFrame(obj, 0.1*i);
+			else
+				FadeOutFrame(obj, 0.1*i);
+			end
+		end
 	end
 end
 
@@ -548,13 +564,13 @@ function EmoteButtons_LoadDeck(deck, wing)
 		end
 	elseif wing == "Left" then
 		EmoteButtons_LeftWing_Deck = deck
-		for i=1, EmoteButtons_LeftWingCount do
+		for i=1, getn( EmoteButtons_Vars.Actions[deck]) do
 			image = EmoteButtons_Vars.Actions[deck][i].image;
 			getglobal(EmoteButtons_LeftWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
 		end
 	else
 		EmoteButtons_RightWing_Deck = deck
-		for i=1, EmoteButtons_RightWingCount do
+		for i=1, getn( EmoteButtons_Vars.Actions[deck]) do
 			image = EmoteButtons_Vars.Actions[deck][i].image;
 			getglobal(EmoteButtons_RightWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
 		end
