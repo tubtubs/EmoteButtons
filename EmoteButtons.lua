@@ -300,6 +300,52 @@ function EmoteButtons_ArrangeFrames()
 	end
 end
 
+function ReArrangeLeftWing()
+	DEFAULT_CHAT_FRAME:AddMessage("Skas")
+
+	local i, obj, correction;
+
+--button size
+	local mra = EmoteButtons_Vars.Main_Ratio;
+--icon size inside the button
+	local mri = floor(0.6*mra);
+--main deck distance from center
+	local mr = floor(mra*1.29);
+--main deck shift in degrees
+	local ms = EmoteButtons_Vars.Main_Shift;
+--main deck correction to get eclipse
+	local mrc = floor(mr/5);
+--wings distance from center
+	local wr = floor(mra*2.29);
+--wings shift in degrees
+	local ws = EmoteButtons_Vars.Wing_Shift;
+
+	--left wing
+	real_size = 0
+	for i=1, getn(EmoteButtons_LeftWing) do
+		if (EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][i]~=nil) then
+			real_size = real_size+1
+			DEFAULT_CHAT_FRAME:AddMessage(EmoteButtons_LeftWing_Deck)
+		else
+			break
+		end
+	end
+	DEFAULT_CHAT_FRAME:AddMessage(real_size)
+	size = real_size+3;
+	deg = floor((180)/real_size)
+	--deg = 20
+	shift = -1;
+	for i=1, size-3 do
+		obj = getglobal(EmoteButtons_LeftWing[i]);
+		obj:SetPoint("CENTER", EmoteButtons_Main, "CENTER", - wr*sin(i*deg+ws),wr*cos(i*deg+ws));
+		obj:SetWidth(mra);
+		obj:SetHeight(mra);
+		obj = getglobal(obj:GetName().."_Icon");
+		obj:SetWidth(mri);
+		obj:SetHeight(mri);
+	end
+end
+
 function FadeOutFrame( frame, time )
 	local fadeInfo = {}
 	fadeInfo.mode = "OUT"
@@ -534,6 +580,7 @@ function EmoteButtons_ToggleDeck(deck, wing)
 			EmoteButtons_ToggleLeftWing();
 		else
 			EmoteButtons_LoadDeck(deck, wing);
+			--ReArrangeLeftWing()
 			if (EmoteButtons_LevelShown~=3 and EmoteButtons_LevelShown~=6) then
 				EmoteButtons_ToggleLeftWing();
 			else
