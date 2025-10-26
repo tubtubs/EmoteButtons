@@ -83,8 +83,13 @@ EmoteButtons_FarRightWing =
 	"EmoteButtons_48","EmoteButtons_49"};
 EmoteButtons_FarRightWing_Deck = "#0";
 
-EmoteButtons_DeckList =
-	{"Deck 1", "Deck 2", "Deck 3", "Deck 4", "Deck 5", "Deck 6", "Deck 7", "Deck 8", "Deck 9"};
+
+EmoteButtons_DeckList={}
+for i, v in pairs(EMOTEBUTTONS_SE) do
+	DEFAULT_CHAT_FRAME:AddMessage(format("s %s",i));
+	table.insert(EmoteButtons_DeckList,i)
+end
+
 EmoteButtons_DecksCount = getn(EmoteButtons_DeckList);
 
 EmoteButtons_FirstLevelName = "Main";
@@ -128,64 +133,14 @@ EmoteButtons_Vars = {
 				{action="", tooltip="", image="", wing="Right"},
 				{action="", tooltip="", image="", wing="Right"},
 				{action="", tooltip="", image="", wing="Right"} },
-		["Deck 1"] = { --{action="", tooltip="", image=""},
-				--{action="", tooltip="", image=""},
-				--{action="", tooltip="", image=""},
-				--{action="", tooltip="", image=""},
-				--{action="", tooltip="", image=""},
-				--{action="", tooltip="", image=""},
-				--{action="", tooltip="", image=""},
-				--{action="", tooltip="", image=""} 
-			},
-		["Deck 2"] = { {action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""} },
+		["Deck 1"] = {},
+		["Deck 2"] = {},
 		["Deck 3"] = {},
-		["Deck 4"] = { {action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""} },
-		["Deck 5"] = { {action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""} },
-		["Deck 6"] = { {action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""} },
-		["Deck 7"] = { {action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""} },
-		["Deck 8"] = { {action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""},
-				{action="", tooltip="", image=""} },
+		["Deck 4"] = {},
+		["Deck 5"] = {},
+		["Deck 6"] = {},
+		["Deck 7"] = {},
+		["Deck 8"] = {},
 		["Deck 9"] = {},
 	},
 	Main_Ratio = 42,
@@ -726,6 +681,8 @@ function EmoteButtons_IsADeck(text)
 end
 
 function EmoteButtons_ToggleDeck(deck, wing)
+
+
 	if wing=="Left" then
 		if EmoteButtons_LeftWing_Deck==deck then
 			if(EmoteButtons_Levels["FarLeft"]) then

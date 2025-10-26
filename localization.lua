@@ -45,9 +45,17 @@ EMOTEBUTTONS_OPENDECK6		= EMOTEBUTTONS_OPENDECK.." 6";
 EMOTEBUTTONS_OPENDECK7		= EMOTEBUTTONS_OPENDECK.." 7";
 EMOTEBUTTONS_OPENDECK8		= EMOTEBUTTONS_OPENDECK.." 8";
 
+EBACTIONTYPE_DECK=0
+EBACTIONTYPE_EMOTE=1
+EBACTIONTYPE_SLASHCMD=2
+
+
+--type=EBACTIONTYPE_DECK
+--type=EBACTIONTYPE_EMOTE
+--type=EBACTIONTYPE_SLASHCMD
 EMOTEBUTTONS_SE = {
 	["Main"] = {
-		{action="Deck 1", tooltip="Flattering emotes"},
+		{action="Deck 1", type=EBACTIONTYPE_DECK, tooltip="Flattering emotes"},
 		{action="/laugh", tooltip="Laugh"},
 		{action="/hi", tooltip="Greet"},
 		{action="Deck 2", tooltip="Nice emotes"},
