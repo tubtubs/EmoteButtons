@@ -59,7 +59,7 @@ EMOTEBUTTONS_SE = {
 		{action="/welcome", tooltip="Welcome"},
 		{action="/bow", tooltip="Bow"},
 		{action="/whistle", tooltip="Whistle"},
-		{action="/kneel", tooltip="Kneel down"}},
+		{action="Deck 9", tooltip="Deck 9"}},
 	["Deck 2"] = { {action="/dance", tooltip="Dance"},
 		{action="/salute", tooltip="Salute"},
 		{action="/kiss", tooltip="Kiss"},
@@ -67,7 +67,7 @@ EMOTEBUTTONS_SE = {
 		{action="/train", tooltip="Make train voices"},
 		{action="/kiss", tooltip=" down"},
 		{action="/sit", tooltip="TEST"},
-		{action="/silly", tooltip="Tell a joke"} },
+		{action="Deck 9", tooltip="Deck 9"} },
 	["Deck 3"] = { {action="/angry", tooltip="Raise your fist"},
 		{action="/shoo", tooltip="Shoo away"},
 		{action="/rude", tooltip="Make a rude gesture"},
@@ -111,5 +111,13 @@ EMOTEBUTTONS_SE = {
 		{action="/console reloadui", tooltip="Reload the User Interface"},
 		{action="/kiss", tooltip=" down"},
 		{action="/sit", tooltip="TEST"},
-		{action="/script EmoteButtons_Reset();", tooltip="Reset EmoteButtons standard emotes"} }	
+		{action="Deck 9", tooltip="Deck 9"} },
+	["Deck 9"] = { {action="/played", tooltip="yed time"},
+		{action="/lol", tooltip="Said info"},
+		{action="/lol", tooltip="Do search"},
+		{action="/lol", tooltip="Ocro UI"},
+		{action="/lol", tooltip="Rrface"},
+		{action="/lol", tooltip=" n"},
+		{action="/lol", tooltip="TT"},
+		{action="/lol", tooltip="as"} }		
 }

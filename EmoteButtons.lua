@@ -6,8 +6,9 @@ Looking to expand this EmoteButtons addon to include support for future expansio
 
 TODO:
 Expand the left/right wing to a size of 8. [CHECK]
-Make the wings dynamically sized (can have less than 8 buttons) [IN PROGRESS, LEFT SIDE DONE]
-Add another level of depth to the buttons
+Make the wings dynamically sized (can have less than 8 buttons) [CHECK]
+Add another level of depth to the buttons [CHECK]
+Might try to make it possible to do a more page too. Hmmm.
 Add action type to the button info, so they can be: Emotes, slash commands, or accessing a Deck
 Add image to button info, so it doesn't get randomzied. lol
 Make the decks and buttons customizable
@@ -16,6 +17,8 @@ Can I get around the decks being pre-rendedered as left vs right? I guess I don'
 DEPARTING NOTES: 
 	Have left side wing setup to handle 0-8 arguments. Maybe I can arrange where they are more dynamically, so theyre closer
 	to center, even if theres fewer than 8 items in a deck.
+	Didn't like the way they look. Might work on how the sit later, might be neat for them to sit in the middle.
+	But its a little touchy, and I wasn't happy with the results.
 
 	DEFAULT_CHAT_FRAME:AddMessage("TEST")
 ]]--
@@ -59,6 +62,13 @@ EmoteButtons_LeftWing =
 	"EmoteButtons_18","EmoteButtons_19"};
 EmoteButtons_LeftWing_Deck = "#0";
 
+EmoteButtons_FarLeftWingCount = 8;
+EmoteButtons_FarLeftWing = 
+	{"EmoteButtons_30", "EmoteButtons_31", "EmoteButtons_32",
+	 "EmoteButtons_34", "EmoteButtons_35", "EmoteButtons_36",
+	"EmoteButtons_38","EmoteButtons_39"};
+EmoteButtons_FarLeftWing_Deck = "#0";
+
 EmoteButtons_RightWingCount = 8;
 EmoteButtons_RightWing = 
 	{"EmoteButtons_20", "EmoteButtons_21", "EmoteButtons_22",
@@ -66,13 +76,32 @@ EmoteButtons_RightWing =
 	"EmoteButtons_28", "EmoteButtons_29"};
 EmoteButtons_RightWing_Deck = "#0";
 
+EmoteButtons_FarRightWingCount = 8;
+EmoteButtons_FarRightWing = 
+	{"EmoteButtons_40", "EmoteButtons_41", "EmoteButtons_42",
+	 "EmoteButtons_44", "EmoteButtons_45", "EmoteButtons_46",
+	"EmoteButtons_48","EmoteButtons_49"};
+EmoteButtons_FarRightWing_Deck = "#0";
+
 EmoteButtons_DeckList =
-	{"Deck 1", "Deck 2", "Deck 3", "Deck 4", "Deck 5", "Deck 6", "Deck 7", "Deck 8"};
+	{"Deck 1", "Deck 2", "Deck 3", "Deck 4", "Deck 5", "Deck 6", "Deck 7", "Deck 8", "Deck 9"};
 EmoteButtons_DecksCount = getn(EmoteButtons_DeckList);
 
 EmoteButtons_FirstLevelName = "Main";
 
 EmoteButtons_LevelShown = 0;
+--Emote Button Levels
+-- 0 is main Button
+-- 1 is main group (0+1)
+-- 3 Left Wing (1+2)
+-- 4 Right Wing (1+3)
+-- 6 Both Left and Right wing (1+2+3)
+-- 7 Far left wing (1+2+4)
+-- 9 Far Right wing (1+3+5)
+-- 15 Both Far Right and Far Left Wing (1+2+3+4+5)
+
+EmoteButtons_Levels={["Main"]=false,["Left"]=false, ["Right"]=false,
+						["FarLeft"]=false, ["FarRight"]=false }
 
 EmoteButtons_ConfigDeck = "#0";
 EmoteButtons_ConfigButton = 0;
@@ -86,7 +115,6 @@ EmoteButtons_LastSlide = 0;
 
 
 function EmoteButtons_WipeVars()
-	DEFAULT_CHAT_FRAME:AddMessage("EMOTEBUTTONS_TEST")
 	local i,j;
 	local inr = EmoteButtons_ImageCount;
 EmoteButtons_Vars = {
@@ -158,6 +186,7 @@ EmoteButtons_Vars = {
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""},
 				{action="", tooltip="", image=""} },
+		["Deck 9"] = {},
 	},
 	Main_Ratio = 42,
 	Main_Shift = 0,
@@ -184,6 +213,8 @@ EmoteButtons_WipeVars();
 function EmoteButtons_Reset()
 	EmoteButtons_LeftWing_Deck = "#0";
 	EmoteButtons_RightWing_Deck = "#0";
+	EmoteButtons_FarLeftWing_Deck = "#0";
+	EmoteButtons_FarRightWing_Deck = "#0";
 	EmoteButtons_ToggleFirstLevel();
 	EmoteButtons_WipeVars();
 end
@@ -198,6 +229,12 @@ function EmoteButtons_Init()
 	end
 	for i = 1, EmoteButtons_RightWingCount do
 		CreateFrame("Button", EmoteButtons_RightWing[i], EmoteButtons_Main, "EmoteButtons_template");
+	end
+	for i = 1, EmoteButtons_FarLeftWingCount do
+		CreateFrame("Button", EmoteButtons_FarLeftWing[i], EmoteButtons_Main, "EmoteButtons_template");
+	end
+	for i = 1, EmoteButtons_FarRightWingCount do
+		CreateFrame("Button", EmoteButtons_FarRightWing[i], EmoteButtons_Main, "EmoteButtons_template");
 	end
 	
 	EmoteButtons_Config_SetMainShiftTitle:SetText(EMOTEBUTTONS_ROTATION);
@@ -235,6 +272,8 @@ function EmoteButtons_ArrangeFrames()
 	local wr = floor(mra*2.29);
 --wings shift in degrees
 	local ws = EmoteButtons_Vars.Wing_Shift;
+--far wings distance from center
+	local fwr = floor(mra*3.29);
 
 
 	--main button
@@ -298,11 +337,38 @@ function EmoteButtons_ArrangeFrames()
 		obj:SetWidth(mri);
 		obj:SetHeight(mri);
 	end
+
+	--far left wing
+	size = EmoteButtons_FarLeftWingCount+3;
+	--deg = floor(180/size+1)
+	deg = 20
+	shift = -1;
+	for i=1, size-3 do
+		obj = getglobal(EmoteButtons_FarLeftWing[i]);
+		obj:SetPoint("CENTER", EmoteButtons_Main, "CENTER", - fwr*sin(i*deg+ws),fwr*cos(i*deg+ws));
+		obj:SetWidth(mra);
+		obj:SetHeight(mra);
+		obj = getglobal(obj:GetName().."_Icon");
+		obj:SetWidth(mri);
+		obj:SetHeight(mri);
+	end
+
+	--far right wing
+	size = EmoteButtons_FarRightWingCount+3;
+	deg = 20
+	shift = -1;
+	for i=1, size-3 do
+		obj = getglobal(EmoteButtons_FarRightWing[i]);
+		obj:SetPoint("CENTER", EmoteButtons_Main, "CENTER", fwr*sin(i*deg-ws),fwr*cos(i*deg-ws));
+		obj:SetWidth(mra);
+		obj:SetHeight(mra);
+		obj = getglobal(obj:GetName().."_Icon");
+		obj:SetWidth(mri);
+		obj:SetHeight(mri);
+	end
 end
 
 function ReArrangeLeftWing()
-	DEFAULT_CHAT_FRAME:AddMessage("Skas")
-
 	local i, obj, correction;
 
 --button size
@@ -325,12 +391,10 @@ function ReArrangeLeftWing()
 	for i=1, getn(EmoteButtons_LeftWing) do
 		if (EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][i]~=nil) then
 			real_size = real_size+1
-			DEFAULT_CHAT_FRAME:AddMessage(EmoteButtons_LeftWing_Deck)
 		else
 			break
 		end
 	end
-	DEFAULT_CHAT_FRAME:AddMessage(real_size)
 	size = real_size+3;
 	deg = floor((180)/real_size)
 	--deg = 20
@@ -413,15 +477,23 @@ function EmoteButtons_ToggleFirstLevel()
 	local image;
 	local obj;
 	local flc = getn(EmoteButtons_FirstLevel);
+	if (getglobal(EmoteButtons_FarLeftWing[1])):IsShown() then
+		EmoteButtons_ToggleFarLeftWing();
+	end
+	if (getglobal(EmoteButtons_FarRightWing[1])):IsShown() then
+		EmoteButtons_ToggleFarRightWing();
+	end
 	if (getglobal(EmoteButtons_LeftWing[1])):IsShown() then
 		EmoteButtons_ToggleLeftWing();
 	end
 	if (getglobal(EmoteButtons_RightWing[1])):IsShown() then
 		EmoteButtons_ToggleRightWing();
 	end
+
+	
 	for i=1, flc do
 		obj = getglobal(EmoteButtons_FirstLevel[i]);
-		if EmoteButtons_LevelShown > 0 then
+		if EmoteButtons_Levels["Main"] then
 			FadeOutFrame(obj,0.1*i);
 		else
 			image = EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][i].image;
@@ -429,11 +501,42 @@ function EmoteButtons_ToggleFirstLevel()
 			FadeInFrame(obj,0.15*(flc-i));
 		end
 	end
-	if EmoteButtons_LevelShown == 0 then
-		EmoteButtons_LevelShown = 1;
-	else
-		EmoteButtons_LevelShown = 0;
+	EmoteButtons_Levels["Main"] = not EmoteButtons_Levels["Main"]
+end
+
+function EmoteButtons_ToggleFarLeftWing()
+	local i=0
+	local obj;
+	local lwc = getn(EmoteButtons_FarLeftWing);
+	for i=1, lwc do
+		obj = getglobal(EmoteButtons_FarLeftWing[i]);
+		if (EmoteButtons_Levels["FarLeft"]) then
+			FadeOutFrame(obj, 0.1*i);
+		elseif (EmoteButtons_Vars.Actions[EmoteButtons_FarLeftWing_Deck][i]~=nil and 
+		EmoteButtons_Vars.Actions[EmoteButtons_FarLeftWing_Deck][i].action~=nil) then
+			FadeInFrame(obj,0.15*(lwc-i));
+		end
 	end
+	--flip the flag on the way out
+	EmoteButtons_Levels["FarLeft"] = not EmoteButtons_Levels["FarLeft"]
+end
+
+
+function EmoteButtons_ToggleFarRightWing()
+	local i=0
+	local obj;
+	local lwc = getn(EmoteButtons_FarRightWing);
+	for i=1, lwc do
+		obj = getglobal(EmoteButtons_FarRightWing[i]);
+		if (EmoteButtons_Levels["FarRight"]) then
+			FadeOutFrame(obj, 0.1*i);
+		elseif (EmoteButtons_Vars.Actions[EmoteButtons_FarRightWing_Deck][i]~=nil and 
+		EmoteButtons_Vars.Actions[EmoteButtons_FarRightWing_Deck][i].action~=nil) then
+			FadeInFrame(obj,0.15*(lwc-i));
+		end
+	end
+	--flip the flag on the way out
+	EmoteButtons_Levels["FarRight"] = not EmoteButtons_Levels["FarRight"]
 end
 
 function EmoteButtons_ToggleLeftWing()
@@ -442,18 +545,15 @@ function EmoteButtons_ToggleLeftWing()
 	local lwc = getn(EmoteButtons_LeftWing);
 	for i=1, lwc do
 		obj = getglobal(EmoteButtons_LeftWing[i]);
-		if ((EmoteButtons_LevelShown == 3) or (EmoteButtons_LevelShown == 6)) then
+		if (EmoteButtons_Levels["Left"]) then
 			FadeOutFrame(obj, 0.1*i);
 		elseif (EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][i]~=nil and 
 		EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][i].action~=nil) then
 			FadeInFrame(obj,0.15*(lwc-i));
 		end
 	end
-	if ((EmoteButtons_LevelShown == 3) or (EmoteButtons_LevelShown == 6)) then
-		EmoteButtons_LevelShown = EmoteButtons_LevelShown - 2;
-	else
-		EmoteButtons_LevelShown = EmoteButtons_LevelShown + 2;
-	end
+	--flip the flag on the way out
+	EmoteButtons_Levels["Left"] = not EmoteButtons_Levels["Left"]
 end
 
 function EmoteButtons_ToggleRightWing()
@@ -462,18 +562,15 @@ function EmoteButtons_ToggleRightWing()
 	local rwc = getn(EmoteButtons_RightWing);
 	for i=1, rwc do
 		obj = getglobal(EmoteButtons_RightWing[i]);
-		if ((EmoteButtons_LevelShown == 4) or (EmoteButtons_LevelShown == 6)) then
+		if (EmoteButtons_Levels["Right"]) then
 			FadeOutFrame(obj, 0.1*i);
 		elseif (EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][i]~=nil and 
 		EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][i].action~=nil) then
 			FadeInFrame(obj,0.15*(rwc-i));
 		end
 	end
-	if ((EmoteButtons_LevelShown == 4) or (EmoteButtons_LevelShown == 6)) then
-		EmoteButtons_LevelShown = EmoteButtons_LevelShown - 3;
-	else
-		EmoteButtons_LevelShown = EmoteButtons_LevelShown + 3;
-	end
+	--flip the flag on the way out
+	EmoteButtons_Levels["Right"] = not EmoteButtons_Levels["Right"]
 end
 
 function EmoteButtons_FadeWing(wing)
@@ -482,9 +579,14 @@ function EmoteButtons_FadeWing(wing)
 	local wingT, wingC;
 	if wing == "left" then
 		wingT=EmoteButtons_LeftWing;
-	else
+	elseif wing == "right" then
 		wingT=EmoteButtons_RightWing;
+	elseif wing =="farleft" then	
+		wingT = EmoteButtons_FarLeftWing;
+	elseif wing =="farright" then	
+		wingT = EmoteButtons_FarRightWing;
 	end
+
 	wingC=getn(wingT);
 	for i=1, wingC do
 		obj=getglobal(wingT[i]);
@@ -496,6 +598,18 @@ function EmoteButtons_FadeWing(wing)
 			end
 		elseif (wing == "right") then
 			if (EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][i]~=nil) then
+				FadeInFrame(obj, 0.1*i);
+			else
+				FadeOutFrame(obj, 0.1*i);
+			end
+		elseif (wing == "farleft") then
+			if (EmoteButtons_Vars.Actions[EmoteButtons_FarLeftWing_Deck][i]~=nil) then
+				FadeInFrame(obj, 0.1*i);
+			else
+				FadeOutFrame(obj, 0.1*i);
+			end
+		elseif (wing == "farright") then
+			if (EmoteButtons_Vars.Actions[EmoteButtons_FarRightWing_Deck][i]~=nil) then
 				FadeInFrame(obj, 0.1*i);
 			else
 				FadeOutFrame(obj, 0.1*i);
@@ -542,6 +656,8 @@ function EmoteButtons_ClickAction(framename)
 				EmoteButtons_ConfigDeck = EmoteButtons_LeftWing_Deck;
 				EmoteButtons_ConfigButton = found;
 				EmoteButtons_UpdateConfig();
+			elseif EmoteButtons_IsADeck(action) then
+				EmoteButtons_ToggleDeck(action, "FarLeft")
 			else
 				EmoteButtons_DoAction(action);
 			end
@@ -551,13 +667,48 @@ function EmoteButtons_ClickAction(framename)
 					found = i;
 				end
 			end
-			action = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].action;		
-			if IsShiftKeyDown() then
-				EmoteButtons_ConfigDeck = EmoteButtons_RightWing_Deck;
-				EmoteButtons_ConfigButton = found;
-				EmoteButtons_UpdateConfig();
+			if found ~= 0 then
+				action = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].action;		
+				if IsShiftKeyDown() then
+					EmoteButtons_ConfigDeck = EmoteButtons_RightWing_Deck;
+					EmoteButtons_ConfigButton = found;
+					EmoteButtons_UpdateConfig();
+				elseif EmoteButtons_IsADeck(action) then
+					EmoteButtons_ToggleDeck(action, "FarRight")
+				else
+					EmoteButtons_DoAction(action);
+				end
 			else
-				EmoteButtons_DoAction(action);
+				for i=1, EmoteButtons_FarLeftWingCount do
+					if EmoteButtons_FarLeftWing[i] == framename then
+						found = i;
+					end
+				end
+				if found~=0 then
+					action = EmoteButtons_Vars.Actions[EmoteButtons_FarLeftWing_Deck][found].action;		
+					if IsShiftKeyDown() then
+						EmoteButtons_ConfigDeck = EmoteButtons_FarLeftWing_Deck;
+						EmoteButtons_ConfigButton = found;
+						EmoteButtons_UpdateConfig();
+					elseif EmoteButtons_IsADeck(action) then
+						EmoteButtons_ToggleDeck(action, "FarLeft")
+					else
+						EmoteButtons_DoAction(action);
+					end		
+				else
+					if found~=0 then
+						action = EmoteButtons_Vars.Actions[EmoteButtons_FarRightWing_Deck][found].action;		
+					end
+					if IsShiftKeyDown() then
+						EmoteButtons_ConfigDeck = EmoteButtons_FarRightWing_Deck;
+						EmoteButtons_ConfigButton = found;
+						EmoteButtons_UpdateConfig();
+					elseif EmoteButtons_IsADeck(action) then
+						EmoteButtons_ToggleDeck(action, "FarRight")
+					else
+						EmoteButtons_DoAction(action);
+					end		
+				end
 			end
 		end
 	end
@@ -574,30 +725,63 @@ function EmoteButtons_IsADeck(text)
 	return isDeck;
 end
 
-function EmoteButtons_ToggleDeck(deck, wing)	
+function EmoteButtons_ToggleDeck(deck, wing)
 	if wing=="Left" then
 		if EmoteButtons_LeftWing_Deck==deck then
+			if(EmoteButtons_Levels["FarLeft"]) then
+				EmoteButtons_ToggleFarLeftWing();
+			end
 			EmoteButtons_ToggleLeftWing();
 		else
 			EmoteButtons_LoadDeck(deck, wing);
-			--ReArrangeLeftWing()
-			if (EmoteButtons_LevelShown~=3 and EmoteButtons_LevelShown~=6) then
-				EmoteButtons_ToggleLeftWing();
-			else
+			if (EmoteButtons_Levels["Left"]) then
+				if(EmoteButtons_Levels["FarLeft"]) then
+					EmoteButtons_ToggleFarLeftWing();
+				end
 				EmoteButtons_FadeWing("left");
+			else
+				EmoteButtons_ToggleLeftWing();
 			end
 		end
-	else
+	elseif wing=="Right" then
 		if EmoteButtons_RightWing_Deck==deck then
+			if(EmoteButtons_Levels["FarRight"]) then
+				EmoteButtons_ToggleFarRightWing();
+			end
 			EmoteButtons_ToggleRightWing();
 		else
 			EmoteButtons_LoadDeck(deck, wing);
-			if (EmoteButtons_LevelShown~=4 and EmoteButtons_LevelShown~=6) then
-				EmoteButtons_ToggleRightWing();
-			else
+			if (EmoteButtons_Levels["Right"]) then
+				if(EmoteButtons_Levels["FarRight"]) then
+					EmoteButtons_ToggleFarRightWing();
+				end
 				EmoteButtons_FadeWing("right");
+			else
+				EmoteButtons_ToggleRightWing();
 			end
 		end
+	elseif wing=="FarLeft" then		
+		if EmoteButtons_FarLeftWing_Deck==deck then
+			EmoteButtons_ToggleFarLeftWing();
+		else
+			EmoteButtons_LoadDeck(deck, wing);
+			if (EmoteButtons_Levels["FarLeft"]) then
+				EmoteButtons_FadeWing("farleft");
+			else
+				EmoteButtons_ToggleFarLeftWing();
+			end
+		end	
+	elseif wing=="FarRight" then		
+		if EmoteButtons_FarRightWing_Deck==deck then
+			EmoteButtons_ToggleFarRightWing();
+		else
+			EmoteButtons_LoadDeck(deck, wing);
+			if (EmoteButtons_Levels["FarRight"]) then
+				EmoteButtons_FadeWing("farright");
+			else
+				EmoteButtons_ToggleFarRightWing();
+			end
+		end	
 	end
 end
 
@@ -615,11 +799,23 @@ function EmoteButtons_LoadDeck(deck, wing)
 			image = EmoteButtons_Vars.Actions[deck][i].image;
 			getglobal(EmoteButtons_LeftWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
 		end
-	else
+	elseif wing == "Right" then
 		EmoteButtons_RightWing_Deck = deck
 		for i=1, getn( EmoteButtons_Vars.Actions[deck]) do
 			image = EmoteButtons_Vars.Actions[deck][i].image;
 			getglobal(EmoteButtons_RightWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
+		end
+	elseif wing =="FarLeft" then
+		EmoteButtons_FarLeftWing_Deck = deck
+		for i=1, getn( EmoteButtons_Vars.Actions[deck]) do
+			image = EmoteButtons_Vars.Actions[deck][i].image;
+			getglobal(EmoteButtons_FarLeftWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
+		end
+	elseif wing =="FarRight" then
+		EmoteButtons_FarRightWing_Deck = deck
+		for i=1, getn( EmoteButtons_Vars.Actions[deck]) do
+			image = EmoteButtons_Vars.Actions[deck][i].image;
+			getglobal(EmoteButtons_FarRightWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
 		end
 	end
 end
@@ -668,10 +864,40 @@ function EmoteButtons_ShowTooltip(framename)
 					found = i;
 				end
 			end
-			tooltip = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].tooltip;
-			action = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].action;
-			anchor = "ANCHOR_BOTTOMRIGHT"
-			x = 30;
+
+			if found ~=0 then
+				tooltip = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].tooltip;
+				action = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].action;
+				anchor = "ANCHOR_BOTTOMRIGHT"
+				x = 30;
+			else
+
+				for i=1, EmoteButtons_FarLeftWingCount do
+					if EmoteButtons_FarLeftWing[i] == framename then
+						found = i;
+					end
+				end
+				
+				if found ~=0 then
+					tooltip = EmoteButtons_Vars.Actions[EmoteButtons_FarLeftWing_Deck][found].tooltip;
+					action = EmoteButtons_Vars.Actions[EmoteButtons_FarLeftWing_Deck][found].action;
+					anchor = "ANCHOR_BOTTOMLEFT"
+					x = -30;
+				else
+					for i=1, EmoteButtons_FarRightWingCount do
+						if EmoteButtons_FarRightWing[i] == framename then
+							found = i;
+						end
+					end
+					
+					if found ~=0 then
+						tooltip = EmoteButtons_Vars.Actions[EmoteButtons_FarRightWing_Deck][found].tooltip;
+						action = EmoteButtons_Vars.Actions[EmoteButtons_FarRightWing_Deck][found].action;
+						anchor = "ANCHOR_BOTTOMLEFT"
+						x = -30;
+					end
+				end	
+			end	
 		end
 	end
 	GameTooltip:SetOwner(getglobal(framename), anchor);
