@@ -127,5 +127,13 @@ EMOTEBUTTONS_SE = {
 		{action="/lol", type=EBACTTYPE_EMOTE,tooltip="Rrface"},
 		{action="/lol", type=EBACTTYPE_EMOTE,tooltip=" n"},
 		{action="/lol",type=EBACTTYPE_EMOTE, tooltip="TT"},
-		{action="/lol", type=EBACTTYPE_EMOTE,tooltip="as"} }		
+		{action="Deck 10", type=EBACTTYPE_DECK,tooltip="Deck 10"} },
+	["Deck 10"] = { {action="/played", EBACTTYPE_SLASHCMD,tooltip="Show played time"},
+		{action="/raidinfo", EBACTTYPE_SLASHCMD,tooltip="Show raid info"},
+		{action="/who", EBACTTYPE_SLASHCMD,tooltip="Do a who search"},
+		{action="/macro", EBACTTYPE_SLASHCMD,tooltip="Open macro UI"},
+		{action="/console reloadui",EBACTTYPE_SLASHCMD, tooltip="Reload the User Interface"},
+		{action="/kiss", type=EBACTTYPE_EMOTE,tooltip=" down"},
+		{action="/sit", type=EBACTTYPE_EMOTE,tooltip="TEST"},
+		{action="Deck 9", type=EBACTTYPE_DECK,tooltip="Deck 9"} }		
 }

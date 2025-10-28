@@ -4,27 +4,14 @@ Or maybe I can get it to act dynamically. That would be something.
 -Try dynamically until it seems like a losing battle - make 8 the max I guess.
 -Dynamically could make it hard to customize later...
 
-Main : 1
-Left: 2
-Right : 3
-Far Left: 4
-Far Right: 5
+select db_emotestext_5875.ID, db_emotestext_5875.Name ,db_emotestextdata_5875.Text_enUS  from db_emotestext_5875
+join db_emotestextdata_5875 on db_emotestext_5875.EmoteText_1 = db_emotestextdata_5875.ID 
 
---Emote Button Levels
--- 0 is main Button
--- 1 is main group (0+1)
--- 3 Left Wing (1+2)
--- 4 Right Wing (1+3)
--- 6 Both Left and Right wing (1+2+3)
 
--- 7 Far left wing (1+2+4)
--- 9 Far Right wing (1+3+5)
-
--- 10 Far left and normal right
--- 11 Far right, and normal left
-
--- 15 Both Far Right and Far Left Wing (1+2+3+4+5)
-
+for i, v in pairs(EMOTEBUTTONS_SE) do
+	DEFAULT_CHAT_FRAME:AddMessage(format("s %s",i));
+	table.insert(EmoteButtons_DeckList,i)
+end
 
 1. I'm Feeling...
     1_1. Happy [4]
