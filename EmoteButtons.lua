@@ -13,8 +13,12 @@ Add action type to the button info, so they can be: Emotes, slash commands, or a
 --Implement action types [check]
 Emote list, used for generating tooltip previews of what the emote will say in chat [CHECK]
 Need to dynamically generate deck lists from the localization table, itll be easier to manage like that. [check]
-Add image to button info, instead of randomized icons
+Add image to button info, instead of randomized icons -- might do this last, could tie into how I display config options [in progress]
 Make the decks and buttons customizable
+--Add new icon picker [check]
+--Add emote button config window (make two of them?)
+--Add deck manager
+--Add emote manager
 
 Tech Debt/TODO LIST:
  --Changed EmoteButtons_Vars.Actions to EMOTEBUTTONS_SE, so I could replace references to EMOTEBUTTONS_SE with actions now I suppose.
@@ -1132,4 +1136,95 @@ end
 function EmoteButtons_HideSelector()
 	EmoteButtons_NormalizeImages();
 	EmoteButtons_ImageSelect1:Hide();
+end
+
+function DeckCFGFrame_OnShow()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	DeckCFGFrame_Update();
+	PlaySound("igCharacterInfoOpen");
+	DeckCFGEditBox:SetFocus();
+	DeckCFGOkayButton_Update();
+	DeckCFGEditBox:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
+	--Disable buttons on the other window?
+end
+
+function DeckCFGFrame_OnHide()
+	DeckCFGFrame:Hide();
+	PlaySound("igCharacterInfoClose");
+end
+
+function DeckCFG_Update()
+	DEFAULT_CHAT_FRAME:AddMessage("OKAY!");
+end 
+
+function DeckCFGButton_OnClick()
+	DeckCFGFrame.selectedIcon =  this:GetID() + (FauxScrollFrame_GetOffset(DeckCFGScrollFrame) * NUM_ICONS_PER_ROW)
+	DeckCFGOkayButton_Update();
+	DeckCFGFrame_Update();
+end
+
+function DeckCFGOkayButton_Update() 
+	if ( (strlen(DeckCFGEditBox:GetText()) > 0) and DeckCFGFrame.selectedIcon ) then
+		DeckCFGOkayButton:Enable();
+	else
+		DeckCFGOkayButton:Disable();
+	end
+	if ( DeckCFGFrame.mode == "edit" and (strlen(DeckCFGEditBox:GetText()) > 0) ) then
+		DeckCFGOkayButton:Enable();
+	end
+end
+
+function DeckCFGOkayButton_OnClick()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	icon = GetMacroIconInfo(DeckCFGFrame.selectedIcon)
+	icon = string.sub(icon, 17, -1)
+	EmoteButtons_Vars.Actions[deck][button].image = icon
+	if EmoteButtons_LeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Left");
+	end
+	if EmoteButtons_RightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Right");
+	end
+	if EmoteButtons_FirstLevelName == deck then
+		EmoteButtons_LoadDeck(deck, "");
+	end
+	PlaySound("igChatScrollUp");
+	EmoteButtons_Vars.Actions[deck][button].tooltip = 	DeckCFGEditBox:GetText();
+	DeckCFGFrame:Hide();
+end
+
+NUM_ICONS_SHOWN = 20;
+NUM_ICONS_PER_ROW = 5;
+NUM_ICON_ROWS = 4;
+ICON_ROW_HEIGHT = 36; -- Don't rename this constant
+
+function DeckCFGFrame_Update()
+	local numMacroIcons = GetNumMacroIcons();
+	local DeckCFGIcon, DeckCFGButton;
+	local DeckCFGOffset = FauxScrollFrame_GetOffset(DeckCFGScrollFrame);
+	local index;
+	
+	-- Icon list
+	for i=1, NUM_ICONS_SHOWN do
+		DeckCFGIcon = getglobal("DeckCFGButton"..i.."Icon");
+		DeckCFGButton = getglobal("DeckCFGButton"..i);
+		index = (DeckCFGOffset * NUM_ICONS_PER_ROW) + i;
+		if ( index <= numMacroIcons ) then
+			DeckCFGIcon:SetTexture(GetMacroIconInfo(index));
+			DeckCFGButton:Show();
+		else
+			DeckCFGIcon:SetTexture("");
+			DeckCFGButton:Hide();
+		end
+		if ( index == DeckCFGFrame.selectedIcon ) then
+			DeckCFGButton:SetChecked(1);
+		else
+			DeckCFGButton:SetChecked(nil);
+		end
+	end
+	
+	-- Scrollbar stuff
+	FauxScrollFrame_Update(DeckCFGScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );
 end

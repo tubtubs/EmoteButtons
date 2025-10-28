@@ -18,6 +18,13 @@ for i, v in pairs(EMOTEBUTTONS_SE) do
 	table.insert(EmoteButtons_DeckList,i)
 end
 
+
+CONFIG AND ICON WINDOW SETUP NOTES:
+
+GetNumMacroIcons()
+GetMacroIconInfo(index)
+
+
 1. I'm Feeling...
     1_1. Happy [4]
     1_2. Angry [8] (removed groan, but in sad/sarcastic)
