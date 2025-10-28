@@ -10,9 +10,8 @@ Make the wings dynamically sized (can have less than 8 buttons) [CHECK]
 Add another level of depth to the buttons [CHECK]
 Might try to make it possible to do a more page too. Hmmm. [CHECK]
 Add action type to the button info, so they can be: Emotes, slash commands, or accessing a Deck [check]
---Implement action types [in progress]
---Use emote list array? Might make it easier to pick them later, since im not planning on using slash commands but doemote
----- Made one in CSV, will make it more useful if I need it later.
+--Implement action types [check]
+Emote list, used for generating tooltip previews of what the emote will say in chat [CHECK]
 Need to dynamically generate deck lists from the localization table, itll be easier to manage like that. [check]
 Add image to button info, instead of randomized icons
 Make the decks and buttons customizable
@@ -133,6 +132,8 @@ function EmoteButtons_Reset()
 	EmoteButtons_ToggleFirstLevel();
 	EmoteButtons_WipeVars();
 end
+
+
 
 function EmoteButtons_Init()
 	local i;
@@ -534,12 +535,6 @@ function EmoteButtons_FadeWing(wing)
 end
 
 function EmoteButtons_ClickAction(framename)
-	for i, v in pairs(EMOTEBUTTONS_SE) do
-		for j, v in pairs(EMOTEBUTTONS_SE[i]) do
-			DEFAULT_CHAT_FRAME:AddMessage(format("i: %s, j: %s",i,j));
-		end
-	end
-	--printDecklist()
 	local i;
 	local found = 0;
 	local action = "";
@@ -569,7 +564,9 @@ function EmoteButtons_ClickAction(framename)
 			EmoteButtons_UpdateConfig();
 		elseif acttype==EBACTTYPE_DECK then
 			EmoteButtons_ToggleDeck(action, wing);
-		else
+		elseif acttype==EBACTTYPE_EMOTE then
+			EmoteButtons_DoEmote(action);
+		elseif acttype==EBACTTYPE_SLASHCMD then	
 			EmoteButtons_DoAction(action);
 		end
 	else
@@ -587,8 +584,10 @@ function EmoteButtons_ClickAction(framename)
 				EmoteButtons_ConfigButton = found;
 				EmoteButtons_UpdateConfig();
 			elseif acttype==EBACTTYPE_DECK then
-				EmoteButtons_ToggleDeck(action, "FarLeft")
-			else
+				EmoteButtons_ToggleDeck(action, "FarLeft");
+			elseif acttype==EBACTTYPE_EMOTE then
+				EmoteButtons_DoEmote(action);
+			elseif acttype==EBACTTYPE_SLASHCMD then	
 				EmoteButtons_DoAction(action);
 			end
 		else
@@ -599,14 +598,16 @@ function EmoteButtons_ClickAction(framename)
 			end
 			if found ~= 0 then
 				action = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].action;		
-				acttype = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].type;	
+				acttype = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].type;
 				if IsShiftKeyDown() then
 					EmoteButtons_ConfigDeck = EmoteButtons_RightWing_Deck;
 					EmoteButtons_ConfigButton = found;
 					EmoteButtons_UpdateConfig();
 				elseif acttype==EBACTTYPE_DECK then
-					EmoteButtons_ToggleDeck(action, "FarRight")
-				else
+					EmoteButtons_ToggleDeck(action, "FarRight");
+				elseif acttype==EBACTTYPE_EMOTE then
+					EmoteButtons_DoEmote(action);
+				elseif acttype==EBACTTYPE_SLASHCMD then	
 					EmoteButtons_DoAction(action);
 				end
 			else
@@ -624,8 +625,10 @@ function EmoteButtons_ClickAction(framename)
 						EmoteButtons_ConfigButton = found;
 						EmoteButtons_UpdateConfig();
 					elseif acttype==EBACTTYPE_DECK then
-						EmoteButtons_ToggleDeck(action, "FarLeft")
-					else
+						EmoteButtons_ToggleDeck(action, "FarLeft");
+					elseif acttype==EBACTTYPE_EMOTE then
+						EmoteButtons_DoEmote(action);
+					elseif acttype==EBACTTYPE_SLASHCMD then	
 						EmoteButtons_DoAction(action);
 					end		
 				else
@@ -644,8 +647,10 @@ function EmoteButtons_ClickAction(framename)
 						EmoteButtons_ConfigButton = found;
 						EmoteButtons_UpdateConfig();
 					elseif acttype==EBACTTYPE_DECK then
-						EmoteButtons_ToggleDeck(action, "FarRight")
-					else
+						EmoteButtons_ToggleDeck(action, "FarRight");
+					elseif acttype==EBACTTYPE_EMOTE then
+						EmoteButtons_DoEmote(action);
+					elseif acttype==EBACTTYPE_SLASHCMD then	
 						EmoteButtons_DoAction(action);
 					end		
 				end
@@ -754,6 +759,10 @@ function EmoteButtons_DoAction(text)
 	ChatEdit_SendText(EmoteButtons_EditBox);
 end
 
+function EmoteButtons_DoEmote(text)
+	DoEmote(text);
+end
+
 function EmoteButtons_ShowTooltip(framename)
 	local i,x,anchor;
 	local found = 0;
@@ -769,6 +778,7 @@ function EmoteButtons_ShowTooltip(framename)
 	if found~=0 then
 		tooltip = EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][found].tooltip;
 		action = EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][found].action;
+		acttype = EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][found].type;
 		if found>floor(EmoteButtons_FirstLevelCount/2) then
 			anchor = "ANCHOR_BOTTOMRIGHT"
 			x = 30;
@@ -785,6 +795,7 @@ function EmoteButtons_ShowTooltip(framename)
 		if found~=0 then
 			tooltip = EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][found].tooltip;
 			action = EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][found].action;
+			acttype = EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][found].type;
 			anchor = "ANCHOR_BOTTOMLEFT"
 			x = -30;
 		else
@@ -797,6 +808,7 @@ function EmoteButtons_ShowTooltip(framename)
 			if found ~=0 then
 				tooltip = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].tooltip;
 				action = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].action;
+				acttype = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].type;
 				anchor = "ANCHOR_BOTTOMRIGHT"
 				x = 30;
 			else
@@ -810,6 +822,7 @@ function EmoteButtons_ShowTooltip(framename)
 				if found ~=0 then
 					tooltip = EmoteButtons_Vars.Actions[EmoteButtons_FarLeftWing_Deck][found].tooltip;
 					action = EmoteButtons_Vars.Actions[EmoteButtons_FarLeftWing_Deck][found].action;
+					acttype = EmoteButtons_Vars.Actions[EmoteButtons_FarLeftWing_Deck][found].type;
 					anchor = "ANCHOR_BOTTOMLEFT"
 					x = -30;
 				else
@@ -822,6 +835,7 @@ function EmoteButtons_ShowTooltip(framename)
 					if found ~=0 then
 						tooltip = EmoteButtons_Vars.Actions[EmoteButtons_FarRightWing_Deck][found].tooltip;
 						action = EmoteButtons_Vars.Actions[EmoteButtons_FarRightWing_Deck][found].action;
+						acttype = EmoteButtons_Vars.Actions[EmoteButtons_FarRightWing_Deck][found].type;
 						anchor = "ANCHOR_BOTTOMLEFT"
 						x = -30;
 					end
@@ -829,8 +843,22 @@ function EmoteButtons_ShowTooltip(framename)
 			end	
 		end
 	end
+
+	if (acttype == EBACTTYPE_EMOTE) then
+		trg = UnitName("target");
+		plr = UnitName("player");
+		if (trg and trg ~= plr) then
+			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. trg;
+			fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. format(EB_EmoteList[action].TargetEmoteText,trg);
+		else
+			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. "EMOTE";
+			fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. EB_EmoteList[action].SelfEmoteText;
+		end
+	else
+		fulltext = "|cFFFFFFFF"..tooltip.."|n|r"..action;
+	end
+
 	GameTooltip:SetOwner(getglobal(framename), anchor);
-	fulltext = "|cFFFFFFFF"..tooltip.."|n|r"..action;
 	if EmoteButtons_Config:IsShown() then
 		fulltext = fulltext..setup;
 	end

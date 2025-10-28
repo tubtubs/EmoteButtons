@@ -4,9 +4,14 @@ Or maybe I can get it to act dynamically. That would be something.
 -Try dynamically until it seems like a losing battle - make 8 the max I guess.
 -Dynamically could make it hard to customize later...
 
-select db_emotestext_5875.ID, db_emotestext_5875.Name ,db_emotestextdata_5875.Text_enUS  from db_emotestext_5875
-join db_emotestextdata_5875 on db_emotestext_5875.EmoteText_1 = db_emotestextdata_5875.ID 
-
+--Turns out an emote list would come in handy for tooltips.
+select a.*,b.SelfEmoteText  from
+(select db_emotestext_5875.ID, db_emotestext_5875.Name ,db_emotestextdata_5875.Text_enUS as TargetEmoteText from db_emotestext_5875
+join db_emotestextdata_5875 on db_emotestext_5875.EmoteText_3 = db_emotestextdata_5875.ID) as a
+join
+(select db_emotestext_5875.ID, db_emotestext_5875.Name ,db_emotestextdata_5875.Text_enUS as SelfEmoteText  from db_emotestext_5875
+join db_emotestextdata_5875 on db_emotestext_5875.EmoteText_7 = db_emotestextdata_5875.ID) as b
+on a.ID=b.ID
 
 for i, v in pairs(EMOTEBUTTONS_SE) do
 	DEFAULT_CHAT_FRAME:AddMessage(format("s %s",i));

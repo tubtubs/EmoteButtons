@@ -7,3 +7,4 @@
 ## SavedVariables: EmoteButtons_Vars
 EmoteButtons.xml
 EmoteButtonsConfig.xml
+EmoteList.lua
