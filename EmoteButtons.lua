@@ -10,6 +10,7 @@ Make the wings dynamically sized (can have less than 8 buttons) [CHECK]
 Add another level of depth to the buttons [CHECK]
 Might try to make it possible to do a more page too. Hmmm.
 Add action type to the button info, so they can be: Emotes, slash commands, or accessing a Deck
+Need to dynamically generate deck lists from the localization table, itll be easier to manage like that.
 Add image to button info, so it doesn't get randomzied. lol
 Make the decks and buttons customizable
 Can I get around the decks being pre-rendedered as left vs right? I guess I don't want them duplicated?
@@ -120,14 +121,14 @@ function EmoteButtons_WipeVars()
 EmoteButtons_Vars = {
 	Actions = {
 		["Main"] = {
-				{action="", tooltip="", image="", wing="Left"},
-				{action="", tooltip="", image="", wing="Left"},
-				{action="", tooltip="", image="", wing="Left"},
-				{action="", tooltip="", image="", wing="Left"},
-				{action="", tooltip="", image="", wing="Right"},
-				{action="", tooltip="", image="", wing="Right"},
-				{action="", tooltip="", image="", wing="Right"},
-				{action="", tooltip="", image="", wing="Right"} },
+				{action="", tooltip="", image="", type=-1, wing="Left"},
+				{action="", tooltip="", image="", type=-1,wing="Left"},
+				{action="", tooltip="", image="", type=-1,wing="Left"},
+				{action="", tooltip="", image="", type=-1,wing="Left"},
+				{action="", tooltip="", image="", type=-1,wing="Right"},
+				{action="", tooltip="", image="", type=-1,wing="Right"},
+				{action="", tooltip="", image="", type=-1,wing="Right"},
+				{action="", tooltip="", image="", type=-1,	wing="Right"} },
 		["Deck 1"] = { --{action="", tooltip="", image=""},
 				--{action="", tooltip="", image=""},
 				--{action="", tooltip="", image=""},
@@ -195,14 +196,16 @@ EmoteButtons_Vars = {
 	for i=1, EmoteButtons_FirstLevelCount do
 		EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][i].action = EMOTEBUTTONS_SE[EmoteButtons_FirstLevelName][i].action;
 		EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][i].tooltip = EMOTEBUTTONS_SE[EmoteButtons_FirstLevelName][i].tooltip;
+		EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][i].type = EMOTEBUTTONS_SE[EmoteButtons_FirstLevelName][i].type;
 		EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][i].image = EmoteButtons_ImageList[math.random(inr)];
 	end
 
 	for i=1, EmoteButtons_DecksCount do
 		for j=1, getn(EMOTEBUTTONS_SE[EmoteButtons_DeckList[i]]) do
-			EmoteButtons_Vars.Actions[EmoteButtons_DeckList[i]][j] = {action="", tooltip="", image=""}
+			EmoteButtons_Vars.Actions[EmoteButtons_DeckList[i]][j] = {action="", tooltip="", image="",type=0}
 			EmoteButtons_Vars.Actions[EmoteButtons_DeckList[i]][j].action = EMOTEBUTTONS_SE[EmoteButtons_DeckList[i]][j].action;
 			EmoteButtons_Vars.Actions[EmoteButtons_DeckList[i]][j].tooltip = EMOTEBUTTONS_SE[EmoteButtons_DeckList[i]][j].tooltip;
+			EmoteButtons_Vars.Actions[EmoteButtons_DeckList[i]][j].type = EMOTEBUTTONS_SE[EmoteButtons_DeckList[i]][j].type;
 			EmoteButtons_Vars.Actions[EmoteButtons_DeckList[i]][j].image = EmoteButtons_ImageList[math.random(inr)];
 		end
 	end
@@ -633,13 +636,15 @@ function EmoteButtons_ClickAction(framename)
 	if found~=0 then
 		action = EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][found].action;
 		tooltip = EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][found].tooltip;
+		acttype = EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][found].type;
 		wing = EmoteButtons_Vars.Actions[EmoteButtons_FirstLevelName][found].wing;
+		--DEFAULT_CHAT_FRAME:AddMessage(format("lol %d",acttype));	
 	--configure
 		if IsShiftKeyDown() then
 			EmoteButtons_ConfigDeck = EmoteButtons_FirstLevelName;
 			EmoteButtons_ConfigButton = found;
 			EmoteButtons_UpdateConfig();
-		elseif EmoteButtons_IsADeck(action) then
+		elseif acttype==EBACTTYPE_DECK then
 			EmoteButtons_ToggleDeck(action, wing);
 		else
 			EmoteButtons_DoAction(action);
@@ -652,11 +657,13 @@ function EmoteButtons_ClickAction(framename)
 		end
 		if found~=0 then
 			action = EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][found].action;		
+			acttype = EmoteButtons_Vars.Actions[EmoteButtons_LeftWing_Deck][found].type;		
+
 			if IsShiftKeyDown() then
 				EmoteButtons_ConfigDeck = EmoteButtons_LeftWing_Deck;
 				EmoteButtons_ConfigButton = found;
 				EmoteButtons_UpdateConfig();
-			elseif EmoteButtons_IsADeck(action) then
+			elseif acttype==EBACTTYPE_DECK then
 				EmoteButtons_ToggleDeck(action, "FarLeft")
 			else
 				EmoteButtons_DoAction(action);
@@ -669,11 +676,12 @@ function EmoteButtons_ClickAction(framename)
 			end
 			if found ~= 0 then
 				action = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].action;		
+				acttype = EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][found].type;	
 				if IsShiftKeyDown() then
 					EmoteButtons_ConfigDeck = EmoteButtons_RightWing_Deck;
 					EmoteButtons_ConfigButton = found;
 					EmoteButtons_UpdateConfig();
-				elseif EmoteButtons_IsADeck(action) then
+				elseif acttype==EBACTTYPE_DECK then
 					EmoteButtons_ToggleDeck(action, "FarRight")
 				else
 					EmoteButtons_DoAction(action);
