@@ -16,10 +16,12 @@ Need to dynamically generate deck lists from the localization table, itll be eas
 Add image to button info, instead of randomized icons -- might do this last, could tie into how I display config options [in progress]
 Make the decks and buttons customizable
 --Add new icon picker [check]
+----Get current icon in the icon picker [CHECK]
 --Add emote button config window (make two of them?)
 --Add deck manager
 --Add emote manager
---Advaned config window with import/export presets, maybe config mode.
+----just did popup's for now, may make a full blown manager soon.
+--Advanced config window with import/export presets, maybe config mode.
 ----command to reset position, or everything
 
 Tech Debt/TODO LIST:
@@ -159,8 +161,8 @@ function EmoteButtons_Init()
 		CreateFrame("Button", EmoteButtons_FarRightWing[i], EmoteButtons_Main, "EmoteButtons_template");
 	end
 	
-	EmoteButtons_Config_SetMainShiftTitle:SetText(EMOTEBUTTONS_ROTATION);
-	EmoteButtons_Config_SetMainSizeTitle:SetText(EMOTEBUTTONS_SIZE);
+	EmoteButtons_ConfigMain_SetMainShiftTitle:SetText(EMOTEBUTTONS_ROTATION);
+	EmoteButtons_ConfigMain_SetMainSizeTitle:SetText(EMOTEBUTTONS_SIZE);
 
 	UIErrorsFrame:AddMessage(EMOTEBUTTONS_INIT_TEXT, 1.0, 1.0, 1.0, 1.0, UIERRORS_HOLD_TIME);
 
@@ -168,8 +170,8 @@ end
 
 function EmoteButtons_LoadedVars()
 
-	EmoteButtons_Config_SetMainShift:SetValue(EmoteButtons_Vars.Main_Shift);
-	EmoteButtons_Config_SetMainSize:SetValue(EmoteButtons_Vars.Main_Ratio);
+	EmoteButtons_ConfigMain_SetMainShift:SetValue(EmoteButtons_Vars.Main_Shift);
+	EmoteButtons_ConfigMain_SetMainSize:SetValue(EmoteButtons_Vars.Main_Ratio);
 
 
 	EmoteButtons_ArrangeFrames();
@@ -898,12 +900,12 @@ end
 
 function EmoteButtons_SliderChanged(sender, units)
 	local val = "err";
-	if sender=="EmoteButtons_Config_SetMainShift" then
-		val = EmoteButtons_Config_SetMainShift:GetValue();
+	if sender=="EmoteButtons_ConfigMain_SetMainShift" then
+		val = EmoteButtons_ConfigMain_SetMainShift:GetValue();
 		EmoteButtons_Vars.Main_Shift = val;
 		EmoteButtons_Vars.Wing_Shift = val;
 	else
-		val = EmoteButtons_Config_SetMainSize:GetValue();
+		val = EmoteButtons_ConfigMain_SetMainSize:GetValue();
 		EmoteButtons_Vars.Main_Ratio = val;
 	end
 	getglobal(sender.."Value"):SetText(val..units);
@@ -1227,6 +1229,11 @@ function EmoteButtons_HideSelector()
 	EmoteButtons_ImageSelect1:Hide();
 end
 
+NUM_ICONS_SHOWN = 20;
+NUM_ICONS_PER_ROW = 5;
+NUM_ICON_ROWS = 4;
+ICON_ROW_HEIGHT = 36;
+
 function DeckCFGFrame_OnShow()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
@@ -1236,6 +1243,41 @@ function DeckCFGFrame_OnShow()
 	DeckCFGOkayButton_Update();
 	DeckCFGEditBox:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
 	--Disable buttons on the other window?
+
+	--Scroll down to current icon
+	local image = EmoteButtons_Vars.Actions[deck][button].image;
+	local found = -1
+	-- Find the index of the image
+	local numMacroIcons = GetNumMacroIcons();
+	local t = ""
+	for i=1, numMacroIcons do
+		t = GetMacroIconInfo(i);
+		if t == "Interface\\Icons\\"..image then
+			found = i;
+		end
+	end
+	DEFAULT_CHAT_FRAME:AddMessage(format("found = %s",found));
+	--FauxScrollFrame_Update(DeckCFGScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );
+	-- Index 281 is at about 2000
+	-- first element of the 56th row2
+	-- 36 per row?
+	--indexs ending in 0 or 5 go one row further down... What do?
+	if (math.mod(found,5) == 0 ) then
+		offset = floor((found-1)/5)*36;
+			innerIndex=5;
+	else
+		offset = floor(found/5)*36;
+		innerIndex=math.mod(found,5); 
+	end
+	DEFAULT_CHAT_FRAME:AddMessage(format("offset= %s",offset));
+	DEFAULT_CHAT_FRAME:AddMessage(format("innerIndex= %s",innerIndex));
+	DeckCFGScrollFrame:SetVerticalScroll(offset);
+	--   FauxScrollFrame_Update(MyModScrollBar,50,5,16);
+	-- 50 is max entries, 5 is number of lines, 16 is pixel height of each line
+	-- Scroll to this index, and select it?
+	getglobal("DeckCFGButton"..innerIndex):SetChecked(1);
+	DeckCFGFrame.selectedIcon = found;
+
 end
 
 function DeckCFGFrame_OnHide()
@@ -1268,6 +1310,7 @@ function DeckCFGOkayButton_OnClick()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	icon = GetMacroIconInfo(DeckCFGFrame.selectedIcon)
+	EmoteButton_Icon:SetTexture(icon);
 	icon = string.sub(icon, 17, -1)
 	EmoteButtons_Vars.Actions[deck][button].image = icon
 	if EmoteButtons_LeftWing_Deck==deck then
@@ -1284,10 +1327,7 @@ function DeckCFGOkayButton_OnClick()
 	DeckCFGFrame:Hide();
 end
 
-NUM_ICONS_SHOWN = 20;
-NUM_ICONS_PER_ROW = 5;
-NUM_ICON_ROWS = 4;
-ICON_ROW_HEIGHT = 36; -- Don't rename this constant
+ -- Don't rename this constant
 
 function DeckCFGFrame_Update()
 	local numMacroIcons = GetNumMacroIcons();
@@ -1315,6 +1355,7 @@ function DeckCFGFrame_Update()
 	end
 	
 	-- Scrollbar stuff
+	DEFAULT_CHAT_FRAME:AddMessage(format("ScrollOffset %s",    DeckCFGScrollFrame:GetVerticalScroll()));
 	FauxScrollFrame_Update(DeckCFGScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );
 end
 

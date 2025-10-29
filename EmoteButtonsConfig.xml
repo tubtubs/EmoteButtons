@@ -65,7 +65,7 @@
 	<Slider name="EBSliderTemp" inherits="OptionsSliderTemplate" virtual="true">
 		<Layers>
 			<Layer level="ARTWORK">
-				<FontString name="$parentTitle" inherits="GameFontNormal">
+				<FontString name="$parentTitle" text ="LOL" inherits="GameFontNormal">
 				 <Anchors>
 					<Anchor point="TOP">
 					 <Offset>
@@ -267,7 +267,7 @@
 		</Anchors>
 		<Scripts>
 			<OnLoad>             
-				EmoteButtons_Init();
+				<!-- EmoteButtons_Init(); -->
 				this:RegisterEvent("ADDON_LOADED");
 			</OnLoad>
 			<OnClick>
@@ -357,6 +357,47 @@
 
 
     <Frames>
+		<Slider name="$parent_SetMainShift" inherits="EBSliderTemp">
+		<Anchors>
+			<Anchor point="TOPRIGHT" relativePoint="TOP">
+				<Offset>
+					<AbsDimension x="-130" y="-40"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:SetMinMaxValues(0,359);
+				this:SetValueStep(2);
+				getglobal(this:GetName().."High"):SetText("359'");
+				getglobal(this:GetName().."Low"):SetText("0'");
+			</OnLoad>
+			<OnValueChanged>
+				EmoteButtons_SliderChanged(this:GetName(), "'");
+			</OnValueChanged>
+		</Scripts>
+	</Slider>
+
+	<Slider name="$parent_SetMainSize" inherits="EBSliderTemp">
+		<Anchors>
+			<Anchor point="TOPLEFT" relativePoint="TOP">
+				<Offset>
+					<AbsDimension x="130" y="-40"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>
+				this:SetMinMaxValues(24,64);
+				this:SetValueStep(1);
+				getglobal(this:GetName().."High"):SetText("64");
+				getglobal(this:GetName().."Low"):SetText("24");
+			</OnLoad>
+			<OnValueChanged>
+				EmoteButtons_SliderChanged(this:GetName(), "px");
+			</OnValueChanged>
+		</Scripts>
+	</Slider>
 
 		<EditBox name="CFGLabelEdit" historyLines="0">
 			<Size>
@@ -531,9 +572,6 @@
 			<OnEvent>
 				EmoteButtons_LoadedVars();
 			</OnEvent>
-			<OnEscapePressed>
-				EmoteButtons_ConfigMain:Hide();
-			</OnEscapePressed>
 		</Scripts>
 	</Button>
     </Frames>
