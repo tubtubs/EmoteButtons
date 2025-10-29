@@ -19,6 +19,8 @@ Make the decks and buttons customizable
 --Add emote button config window (make two of them?)
 --Add deck manager
 --Add emote manager
+--Advaned config window with import/export presets, maybe config mode.
+----command to reset position, or everything
 
 Tech Debt/TODO LIST:
  --Changed EmoteButtons_Vars.Actions to EMOTEBUTTONS_SE, so I could replace references to EMOTEBUTTONS_SE with actions now I suppose.
@@ -851,7 +853,8 @@ function EmoteButtons_ShowTooltip(framename)
 	if (acttype == EBACTTYPE_EMOTE) then
 		trg = UnitName("target");
 		plr = UnitName("player");
-		if (trg and trg ~= plr) then
+		action = string.upper(action); --Emotelist is all upper, don't want to change that.
+		if (EB_EmoteList[action] and trg and trg ~= plr) then
 			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. trg;
 			fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. format(EB_EmoteList[action].TargetEmoteText,trg);
 		else
@@ -884,13 +887,13 @@ function EmoteButtons_UpdateConfig()
 	local image = EmoteButtons_Vars.Actions[deck][button].image;
 
 	
-	EmoteButtons_Config_ButtonName:SetText(deck.." - "..EMOTEBUTTONS_BUTTON.." "..button);
+	--EmoteButtons_ConfigMain_ButtonName:SetText(deck.." - "..EMOTEBUTTONS_BUTTON.." "..button);
 
-	EmoteButtons_Config_Action:SetText(action);
-	EmoteButtons_Config_Tooltip:SetText(tooltip);
-	
-	EmoteButtons_Config:Show();
-    EmoteButtons_PopupImageSelector(); 
+	--EmoteButtons_ConfigMain_Action:SetText(action);
+	--EmoteButtons_ConfigMain_Tooltip:SetText(tooltip);
+	EmoteButton_Icon:SetTexture("Interface\\Icons\\"..image);
+	EmoteButtons_ConfigMain:Show();
+    --EmoteButtons_PopupImageSelector(); 
 end
 
 function EmoteButtons_SliderChanged(sender, units)
@@ -936,6 +939,80 @@ end
 
 function EmoteButtons_ChangeEmote()
 	StaticPopupDialogs["EMOTEBUTTONS_CHANGEEMOTE"]={
+		text=TEXT(EMOTEBUTTONS_CHANGEEMOTE),
+		button1=TEXT(ACCEPT),
+		button2=TEXT(CANCEL),
+		hasEditBox=1,
+		maxLetters=255,
+		OnAccept=function()
+			local editBox=getglobal(this:GetParent():GetName().."EditBox");
+			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
+			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_EMOTE;
+			EmoteButtons_UpdateConfig();
+		end,
+		EditBoxOnEnterPressed=function()
+			local editBox=getglobal(this:GetParent():GetName().."EditBox");
+			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
+			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_EMOTE;
+			EmoteButtons_UpdateConfig();
+			this:GetParent():Hide();
+		end,
+		EditBoxOnEscapePressed=function()
+			this:GetParent():Hide();
+		end,
+		timeout=0,
+		exclusive=1
+	};
+	StaticPopup_Show("EMOTEBUTTONS_CHANGEEMOTE");
+
+	if (EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type == EBACTTYPE_EMOTE) then 
+		txt = EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action;
+	else
+		txt = "";
+	end
+
+	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_CHANGEEMOTE")):GetName().."EditBox"):SetText(txt);
+end
+
+function EmoteButtons_ChangeDeck()
+	StaticPopupDialogs["EMOTEBUTTONS_CHANGEDECK"]={
+		text=TEXT(EMOTEBUTTONS_CHANGEDECK),
+		button1=TEXT(ACCEPT),
+		button2=TEXT(CANCEL),
+		hasEditBox=1,
+		maxLetters=255,
+		OnAccept=function()
+			local editBox=getglobal(this:GetParent():GetName().."EditBox");
+			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
+			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_DECK;
+			EmoteButtons_UpdateConfig();
+		end,
+		EditBoxOnEnterPressed=function()
+			local editBox=getglobal(this:GetParent():GetName().."EditBox");
+			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
+			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_DECK;
+			EmoteButtons_UpdateConfig();
+			this:GetParent():Hide();
+		end,
+		EditBoxOnEscapePressed=function()
+			this:GetParent():Hide();
+		end,
+		timeout=0,
+		exclusive=1
+	};
+	StaticPopup_Show("EMOTEBUTTONS_CHANGEDECK");
+
+	if (EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type == EBACTTYPE_DECK) then 
+		txt = EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action;
+	else
+		txt = "";
+	end
+
+	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_CHANGEDECK")):GetName().."EditBox"):SetText(txt);
+end
+
+function EmoteButtons_ChangeCommand()
+	StaticPopupDialogs["EMOTEBUTTONS_CHANGECOMMAND"]={
 		text=TEXT(EMOTEBUTTONS_CHANGECOMMAND),
 		button1=TEXT(ACCEPT),
 		button2=TEXT(CANCEL),
@@ -944,19 +1021,31 @@ function EmoteButtons_ChangeEmote()
 		OnAccept=function()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
 			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
+			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_SLASHCMD;
 			EmoteButtons_UpdateConfig();
 		end,
 		EditBoxOnEnterPressed=function()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
 			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
+			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_SLASHCMD;
 			EmoteButtons_UpdateConfig();
+			this:GetParent():Hide();
+		end,
+		EditBoxOnEscapePressed=function()
 			this:GetParent():Hide();
 		end,
 		timeout=0,
 		exclusive=1
 	};
-	StaticPopup_Show("EMOTEBUTTONS_CHANGEEMOTE");
-	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_CHANGEEMOTE")):GetName().."EditBox"):SetText(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action);
+	StaticPopup_Show("EMOTEBUTTONS_CHANGECOMMAND");
+
+	if (EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type == EBACTTYPE_SLASHCMD) then 
+		txt = EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action;
+	else
+		txt = "";
+	end
+
+	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_CHANGECOMMAND")):GetName().."EditBox"):SetText(txt);
 end
 
 function EmoteButtons_SetDeck(number)
@@ -1227,4 +1316,24 @@ function DeckCFGFrame_Update()
 	
 	-- Scrollbar stuff
 	FauxScrollFrame_Update(DeckCFGScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );
+end
+
+function CFGLabelEditOnShow()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	CFGLabelEdit:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
+end
+
+function CFGLabelEditOnEnter()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	EmoteButtons_Vars.Actions[deck][button].tooltip = CFGLabelEdit:GetText();
+	CFGLabelEdit:ClearFocus();
+end
+
+function CFGLabelEditOnEscape()
+	CFGLabelEdit:ClearFocus();
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	CFGLabelEdit:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
 end

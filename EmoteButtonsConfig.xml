@@ -92,7 +92,7 @@
     <Size>
       <AbsDimension x="600" y="180" />
     </Size>
-    <Anchors>
+    <Anchors> 
       <Anchor point="CENTER" relativeTo="UIParent">
         <Offset>
           <AbsDimension x="0" y="0" />
@@ -252,7 +252,7 @@
 		<OnClick>
 			DeckCFGFrame:Show();
 
-			<!-- EmoteButtons_ChangeTooltip(); -->
+			EmoteButtons_ChangeTooltip();
 		</OnClick>
 	</Scripts>
       </Button>
@@ -277,6 +277,263 @@
 			<OnEvent>
 				EmoteButtons_LoadedVars();
 			</OnEvent>
+		</Scripts>
+	</Button>
+    </Frames>
+  </Frame>
+
+   <Frame name="EmoteButtons_ConfigMain" hidden="true">
+    <Size>
+      <AbsDimension x="600" y="180" />
+    </Size>
+    <Anchors> 
+      <Anchor point="CENTER" relativeTo="UIParent">
+        <Offset>
+          <AbsDimension x="0" y="0" />
+        </Offset>
+      </Anchor>
+    </Anchors>
+    <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+      <BackgroundInsets>
+        <AbsInset left="11" right="12" top="12" bottom="11" />
+      </BackgroundInsets>
+      <TileSize>
+        <AbsValue val="32" />
+      </TileSize>
+      <EdgeSize>
+        <AbsValue val="32" />
+      </EdgeSize>
+    </Backdrop>
+    <Layers>
+      <Layer>
+        <Texture name="$parentTitleBorder" file="Interface\DialogFrame\UI-DialogBox-Header">
+          <Size>
+            <AbsDimension x="160" y="32" />
+          </Size>
+          <Anchors>
+            <Anchor point="TOP">
+              <Offset>
+                <AbsDimension x="0" y="5" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
+        </Texture>
+        <FontString name="$parentTitleString" font="GameFontNormal" text="EMOTEBUTTONS_NAME"> <!--Window Title -->
+          <Size>
+            <AbsDimension x="140" y="0" />
+          </Size>
+          <Anchors>
+            <Anchor point="TOP">
+              <Offset>
+                <AbsDimension x="0" y="-5" />
+              </Offset>
+            </Anchor>
+          </Anchors>
+          <FontHeight>
+            <AbsValue val="12" />
+          </FontHeight>
+          <Color r="1" g="0.8196079" b="0" />
+          <Shadow>
+            <Color r="0" g="0" b="0" />
+            <Offset>
+              <AbsDimension x="1" y="-1" />
+            </Offset>
+          </Shadow>
+        </FontString>
+      </Layer>
+	<Layer>
+		<FontString name="$parent_SetEmote" inherits="GameFontWhite" text="EMOTEBUTTONS_SETLABEL">
+			<Anchors>
+				<Anchor point="CENTER" relativePoint="BOTTOMLEFT">
+					<Offset>
+						<AbsDimension x="70" y="50"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</FontString>
+	</Layer>
+    </Layers>
+
+
+    <Frames>
+
+		<EditBox name="CFGLabelEdit" historyLines="0">
+			<Size>
+				<AbsDimension x="80" y="25"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="29" y="-60"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+			<Layers>
+				<Layer level="BACKGROUND">
+					<Texture name="CFGLabelEditLeft" file="Interface\ClassTrainerFrame\UI-ClassTrainer-FilterBorder">
+						<Size>
+							<AbsDimension x="12" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset>
+									<AbsDimension x="-11" y="0"/>
+								</Offset>
+							</Anchor>
+						</Anchors>
+						<TexCoords left="0" right="0.09375" top="0" bottom="1.0"/>
+					</Texture>
+					<Texture name="CFGLabelEditMiddle" file="Interface\ClassTrainerFrame\UI-ClassTrainer-FilterBorder">
+						<Size>
+							<AbsDimension x="175" y="29"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="DeckCFGNameLeft" relativePoint="RIGHT"/>
+						</Anchors>
+						<TexCoords left="0.09375" right="0.90625" top="0" bottom="1.0"/>
+					</Texture>
+					<Texture name="CFGLabelEditNameRight" file="Interface\ClassTrainerFrame\UI-ClassTrainer-FilterBorder">
+						<Size>
+							<AbsDimension x="12" y="25"/>
+						</Size>
+						<Anchors>
+							<Anchor point="LEFT" relativeTo="CFGLabelEditMiddle" relativePoint="RIGHT"/>
+						</Anchors>
+						<TexCoords left="0.90625" right="1.0" top="0" bottom="1.0"/>
+					</Texture>
+				</Layer>
+			</Layers>
+			<Scripts>
+				<OnShow>
+					CFGLabelEdit:SetAutoFocus(0);
+					CFGLabelEditOnShow();
+				</OnShow>
+				<OnEscapePressed>
+				CFGLabelEditOnEscape();
+					CFGLabelEdit:ClearFocus();
+				</OnEscapePressed>
+				<OnEnterPressed>
+					CFGLabelEditOnEnter();
+				</OnEnterPressed>
+			</Scripts>
+			<FontString inherits="ChatFontNormal"/>
+		</EditBox>
+		
+
+
+	<Button name="$parent_SetIcon" text="EMOTEBUTTONS_SETICON" inherits="EmoteButtons_OptionButton_Template">
+        <Anchors>
+          <Anchor point="LEFT" relativeTo="CFGLabelEdit">
+            <Offset>
+              <AbsDimension x="95" y="2"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+		<Scripts>
+			<OnClick>
+				DeckCFGFrame:Show();
+			</OnClick>
+		</Scripts>
+	</Button>
+
+
+	<Button name="$parent_SetEmote" text="EMOTEBUTTONS_SETEMOTE" inherits="EmoteButtons_OptionButton_Template">
+        <Anchors>
+          <Anchor point="LEFT" relativeTo="$parent_SetIcon">
+            <Offset>
+              <AbsDimension x="105" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+		<Scripts>
+			<OnClick>
+				EmoteButtons_ChangeEmote();
+				<!-- EmoteButtons_ChangeTooltip(); -->
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<Button name="$parent_SetCommand" text="EMOTEBUTTONS_SETCOMMAND" inherits="EmoteButtons_OptionButton_Template">
+        <Anchors>
+          <Anchor point="RIGHT" relativeTo="$parent_SetEmote" relativePoint="RIGHT">
+            <Offset>
+              <AbsDimension x="320" y="-18"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+		<Scripts>
+			<OnClick>
+				EmoteButtons_ChangeCommand();
+				<!-- EmoteButtons_ChangeTooltip(); -->
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<Button name="$parent_SetDeck" text="EMOTEBUTTONS_SETDECK" inherits="EmoteButtons_OptionButton_Template">
+        <Anchors>
+          <Anchor point="RIGHT" relativeTo="$parent_SetCommand" relativePoint="RIGHT">
+            <Offset>
+              <AbsDimension x="105" y="0"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+		<Scripts>
+			<OnClick>
+				EmoteButtons_ChangeDeck();
+				<!-- EmoteButtons_ChangeTooltip(); -->
+			</OnClick>
+		</Scripts>
+	</Button>
+
+	<Button name="$parent_Icon" text=""> <!--- Icon beside Set Icon button-->
+        <Anchors>
+          <Anchor point="CENTER" relativeTo="$parent_SetIcon">
+            <Offset>
+              <AbsDimension x="0" y="30"/>
+            </Offset>
+          </Anchor>
+        </Anchors>
+		<Size>
+			<AbsDimension x="64" y="64"/>
+		</Size>
+			<NormalTexture name="EmoteButton_Icon">
+			<Size>
+				<AbsDimension x="36" y="36"/>
+			</Size>
+			<Anchors>
+				<Anchor point="CENTER">
+					<Offset>
+						<AbsDimension x="0" y="-1"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</NormalTexture>
+	</Button>
+
+	<Button name="EmoteButtonsMain_CloseConfig" inherits="UIPanelCloseButton">
+		<Anchors>
+			<Anchor point="TOPRIGHT" relativeTo="EmoteButtons_Config" relativePoint="TOPRIGHT">
+				<Offset>
+					<AbsDimension x="-2" y="-4"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Scripts>
+			<OnLoad>             
+				EmoteButtons_Init();
+				this:RegisterEvent("ADDON_LOADED");
+			</OnLoad>
+			<OnClick>
+				EmoteButtons_ConfigMain:Hide();
+				<!-- EmoteButtons_HideSelector(); -->
+			</OnClick>
+			<OnEvent>
+				EmoteButtons_LoadedVars();
+			</OnEvent>
+			<OnEscapePressed>
+				EmoteButtons_ConfigMain:Hide();
+			</OnEscapePressed>
 		</Scripts>
 	</Button>
     </Frames>
@@ -512,7 +769,7 @@
 			<AbsDimension x="297" y="298"/>
 		</Size>
 		<Anchors>
-			<Anchor point="TOPLEFT" relativeTo="EmoteButtons_Config" relativePoint="TOPRIGHT">
+			<Anchor point="TOPLEFT" relativeTo="EmoteButtons_ConfigMain_Icon" relativePoint="TOPRIGHT">
 				<Offset>
 					<AbsDimension x="-40" y="-40"/>
 				</Offset>
@@ -585,7 +842,7 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<EditBox name="DeckCFGEditBox" letters="16" historyLines="0">
+			<EditBox name="DeckCFGEditBox" letters="255" historyLines="0">
 				<Size>
 					<AbsDimension x="200" y="20"/>
 				</Size>

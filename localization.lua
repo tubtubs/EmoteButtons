@@ -35,7 +35,16 @@ EMOTEBUTTONS_SLASHCOMMAND	= "Do Emote";
 
 EMOTEBUTTONS_CHANGELABEL	= "Change label to:";
 EMOTEBUTTONS_CHANGECOMMAND	= "Change action command to:";
-DeckCFG_POPUP_TEXT = "Enter Deck Name:";
+EMOTEBUTTONS_CHANGEEMOTE	= "Change emote to:";
+EMOTEBUTTONS_CHANGEDECK	= "Change deck action to:";
+
+EMOTEBUTTONS_SETICON = "Set Icon"
+EMOTEBUTTONS_SETEMOTE = "Set Emote"
+EMOTEBUTTONS_SETCOMMAND = "Set Command"
+EMOTEBUTTONS_SETDECK = "Set Deck"
+EMOTEBUTTONS_SETLABEL = "Label/Tooltip:"
+
+DeckCFG_POPUP_TEXT = "Label/Tooltip:";
 DeckCFG_CHOOSE_ICON = "Choose an Icon:"
 
 EMOTEBUTTONS_OPENDECK1		= EMOTEBUTTONS_OPENDECK.." 1";
@@ -62,13 +71,13 @@ EMOTEBUTTONS_SE = {
 		{action="/played", type=EBACTTYPE_SLASHCMD,tooltip="/played"},
 		{action="Deck 2", type=EBACTTYPE_DECK,tooltip="Nice emotes"},
 		{action="Deck 3", type=EBACTTYPE_DECK,tooltip="Improper behaviour"},
-		{action="/cry", type=EBACTTYPE_EMOTE,tooltip="Cry"},
-		{action="/bye",type=EBACTTYPE_EMOTE,tooltip="Farewell"},
+		{action="/cry", type=EBACTTYPE_SLASHCMD,tooltip="Cry"},
+		{action="/bye",type=EBACTTYPE_SLASHCMD,tooltip="Farewell"},
 		{action="Deck 8", type=EBACTTYPE_DECK,tooltip="Other functions"} },
 	["Deck 1"] = { {action="/played",type=EBACTTYPE_SLASHCMD, tooltip="/played"},
 		{action="AGREE", type=EBACTTYPE_EMOTE,tooltip="Agree"},
-		{action="/bow", type=EBACTTYPE_EMOTE,tooltip="Bow"},
-		{action="/whistle",type=EBACTTYPE_EMOTE, tooltip="Whistle"},
+		{action="/bow", type=EBACTTYPE_SLASHCMD,tooltip="Bow"},
+		{action="/whistle",type=EBACTTYPE_SLASHCMD, tooltip="Whistle"},
 		{action="Deck 9", type=EBACTTYPE_DECK,tooltip="Deck 9"}},
 	["Deck 2"] = { {action="/dance",type=EBACTTYPE_EMOTE, tooltip="Dance"},
 		{action="/salute", type=EBACTTYPE_EMOTE,tooltip="Salute"},
@@ -124,18 +133,18 @@ EMOTEBUTTONS_SE = {
 		{action="Deck 9", type=EBACTTYPE_DECK,tooltip="Deck 9"} },
 	["Deck 9"] = { {action="/played",type=EBACTTYPE_SLASHCMD, tooltip="/played"},
 		{action="AGREE", type=EBACTTYPE_EMOTE,tooltip="Agree"},
-		{action="/lol", type=EBACTTYPE_EMOTE,tooltip="Do search"},
-		{action="/lol", type=EBACTTYPE_EMOTE,tooltip="Ocro UI"},
-		{action="/lol", type=EBACTTYPE_EMOTE,tooltip="Rrface"},
-		{action="/lol", type=EBACTTYPE_EMOTE,tooltip=" n"},
-		{action="/lol",type=EBACTTYPE_EMOTE, tooltip="TT"},
+		{action="AGREE", type=EBACTTYPE_EMOTE,tooltip="Do search"},
+		{action="AGREE", type=EBACTTYPE_EMOTE,tooltip="Ocro UI"},
+		{action="AGREE", type=EBACTTYPE_EMOTE,tooltip="Rrface"},
+		{action="AGREE", type=EBACTTYPE_EMOTE,tooltip=" n"},
+		{action="AGREE",type=EBACTTYPE_EMOTE, tooltip="TT"},
 		{action="Deck 10", type=EBACTTYPE_DECK,tooltip="Deck 10"} },
-	["Deck 10"] = { {action="/played", EBACTTYPE_SLASHCMD,tooltip="Show played time"},
-		{action="/raidinfo", EBACTTYPE_SLASHCMD,tooltip="Show raid info"},
-		{action="/who", EBACTTYPE_SLASHCMD,tooltip="Do a who search"},
-		{action="/macro", EBACTTYPE_SLASHCMD,tooltip="Open macro UI"},
-		{action="/console reloadui",EBACTTYPE_SLASHCMD, tooltip="Reload the User Interface"},
-		{action="/kiss", type=EBACTTYPE_EMOTE,tooltip=" down"},
-		{action="/sit", type=EBACTTYPE_EMOTE,tooltip="TEST"},
+	["Deck 10"] = { {action="/played", type=EBACTTYPE_SLASHCMD,tooltip="Show played time"},
+		{action="/raidinfo", type=EBACTTYPE_SLASHCMD,tooltip="Show raid info"},
+		{action="/who", type=EBACTTYPE_SLASHCMD,tooltip="Do a who search"},
+		{action="/macro", type=EBACTTYPE_SLASHCMD,tooltip="Open macro UI"},
+		{action="/console reloadui",type=EBACTTYPE_SLASHCMD, tooltip="Reload the User Interface"},
+		{action="AGREE", type=EBACTTYPE_EMOTE,tooltip=" down"},
+		{action="AGREE", type=EBACTTYPE_EMOTE,tooltip="TEST"},
 		{action="Deck 9", type=EBACTTYPE_DECK,tooltip="Deck 9"} }		
 }
