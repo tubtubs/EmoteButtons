@@ -1256,12 +1256,9 @@ function DeckCFGFrame_OnShow()
 			found = i;
 		end
 	end
-	DEFAULT_CHAT_FRAME:AddMessage(format("found = %s",found));
-	--FauxScrollFrame_Update(DeckCFGScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );
-	-- Index 281 is at about 2000
-	-- first element of the 56th row2
-	-- 36 per row?
-	--indexs ending in 0 or 5 go one row further down... What do?
+	-- 36 per row
+	--Made an edge case, cuz I couldn't maths
+	--Without modulus check multiples of 5 would end up on the next row
 	if (math.mod(found,5) == 0 ) then
 		offset = floor((found-1)/5)*36;
 			innerIndex=5;
@@ -1269,12 +1266,7 @@ function DeckCFGFrame_OnShow()
 		offset = floor(found/5)*36;
 		innerIndex=math.mod(found,5); 
 	end
-	DEFAULT_CHAT_FRAME:AddMessage(format("offset= %s",offset));
-	DEFAULT_CHAT_FRAME:AddMessage(format("innerIndex= %s",innerIndex));
 	DeckCFGScrollFrame:SetVerticalScroll(offset);
-	--   FauxScrollFrame_Update(MyModScrollBar,50,5,16);
-	-- 50 is max entries, 5 is number of lines, 16 is pixel height of each line
-	-- Scroll to this index, and select it?
 	getglobal("DeckCFGButton"..innerIndex):SetChecked(1);
 	DeckCFGFrame.selectedIcon = found;
 
@@ -1355,7 +1347,6 @@ function DeckCFGFrame_Update()
 	end
 	
 	-- Scrollbar stuff
-	DEFAULT_CHAT_FRAME:AddMessage(format("ScrollOffset %s",    DeckCFGScrollFrame:GetVerticalScroll()));
 	FauxScrollFrame_Update(DeckCFGScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );
 end
 
