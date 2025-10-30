@@ -19,12 +19,15 @@ Make the decks and buttons customizable
 --Add new icon picker [check]
 ----Get current icon in the icon picker [CHECK]
 --Add slash command config window
---Add deck manager
---Add emote manager
+--Add deck manager 
+--Add emote manager [check]
+---Add search to emote manager
+---Add full border around scroll area
 ----just did popup's for now, may make a full blown manager soon. [check]
 --Advanced config window with import/export presets, maybe config mode.
 ----command to reset position, or everything
---Escape to close, should be possible without textbox
+--Escape to close, should be possible without textbox [check]
+---It is, can I make it so it doesn't close both - just one then the other?
 --Main config window needs a delete button
 --How to add new elements to decks?
 
@@ -860,12 +863,20 @@ function EmoteButtons_ShowTooltip(framename)
 		trg = UnitName("target");
 		plr = UnitName("player");
 		action = string.upper(action); --Emotelist is all upper, don't want to change that.
-		if (EB_EmoteList[action] and trg and trg ~= plr) then
+		found = 0;
+		for i=1, getn(EB_EmoteList) do
+			if EB_EmoteList[i].Name == action then
+				found = i;
+				break;
+			end
+		end
+		DEFAULT_CHAT_FRAME:AddMessage(format("%s",found));
+		if (found ~= 0 and EB_EmoteList[found] and trg and trg ~= plr) then
 			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. trg;
-			fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. format(EB_EmoteList[action].TargetEmoteText,trg);
+			fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. format(EB_EmoteList[found].TargetEmoteText,trg);
 		else
 			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. "EMOTE";
-			fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. EB_EmoteList[action].SelfEmoteText;
+			fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. EB_EmoteList[found].SelfEmoteText;
 		end
 	else
 		fulltext = "|cFFFFFFFF"..tooltip.."|n|r"..action;
@@ -899,6 +910,8 @@ function EmoteButtons_UpdateConfig()
 	--EmoteButtons_ConfigMain_Tooltip:SetText(tooltip);
 	EmoteButton_Icon:SetTexture("Interface\\Icons\\"..image);
 	EmoteButtons_ConfigMain:Show();
+	EB_EmotesManager:Hide();
+	DeckCFGFrame:Hide();
     --EmoteButtons_PopupImageSelector(); 
 end
 
@@ -969,15 +982,16 @@ function EmoteButtons_ChangeEmote()
 		timeout=0,
 		exclusive=1
 	};
-	StaticPopup_Show("EMOTEBUTTONS_CHANGEEMOTE");
+	--StaticPopup_Show("EMOTEBUTTONS_CHANGEEMOTE");
 
 	if (EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type == EBACTTYPE_EMOTE) then 
 		txt = EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action;
 	else
 		txt = "";
 	end
+	EB_EmotesManager:Show();
 
-	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_CHANGEEMOTE")):GetName().."EditBox"):SetText(txt);
+	--getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_CHANGEEMOTE")):GetName().."EditBox"):SetText(txt);
 end
 
 function EmoteButtons_ChangeDeck()
@@ -1250,29 +1264,36 @@ function DeckCFGFrame_OnShow()
 
 	--Scroll down to current icon
 	local image = EmoteButtons_Vars.Actions[deck][button].image;
-	local found = -1
+	DEFAULT_CHAT_FRAME:AddMessage(format("IMAGE: %s", EmoteButtons_Vars.Actions[deck][button].image))
+	image = string.lower(image);
+	local found = 0
 	-- Find the index of the image
 	local numMacroIcons = GetNumMacroIcons();
 	local t = ""
 	for i=1, numMacroIcons do
 		t = GetMacroIconInfo(i);
-		if t == "Interface\\Icons\\"..image then
+		t = string.lower(t);
+		if t == "interface\\icons\\"..image then
 			found = i;
 		end
 	end
 	-- 36 per row
 	--Made an edge case, cuz I couldn't maths
 	--Without modulus check multiples of 5 would end up on the next row
-	if (math.mod(found,5) == 0 ) then
-		offset = floor((found-1)/5)*36;
-			innerIndex=5;
-	else
-		offset = floor(found/5)*36;
-		innerIndex=math.mod(found,5); 
+	if (found ~= 0) then
+		if (math.mod(found,5) == 0 ) then
+			offset = floor((found-1)/5)*36;
+				innerIndex=5;
+		else
+			offset = floor(found/5)*36;
+			innerIndex=math.mod(found,5); 
+		end
+		DeckCFGScrollFrame:SetVerticalScroll(offset);
+		getglobal("DeckCFGButton"..innerIndex):SetChecked(1);
+		DeckCFGFrame.selectedIcon = found;
 	end
-	DeckCFGScrollFrame:SetVerticalScroll(offset);
-	getglobal("DeckCFGButton"..innerIndex):SetChecked(1);
-	DeckCFGFrame.selectedIcon = found;
+
+
 
 end
 
@@ -1372,4 +1393,138 @@ function CFGLabelEditOnEscape()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	CFGLabelEdit:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
+end
+
+NUM_EMOTES_SHOWN = 8;
+EMOTE_ROW_HEIGHT = 36;
+
+function EmotesManager_OnShow()
+
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	EmoteManagerFrame_Update();
+	PlaySound("igCharacterInfoOpen");
+	--Disable buttons on the other window?
+
+	--Scroll down to current icon
+	if (EmoteButtons_Vars.Actions[deck][button].type == EBACTTYPE_EMOTE) then 
+		local emote = EmoteButtons_Vars.Actions[deck][button].action;
+		local found = 0
+		-- Find the index of the emote
+		local numEmotes = getn(EB_EmoteList);
+		local t = ""
+		for i=1, numEmotes do
+			t = EB_EmoteList[i].Name;
+			if t == emote then
+				found = i;
+				break;
+			end
+		end
+		-- 36 per row
+		--Made an edge case, cuz I couldn't maths
+		--Without modulus check multiples of 5 would end up on the next row
+		--if (math.mod(found,5) == 0 ) then
+		--	offset = floor((found-1)/5)*36;
+		--		innerIndex=5;
+		--else
+		--	offset = floor(found/5)*36;
+		--	innerIndex=math.mod(found,5); 
+		--end
+		--innerIndex = floor(found/NUM_EMOTES_SHOWN)
+		DEFAULT_CHAT_FRAME:AddMessage(format("Found: %s",found));
+		EB_EmotesManager_SelectedEmote:SetText(EB_EmoteList[found].Name);
+		EB_EmotesManager_PreviewEmote1:SetText(EB_EmoteList[found].TargetEmoteText);
+		EB_EmotesManager_PreviewEmote2:SetText(EB_EmoteList[found].SelfEmoteText);
+		EB_EmotesManager_ScrollFrame:SetVerticalScroll(floor((found-1)*8));
+		getglobal("EB_EmotesManager_Button".."1"):SetChecked(1);
+		EB_EmotesManager.selectedIcon = found;
+		EmoteManagerFrame_Update();
+	else
+		for i=1, NUM_EMOTES_SHOWN do
+			getglobal("EB_EmotesManager_Button"..i):SetChecked(0);
+		end
+			EB_EmotesManager_SelectedEmote:SetText("");
+		EB_EmotesManager_PreviewEmote1:SetText("");
+		EB_EmotesManager_PreviewEmote2:SetText("");
+		EB_EmotesManager_ScrollFrame:SetVerticalScroll(0);
+		EB_EmotesManager.selectedIcon = 0;
+		EmoteManagerFrame_Update();
+	end
+	EmoteManagerSubmitButton_Update();
+end
+
+function EmoteManagerButton_OnClick()
+	EB_EmotesManager.selectedIcon =  this:GetID() + (FauxScrollFrame_GetOffset(EB_EmotesManager_ScrollFrame));
+	found = EB_EmotesManager.selectedIcon;
+	EmoteManagerSubmitButton_Update() 
+	DEFAULT_CHAT_FRAME:AddMessage(format("Selected Icon: %s",EB_EmotesManager.selectedIcon));
+	EB_EmotesManager_SelectedEmote:SetText(EB_EmoteList[found].Name);
+	EB_EmotesManager_PreviewEmote1:SetText(EB_EmoteList[found].TargetEmoteText);
+	EB_EmotesManager_PreviewEmote2:SetText(EB_EmoteList[found].SelfEmoteText);
+	EmoteManagerFrame_Update();
+end
+
+function EmoteManagerFrame_Update()
+	local numEmotes = getn(EB_EmoteList);
+	local EmoteManager_ButtonText,EmoteManager_Button;
+	local DeckCFGOffset = FauxScrollFrame_GetOffset(EB_EmotesManager_ScrollFrame);
+	DEFAULT_CHAT_FRAME:AddMessage(format("OFFSET: %s",EB_EmotesManager_ScrollFrame:GetVerticalScroll()))
+	local index;
+		DEFAULT_CHAT_FRAME:AddMessage("Updates");
+
+	-- Icon list
+	for i=1, NUM_EMOTES_SHOWN do
+		EmoteManager_ButtonText = getglobal("EB_EmotesManager_Button"..i.."Name");
+		EmoteManager_Button = getglobal("EB_EmotesManager_Button"..i);
+		index = (DeckCFGOffset) + i;
+		DEFAULT_CHAT_FRAME:AddMessage(format("index: %s", index));
+		if ( index <= numEmotes) then
+			EmoteManager_Button:Show();
+			EmoteManager_ButtonText:SetText(format("%s",EB_EmoteList[index].Name))
+		else
+			EmoteManager_Button:Hide();
+		end
+		if ( index == EB_EmotesManager.selectedIcon  ) then
+			EmoteManager_Button:SetChecked(1);
+		else
+			EmoteManager_Button:SetChecked(nil);
+		end
+	end
+	
+	-- Scrollbar stuff
+	FauxScrollFrame_Update(EB_EmotesManager_ScrollFrame, numEmotes , NUM_EMOTES_SHOWN, NUM_EMOTES_SHOWN);
+end
+
+function EmoteManagerSubmitButton_Update() 
+	if ( EB_EmotesManager.selectedIcon~=0 ) then
+		EB_EmotesManager_SubmitButton:Enable();
+	else
+		EB_EmotesManager_SubmitButton:Disable();
+	end
+end
+
+
+function EmoteManagerSubmitButton_OnClick() 
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	emote = EB_EmotesManager.selectedIcon;
+	EmoteButtons_Vars.Actions[deck][button].action = EB_EmoteList[emote].Name;
+	EmoteButtons_Vars.Actions[deck][button].type = EBACTTYPE_EMOTE;
+	if EmoteButtons_FarLeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarLeft");
+	end
+	if EmoteButtons_FarRightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarRight");
+	end
+	if EmoteButtons_LeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Left");
+	end
+	if EmoteButtons_RightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Right");
+	end
+	if EmoteButtons_FirstLevelName == deck then
+		EmoteButtons_LoadDeck(deck, "");
+	end
+	PlaySound("igChatScrollUp");
+	EB_EmotesManager:Hide();
 end

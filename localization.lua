@@ -38,11 +38,18 @@ EMOTEBUTTONS_CHANGECOMMAND	= "Change action command to:";
 EMOTEBUTTONS_CHANGEEMOTE	= "Change emote to:";
 EMOTEBUTTONS_CHANGEDECK	= "Change deck action to:";
 
+EMOTEBUTTONS_EMOTEMANAGER = "Emote Manager"
+EMOTEBUTTONS_SUBMITBUTTON = "Submit"
+EMOTEBUTTONS_CANCELBUTTON = "Cancel"
+
+
 EMOTEBUTTONS_SETICON = "Set Icon"
 EMOTEBUTTONS_SETEMOTE = "Set Emote"
 EMOTEBUTTONS_SETCOMMAND = "Set Command"
 EMOTEBUTTONS_SETDECK = "Set Deck"
 EMOTEBUTTONS_SETLABEL = "Label/Tooltip:"
+
+EMOTEBUTTONS_TEST = "TEST"
 
 DeckCFG_POPUP_TEXT = "Label/Tooltip:";
 DeckCFG_CHOOSE_ICON = "Choose an Icon:"
@@ -67,18 +74,21 @@ EBACTTYPE_SLASHCMD = 2
 EMOTEBUTTONS_SE = {
 	["Main"] = {
 		{action="Deck 1", type=EBACTTYPE_DECK, tooltip="Flattering emotes"},
-		{action="AGREE", type=EBACTTYPE_EMOTE,tooltip="Agree"},
+		{action="BECKON", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
 		{action="/played", type=EBACTTYPE_SLASHCMD,tooltip="/played"},
 		{action="Deck 2", type=EBACTTYPE_DECK,tooltip="Nice emotes"},
 		{action="Deck 3", type=EBACTTYPE_DECK,tooltip="Improper behaviour"},
 		{action="/cry", type=EBACTTYPE_SLASHCMD,tooltip="Cry"},
 		{action="/bye",type=EBACTTYPE_SLASHCMD,tooltip="Farewell"},
 		{action="Deck 8", type=EBACTTYPE_DECK,tooltip="Other functions"} },
-	["Deck 1"] = { {action="/played",type=EBACTTYPE_SLASHCMD, tooltip="/played"},
-		{action="AGREE", type=EBACTTYPE_EMOTE,tooltip="Agree"},
-		{action="/bow", type=EBACTTYPE_SLASHCMD,tooltip="Bow"},
-		{action="/whistle",type=EBACTTYPE_SLASHCMD, tooltip="Whistle"},
-		{action="Deck 9", type=EBACTTYPE_DECK,tooltip="Deck 9"}},
+	["Deck 1"] = { {action="ABSENT", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+{action="AGREE", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+{action="AMAZE", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+{action="ANGRY", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+{action="APOLOGIZE", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+{action="APPLAUD", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+{action="ARM", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+{action="ATTACKMYTARGET", type=EBACTTYPE_EMOTE,tooltip="not Agree"} },
 	["Deck 2"] = { {action="/dance",type=EBACTTYPE_EMOTE, tooltip="Dance"},
 		{action="/salute", type=EBACTTYPE_EMOTE,tooltip="Salute"},
 		{action="/kiss",type=EBACTTYPE_EMOTE,tooltip="Kiss"},
