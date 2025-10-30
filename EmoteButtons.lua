@@ -14,15 +14,19 @@ Add action type to the button info, so they can be: Emotes, slash commands, or a
 Emote list, used for generating tooltip previews of what the emote will say in chat [CHECK]
 Need to dynamically generate deck lists from the localization table, itll be easier to manage like that. [check]
 Add image to button info, instead of randomized icons -- might do this last, could tie into how I display config options [in progress]
+
 Make the decks and buttons customizable
 --Add new icon picker [check]
 ----Get current icon in the icon picker [CHECK]
---Add emote button config window (make two of them?)
+--Add slash command config window
 --Add deck manager
 --Add emote manager
-----just did popup's for now, may make a full blown manager soon.
+----just did popup's for now, may make a full blown manager soon. [check]
 --Advanced config window with import/export presets, maybe config mode.
 ----command to reset position, or everything
+--Escape to close, should be possible without textbox
+--Main config window needs a delete button
+--How to add new elements to decks?
 
 Tech Debt/TODO LIST:
  --Changed EmoteButtons_Vars.Actions to EMOTEBUTTONS_SE, so I could replace references to EMOTEBUTTONS_SE with actions now I suppose.

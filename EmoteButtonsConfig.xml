@@ -282,7 +282,7 @@
     </Frames>
   </Frame>
 
-   <Frame name="EmoteButtons_ConfigMain" hidden="true">
+   <Frame name="EmoteButtons_ConfigMain" hidden="true" enableKeyboard="true" >
     <Size>
       <AbsDimension x="600" y="180" />
     </Size>
@@ -564,6 +564,7 @@
 			<OnLoad>             
 				EmoteButtons_Init();
 				this:RegisterEvent("ADDON_LOADED");
+				tinsert(UISpecialFrames, "EmoteButtons_ConfigMain");
 			</OnLoad>
 			<OnClick>
 				EmoteButtons_ConfigMain:Hide();
