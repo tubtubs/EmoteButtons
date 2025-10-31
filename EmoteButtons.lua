@@ -28,7 +28,7 @@ Make the decks and buttons customizable
 ----command to reset position, or everything
 --Escape to close, should be possible without textbox [check]
 ---It is, can I make it so it doesn't close both - just one then the other?
---Main config window needs a delete button
+--Main config window needs a delete  (or just have it in deck manager?)
 --How to add new elements to decks?
 
 Tech Debt/TODO LIST:
@@ -870,7 +870,6 @@ function EmoteButtons_ShowTooltip(framename)
 				break;
 			end
 		end
-		DEFAULT_CHAT_FRAME:AddMessage(format("%s",found));
 		if (found ~= 0 and EB_EmoteList[found] and trg and trg ~= plr) then
 			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. trg;
 			fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. format(EB_EmoteList[found].TargetEmoteText,trg);
@@ -1247,6 +1246,11 @@ function EmoteButtons_HideSelector()
 	EmoteButtons_ImageSelect1:Hide();
 end
 
+function EmoteButtons_OnHide()
+	EB_EmotesManager:Hide();
+	DeckCFGFrame:Hide();
+end
+
 NUM_ICONS_SHOWN = 20;
 NUM_ICONS_PER_ROW = 5;
 NUM_ICON_ROWS = 4;
@@ -1264,7 +1268,6 @@ function DeckCFGFrame_OnShow()
 
 	--Scroll down to current icon
 	local image = EmoteButtons_Vars.Actions[deck][button].image;
-	DEFAULT_CHAT_FRAME:AddMessage(format("IMAGE: %s", EmoteButtons_Vars.Actions[deck][button].image))
 	image = string.lower(image);
 	local found = 0
 	-- Find the index of the image
@@ -1420,18 +1423,6 @@ function EmotesManager_OnShow()
 				break;
 			end
 		end
-		-- 36 per row
-		--Made an edge case, cuz I couldn't maths
-		--Without modulus check multiples of 5 would end up on the next row
-		--if (math.mod(found,5) == 0 ) then
-		--	offset = floor((found-1)/5)*36;
-		--		innerIndex=5;
-		--else
-		--	offset = floor(found/5)*36;
-		--	innerIndex=math.mod(found,5); 
-		--end
-		--innerIndex = floor(found/NUM_EMOTES_SHOWN)
-		DEFAULT_CHAT_FRAME:AddMessage(format("Found: %s",found));
 		EB_EmotesManager_SelectedEmote:SetText(EB_EmoteList[found].Name);
 		EB_EmotesManager_PreviewEmote1:SetText(EB_EmoteList[found].TargetEmoteText);
 		EB_EmotesManager_PreviewEmote2:SetText(EB_EmoteList[found].SelfEmoteText);
@@ -1457,7 +1448,6 @@ function EmoteManagerButton_OnClick()
 	EB_EmotesManager.selectedIcon =  this:GetID() + (FauxScrollFrame_GetOffset(EB_EmotesManager_ScrollFrame));
 	found = EB_EmotesManager.selectedIcon;
 	EmoteManagerSubmitButton_Update() 
-	DEFAULT_CHAT_FRAME:AddMessage(format("Selected Icon: %s",EB_EmotesManager.selectedIcon));
 	EB_EmotesManager_SelectedEmote:SetText(EB_EmoteList[found].Name);
 	EB_EmotesManager_PreviewEmote1:SetText(EB_EmoteList[found].TargetEmoteText);
 	EB_EmotesManager_PreviewEmote2:SetText(EB_EmoteList[found].SelfEmoteText);
@@ -1468,16 +1458,12 @@ function EmoteManagerFrame_Update()
 	local numEmotes = getn(EB_EmoteList);
 	local EmoteManager_ButtonText,EmoteManager_Button;
 	local DeckCFGOffset = FauxScrollFrame_GetOffset(EB_EmotesManager_ScrollFrame);
-	DEFAULT_CHAT_FRAME:AddMessage(format("OFFSET: %s",EB_EmotesManager_ScrollFrame:GetVerticalScroll()))
 	local index;
-		DEFAULT_CHAT_FRAME:AddMessage("Updates");
-
-	-- Icon list
+	-- Emote list
 	for i=1, NUM_EMOTES_SHOWN do
 		EmoteManager_ButtonText = getglobal("EB_EmotesManager_Button"..i.."Name");
 		EmoteManager_Button = getglobal("EB_EmotesManager_Button"..i);
 		index = (DeckCFGOffset) + i;
-		DEFAULT_CHAT_FRAME:AddMessage(format("index: %s", index));
 		if ( index <= numEmotes) then
 			EmoteManager_Button:Show();
 			EmoteManager_ButtonText:SetText(format("%s",EB_EmoteList[index].Name))
@@ -1493,6 +1479,9 @@ function EmoteManagerFrame_Update()
 	
 	-- Scrollbar stuff
 	FauxScrollFrame_Update(EB_EmotesManager_ScrollFrame, numEmotes , NUM_EMOTES_SHOWN, NUM_EMOTES_SHOWN);
+	-- numEmotes is max entries, NUM_EMOTES_SHOWN is the number of lines, last one is supposed to be pixel size
+	-- But it works best if I just shove number of elements in there. My scroll area isn't litterally moving,
+	-- I'm merely switching out the elements every time a scroll event happens.
 end
 
 function EmoteManagerSubmitButton_Update() 
