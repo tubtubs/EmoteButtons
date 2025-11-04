@@ -42,6 +42,10 @@ EMOTEBUTTONS_EMOTEMANAGER = "Emote Manager"
 EMOTEBUTTONS_SUBMITBUTTON = "Submit"
 EMOTEBUTTONS_CANCELBUTTON = "Cancel"
 
+EMOTEBUTTONS_DECKMANAGER = "Deck Manager"
+EMOTEBUTTONS_ADD = "Add"
+EMOTEBUTTONS_DELETE = "Delete"
+
 
 EMOTEBUTTONS_SETICON = "Set Icon"
 EMOTEBUTTONS_SETEMOTE = "Set Emote"
@@ -82,13 +86,13 @@ EMOTEBUTTONS_SE = {
 		{action="/bye",type=EBACTTYPE_SLASHCMD,tooltip="Farewell"},
 		{action="Deck 8", type=EBACTTYPE_DECK,tooltip="Other functions"} },
 	["Deck 1"] = { {action="ABSENT", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
-{action="AGREE", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
-{action="AMAZE", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
-{action="ANGRY", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
-{action="APOLOGIZE", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
-{action="APPLAUD", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
-{action="ARM", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
-{action="ATTACKMYTARGET", type=EBACTTYPE_EMOTE,tooltip="not Agree"} },
+		{action="AGREE", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+		{action="AMAZE", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+		{action="ANGRY", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+		{action="APOLOGIZE", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+		{action="APPLAUD", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+		{action="ARM", type=EBACTTYPE_EMOTE,tooltip="not Agree"},
+		{action="ATTACKMYTARGET", type=EBACTTYPE_EMOTE,tooltip="not Agree"} },
 	["Deck 2"] = { {action="/dance",type=EBACTTYPE_EMOTE, tooltip="Dance"},
 		{action="/salute", type=EBACTTYPE_EMOTE,tooltip="Salute"},
 		{action="/kiss",type=EBACTTYPE_EMOTE,tooltip="Kiss"},

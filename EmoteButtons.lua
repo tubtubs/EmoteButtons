@@ -18,7 +18,7 @@ Add image to button info, instead of randomized icons -- might do this last, cou
 Make the decks and buttons customizable
 --Add new icon picker [check]
 ----Get current icon in the icon picker [CHECK]
---Add slash command config window
+~~Add slash command config window
 --Add deck manager 
 --Add emote manager [check]
 ---Add search to emote manager
@@ -119,6 +119,17 @@ EmoteButtons_CanChangeSlider = false;
 --image slider
 EmoteButtons_ImageSlideCenter = floor(EmoteButtons_ImageCount/2);
 EmoteButtons_LastSlide = 0;
+
+--Needed for options menu
+EmoteButtons_DeckList={}
+for i, v in pairs(EMOTEBUTTONS_SE) do
+	table.insert(EmoteButtons_DeckList,i)
+end
+function sort_alphabetical(a, b)
+  return a < b
+end
+table.sort(EmoteButtons_DeckList,sort_alphabetical);
+
 
 function EmoteButtons_WipeVars()
 	local i,j;
@@ -1402,7 +1413,7 @@ NUM_EMOTES_SHOWN = 8;
 EMOTE_ROW_HEIGHT = 36;
 
 function EmotesManager_OnShow()
-
+	DeckManagerFrame:Hide();
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	EmoteManagerFrame_Update();
@@ -1516,4 +1527,152 @@ function EmoteManagerSubmitButton_OnClick()
 	end
 	PlaySound("igChatScrollUp");
 	EB_EmotesManager:Hide();
+end
+
+--DeckManager Functions
+
+NUM_DECKS_SHOWN = 8;
+CURRENT_DECK = "";
+
+function DeckManagerFrameUpdateText()
+	DeckManagerFrame_SelectedDeck:SetText("LOL");
+	DeckManagerFrame_DeckButtonTooltip:SetText("LOL");
+	DeckManagerFrame_DeckButtonAction:SetText("LOL");
+	DeckManagerFrame_DeckButtonActionType:SetText("LOL");
+end
+
+function DeckManagerFrame_OnShow()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	DeckManagerFrame.selectedIcon = 0;
+	DeckManagerFrame_DeckScrollFrame:SetVerticalScroll(0);
+	DeckManagerFrameSubmitButton_Update();
+	DeckManagerFrame_Update();
+	PlaySound("igCharacterInfoOpen");
+	for i=1,  8 do
+			button = getglobal("DeckManagerFrame_DeckActionButton"..i);
+			buttontxt = getglobal("DeckManagerFrame_DeckActionButton"..i.."Name");
+			buttonicon = getglobal("DeckManagerFrame_DeckActionButton"..i.."Icon");
+
+			buttonicon:SetTexture("Interface\\Buttons\\UI-EmptySlot-Disabled");
+			buttontxt:SetText("");
+			button:SetChecked(0);
+	end
+	--Disable buttons on the other window?
+	--Decided against scrolling down to current Deck
+	EB_EmotesManager:Hide();
+end
+
+function DeckManagerFrameSubmitButton_OnClick()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	action = DeckManagerFrame.selectedIcon;
+	EmoteButtons_Vars.Actions[deck][button].action = EmoteButtons_DeckList[action];
+	EmoteButtons_Vars.Actions[deck][button].type = EBACTTYPE_DECK;
+	if EmoteButtons_FarLeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarLeft");
+	end
+	if EmoteButtons_FarRightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarRight");
+	end
+	if EmoteButtons_LeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Left");
+	end
+	if EmoteButtons_RightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Right");
+	end
+	if EmoteButtons_FirstLevelName == deck then
+		EmoteButtons_LoadDeck(deck, "");
+	end
+	PlaySound("igChatScrollUp");
+	DeckManagerFrame:Hide();
+end
+
+function DeckManagerFrameSubmitButton_Update() 
+	if ( DeckManagerFrame.selectedIcon~=0 ) then
+		DeckManagerFrame_SubmitButton:Enable();
+	else
+		DeckManagerFrame_SubmitButton:Disable();
+	end
+end
+
+
+function DeckManagerFrameDeckActionButton_OnClick()
+	DeckManagerFrame.selectedAction =  this:GetID() + (FauxScrollFrame_GetOffset(DeckManagerFrame_DeckScrollFrame));
+	DeckManagerFrame_Update();
+end
+
+function DeckManagerFrame_UpdateActions(deck)
+	deck_tag = EmoteButtons_DeckList[deck]
+	d = EmoteButtons_Vars.Actions[deck_tag]
+	for i=1, getn(d) do
+		buttontxt = getglobal("DeckManagerFrame_DeckActionButton"..i.."Name");
+		button = getglobal("DeckManagerFrame_DeckActionButton"..i);
+		buttonicon = getglobal("DeckManagerFrame_DeckActionButton"..i.."Icon");
+		button:SetChecked(0);
+
+
+		if d[i].type == EBACTTYPE_DECK then
+			txt = "DECK: ";
+		elseif d[i].type == EBACTTYPE_EMOTE then
+			txt = "Emote: ";
+		elseif d[i].type == EBACTTYPE_SLASHCMD then
+			txt = "SLASH CMD: ";
+		end
+		txt = txt .. d[i].action 
+		txt = txt .. " Tooltip: " .. d[i].tooltip
+		buttontxt:SetText(txt);
+		buttonicon:SetTexture("Interface\\Icons\\"..d[i].image)
+	end
+	if getn(d) ~= 8 then
+		for i=getn(d)+1, 8 do
+			button = getglobal("DeckManagerFrame_DeckActionButton"..i);
+			buttontxt = getglobal("DeckManagerFrame_DeckActionButton"..i.."Name");
+			buttonicon = getglobal("DeckManagerFrame_DeckActionButton"..i.."Icon");
+			buttonicon:SetTexture("Interface\\Buttons\\UI-EmptySlot-Disabled");
+
+			buttontxt:SetText("Empty");
+			button:SetChecked(0);
+		end
+	end
+end
+
+function DeckManagerFrame_Update()
+	local numDecks = getn(EmoteButtons_DeckList);
+	local DeckManagerFrame_DeckButtonText, DeckManagerFrame_DeckButton;
+	local DeckManagerOffset = FauxScrollFrame_GetOffset(DeckManagerFrame_DeckScrollFrame);
+	local index;
+		-- Deck list
+	for i=1, NUM_DECKS_SHOWN do
+		DeckManagerFrame_DeckButtonText = getglobal("DeckManagerFrame_DeckButton"..i.."Name");
+		DeckManagerFrame_DeckButton = getglobal("DeckManagerFrame_DeckButton"..i);
+		index = (DeckManagerOffset) + i;
+		if ( index <= numDecks) then
+			DeckManagerFrame_DeckButton:Show();
+			DeckManagerFrame_DeckButtonText:SetText(format("%s",EmoteButtons_DeckList[index]))
+		else
+			DeckManagerFrame_DeckButton:Hide();
+		end
+		if ( index == DeckManagerFrame.selectedIcon  ) then
+			DeckManagerFrame_DeckButton:SetChecked(1);
+		else
+			DeckManagerFrame_DeckButton:SetChecked(nil);
+		end
+	end
+	
+	-- Scrollbar stuff
+	FauxScrollFrame_Update(DeckManagerFrame_DeckScrollFrame, numDecks , NUM_DECKS_SHOWN, NUM_DECKS_SHOWN);
+	-- numEmotes is max entries, NUM_EMOTES_SHOWN is the number of lines, last one is supposed to be pixel size
+	-- But it works best if I just shove number of elements in there. My scroll area isn't litterally moving,
+	-- I'm merely switching out the elements every time a scroll event happens.
+end
+
+--Deprecated, but will need for DeckBuilder
+function DeckManagerFrameDeckButton_OnClick()
+	DeckManagerFrame.selectedIcon =  this:GetID() + (FauxScrollFrame_GetOffset(DeckManagerFrame_DeckScrollFrame));
+	found = DeckManagerFrame.selectedIcon;
+	DeckManagerFrame.selectedAction = 0;
+	DeckManagerFrame_UpdateActions(found);
+	DeckManagerFrameSubmitButton_Update() 
+	DeckManagerFrame_Update();
 end
