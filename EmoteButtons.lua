@@ -1544,20 +1544,41 @@ end
 function DeckManagerFrame_OnShow()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
-	DeckManagerFrame.selectedIcon = 0;
-	DeckManagerFrame_DeckScrollFrame:SetVerticalScroll(0);
-	DeckManagerFrameSubmitButton_Update();
-	DeckManagerFrame_Update();
-	PlaySound("igCharacterInfoOpen");
-	for i=1,  8 do
-			button = getglobal("DeckManagerFrame_DeckActionButton"..i);
-			buttontxt = getglobal("DeckManagerFrame_DeckActionButton"..i.."Name");
-			buttonicon = getglobal("DeckManagerFrame_DeckActionButton"..i.."Icon");
 
-			buttonicon:SetTexture("Interface\\Buttons\\UI-EmptySlot-Disabled");
-			buttontxt:SetText("");
-			button:SetChecked(0);
+
+	if (EmoteButtons_Vars.Actions[deck][button].type == EBACTTYPE_DECK) then 
+		local action = EmoteButtons_Vars.Actions[deck][button].action;
+		local found = 0
+		-- Find the index of the action
+		local numDecks = getn(EmoteButtons_DeckList);
+		local t = ""
+		for i=1, numDecks do
+			t = EmoteButtons_DeckList[i];
+			if t == action then
+				found = i;
+				break;
+			end
+		end
+		EB_EmotesManager_ScrollFrame:SetVerticalScroll(floor((found-1)*8));
+		getglobal("EB_EmotesManager_Button".."1"):SetChecked(1);
+		DeckManagerFrame.selectedIcon = found;
+		EmoteManagerFrame_Update();
+	else
+		DeckManagerFrame.selectedIcon = 0;
+		DeckManagerFrame_DeckScrollFrame:SetVerticalScroll(0);
+		PlaySound("igCharacterInfoOpen");
+		for i=1,  8 do
+				button = getglobal("DeckManagerFrame_DeckActionButton"..i);
+				buttontxt = getglobal("DeckManagerFrame_DeckActionButton"..i.."Name");
+				buttonicon = getglobal("DeckManagerFrame_DeckActionButton"..i.."Icon");
+
+				buttonicon:SetTexture("Interface\\Buttons\\UI-EmptySlot-Disabled");
+				buttontxt:SetText("");
+				button:SetChecked(0);
+		end
 	end
+	DeckManagerFrame_Update();	
+	DeckManagerFrameSubmitButton_Update();
 	--Disable buttons on the other window?
 	--Decided against scrolling down to current Deck
 	EB_EmotesManager:Hide();
