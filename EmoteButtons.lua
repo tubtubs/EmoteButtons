@@ -1562,7 +1562,7 @@ function DeckManagerFrame_OnShow()
 		EB_EmotesManager_ScrollFrame:SetVerticalScroll(floor((found-1)*8));
 		getglobal("EB_EmotesManager_Button".."1"):SetChecked(1);
 		DeckManagerFrame.selectedIcon = found;
-		EmoteManagerFrame_Update();
+		DeckManagerFrame_UpdateActions(found);
 	else
 		DeckManagerFrame.selectedIcon = 0;
 		DeckManagerFrame_DeckScrollFrame:SetVerticalScroll(0);
