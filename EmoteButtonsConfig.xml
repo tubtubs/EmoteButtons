@@ -256,7 +256,7 @@
 				<Scripts>
 					<OnLoad>
 						<!-- EmoteButtons_Init(); -->
-				this:RegisterEvent("ADDON_LOADED");
+			<!--	this:RegisterEvent("ADDON_LOADED"); -->
 					</OnLoad>
 					<OnClick>
 				EmoteButtons_Config:Hide();
@@ -1226,7 +1226,7 @@
 
 	<CheckButton name="DeckBuilderActionTemplate" virtual="true">
 		<Size>
-			<AbsDimension x="108" y="16"/>
+			<AbsDimension x="300" y="16"/>
 		</Size>
 		<Layers>
 			<Layer level="OVERLAY">
@@ -1456,7 +1456,7 @@
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="$parent_DeckScrollFrame">
 						<Offset>
-							<AbsDimension x="140" y="0"/>
+							<AbsDimension x="332" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
