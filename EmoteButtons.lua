@@ -18,23 +18,23 @@ Add image to button info, instead of randomized icons -- might do this last, cou
 Make the decks and buttons customizable
 --Add new icon picker [check]
 ----Get current icon in the icon picker [CHECK]
-~~Add slash command config window
---Add deck manager 
+~~Add slash command config window (Textbox popup is good enough for now)
+--Add deck manager [check]
 --Add emote manager [check]
----Add search to emote manager
+---Add search to emote manager (meh)
 ---Add full border around scroll area
-----just did popup's for now, may make a full blown manager soon. [check]
 --Advanced config window with import/export presets, maybe config mode.
 ----command to reset position, or everything
 --Escape to close, should be possible without textbox [check]
 ---It is, can I make it so it doesn't close both - just one then the other?
---Main config window needs a delete  (or just have it in deck manager?)
+----No, not really
+--Main config window needs a delete  (or just have it in deck builder?)
 --How to add new elements to decks?
 
 Tech Debt/TODO LIST:
  --Changed EmoteButtons_Vars.Actions to EMOTEBUTTONS_SE, so I could replace references to EMOTEBUTTONS_SE with actions now I suppose.
 	This hasn't had any un-intended issues... YET. It may need tweeking to be more dynamic later, but we'll get there with the config later.
-
+ --Bad naming convention on frames
 DEPARTING NOTES: 
 	Have left side wing setup to handle 0-8 arguments. Maybe I can arrange where they are more dynamically, so theyre closer
 	to center, even if theres fewer than 8 items in a deck.
@@ -122,24 +122,29 @@ EmoteButtons_LastSlide = 0;
 
 --Needed for options menu
 EmoteButtons_DeckList={}
-for i, v in pairs(EMOTEBUTTONS_SE) do
-	table.insert(EmoteButtons_DeckList,i)
-end
-function sort_alphabetical(a, b)
-  return a < b
-end
-table.sort(EmoteButtons_DeckList,sort_alphabetical);
+
 
 
 function EmoteButtons_WipeVars()
 	local i,j;
 	local inr = EmoteButtons_ImageCount;
+	if not EmoteButtons_Vars then
+		DEFAULT_CHAT_FRAME:AddMessage("LELASD")
 	EmoteButtons_Vars = {
 		Actions = EMOTEBUTTONS_SE,
 		Main_Ratio = 42,
 		Main_Shift = 0,
 		Wing_Shift = 0,
-};
+	};
+	end
+
+	for i, v in pairs(EmoteButtons_Vars.Actions) do
+		table.insert(EmoteButtons_DeckList,i)
+	end
+	function sort_alphabetical(a, b)
+	return a < b
+	end
+	table.sort(EmoteButtons_DeckList,sort_alphabetical);
 
 	for i, v in pairs(EmoteButtons_Vars.Actions) do
 		for j, v in pairs(EmoteButtons_Vars.Actions[i]) do
@@ -977,13 +982,13 @@ function EmoteButtons_ChangeEmote()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
 			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
 			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_EMOTE;
-			EmoteButtons_UpdateConfig();
+			--EmoteButtons_UpdateConfig();
 		end,
 		EditBoxOnEnterPressed=function()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
 			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
 			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_EMOTE;
-			EmoteButtons_UpdateConfig();
+			--EmoteButtons_UpdateConfig();
 			this:GetParent():Hide();
 		end,
 		EditBoxOnEscapePressed=function()
@@ -992,15 +997,13 @@ function EmoteButtons_ChangeEmote()
 		timeout=0,
 		exclusive=1
 	};
-	--StaticPopup_Show("EMOTEBUTTONS_CHANGEEMOTE");
+	StaticPopup_Show("EMOTEBUTTONS_CHANGEEMOTE");
 
 	if (EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type == EBACTTYPE_EMOTE) then 
 		txt = EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action;
 	else
 		txt = "";
 	end
-	EB_EmotesManager:Show();
-
 	--getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_CHANGEEMOTE")):GetName().."EditBox"):SetText(txt);
 end
 
@@ -1052,13 +1055,13 @@ function EmoteButtons_ChangeCommand()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
 			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
 			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_SLASHCMD;
-			EmoteButtons_UpdateConfig();
+			--EmoteButtons_UpdateConfig();
 		end,
 		EditBoxOnEnterPressed=function()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
 			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
 			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_SLASHCMD;
-			EmoteButtons_UpdateConfig();
+			--EmoteButtons_UpdateConfig();
 			this:GetParent():Hide();
 		end,
 		EditBoxOnEscapePressed=function()
@@ -1421,7 +1424,18 @@ function EmotesManager_OnShow()
 	--Disable buttons on the other window?
 
 	--Scroll down to current icon
-	if (EmoteButtons_Vars.Actions[deck][button].type == EBACTTYPE_EMOTE) then 
+	len = getn(EmoteButtons_Vars.Actions[deck])
+	if len < button or EmoteButtons_Vars.Actions[deck][button].type ~= EBACTTYPE_EMOTE then
+		for i=1, NUM_EMOTES_SHOWN do
+			getglobal("EB_EmotesManager_Button"..i):SetChecked(0);
+		end
+			EB_EmotesManager_SelectedEmote:SetText("");
+		EB_EmotesManager_PreviewEmote1:SetText("");
+		EB_EmotesManager_PreviewEmote2:SetText("");
+		EB_EmotesManager_ScrollFrame:SetVerticalScroll(0);
+		EB_EmotesManager.selectedIcon = 0;
+		EmoteManagerFrame_Update();
+	elseif (EmoteButtons_Vars.Actions[deck][button].type == EBACTTYPE_EMOTE) then 
 		local emote = EmoteButtons_Vars.Actions[deck][button].action;
 		local found = 0
 		-- Find the index of the emote
@@ -1440,16 +1454,6 @@ function EmotesManager_OnShow()
 		EB_EmotesManager_ScrollFrame:SetVerticalScroll(floor((found-1)*8));
 		getglobal("EB_EmotesManager_Button".."1"):SetChecked(1);
 		EB_EmotesManager.selectedIcon = found;
-		EmoteManagerFrame_Update();
-	else
-		for i=1, NUM_EMOTES_SHOWN do
-			getglobal("EB_EmotesManager_Button"..i):SetChecked(0);
-		end
-			EB_EmotesManager_SelectedEmote:SetText("");
-		EB_EmotesManager_PreviewEmote1:SetText("");
-		EB_EmotesManager_PreviewEmote2:SetText("");
-		EB_EmotesManager_ScrollFrame:SetVerticalScroll(0);
-		EB_EmotesManager.selectedIcon = 0;
 		EmoteManagerFrame_Update();
 	end
 	EmoteManagerSubmitButton_Update();
@@ -1508,23 +1512,21 @@ function EmoteManagerSubmitButton_OnClick()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	emote = EB_EmotesManager.selectedIcon;
-	EmoteButtons_Vars.Actions[deck][button].action = EB_EmoteList[emote].Name;
-	EmoteButtons_Vars.Actions[deck][button].type = EBACTTYPE_EMOTE;
-	if EmoteButtons_FarLeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarLeft");
+	len = getn(EmoteButtons_Vars.Actions[deck])
+	if len < button then
+		a = {action=EB_EmoteList[emote].Name, type=EBACTTYPE_EMOTE, tooltip=""
+			, image = "Interface\\Buttons\\UI-EmptySlot-Disabled"}
+		table.insert(EmoteButtons_Vars.Actions[deck], a);
+		DeckBuilderFrame_UpdateActions();
+	else
+		EmoteButtons_Vars.Actions[deck][button].action = EB_EmoteList[emote].Name;
+		EmoteButtons_Vars.Actions[deck][button].type = EBACTTYPE_EMOTE;
 	end
-	if EmoteButtons_FarRightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarRight");
-	end
-	if EmoteButtons_LeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Left");
-	end
-	if EmoteButtons_RightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Right");
-	end
-	if EmoteButtons_FirstLevelName == deck then
-		EmoteButtons_LoadDeck(deck, "");
-	end
+	EmoteButtons_LoadDeck(deck, "FarLeft");
+	EmoteButtons_LoadDeck(deck, "FarRight");
+	EmoteButtons_LoadDeck(deck, "Left");
+	EmoteButtons_LoadDeck(deck, "Right");
+	EmoteButtons_LoadDeck(deck, "");
 	PlaySound("igChatScrollUp");
 	EB_EmotesManager:Hide();
 end
@@ -1559,8 +1561,8 @@ function DeckManagerFrame_OnShow()
 				break;
 			end
 		end
-		EB_EmotesManager_ScrollFrame:SetVerticalScroll(floor((found-1)*8));
-		getglobal("EB_EmotesManager_Button".."1"):SetChecked(1);
+		DeckManagerFrame_DeckScrollFrame:SetVerticalScroll(floor((found-1)*8));
+		getglobal("DeckManagerFrame_DeckActionButton".."1"):SetChecked(1);
 		DeckManagerFrame.selectedIcon = found;
 		DeckManagerFrame_UpdateActions(found);
 	else
@@ -1588,23 +1590,21 @@ function DeckManagerFrameSubmitButton_OnClick()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	action = DeckManagerFrame.selectedIcon;
-	EmoteButtons_Vars.Actions[deck][button].action = EmoteButtons_DeckList[action];
-	EmoteButtons_Vars.Actions[deck][button].type = EBACTTYPE_DECK;
-	if EmoteButtons_FarLeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarLeft");
+	len = getn(EmoteButtons_Vars.Actions[deck])
+	if len < button then
+		a = {action=EB_EmoteList[emote].Name, type=EBACTTYPE_EMOTE, tooltip=""
+			, image = "Interface\\Buttons\\UI-EmptySlot-Disabled"}
+		table.insert(EmoteButtons_Vars.Actions[deck], a);
+		DeckBuilderFrame_UpdateActions();
+	else
+		EmoteButtons_Vars.Actions[deck][button].action = EmoteButtons_DeckList[action];
+		EmoteButtons_Vars.Actions[deck][button].type = EBACTTYPE_DECK;
 	end
-	if EmoteButtons_FarRightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarRight");
-	end
-	if EmoteButtons_LeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Left");
-	end
-	if EmoteButtons_RightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Right");
-	end
-	if EmoteButtons_FirstLevelName == deck then
-		EmoteButtons_LoadDeck(deck, "");
-	end
+	EmoteButtons_LoadDeck(deck, "FarLeft");
+	EmoteButtons_LoadDeck(deck, "FarRight");
+	EmoteButtons_LoadDeck(deck, "Left");
+	EmoteButtons_LoadDeck(deck, "Right");
+	EmoteButtons_LoadDeck(deck, "");
 	PlaySound("igChatScrollUp");
 	DeckManagerFrame:Hide();
 end
@@ -1688,7 +1688,6 @@ function DeckManagerFrame_Update()
 	-- I'm merely switching out the elements every time a scroll event happens.
 end
 
---Deprecated, but will need for DeckBuilder
 function DeckManagerFrameDeckButton_OnClick()
 	DeckManagerFrame.selectedIcon =  this:GetID() + (FauxScrollFrame_GetOffset(DeckManagerFrame_DeckScrollFrame));
 	found = DeckManagerFrame.selectedIcon;
@@ -1696,4 +1695,231 @@ function DeckManagerFrameDeckButton_OnClick()
 	DeckManagerFrame_UpdateActions(found);
 	DeckManagerFrameSubmitButton_Update() 
 	DeckManagerFrame_Update();
+end 
+
+-- Deck Builder --
+
+function DeckBuilderFrame_OnShow()
+	EmoteButtons_ConfigMain:Hide();
+	DeckManagerFrame:Hide();
+	EB_EmotesManager:Hide();
+	DeckCFGFrame:Hide();
+	DeckBuilderFrame.selectedIcon = 0;
+	DeckBuilderFrame.selectedAction = 0;
+	DeckBuilderFrame_DeckScrollFrame:SetVerticalScroll(0);
+	PlaySound("igCharacterInfoOpen");
+	DeckBuilderFrame_Update();
+	for i=1,  8 do
+			button = getglobal("DeckBuilderFrame_DeckActionButton"..i);
+			buttontxt = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Name");
+			buttonicon = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Icon");
+
+			buttonicon:SetTexture("Interface\\Buttons\\UI-EmptySlot-Disabled");
+			buttontxt:SetText("");
+			button:SetChecked(0);
+	end
+	DeckBuilderFrame_Update();
+	DeckBuilderFrameButtons_Update() 
 end
+
+function DeckBuilderFrame_OnHide()
+	DEFAULT_CHAT_FRAME:AddMessage("TODO!");
+end
+
+function DeckBuilderFrameDeckActionButton_OnClick()
+	if DeckBuilderFrame.selectedIcon ~= 0 then
+		DeckBuilderFrame.selectedAction =  this:GetID()
+		EmoteButtons_ConfigButton = this:GetID()
+		DeckBuilderFrame_UpdateActions(DeckBuilderFrame.selectedIcon)
+	else
+		this:SetChecked(nil);
+		--getglobal("DeckBuilderFrame_DeckActionButton"..this:GetID())
+	end
+	DeckBuilderFrameButtons_Update();
+	DeckBuilderFrame_Update();
+end
+
+function DeckBuilderFrameDeckButton_OnClick()
+	DeckBuilderFrame.selectedIcon =  this:GetID() + (FauxScrollFrame_GetOffset(DeckBuilderFrame_DeckScrollFrame));
+	found = DeckBuilderFrame.selectedIcon;
+	DeckBuilderFrame.selectedAction = 0;
+	EmoteButtons_ConfigDeck = EmoteButtons_DeckList[DeckBuilderFrame.selectedIcon];
+	DeckBuilderFrame_UpdateActions(found);
+	DeckBuilderFrameButtons_Update() 
+	DeckBuilderFrame_Update();
+end
+
+function DeckBuilderFrame_UpdateActions(deck)
+	if (deck == 0 ) then
+		d={}
+	else	
+		deck_tag = EmoteButtons_DeckList[deck]
+		d = EmoteButtons_Vars.Actions[deck_tag]
+	end
+	for i=1, getn(d) do
+		buttontxt = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Name");
+		button = getglobal("DeckBuilderFrame_DeckActionButton"..i);
+		buttonicon = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Icon");
+
+		if d[i].type == EBACTTYPE_DECK then
+			txt = "DECK: ";
+		elseif d[i].type == EBACTTYPE_EMOTE then
+			txt = "EMOTE: ";
+		elseif d[i].type == EBACTTYPE_SLASHCMD then
+			txt = "CMD: ";
+		end
+		txt = txt .. d[i].action 
+		txt = txt .. " Tooltip: " .. d[i].tooltip
+		buttontxt:SetText(txt);
+		buttonicon:SetTexture("Interface\\Icons\\"..d[i].image)
+		if ( i == DeckBuilderFrame.selectedAction  ) then
+			button:SetChecked(1);
+		else
+			button:SetChecked(nil);
+		end
+	end
+	if getn(d) ~= 8 then
+		for i=getn(d)+1, 8 do
+			button = getglobal("DeckBuilderFrame_DeckActionButton"..i);
+			buttontxt = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Name");
+			buttonicon = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Icon");
+			buttonicon:SetTexture("Interface\\Buttons\\UI-EmptySlot-Disabled");
+
+			buttontxt:SetText("Empty");
+			if ( i == DeckBuilderFrame.selectedAction  ) then
+				button:SetChecked(1);
+			else
+				button:SetChecked(nil);
+			end
+		end
+	end
+end
+
+
+function DeckBuilderFrame_Update()
+	local numDecks = getn(EmoteButtons_DeckList);
+	local DeckBuilderFrame_DeckButtonText, DeckBuilderFrame_DeckButton;
+	local DeckBuilderOffset = FauxScrollFrame_GetOffset(DeckBuilderFrame_DeckScrollFrame);
+	local index;
+		-- Deck list
+	for i=1, NUM_DECKS_SHOWN do
+		DeckBuilderFrame_DeckButtonText = getglobal("DeckBuilderFrame_DeckButton"..i.."Name");
+		DeckBuilderFrame_DeckButton = getglobal("DeckBuilderFrame_DeckButton"..i);
+		index = (DeckBuilderOffset) + i;
+		if ( index <= numDecks) then
+			DeckBuilderFrame_DeckButton:Show();
+			DeckBuilderFrame_DeckButtonText:SetText(format("%s",EmoteButtons_DeckList[index]))
+		else
+			DeckBuilderFrame_DeckButton:Hide();
+		end
+		if ( index == DeckBuilderFrame.selectedIcon  ) then
+			DeckBuilderFrame_DeckButton:SetChecked(1);
+		else
+			DeckBuilderFrame_DeckButton:SetChecked(nil);
+		end
+	end
+	
+	-- Scrollbar stuff
+	FauxScrollFrame_Update(DeckBuilderFrame_DeckScrollFrame, numDecks , NUM_DECKS_SHOWN, NUM_DECKS_SHOWN);
+	-- numEmotes is max entries, NUM_EMOTES_SHOWN is the number of lines, last one is supposed to be pixel size
+	-- But it works best if I just shove number of elements in there. My scroll area isn't litterally moving,
+	-- I'm merely switching out the elements every time a scroll event happens.
+end
+
+function DeckBuilderFrameButtons_Update() 
+	if ( DeckBuilderFrame.selectedIcon~=0 ) then
+		DeckBuilderFrame_DeleteDeckButton:Enable();
+	else
+		DeckBuilderFrame_DeleteDeckButton:Disable();
+	end
+	
+	if ( DeckBuilderFrame.selectedAction~=0 ) then
+		DeckBuilderFrame_ChangeTooltipButton:Enable();
+		DeckBuilderFrame_ChangeDeckActionButton:Enable();
+		DeckBuilderFrame_ChangeEmoteActionButton:Enable();
+		DeckBuilderFrame_ChangeCMDActionButton:Enable();
+		DeckBuilderFrame_DeleteActionButton:Enable();
+
+	else
+		DeckBuilderFrame_ChangeTooltipButton:Disable();
+		DeckBuilderFrame_ChangeDeckActionButton:Disable();
+		DeckBuilderFrame_ChangeEmoteActionButton:Disable();
+		DeckBuilderFrame_ChangeCMDActionButton:Disable();
+		DeckBuilderFrame_DeleteActionButton:Disable();
+	end
+end
+
+function DeckBuilderFrame_DeleteActionButton_OnClick()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	table.remove(EmoteButtons_Vars.Actions[deck], DeckBuilderFrame.selectedAction);
+	EmoteButtons_LoadDeck(deck, "FarLeft");
+	EmoteButtons_LoadDeck(deck, "FarRight");
+	EmoteButtons_LoadDeck(deck, "Left");
+	EmoteButtons_LoadDeck(deck, "Right");
+	EmoteButtons_LoadDeck(deck, "");
+	
+	DeckBuilderFrame_UpdateActions(DeckBuilderFrame.selectedIcon);
+end
+
+function DeckBuilderFrame_DeleteDeckButton_OnClick()
+--check if the deck is used in any other decks...
+	local deck = EmoteButtons_ConfigDeck;
+	if deck == EmoteButtons_FirstLevelName then
+		DEFAULT_CHAT_FRAME:AddMessage("Cannot delete Main deck")
+	else
+		found = 0
+		for i=1, getn(EmoteButtons_DeckList) do
+			d = EmoteButtons_DeckList[i]
+			for n=1, getn(EmoteButtons_Vars.Actions[d]) do
+				if(EmoteButtons_Vars.Actions[d][n].type == EBACTTYPE_DECK and
+					EmoteButtons_Vars.Actions[d][n].action == deck) then
+					found = 1
+				end			
+			end
+		end
+		txt = "Do you want to delete the deck " .. deck .. "?"
+		if found == 1 then
+			txt = txt .. " This deck is used by other decks, these buttons will be deleted."
+		end
+		confirmation = 0 
+		StaticPopupDialogs["DELETE_DECK_CONFIRMATION"] = {
+		text = txt,
+		button1 = "Yes",
+		button2 = "No",
+		OnAccept = function()
+			DEFAULT_CHAT_FRAME:AddMessage("YES")
+			if found == 1 then --need to delete the other buttons relying on it first...
+				for i=1, getn(EmoteButtons_DeckList) do
+					d = EmoteButtons_DeckList[i]
+					for n=1, getn(EmoteButtons_Vars.Actions[d]) do
+						if(EmoteButtons_Vars.Actions[d][n].type == EBACTTYPE_DECK and
+							EmoteButtons_Vars.Actions[d][n].action == deck) then
+							--found = 1
+							table.remove(EmoteButtons_Vars.Actions[d], n)
+							DEFAULT_CHAT_FRAME:AddMessage(format("Deleting from deck... %s %s", d, n))
+						end			
+					end
+				end
+			end
+			DEFAULT_CHAT_FRAME:AddMessage(format("Deleting deck... %s", deck))
+			EmoteButtons_Vars.Actions[deck] = nil;
+			table.remove(EmoteButtons_DeckList, DeckBuilderFrame.selectedIcon);
+		end,
+		timeout = 0,
+		whileDead = true,
+		hideOnEscape = true,
+		preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
+		}
+		StaticPopup_Show("DELETE_DECK_CONFIRMATION")
+
+	end
+end
+
+function DeckBuilderFrame_AddDeckButton_OnClick()
+
+end
+
+
+--DeckBuilderActionButtonTemplate
+--DeckBuilderDeckButtonTemplate

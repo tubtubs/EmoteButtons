@@ -55,6 +55,8 @@ EMOTEBUTTONS_SETLABEL = "Label/Tooltip:"
 
 EMOTEBUTTONS_TEST = "TEST"
 
+EMOTEBUTTONS_DECKBUILDER = "Deck Builder"
+
 DeckCFG_POPUP_TEXT = "Label/Tooltip:";
 DeckCFG_CHOOSE_ICON = "Choose an Icon:"
 
