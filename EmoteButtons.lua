@@ -123,7 +123,9 @@ EmoteButtons_LastSlide = 0;
 --Needed for options menu
 EmoteButtons_DeckList={}
 
-
+function sort_alphabetical(a, b)
+	return a < b
+end
 
 function EmoteButtons_WipeVars()
 	local i,j;
@@ -146,9 +148,7 @@ function EmoteButtons_WipeVars()
 	for i, v in pairs(EmoteButtons_Vars.Actions) do
 		table.insert(EmoteButtons_DeckList,i)
 	end
-	function sort_alphabetical(a, b)
-	return a < b
-	end
+
 	table.sort(EmoteButtons_DeckList,sort_alphabetical);
 
 end
@@ -1787,9 +1787,11 @@ end
 function DeckBuilderFrame_UpdateActions(deck)
 	if (deck == 0 ) then
 		d={}
+		txt = ""
 	else	
 		deck_tag = EmoteButtons_DeckList[deck]
 		d = EmoteButtons_Vars.Actions[deck_tag]
+		txt = "Empty"
 	end
 	for i=1, getn(d) do
 		buttontxt = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Name");
@@ -1820,7 +1822,7 @@ function DeckBuilderFrame_UpdateActions(deck)
 			buttonicon = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Icon");
 			buttonicon:SetTexture("Interface\\Buttons\\UI-EmptySlot-Disabled");
 
-			buttontxt:SetText("Empty");
+			buttontxt:SetText(txt);
 			if ( i == DeckBuilderFrame.selectedAction  ) then
 				button:SetChecked(1);
 			else
@@ -1961,8 +1963,53 @@ function DeckBuilderFrame_DeleteDeckButton_OnClick()
 end
 
 function DeckBuilderFrame_AddDeckButton_OnClick()
-
+	-- Make a popup, show it
+	StaticPopupDialogs["EMOTEBUTTONS_NEWDECK"]={
+		text=TEXT(EMOTEBUTTONS_NEWDECK),
+		button1=TEXT(ACCEPT),
+		button2=TEXT(CANCEL),
+		hasEditBox=1,
+		maxLetters=200,
+		OnAccept=function()
+			local editBox=getglobal(this:GetParent():GetName().."EditBox");
+			local newDeck = editBox:GetText();
+			--Try to find it in the current deck list...
+			found = 0
+			for i=1, getn(EmoteButtons_DeckList) do
+				if EmoteButtons_DeckList[i] == newDeck then
+					found = 1
+				end
+			end
+			if found == 1 then
+				DEFAULT_CHAT_FRAME:AddMessage("Deck name already in use!");
+			else
+				EmoteButtons_Vars.Actions[newDeck] = {};
+				table.insert(EmoteButtons_DeckList, newDeck);
+				table.sort(EmoteButtons_DeckList,sort_alphabetical);
+				DEFAULT_CHAT_FRAME:AddMessage("Deck add success!");
+				--Sort potentially messes up indexes on deck list, so need to reset deck selection
+				DeckBuilderFrame.selectedAction = 0;
+				DeckBuilderFrame.selectedIcon = 0;
+				DeckBuilderFrame_Update();
+				DeckBuilderFrame_UpdateActions(0);
+			end
+			--EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].tooltip = editBox:GetText();
+			--EmoteButtons_UpdateConfig();
+		end,
+		EditBoxOnEnterPressed=function()
+			local editBox=getglobal(this:GetParent():GetName().."EditBox");
+			--EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].tooltip = editBox:GetText();
+			--EmoteButtons_UpdateConfig();
+			--this:GetParent():Hide();
+		end,
+		timeout=0,
+		exclusive=1
+	};
+	StaticPopup_Show("EMOTEBUTTONS_NEWDECK");
+	--getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_NEWDECK")):GetName().."EditBox"):SetText(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].tooltip);
 end
+
+
 
 
 --DeckBuilderActionButtonTemplate

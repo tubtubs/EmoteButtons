@@ -1551,7 +1551,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						DeckBuilderFrameSubmitButton_OnClick();
+						DeckBuilderFrame_AddDeckButton_OnClick();
 					</OnClick>
 				</Scripts>
 			</Button>
