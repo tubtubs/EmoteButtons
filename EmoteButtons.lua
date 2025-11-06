@@ -4,7 +4,21 @@ Tubtubs
 Looking to expand this EmoteButtons addon to include support for future expansions emotes.
 
 
+CHANGELOG:
+Added Emote, and Deck managers
+Added Icon picker dialog (uses macro icons)
+Added Deckbuilder
+
 TODO:
+Remove the textbox from the maincofig, I think it's awful.
+-Maybe I can put the icon, or have a preview there?
+Advanced config window with import/export presets, maybe config mode. **
+Chat commands:
+- /emotebuttons deckbuilder
+- /emotebuttons resetposition
+- /emotebuttons resetdecks
+- /emotebuttons resetprofile
+
 Expand the left/right wing to a size of 8. [CHECK]
 Make the wings dynamically sized (can have less than 8 buttons) [CHECK]
 Add another level of depth to the buttons [CHECK]
@@ -19,27 +33,21 @@ Make the decks and buttons customizable
 --Add new icon picker [check]
 ----Get current icon in the icon picker [CHECK]
 ~~Add slash command config window (Textbox popup is good enough for now)
+~~~Debating if I want to show some common slash commands...
 --Add deck manager [check]
 --Add emote manager [check]
 ---Add search to emote manager (meh)
 ---Add full border around scroll area
---Advanced config window with import/export presets, maybe config mode.
-----command to reset position, or everything
+
 --Escape to close, should be possible without textbox [check]
 ---It is, can I make it so it doesn't close both - just one then the other?
 ----No, not really
 --Main config window needs a delete  (or just have it in deck builder?)
---How to add new elements to decks?
+---Deck builder is better, easily better. [CHECK]
 
 Tech Debt/TODO LIST:
- --Changed EmoteButtons_Vars.Actions to EMOTEBUTTONS_SE, so I could replace references to EMOTEBUTTONS_SE with actions now I suppose.
-	This hasn't had any un-intended issues... YET. It may need tweeking to be more dynamic later, but we'll get there with the config later.
+ --I still kind of want to be rid of the Decklist global, but whatever.
  --Bad naming convention on frames
-DEPARTING NOTES: 
-	Have left side wing setup to handle 0-8 arguments. Maybe I can arrange where they are more dynamically, so theyre closer
-	to center, even if theres fewer than 8 items in a deck.
-	Didn't like the way they look. Might work on how the sit later, might be neat for them to sit in the middle.
-	But its a little touchy, and I wasn't happy with the results.
 
 	DEFAULT_CHAT_FRAME:AddMessage("TEST")
 ]]--
@@ -1056,8 +1064,11 @@ function EmoteButtons_ChangeCommand()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
 			len = getn(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck])
 			if len < EmoteButtons_ConfigButton then
+				local numMacroIcons = GetNumMacroIcons();
+				icon = GetMacroIconInfo(math.random(numMacroIcons))
+				icon = string.sub(icon, 17, -1)
 				a = {action=editBox:GetText(), type=EBACTTYPE_SLASHCMD, tooltip=""
-					, image = "Interface\\Buttons\\UI-EmptySlot-Disabled"}
+					, image = icon}
 				table.insert(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck], a);
 			else
 				EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
@@ -1072,8 +1083,11 @@ function EmoteButtons_ChangeCommand()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
 			len = getn(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck])
 			if len < EmoteButtons_ConfigButton then
+				local numMacroIcons = GetNumMacroIcons();
+				icon = GetMacroIconInfo(math.random(numMacroIcons))
+				icon = string.sub(icon, 17, -1)
 				a = {action=editBox:GetText(), type=EBACTTYPE_SLASHCMD, tooltip=""
-					, image = "Interface\\Buttons\\UI-EmptySlot-Disabled"}
+					, image = icon}
 				table.insert(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck], a);
 			else
 				EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
@@ -1370,21 +1384,11 @@ function DeckCFGOkayButton_OnClick()
 	EmoteButton_Icon:SetTexture(icon);
 	icon = string.sub(icon, 17, -1)
 	EmoteButtons_Vars.Actions[deck][button].image = icon
-	if EmoteButtons_FarLeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarLeft");
-	end
-	if EmoteButtons_FarRightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarRight");
-	end
-	if EmoteButtons_LeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Left");
-	end
-	if EmoteButtons_RightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Right");
-	end
-	if EmoteButtons_FirstLevelName == deck then
-		EmoteButtons_LoadDeck(deck, "");
-	end
+	EmoteButtons_LoadDeck(deck, "FarLeft");
+	EmoteButtons_LoadDeck(deck, "FarRight");
+	EmoteButtons_LoadDeck(deck, "Left");
+	EmoteButtons_LoadDeck(deck, "Right");
+	EmoteButtons_LoadDeck(deck, "");
 	PlaySound("igChatScrollUp");
 	EmoteButtons_Vars.Actions[deck][button].tooltip = 	DeckCFGEditBox:GetText();
 	if DeckBuilderFrame:IsShown() then
@@ -1461,7 +1465,7 @@ function EmotesManager_OnShow()
 		for i=1, NUM_EMOTES_SHOWN do
 			getglobal("EB_EmotesManager_Button"..i):SetChecked(0);
 		end
-			EB_EmotesManager_SelectedEmote:SetText("");
+		EB_EmotesManager_SelectedEmote:SetText("");
 		EB_EmotesManager_PreviewEmote1:SetText("");
 		EB_EmotesManager_PreviewEmote2:SetText("");
 		EB_EmotesManager_ScrollFrame:SetVerticalScroll(0);
@@ -1546,8 +1550,13 @@ function EmoteManagerSubmitButton_OnClick()
 	emote = EB_EmotesManager.selectedIcon;
 	len = getn(EmoteButtons_Vars.Actions[deck])
 	if len < button then
+		local numMacroIcons = GetNumMacroIcons();
+		icon = GetMacroIconInfo(math.random(numMacroIcons))
+		icon = string.sub(icon, 17, -1)
+
 		a = {action=EB_EmoteList[emote].Name, type=EBACTTYPE_EMOTE, tooltip=""
-			, image = "Interface\\Buttons\\UI-EmptySlot-Disabled"}
+			, image = icon }
+
 		table.insert(EmoteButtons_Vars.Actions[deck], a);
 	else
 		EmoteButtons_Vars.Actions[deck][button].action = EB_EmoteList[emote].Name;
@@ -1626,9 +1635,13 @@ function DeckManagerFrameSubmitButton_OnClick()
 	action = DeckManagerFrame.selectedIcon;
 	len = getn(EmoteButtons_Vars.Actions[deck])
 	if len < button then
+		local numMacroIcons = GetNumMacroIcons();
+		icon = GetMacroIconInfo(math.random(numMacroIcons))
+		icon = string.sub(icon, 17, -1)
 		a = {action=deck, type=EBACTTYPE_DECK, tooltip=""
-			, image = "Interface\\Buttons\\UI-EmptySlot-Disabled"}
+			, image = icon}
 		table.insert(EmoteButtons_Vars.Actions[deck], a);
+		DeckBuilderFrameButtons_Update();
 		DeckBuilderFrame_UpdateActions(DeckBuilderFrame.selectedIcon);
 	else
 		EmoteButtons_Vars.Actions[deck][button].action = EmoteButtons_DeckList[action];
