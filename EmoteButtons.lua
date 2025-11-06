@@ -1352,14 +1352,15 @@ function DeckCFGButton_OnClick()
 end
 
 function DeckCFGOkayButton_Update() 
-	if ( (strlen(DeckCFGEditBox:GetText()) > 0) and DeckCFGFrame.selectedIcon ) then
+	if ( DeckCFGFrame.selectedIcon ) then
 		DeckCFGOkayButton:Enable();
 	else
 		DeckCFGOkayButton:Disable();
 	end
-	if ( DeckCFGFrame.mode == "edit" and (strlen(DeckCFGEditBox:GetText()) > 0) ) then
-		DeckCFGOkayButton:Enable();
-	end
+-- unused sample code
+--	if ( DeckCFGFrame.mode == "edit" and (strlen(DeckCFGEditBox:GetText()) > 0) ) then
+--		DeckCFGOkayButton:Enable();
+--	end
 end
 
 function DeckCFGOkayButton_OnClick()
@@ -1369,6 +1370,12 @@ function DeckCFGOkayButton_OnClick()
 	EmoteButton_Icon:SetTexture(icon);
 	icon = string.sub(icon, 17, -1)
 	EmoteButtons_Vars.Actions[deck][button].image = icon
+	if EmoteButtons_FarLeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarLeft");
+	end
+	if EmoteButtons_FarRightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarRight");
+	end
 	if EmoteButtons_LeftWing_Deck==deck then
 		EmoteButtons_LoadDeck(deck, "Left");
 	end
@@ -1380,6 +1387,9 @@ function DeckCFGOkayButton_OnClick()
 	end
 	PlaySound("igChatScrollUp");
 	EmoteButtons_Vars.Actions[deck][button].tooltip = 	DeckCFGEditBox:GetText();
+	if DeckBuilderFrame:IsShown() then
+		DeckBuilderFrame_UpdateActions();
+	end
 	DeckCFGFrame:Hide();
 end
 
@@ -1785,13 +1795,14 @@ function DeckBuilderFrameDeckButton_OnClick()
 end
 
 function DeckBuilderFrame_UpdateActions(deck)
+	deck = DeckBuilderFrame.selectedIcon;
 	if (deck == 0 ) then
 		d={}
-		txt = ""
+		emptyTxt = ""
 	else	
 		deck_tag = EmoteButtons_DeckList[deck]
 		d = EmoteButtons_Vars.Actions[deck_tag]
-		txt = "Empty"
+		emptyTxt = "Empty"
 	end
 	for i=1, getn(d) do
 		buttontxt = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Name");
@@ -1822,7 +1833,7 @@ function DeckBuilderFrame_UpdateActions(deck)
 			buttonicon = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Icon");
 			buttonicon:SetTexture("Interface\\Buttons\\UI-EmptySlot-Disabled");
 
-			buttontxt:SetText(txt);
+			buttontxt:SetText(emptyTxt);
 			if ( i == DeckBuilderFrame.selectedAction  ) then
 				button:SetChecked(1);
 			else
@@ -1904,6 +1915,8 @@ function DeckBuilderFrame_DeleteActionButton_OnClick()
 	EmoteButtons_LoadDeck(deck, "Left");
 	EmoteButtons_LoadDeck(deck, "Right");
 	EmoteButtons_LoadDeck(deck, "");
+	--reset deck builder action buttons and what not
+	DeckBuilderFrame.selectedAction = 0;
 	DeckBuilderFrameButtons_Update();
 	DeckBuilderFrame_UpdateActions(DeckBuilderFrame.selectedIcon);
 end
@@ -1992,21 +2005,44 @@ function DeckBuilderFrame_AddDeckButton_OnClick()
 				DeckBuilderFrame.selectedIcon = 0;
 				DeckBuilderFrame_Update();
 				DeckBuilderFrame_UpdateActions(0);
+				DeckBuilderFrameButtons_Update();
 			end
 			--EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].tooltip = editBox:GetText();
 			--EmoteButtons_UpdateConfig();
 		end,
 		EditBoxOnEnterPressed=function()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
-			--EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].tooltip = editBox:GetText();
-			--EmoteButtons_UpdateConfig();
-			--this:GetParent():Hide();
+			local newDeck = editBox:GetText();
+			--Try to find it in the current deck list...
+			found = 0
+			for i=1, getn(EmoteButtons_DeckList) do
+				if EmoteButtons_DeckList[i] == newDeck then
+					found = 1
+				end
+			end
+			if found == 1 then
+				DEFAULT_CHAT_FRAME:AddMessage("Deck name already in use!");
+			else
+				EmoteButtons_Vars.Actions[newDeck] = {};
+				table.insert(EmoteButtons_DeckList, newDeck);
+				table.sort(EmoteButtons_DeckList,sort_alphabetical);
+				DEFAULT_CHAT_FRAME:AddMessage("Deck add success!");
+				--Sort potentially messes up indexes on deck list, so need to reset deck selection
+				DeckBuilderFrame.selectedAction = 0;
+				DeckBuilderFrame.selectedIcon = 0;
+				DeckBuilderFrame_Update();
+				DeckBuilderFrame_UpdateActions(0);
+				DeckBuilderFrameButtons_Update();
+			end
+		end,
+		EditBoxOnEscapePressed=function()
+			this:GetParent():Hide();
 		end,
 		timeout=0,
 		exclusive=1
 	};
 	StaticPopup_Show("EMOTEBUTTONS_NEWDECK");
-	--getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_NEWDECK")):GetName().."EditBox"):SetText(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].tooltip);
+	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_NEWDECK")):GetName().."EditBox"):SetText("");
 end
 
 
