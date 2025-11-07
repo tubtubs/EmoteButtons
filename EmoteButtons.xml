@@ -2,6 +2,7 @@
 	<Script file="localization.lua"/>
 	<script file="EmoteButtonsImages.lua"/>
 	<Script file="EmoteButtons.lua"/>
+	<Script file="EmoteList.lua"/>
 
 			<Button name="EmoteButtons_temp_noscript" toplevel="true" virtual="true">
 				<Size>

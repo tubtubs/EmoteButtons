@@ -13,9 +13,7 @@ Added Deckbuilder
 
 
 TODO:
-Remove the textbox from the maincofig, I think it's awful.
--Maybe I can put the icon, or have a preview there?
-Advanced config window with import/export presets, maybe config mode. **
+Advanced config window with import/export decks, and profiles, maybe config mode. **
 Chat commands:
 - /emotebuttons deckbuilder
 - /emotebuttons options
@@ -25,6 +23,8 @@ Chat commands:
 Do I want to keep the old Deckbuilder config window? Deckbuilder is pretty goated.
 -Deck builder could take over, and select the button you shift clicked.
 -Open advanced config if you shift click on the middle? ctrl click?
+--Shove size and rotation in advanced config?
+[BONUS] Add more icons, under tabs in the icon picker.
 
 
 Expand the left/right wing to a size of 8. [CHECK]
@@ -203,23 +203,16 @@ function EmoteButtons_Init()
 	for i = 1, EmoteButtons_FarRightWingCount do
 		CreateFrame("Button", EmoteButtons_FarRightWing[i], EmoteButtons_Main, "EmoteButtons_template");
 	end
-	
-	EmoteButtons_ConfigMain_SetMainShiftTitle:SetText(EMOTEBUTTONS_ROTATION);
-	EmoteButtons_ConfigMain_SetMainSizeTitle:SetText(EMOTEBUTTONS_SIZE);
 
 	UIErrorsFrame:AddMessage(EMOTEBUTTONS_INIT_TEXT, 1.0, 1.0, 1.0, 1.0, UIERRORS_HOLD_TIME);
-
 end
 
 function EmoteButtons_LoadedVars()
 	EmoteButtons_WipeVars();
 	DEFAULT_CHAT_FRAME:AddMessage("testing testing")
-	EmoteButtons_ConfigMain_SetMainShift:SetValue(EmoteButtons_Vars.Main_Shift);
-	EmoteButtons_ConfigMain_SetMainSize:SetValue(EmoteButtons_Vars.Main_Ratio);
-
-
+	EmoteButtons_AdvancedConfigFrame_SetMainShift:SetValue(EmoteButtons_Vars.Main_Shift);
+	EmoteButtons_AdvancedConfigFrame_SetMainSize:SetValue(EmoteButtons_Vars.Main_Ratio);
 	EmoteButtons_ArrangeFrames();
-
 end
 
 function EmoteButtons_ArrangeFrames()
@@ -944,21 +937,22 @@ function EmoteButtons_UpdateConfig()
 
 	--EmoteButtons_ConfigMain_Action:SetText(action);
 	--EmoteButtons_ConfigMain_Tooltip:SetText(tooltip);
-	EmoteButton_Icon:SetTexture("Interface\\Icons\\"..image);
-	EmoteButtons_ConfigMain:Show();
-	EB_EmotesManager:Hide();
-	DeckCFGFrame:Hide();
+	--EmoteButton_Icon:SetTexture("Interface\\Icons\\"..image);
+	DeckBuilderFrame:Show();
+	DeckBuilderFrame_ScrollToSelected();
+	--EB_EmotesManager:Hide();
+	--DeckCFGFrame:Hide();
     --EmoteButtons_PopupImageSelector(); 
 end
 
 function EmoteButtons_SliderChanged(sender, units)
 	local val = "err";
-	if sender=="EmoteButtons_ConfigMain_SetMainShift" then
-		val = EmoteButtons_ConfigMain_SetMainShift:GetValue();
+	if sender=="EmoteButtons_AdvancedConfigFrame_SetMainShift" then
+		val = EmoteButtons_AdvancedConfigFrame_SetMainShift:GetValue();
 		EmoteButtons_Vars.Main_Shift = val;
 		EmoteButtons_Vars.Wing_Shift = val;
 	else
-		val = EmoteButtons_ConfigMain_SetMainSize:GetValue();
+		val = EmoteButtons_AdvancedConfigFrame_SetMainSize:GetValue();
 		EmoteButtons_Vars.Main_Ratio = val;
 	end
 	getglobal(sender.."Value"):SetText(val..units);
@@ -1834,27 +1828,27 @@ end
 
 -- Deck Builder --
 
-function DeckBuilderFrame_OnShow()
-	EmoteButtons_ConfigMain:Hide();
-	DeckManagerFrame:Hide();
-	EB_EmotesManager:Hide();
-	DeckCFGFrame:Hide();
-	DeckBuilderFrame.selectedIcon = 0;
-	DeckBuilderFrame.selectedAction = 0;
-	DeckBuilderFrame_DeckScrollFrame:SetVerticalScroll(0);
+function DeckBuilderFrame_ScrollToSelected()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	found = 0
+	for i=1, getn(EmoteButtons_DeckList) do
+		d = EmoteButtons_DeckList[i]
+		if (d==deck) then
+			found = i;
+		end
+	end
+	DeckBuilderFrame.selectedIcon = found;
+	DeckBuilderFrame.selectedAction = button;
+	DeckBuilderFrame_DeckScrollFrame:SetVerticalScroll(found);
 	PlaySound("igCharacterInfoOpen");
 	DeckBuilderFrame_Update();
-	for i=1,  8 do
-			button = getglobal("DeckBuilderFrame_DeckActionButton"..i);
-			buttontxt = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Name");
-			buttonicon = getglobal("DeckBuilderFrame_DeckActionButton"..i.."Icon");
-
-			buttonicon:SetTexture("Interface\\Buttons\\UI-EmptySlot-Disabled");
-			buttontxt:SetText("");
-			button:SetChecked(0);
-	end
-	DeckBuilderFrame_Update();
+	DeckBuilderFrame_UpdateActions();
 	DeckBuilderFrameButtons_Update() 
+end
+
+function DeckBuilderFrame_OnShow()
+	EmoteButtons_AdvancedConfigFrame:Hide();
 end
 
 function DeckBuilderFrame_OnHide()
@@ -2160,8 +2154,13 @@ function DeckBuilderFrame_AddDeckButton_OnClick()
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_NEWDECK")):GetName().."EditBox"):SetText("");
 end
 
-
-
-
---DeckBuilderActionButtonTemplate
---DeckBuilderDeckButtonTemplate
+function EmoteButtons_AdvancedConfigFrame_OnShow()
+	DeckBuilderFrame:Hide();
+	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
+	StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
+	EB_EmotesManager:Hide();
+	DeckCFGFrame:Hide();
+	DeckManagerFrame:Hide();
+	EmoteButtons_AdvancedConfigFrame_SetMainShiftTitle:SetText(EMOTEBUTTONS_ROTATION);
+	EmoteButtons_AdvancedConfigFrame_SetMainSizeTitle:SetText(EMOTEBUTTONS_SIZE);
+end
