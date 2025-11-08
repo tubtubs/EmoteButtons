@@ -19,8 +19,8 @@ Advanced config window with import/export decks, and profiles, maybe config mode
 --Profiles [CHECK]
 --Import Export?
 ---Loadstring might do this very easily...
---Reset Position/Profile
-Chat commands:
+--Reset Position/Profile [Check]
+Chat commands: [CHECK]
 - /emotebuttons deckbuilder
 - /emotebuttons options
 - /emotebuttons resetposition
@@ -143,6 +143,36 @@ EmoteButtons_LastSlide = 0;
 
 --Needed for options menu
 EmoteButtons_DeckList={}
+
+-- chat inputs
+local function TextMenu(arg)
+	if arg == nil or arg == "" then
+		DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r This is help topic for |cFFFFFF00 /EmoteButtons or /EB.|r",1,1,1)
+		DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons deckbuilder|r - opens the deckbuilder.",1,1,1)
+		DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons options|r - opens the advanced config window.",1,1,1)		
+		DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetposition|r - resets position of the main button.",1,1,1)
+		DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetprofile|r - resets the current profile, and deck config to default.",1,1,1)
+	else
+		if arg == "resetposition" then
+			ResetPosition()
+		elseif arg == "resetprofile" then
+			ResetProfile()
+		elseif arg == "options" then
+			EmoteButtons_AdvancedConfigFrame:Show();
+		elseif arg == "deckbuilder" then
+			--DeckBuilderFrame:Show();
+			EmoteButtons_UpdateConfig()
+		else
+			DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r unknown command",1,0.3,0.3);
+		end
+	end
+end
+-- slashcommands
+SlashCmdList['VANILLA_STORYLINE'] = TextMenu
+SLASH_VANILLA_STORYLINE1 = '/EmoteButtons'
+SLASH_VANILLA_STORYLINE2 = '/EB'
+
+
 
 function sort_alphabetical(a, b)
 	return a < b
@@ -931,9 +961,9 @@ function EmoteButtons_UpdateConfig()
 	local found = 0;
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
-	local action = EmoteButtons_Vars.Actions[deck][button].action;
-	local tooltip = EmoteButtons_Vars.Actions[deck][button].tooltip;
-	local image = EmoteButtons_Vars.Actions[deck][button].image;
+--	local action = EmoteButtons_Vars.Actions[deck][button].action;
+--	local tooltip = EmoteButtons_Vars.Actions[deck][button].tooltip;
+--	local image = EmoteButtons_Vars.Actions[deck][button].image;
 
 	
 	--EmoteButtons_ConfigMain_ButtonName:SetText(deck.." - "..EMOTEBUTTONS_BUTTON.." "..button);

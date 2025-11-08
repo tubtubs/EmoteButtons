@@ -1311,6 +1311,42 @@
 				</Scripts>
 			</Slider>
 
+			<Button name="$parent_ImportProfileButton" text="Import Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Size>
+					<AbsDimension x="155" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="-195" y="-95"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+               <Scripts>
+                   <OnClick>
+                       ResetPosition();
+                   </OnClick>
+               </Scripts>
+           </Button>
+
+			<Button name="$parent_ExportProfileButton" text="Export Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Size>
+					<AbsDimension x="155" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parent_ImportProfileButton">
+						<Offset>
+							<AbsDimension x="0" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+               <Scripts>
+                   <OnClick>
+                       ResetPosition();
+                   </OnClick>
+               </Scripts>
+           </Button>
+
 
 			<Button name="$parent_ResetPositionButton" text="Reset Main Button Position" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
@@ -1330,7 +1366,7 @@
                </Scripts>
            </Button>
 
-			<Button name="$parent_ResetPositionButton" text="Reset Current Profile" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_ResetProfileButton" text="Reset Current Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
 				</Size>
