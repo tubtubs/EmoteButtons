@@ -25,11 +25,6 @@ Chat commands:
 - /emotebuttons options
 - /emotebuttons resetposition
 - /emotebuttons resetprofile --reloads the Default deck setup
-
-Do I want to keep the old Deckbuilder config window? Deckbuilder is pretty goated.
--Deck builder could take over, and select the button you shift clicked.
--Open advanced config if you shift click on the middle? ctrl click?
---Shove size and rotation in advanced config?
 [BONUS] Add more icons, under tabs in the icon picker.
 
 
@@ -2348,10 +2343,6 @@ function EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick
 	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 0, 0);
 end
 
-
-
-
-
 function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()
 	local accept = function()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
@@ -2390,3 +2381,31 @@ function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_NEWPROFILE")):GetName().."EditBox"):SetText("");
 end
 
+function ResetPosition()
+	EmoteButtons_Main:ClearAllPoints()
+	EmoteButtons_Main:SetPoint("CENTER", UIParent ,"CENTER", 0, 0)
+end
+
+function ResetProfile()
+	index = 0;
+	for i=1, getn(EmoteButtons_Vars.Profiles) do
+		if EmoteButtons_Vars.Profiles[i].Name==EmoteButtons_Vars.Profile then
+			index = i;
+		end
+	end
+	StaticPopupDialogs["RESET_PROFILE_CONFIRMATION"] = {
+	text = "Do you want to reset the current decks config in the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
+	button1 = "Yes",
+	button2 = "No",
+	OnAccept = function()
+		EmoteButtons_Vars.Profiles[index].Decks = EMOTEBUTTONS_SE;
+		EmoteButtons_Vars.Actions = EMOTEBUTTONS_SE;
+		ReloadUI();
+	end,
+	timeout = 0,
+	whileDead = true,
+	hideOnEscape = true,
+	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
+	}
+	StaticPopup_Show("RESET_PROFILE_CONFIRMATION")
+end
