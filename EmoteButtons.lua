@@ -2221,7 +2221,6 @@ function EmoteButtons_AdvancedConfigFrame_OnShow()
 end
 
 function SaveProfile()
-	DEFAULT_CHAT_FRAME:AddMessage("Meh")
 	index = 0;
 	for i=1, getn(EmoteButtons_Vars.Profiles) do
 		if EmoteButtons_Vars.Profiles[i].Name==EmoteButtons_Vars.Profile then

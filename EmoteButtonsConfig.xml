@@ -602,7 +602,7 @@
 			</OnClick>
 		</Scripts>
 	</CheckButton>
-	<Frame name="EB_EmotesManager" frameStrata="FULLSCREEN" hidden="true">
+	<Frame name="EB_EmotesManager" frameStrata="HIGH" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="EmoteButtons_ConfigMain">
 				<Offset>
@@ -914,7 +914,7 @@
 		</Scripts>
 	</CheckButton>
 
-	<Frame name="DeckManagerFrame" frameStrata="FULLSCREEN" hidden="true">
+	<Frame name="DeckManagerFrame" frameStrata="HIGH" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="EmoteButtons_ConfigMain"> <!-- TODO -->
 				<Offset>
@@ -1197,7 +1197,7 @@
 	</Frame>
 
 <!-- Advanced Config-->
-	<Frame name="EmoteButtons_AdvancedConfigFrame" frameStrata="FULLSCREEN" hidden="true">
+	<Frame name="EmoteButtons_AdvancedConfigFrame" frameStrata="HIGH" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
 				<Offset>
@@ -1905,7 +1905,7 @@
 		</Scripts>
 	</CheckButton>
 
-	<Frame name="DeckBuilderFrame" frameStrata="FULLSCREEN" hidden="true">
+	<Frame name="DeckBuilderFrame" frameStrata="HIGH" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
 				<Offset>
