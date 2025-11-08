@@ -1264,6 +1264,7 @@
 			Size Slider
 			Rotation Slider
 			Profiles Dropdown
+			-Add/Remove Profiles too.
 			Export/Import Decks
 			Reset Position
 			-->
@@ -1310,6 +1311,92 @@
 				</Scripts>
 			</Slider>
 
+			<Button name="$parent_ProfileSetDropdownButton" text="Profiles" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-45"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+               <Scripts>
+					<OnShow>
+                       UIDropDownMenu_Initialize(self, ProfileSetDropDown_OnShow);
+                   </OnShow>
+                   <OnClick>
+                       EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick();
+                   </OnClick>
+               </Scripts>
+           </Button>
+
+			<Button name="$parent_ProfileDeleteDropdownButton" text="Delete Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileSetDropdownButton">
+						<Offset>
+							<AbsDimension x="0" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+               <Scripts>
+					<OnShow>
+                       UIDropDownMenu_Initialize(self, ProfileDeleteDropDown_OnShow);
+                   </OnShow>
+                   <OnClick>
+                       EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick();
+                   </OnClick>
+               </Scripts>
+           </Button>
+
+			<Button name="$parent_ProfileDuplicateDropdownButton" text="Duplicate Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Size>
+					<AbsDimension x="120" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileDeleteDropdownButton">
+						<Offset>
+							<AbsDimension x="10" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+               <Scripts>
+					<OnShow>
+                       UIDropDownMenu_Initialize(self, ProfileDuplicateDropDown_OnShow);
+                   </OnShow>
+                   <OnClick>
+                       EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick();
+                   </OnClick>
+               </Scripts>
+           </Button>
+
+			<Button name="$parent_ProfileCreateButton" text="Create Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileDuplicateDropdownButton">
+						<Offset>
+							<AbsDimension x="-10" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+               <Scripts>
+                   <OnClick>
+                       EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick();
+                   </OnClick>
+               </Scripts>
+           </Button>
+
+			<Button name="$parent_ProfileSaveButton" text="Save Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileCreateButton">
+						<Offset>
+							<AbsDimension x="0" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+               <Scripts>
+                   <OnClick>
+					SaveProfile()
+                   </OnClick>
+               </Scripts>
+           </Button>
 
 			<Button name="$parent_Close" inherits="UIPanelCloseButton">
 				<Anchors>

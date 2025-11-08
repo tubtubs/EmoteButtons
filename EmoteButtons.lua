@@ -13,13 +13,19 @@ Added Deckbuilder
 
 
 TODO:
-Advanced config window with import/export decks, and profiles, maybe config mode. **
+Advanced config window with import/export decks, and profiles, maybe config mode
+--Window [CHECK]
+--Sliders [Check]
+--Profiles [CHECK]
+--Import Export?
+---Loadstring might do this very easily...
+--Reset Position/Profile
 Chat commands:
 - /emotebuttons deckbuilder
 - /emotebuttons options
 - /emotebuttons resetposition
-- /emotebuttons resetdecks
-- /emotebuttons resetprofile
+- /emotebuttons resetprofile --reloads the Default deck setup
+
 Do I want to keep the old Deckbuilder config window? Deckbuilder is pretty goated.
 -Deck builder could take over, and select the button you shift clicked.
 -Open advanced config if you shift click on the middle? ctrl click?
@@ -156,12 +162,14 @@ function EmoteButtons_WipeVars()
 			Main_Ratio = 42,
 			Main_Shift = 0,
 			Wing_Shift = 0,
+			Profiles = EMOTEBUTTONS_PROFILES,
+			Profile=EMOTEBUTTONS_PROFILES[1].Name,
 		};
-		for i, v in pairs(EmoteButtons_Vars.Actions) do
-			for j, v in pairs(EmoteButtons_Vars.Actions[i]) do
-				EmoteButtons_Vars.Actions[i][j].image = EmoteButtons_ImageList[math.random(inr)];
-			end
-		end
+--		for i, v in pairs(EmoteButtons_Vars.Actions) do
+--			for j, v in pairs(EmoteButtons_Vars.Actions[i]) do
+--				EmoteButtons_Vars.Actions[i][j].image = EmoteButtons_ImageList[math.random(inr)];
+--			end
+--		end
 	end
 
 	EmoteButtons_DeckList = {}
@@ -2164,3 +2172,221 @@ function EmoteButtons_AdvancedConfigFrame_OnShow()
 	EmoteButtons_AdvancedConfigFrame_SetMainShiftTitle:SetText(EMOTEBUTTONS_ROTATION);
 	EmoteButtons_AdvancedConfigFrame_SetMainSizeTitle:SetText(EMOTEBUTTONS_SIZE);
 end
+
+function SaveProfile()
+	DEFAULT_CHAT_FRAME:AddMessage("Meh")
+	index = 0;
+	for i=1, getn(EmoteButtons_Vars.Profiles) do
+		if EmoteButtons_Vars.Profiles[i].Name==EmoteButtons_Vars.Profile then
+			index = i;
+		end
+	end
+	StaticPopupDialogs["SAVE_PROFILE_CONFIRMATION"] = {
+	text = "Do you want to save your current decks config to the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
+	button1 = "Yes",
+	button2 = "No",
+	OnAccept = function()
+		EmoteButtons_Vars.Profiles[index].Decks = EmoteButtons_Vars.Actions;
+		--table.remove(EmoteButtons_Vars.Profiles, index);
+	end,
+	timeout = 0,
+	whileDead = true,
+	hideOnEscape = true,
+	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
+	}
+	StaticPopup_Show("SAVE_PROFILE_CONFIRMATION")
+end
+
+function SetProfile(index)
+	DEFAULT_CHAT_FRAME:AddMessage("Meh2")
+	StaticPopupDialogs["SET_PROFILE_CONFIRMATION"] = {
+	text = "Do you want to set your current decks config to the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
+	button1 = "Yes",
+	button2 = "No",
+	OnAccept = function()
+	EmoteButtons_Vars.Actions = EmoteButtons_Vars.Profiles[index].Decks;
+	EmoteButtons_Vars.Profile = EmoteButtons_Vars.Profiles[index].Name;	
+	ReloadUI();	--table.remove(EmoteButtons_Vars.Profiles, index);
+	end,
+	timeout = 0,
+	whileDead = true,
+	hideOnEscape = true,
+	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
+	}
+	StaticPopup_Show("SET_PROFILE_CONFIRMATION")
+ -- Ask to save the current profile before switching.
+
+	--
+end
+
+--Did this onshow, instead of load since my variables weren't loaded on time for on load.
+--Might just need to change when the AddonLoaded event is called?
+function ProfileSetDropDown_OnShow()
+	for i=1, getn(EmoteButtons_Vars.Profiles) do
+		info = {};
+		info.text       = EmoteButtons_Vars.Profiles[i].Name;
+		info.value      = i;
+		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
+			info.checked =true;
+		else
+			info.checked=false;
+		end
+		info.func =  function() 
+			SaveProfile();
+			SetProfile(this.value) 
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
+function EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick()
+	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, 0, 0);
+end
+
+function DeleteProfile(index)
+	DEFAULT_CHAT_FRAME:AddMessage("broken")
+	StaticPopupDialogs["DELETE_PROFILE_CONFIRMATION"] = {
+	text = "Do you want to delete the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
+	button1 = "Yes",
+	button2 = "No",
+	OnAccept = function()
+		table.remove(EmoteButtons_Vars.Profiles, index);
+
+	end,
+	timeout = 0,
+	whileDead = true,
+	hideOnEscape = true,
+	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
+	}
+	StaticPopup_Show("DELETE_PROFILE_CONFIRMATION")
+end
+
+function ProfileDeleteDropDown_OnShow()
+	for i=1, getn(EmoteButtons_Vars.Profiles) do
+		info = {};
+		info.text       = EmoteButtons_Vars.Profiles[i].Name;
+		info.value      = i;
+		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
+			info.checked =true;
+		else -- only add if its not currently in use...
+			info.checked=false;
+			info.func =  function() 
+				DeleteProfile(this.value) 
+			end
+			UIDropDownMenu_AddButton(info);
+		end
+	end
+end
+
+function EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick()
+	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, 0, 0);
+end
+
+function DuplicateProfile(index)
+	--prompt for a new name
+	--make a new profile, use that name and old deck
+	--need to test if its by ref or by val?
+		local accept = function()
+			local editBox=getglobal(this:GetParent():GetName().."EditBox");
+			local newProfile = editBox:GetText();
+			--Try to find it in the current deck list...
+			found = 0
+			for i=1, getn(EmoteButtons_Vars.Profiles) do
+				if EmoteButtons_Vars.Profiles[i].Name == newProfile then
+					found = 1
+				end
+			end
+			if found == 1 then
+				--Play an error sound?
+				DEFAULT_CHAT_FRAME:AddMessage("Profile name already in use!");
+			else
+				--need to generate new deck instead of referencing old one.
+				--better copy it!
+				a = {Name=newProfile, Decks=EmoteButtons_Vars.Profiles[index].Decks} --need to set it to the deck we clicked earlier...
+				table.insert(EmoteButtons_Vars.Profiles,a)
+				DEFAULT_CHAT_FRAME:AddMessage(format("Profile %s added successfully!",newProfile));
+			end
+			this:GetParent():Hide();
+		end
+	StaticPopupDialogs["EMOTEBUTTONS_DUPLICATEPROFILE"]={
+		text=TEXT(EMOTEBUTTONS_NEWPROFILE),
+		button1=TEXT(ACCEPT),
+		button2=TEXT(CANCEL),
+		hasEditBox=1,
+		maxLetters=200,
+		OnAccept=accept,
+		EditBoxOnEnterPressed=accept,
+		EditBoxOnEscapePressed=function()
+			this:GetParent():Hide();
+		end,
+		timeout=0,
+		exclusive=1
+	};
+	StaticPopup_Show("EMOTEBUTTONS_DUPLICATEPROFILE");
+	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_DUPLICATEPROFILE")):GetName().."EditBox"):SetText("");
+end
+
+
+function ProfileDuplicateDropDown_OnShow()
+	for i=1, getn(EmoteButtons_Vars.Profiles) do
+		info = {};
+		info.text       = EmoteButtons_Vars.Profiles[i].Name;
+		info.value      = i;
+		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
+			info.checked =true;
+		else
+			info.checked=false;
+		end
+		info.func =  function() 
+			DuplicateProfile(this.value) 
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
+function EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick()
+	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 0, 0);
+end
+
+
+
+
+
+function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()
+	local accept = function()
+			local editBox=getglobal(this:GetParent():GetName().."EditBox");
+			local newProfile = editBox:GetText();
+			--Try to find it in the current deck list...
+			found = 0
+			for i=1, getn(EmoteButtons_Vars.Profiles) do
+				if EmoteButtons_Vars.Profiles[i].Name == newProfile then
+					found = 1
+				end
+			end
+			if found == 1 then
+				--Play an error sound?
+				DEFAULT_CHAT_FRAME:AddMessage("Profile name already in use!");
+			else
+				a = {Name=newProfile, Decks=EMOTEBUTTONS_SE}
+				table.insert(EmoteButtons_Vars.Profiles,a)
+				DEFAULT_CHAT_FRAME:AddMessage(format("Profile %s added successfully!",newProfile));
+			end
+		end
+	StaticPopupDialogs["EMOTEBUTTONS_NEWPROFILE"]={
+		text=TEXT(EMOTEBUTTONS_NEWPROFILE),
+		button1=TEXT(ACCEPT),
+		button2=TEXT(CANCEL),
+		hasEditBox=1,
+		maxLetters=200,
+		OnAccept=accept,
+		EditBoxOnEnterPressed=accept,
+		EditBoxOnEscapePressed=function()
+			this:GetParent():Hide();
+		end,
+		timeout=0,
+		exclusive=1
+	};
+	StaticPopup_Show("EMOTEBUTTONS_NEWPROFILE");
+	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_NEWPROFILE")):GetName().."EditBox"):SetText("");
+end
+
