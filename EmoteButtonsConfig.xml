@@ -602,7 +602,7 @@
 			</OnClick>
 		</Scripts>
 	</CheckButton>
-	<Frame name="EB_EmotesManager" hidden="true">
+	<Frame name="EB_EmotesManager" frameStrata="FULLSCREEN" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="EmoteButtons_ConfigMain">
 				<Offset>
@@ -914,7 +914,7 @@
 		</Scripts>
 	</CheckButton>
 
-	<Frame name="DeckManagerFrame" hidden="true">
+	<Frame name="DeckManagerFrame" frameStrata="FULLSCREEN" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="EmoteButtons_ConfigMain"> <!-- TODO -->
 				<Offset>
@@ -1197,7 +1197,7 @@
 	</Frame>
 
 <!-- Advanced Config-->
-	<Frame name="EmoteButtons_AdvancedConfigFrame" hidden="true">
+	<Frame name="EmoteButtons_AdvancedConfigFrame" frameStrata="FULLSCREEN" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
 				<Offset>
@@ -1497,7 +1497,7 @@
 		</Scripts>
 	</Frame>
 
-	<Frame name="EmoteButtons_ExportProfileFrame" hidden="true">
+	<Frame name="EmoteButtons_ExportProfileFrame" toplevel="true" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
 				<Offset>
@@ -1561,8 +1561,10 @@
 		</Layers> 
 		<Frames>
 
-			<EditBox name="$parent_ExportEditBox" multiLine="1" font="GameFontNormal">
-			    <Size x="300" y="480" />
+			<ScrollFrame name="$parent_ScrollFrame" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="300" y="480"/>
+				</Size>
 				<Anchors>
 					<Anchor point="LEFT">
 						<Offset x="50" y="-60" />
@@ -1571,26 +1573,48 @@
 						<Offset x="50" y="-60" />
 					</Anchor>
 					<Anchor point="BOTTOM">
-						<Offset x="50" y="30" />
+						<Offset x="50" y="60" />
 					</Anchor>
 				</Anchors>
-				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-					<BackgroundInsets>
-						<AbsInset left="150" right="150" top="240" bottom="240" />
-					</BackgroundInsets>
-					<TileSize>
-						<AbsValue val="32" />
-					</TileSize>
-					<EdgeSize>
-						<AbsValue val="32" />
-					</EdgeSize>
-				</Backdrop>
-				<Scripts>
-					<OnEscapePressed>
-					EmoteButtons_ExportProfileFrame:Hide();
-					</OnEscapePressed>
-				</Scripts>
-			</EditBox>
+				<ScrollChild>
+					<EditBox name="$parent_ExportEditBox" multiLine="1" font="GameFontNormal">
+						<Size>
+							<AbsDimension x="300" y="480" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_ScrollFrame">
+								<Offset x="-80" y="80" />
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT"  relativeTo="$parent_ScrollFrame">
+								<Offset x="20" y="20" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnCursorChanged>
+							this:HighlightText();
+							</OnCursorChanged>
+							<OnShow>
+							this:HighlightText();
+							EmoteButtons_ImportProfileFrame:Hide();
+							</OnShow>
+							<OnTextChanged>
+								local scrollBar = getglobal(this:GetParent():GetName().."ScrollBar")
+								this:GetParent():UpdateScrollChildRect();
+								local min;
+								local max;
+								min, max = scrollBar:GetMinMaxValues();
+								if ( max > 0 and (this.max ~= max) ) then
+									this.max = max;
+									scrollBar:SetValue(max);
+								end
+							</OnTextChanged>
+							<OnEscapePressed>
+							EmoteButtons_ExportProfileFrame:Hide();
+							</OnEscapePressed>
+						</Scripts>
+					</EditBox>
+				</ScrollChild>
+			</ScrollFrame>
 
 			<Button name="$parent_Close" inherits="UIPanelCloseButton">
 				<Anchors>
@@ -1619,7 +1643,7 @@
 	</Frame>
 
 
-	<Frame name="EmoteButtons_ImportProfileFrame" hidden="true">
+	<Frame name="EmoteButtons_ImportProfileFrame" toplevel="true" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
 				<Offset>
@@ -1640,7 +1664,7 @@
 			<EdgeSize>
 				<AbsValue val="32" />
 			</EdgeSize>
-		</Backdrop>
+		</Backdrop> 
 		<Layers>
 			<Layer>
 				<Texture name="$parentTitleBorder" file="Interface\DialogFrame\UI-DialogBox-Header">
@@ -1683,8 +1707,10 @@
 		</Layers> 
 		<Frames>
 
-			<EditBox name="$parent_ImportEditBox" multiLine="1" font="GameFontNormal">
-			    <Size x="300" y="480" />
+			<ScrollFrame name="$parent_ScrollFrame" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="300" y="480"/>
+				</Size>
 				<Anchors>
 					<Anchor point="LEFT">
 						<Offset x="50" y="-60" />
@@ -1693,31 +1719,49 @@
 						<Offset x="50" y="-60" />
 					</Anchor>
 					<Anchor point="BOTTOM">
-						<Offset x="50" y="30" />
+						<Offset x="50" y="60" />
 					</Anchor>
 				</Anchors>
-				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
-					<BackgroundInsets>
-						<AbsInset left="150" right="150" top="240" bottom="240" />
-					</BackgroundInsets>
-					<TileSize>
-						<AbsValue val="32" />
-					</TileSize>
-					<EdgeSize>
-						<AbsValue val="32" />
-					</EdgeSize>
-				</Backdrop>
-				<Scripts>
-					<OnEnterPressed>
-					EmoteButtons_ImportProfileFrame_SubmitButton_OnClick();
-					</OnEnterPressed>
-					<OnEscapePressed>
-					EmoteButtons_ImportProfileFrame:Hide();
-					</OnEscapePressed>
-				</Scripts>
-			</EditBox>
+				<ScrollChild>
+					<EditBox name="$parent_ImportEditBox" multiLine="1" font="GameFontNormal">
+						<Size>
+							<AbsDimension x="300" y="480" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_ScrollFrame">
+								<Offset x="-80" y="80" />
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT"  relativeTo="$parent_ScrollFrame">
+								<Offset x="20" y="20" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								EmoteButtons_ExportProfileFrame:Hide();
+							</OnShow>
+							<OnTextChanged>
+								local scrollBar = getglobal(this:GetParent():GetName().."ScrollBar")
+								this:GetParent():UpdateScrollChildRect();
+								local min;
+								local max;
+								min, max = scrollBar:GetMinMaxValues();
+								if ( max > 0 and (this.max ~= max) ) then
+									this.max = max;
+									scrollBar:SetValue(max);
+								end
+							</OnTextChanged>
+							<OnEnterPressed>
+							EmoteButtons_ImportProfileFrame_SubmitButton_OnClick();
+							</OnEnterPressed>
+							<OnEscapePressed>
+							EmoteButtons_ImportProfileFrame:Hide();
+							</OnEscapePressed>
+						</Scripts>
+					</EditBox>
+				</ScrollChild>
+			</ScrollFrame>
 			
-			<Button name="$parent_SubmitButton" text="Export Profile" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_SubmitButton" text="Import Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
 				</Size>
@@ -1861,7 +1905,7 @@
 		</Scripts>
 	</CheckButton>
 
-	<Frame name="DeckBuilderFrame" hidden="true">
+	<Frame name="DeckBuilderFrame" frameStrata="FULLSCREEN" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
 				<Offset>
@@ -2467,9 +2511,9 @@
 			<AbsDimension x="297" y="298"/>
 		</Size>
 		<Anchors>
-			<Anchor point="TOPLEFT" relativeTo="EmoteButtons_ConfigMain_Icon" relativePoint="TOPRIGHT">
+			<Anchor point="BOTTOM" relativeTo="DeckBuilderFrame" relativePoint="BOTTOM">
 				<Offset>
-					<AbsDimension x="-40" y="-40"/>
+					<AbsDimension x="0" y="-300"/>
 				</Offset>
 			</Anchor>
 		</Anchors>

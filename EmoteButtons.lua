@@ -10,23 +10,27 @@ Added far left and far right wings (increases max buttons greatly)
 Added Emote, and Deck managers
 Added Icon picker dialog (uses macro icons)
 Added Deckbuilder
+Advanced Config Window
+-Profiles Supported
+-Importing/Exporting Profiles supported
 
 
 TODO:
-Advanced config window with import/export decks, and profiles, maybe config mode
+Advanced config window with import/export decks, and profiles, maybe config mode [check]
 --Window [CHECK]
 --Sliders [Check]
 --Profiles [CHECK]
---Import Export?
----Loadstring might do this very easily...
+--Import Export? [CHECK]
+---Loadstring might do this very easily... [check]
 --Reset Position/Profile [Check]
 Chat commands: [CHECK]
 - /emotebuttons deckbuilder
 - /emotebuttons options
 - /emotebuttons resetposition
-- /emotebuttons resetprofile --reloads the Default deck setup
-[BONUS] Add more icons, under tabs in the icon picker.
-
+- /emotebuttons resetprofile --reloads the Default deck setup*
+[BONUS] Add more icons, under tabs in the icon picker.*
+[BONUS] Allow grabbing an icon from spell or item*
+Setup Default Profile*
 
 Expand the left/right wing to a size of 8. [CHECK]
 Make the wings dynamically sized (can have less than 8 buttons) [CHECK]
@@ -172,6 +176,20 @@ SlashCmdList['VANILLA_STORYLINE'] = TextMenu
 SLASH_VANILLA_STORYLINE1 = '/EmoteButtons'
 SLASH_VANILLA_STORYLINE2 = '/EB'
 
+function HideAllPopupsFrames()
+	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
+	StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_CHANGETOOLTIP")
+	StaticPopup_Hide ("RESET_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_NEWPROFILE")
+	StaticPopup_Hide ("EMOTEBUTTONS_DUPLICATEPROFILE")
+	StaticPopup_Hide ("DELETE_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("SET_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("SAVE_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_NEWDECK")
+	StaticPopup_Hide ("SET_PROFILE_CONFIRMATION")
+end
+
 function sort_alphabetical(a, b)
 	return a < b
 end
@@ -240,7 +258,7 @@ end
 
 function EmoteButtons_LoadedVars()
 	EmoteButtons_WipeVars();
-	DEFAULT_CHAT_FRAME:AddMessage("testing testing")
+	--DEFAULT_CHAT_FRAME:AddMessage("testing testing")
 	EmoteButtons_AdvancedConfigFrame_SetMainShift:SetValue(EmoteButtons_Vars.Main_Shift);
 	EmoteButtons_AdvancedConfigFrame_SetMainSize:SetValue(EmoteButtons_Vars.Main_Ratio);
 	EmoteButtons_ArrangeFrames();
@@ -554,6 +572,7 @@ function EmoteButtons_ToggleRightWing()
 	local rwc = getn(EmoteButtons_RightWing);
 	for i=1, rwc do
 		obj = getglobal(EmoteButtons_RightWing[i]);
+		DEFAULT_CHAT_FRAME:AddMessage(format("%s", EmoteButtons_RightWing_Deck))
 		if (EmoteButtons_Levels["Right"]) then
 			FadeOutFrame(obj, 0.1*i);
 		elseif (EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][i]~=nil and 
@@ -798,7 +817,7 @@ end
 function EmoteButtons_LoadDeck(deck, wing)
 	local i;
 	local image;
-	if deck== EmoteButtons_FirstLevelName then
+	if wing== '' then
 		for i=1, getn( EmoteButtons_Vars.Actions[deck]) do
 			image = EmoteButtons_Vars.Actions[deck][i].image;
 			getglobal(EmoteButtons_FirstLevel[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
@@ -1444,8 +1463,9 @@ function DeckCFGFrame_OnShow()
 		DeckCFGFrame.selectedIcon = found;
 	end
 
-
-
+	HideAllPopupsFrames()
+	DeckManagerFrame:Hide();
+	EB_EmotesManager:Hide();
 end
 
 function DeckCFGFrame_OnHide()
@@ -1719,7 +1739,9 @@ function DeckManagerFrame_OnShow()
 				break;
 			end
 		end
-		DeckManagerFrame_DeckScrollFrame:SetVerticalScroll(floor((found-1)*8));
+		if found > 9 then
+			DeckManagerFrame_DeckScrollFrame:SetVerticalScroll(floor((found-1)*8));
+		end --only scroll down if its past first page, glitches out less than 8 entries with no scroll bar
 		getglobal("DeckManagerFrame_DeckActionButton".."1"):SetChecked(1);
 		DeckManagerFrame.selectedIcon = found;
 		DeckManagerFrame_UpdateActions(found);
@@ -1871,7 +1893,9 @@ function DeckBuilderFrame_ScrollToSelected()
 	end
 	DeckBuilderFrame.selectedIcon = found;
 	DeckBuilderFrame.selectedAction = button;
-	DeckBuilderFrame_DeckScrollFrame:SetVerticalScroll(found);
+	if (found > 9 ) then
+		DeckBuilderFrame_DeckScrollFrame:SetVerticalScroll(found);
+	end -- only scroll if its past the first page, not worth it otherwise.
 	PlaySound("igCharacterInfoOpen");
 	DeckBuilderFrame_Update();
 	DeckBuilderFrame_UpdateActions();
@@ -2085,12 +2109,17 @@ function DeckBuilderFrame_DeleteDeckButton_OnClick()
 			if found == 1 then --need to delete the other buttons relying on it first...
 				for i=1, getn(EmoteButtons_DeckList) do
 					d = EmoteButtons_DeckList[i]
-					for n=1, getn(EmoteButtons_Vars.Actions[d]) do
+					l=getn(EmoteButtons_Vars.Actions[d])
+					for n=1, l do
+						if (n>getn(EmoteButtons_Vars.Actions[d])) then
+							break
+						end
 						if(EmoteButtons_Vars.Actions[d][n].type == EBACTTYPE_DECK and
 							EmoteButtons_Vars.Actions[d][n].action == deck) then
 							--found = 1
 							table.remove(EmoteButtons_Vars.Actions[d], n)
-							DEFAULT_CHAT_FRAME:AddMessage(format("Deleting from deck... %s %s", d, n))
+							DEFAULT_CHAT_FRAME:AddMessage(format("Deleting from deck:%s index:%s", d, n))
+							--array just got smaller...
 						end			
 					end
 				end
@@ -2098,12 +2127,8 @@ function DeckBuilderFrame_DeleteDeckButton_OnClick()
 			DEFAULT_CHAT_FRAME:AddMessage(format("Deleting deck... %s", deck))
 			EmoteButtons_Vars.Actions[deck] = nil;
 			table.remove(EmoteButtons_DeckList, DeckBuilderFrame.selectedIcon);
-			EmoteButtons_LoadDeck(deck, "FarLeft");
-			EmoteButtons_LoadDeck(deck, "FarRight");
-			EmoteButtons_LoadDeck(deck, "Left");
-			EmoteButtons_LoadDeck(deck, "Right");
-			EmoteButtons_LoadDeck(deck, "");
-			DeckBuilderFrame_OnShow();
+			--DeckBuilderFrame_OnShow();
+			ReloadUI()
 		end,
 		timeout = 0,
 		whileDead = true,
@@ -2187,8 +2212,7 @@ end
 
 function EmoteButtons_AdvancedConfigFrame_OnShow()
 	DeckBuilderFrame:Hide();
-	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
-	StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
+	HideAllPopupsFrames()
 	EB_EmotesManager:Hide();
 	DeckCFGFrame:Hide();
 	DeckManagerFrame:Hide();
@@ -2221,7 +2245,6 @@ function SaveProfile()
 end
 
 function SetProfile(index)
-	DEFAULT_CHAT_FRAME:AddMessage("Meh2")
 	StaticPopupDialogs["SET_PROFILE_CONFIRMATION"] = {
 	text = "Do you want to set your current decks config to the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
 	button1 = "Yes",
@@ -2267,7 +2290,6 @@ function EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick()
 end
 
 function DeleteProfile(index)
-	DEFAULT_CHAT_FRAME:AddMessage("broken")
 	StaticPopupDialogs["DELETE_PROFILE_CONFIRMATION"] = {
 	text = "Do you want to delete the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
 	button1 = "Yes",
@@ -2443,7 +2465,7 @@ function ImportProfile()
 end
 
 function EmoteButtons_ImportProfileFrame_SubmitButton_OnClick()
-	l = EmoteButtons_ImportProfileFrame_ImportEditBox:GetText();
+	l = EmoteButtons_ImportProfileFrame_ScrollFrame_ImportEditBox:GetText();
 	f = loadstring(l);
 	a,b = f();
 	b.Decks = a;
@@ -2559,6 +2581,6 @@ function ExportProfile()
 --	TempD = f();
 	--DEFAULT_CHAT_FRAME:AddMessage(format("%s",getn(TempD)))
 --	DEFAULT_CHAT_FRAME:AddMessage(format("%s",TempD["Main"][1].action))
-	EmoteButtons_ExportProfileFrame_ExportEditBox:SetText(TempDecks..TempProfile)
+	EmoteButtons_ExportProfileFrame_ScrollFrame_ExportEditBox:SetText(TempDecks..TempProfile)
 	EmoteButtons_ExportProfileFrame:Show();
 end
