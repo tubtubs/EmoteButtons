@@ -172,8 +172,6 @@ SlashCmdList['VANILLA_STORYLINE'] = TextMenu
 SLASH_VANILLA_STORYLINE1 = '/EmoteButtons'
 SLASH_VANILLA_STORYLINE2 = '/EB'
 
-
-
 function sort_alphabetical(a, b)
 	return a < b
 end
@@ -2438,4 +2436,129 @@ function ResetProfile()
 	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
 	}
 	StaticPopup_Show("RESET_PROFILE_CONFIRMATION")
+end
+
+function ImportProfile()
+	EmoteButtons_ImportProfileFrame:Show();
+end
+
+function EmoteButtons_ImportProfileFrame_SubmitButton_OnClick()
+	l = EmoteButtons_ImportProfileFrame_ImportEditBox:GetText();
+	f = loadstring(l);
+	a,b = f();
+	b.Decks = a;
+	--DEFAULT_CHAT_FRAME:AddMessage(format("Import Profile %s %s",a["Main"][1].action, b.Decks["Main"][1].action))
+	--check for profile name conflicts, offer to rename.	
+	p = b.Name;
+	found = 0
+	for i=1, getn(EmoteButtons_Vars.Profiles) do
+		if EmoteButtons_Vars.Profiles[i].Name == p then
+			found = i
+		end
+	end
+
+	-- Now offer to rename it,
+	if found == 0 then
+		insert(EmoteButtons_Vars.Profiles,b)
+		DEFAULT_CHAT_FRAME:AddMessage(format("Profile %s added successfully!",b.Name));
+
+	else
+	local accept = function()
+		local editBox=getglobal(this:GetParent():GetName().."EditBox");
+		local newProfile = editBox:GetText();
+		--Try to find it in the current deck list...
+		found = 0
+		for i=1, getn(EmoteButtons_Vars.Profiles) do
+			if EmoteButtons_Vars.Profiles[i].Name == newProfile then
+				found = 1
+			end
+		end
+		if found == 1 then
+			--Play an error sound?
+			DEFAULT_CHAT_FRAME:AddMessage("Profile name already in use!");
+		else
+			b.Name = newProfile;
+			table.insert(EmoteButtons_Vars.Profiles,b);
+			DEFAULT_CHAT_FRAME:AddMessage(format("Profile %s added successfully!",newProfile));
+		end
+		this:GetParent():Hide();
+	end
+	StaticPopupDialogs["EMOTEBUTTONS_IMPORTPROFILE"]={
+	text=TEXT("Profile with this name found already, please rename it."),
+	button1=TEXT(ACCEPT),
+	button2=TEXT(CANCEL),
+	hasEditBox=1,
+	maxLetters=200,
+	OnAccept=accept,
+	EditBoxOnEnterPressed=accept,
+	EditBoxOnEscapePressed=function()
+		this:GetParent():Hide();
+	end,
+	timeout=0,
+	exclusive=1
+	};
+	StaticPopup_Show("EMOTEBUTTONS_IMPORTPROFILE");
+	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_IMPORTPROFILE")):GetName().."EditBox"):SetText("");
+	end
+	EmoteButtons_ImportProfileFrame:Hide();
+end
+
+---How do I want it to look on export? Like valid lua table probably.
+--
+
+function ExportProfile()
+--TempDecks = {
+--    ["DECK"] = {
+--		{action = "ACTION", type="TYPE", tooltip="TOOLTIP",image="IMAGE"},
+--		{action = "ACTION", type="TYPE", tooltip="TOOLTIP",image="IMAGE"}
+--	}
+--}
+
+--TempProfile = {Name = "Name", Decks = "TempDecks"}
+--insert it later
+--
+	--Load Decks for export.
+	TempDecks = "return {\n"
+
+	deck_counter = 1;
+	for i,v in pairs(EmoteButtons_Vars.Actions) do
+		deck =  i
+		TempDecks = format("%s[\"%s\"]={\n",TempDecks, deck);
+		act_counter = 1
+		for j,v in pairs (EmoteButtons_Vars.Actions[i]) do
+			act = EmoteButtons_Vars.Actions[i][j].action
+			actType = EmoteButtons_Vars.Actions[i][j].type
+			tip = EmoteButtons_Vars.Actions[i][j].tooltip
+			img = EmoteButtons_Vars.Actions[i][j].image
+			TempDecks = format(
+				"%s{action=\"%s\", type=%s, tooltip=\"%s\", image=\"%s\"}",
+				TempDecks,act,actType,tip,img
+			)
+			--does it get a comma, or just a newline?
+			if (act_counter == getn(EmoteButtons_Vars.Actions[i])) then
+				TempDecks = format("%s\n",TempDecks);	
+			else
+				TempDecks = format("%s,\n",TempDecks);	
+			end
+			act_counter = act_counter + 1;
+		end
+		DEFAULT_CHAT_FRAME:AddMessage(format("ech %s %s", deck_counter, getn(EmoteButtons_Vars.Actions)))
+		if (deck_counter == getn(EmoteButtons_DeckList)) then
+			TempDecks = format("%s}\n",TempDecks);	
+		else
+			TempDecks = format("%s},\n",TempDecks);	
+		end
+		deck_counter = deck_counter + 1;
+	end
+	TempDecks = format("%s}\n", TempDecks)
+	--TempDecks = format("%s return TempD",TempDecks)
+
+	TempProfile = format(",{Name = \"%s\", Decks=TempDecks}\n",
+							EmoteButtons_Vars.Profile)
+--	f = loadstring(TempDecks)
+--	TempD = f();
+	--DEFAULT_CHAT_FRAME:AddMessage(format("%s",getn(TempD)))
+--	DEFAULT_CHAT_FRAME:AddMessage(format("%s",TempD["Main"][1].action))
+	EmoteButtons_ExportProfileFrame_ExportEditBox:SetText(TempDecks..TempProfile)
+	EmoteButtons_ExportProfileFrame:Show();
 end
