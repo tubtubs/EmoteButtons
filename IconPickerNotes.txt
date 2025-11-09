@@ -1,0 +1,260 @@
+ICON PICKER FEATURES:
+-Icons from bag slots
+-Icons from action bar?
+-Icons from buffs/debuffs?
+Categories...
+-Abilities/Spells
+-Bag
+-Bars
+-Buffs
+
+ICON TEXT CHECKS:
+
+*Trade - 780 icons
+**MISC Trade 13
+Name  like "Trade_%"  or Name  like "INV_tradeskill%"
+
+**Mining 88
+Name  like "INV_Stone%" or Name  like "INV_Ore%" or Name  like "INV_Ingot%" or Name  like "INV_Pick%"  
+
+**Blacksmithing 37
+Name  like "INV_Blacksmith%"  or Name  like "INV_Stone_%"
+
+**Jewelcrafting 199
+Name  like "INV_Jewelcrafting%" or Name  like "INV_Misc_Gem%" or Name  like "INV_Misc_Powder%"  
+
+**Fishing 6
+Name  like "INV_Fishing%"  
+
+**Inscription 141
+Name  like "INV_Inscription%" or Name  like "INV_Scroll%" 
+
+**Enchanting 60 --Probably missing shards?
+Name  like "INV_Enchant%" or Name  like "INV_Rod%" or Name like "INV_Misc_Dust%" 
+
+**Leatherworking 105
+Name  like "INV_Misc_Leather%"  or Name  like "INV_Misc_Armorkit%" or Name like "INV_Misc_MonsterScales%" or Name like "Inv_Misc_Pelt%"
+
+**Engineering 101
+Name  like "INV_Gizmo%" or Name  like "INV_Misc_Bomb%" or Name  like "INV_Misc_Eng%"  or Name  like "INV_Misc_Wrench%" or Name  like "INV_Misc_Screwdriver%" or Name  like "INV_Misc_Gear%" 
+
+**Tailoring 81
+Name  like "INV_Fabric%"  or Name  like "INV_Misc_Bag%"
+
+**Alchemy 24
+Name  like "INV_Alchemy%" 
+
+**Herbalism 50
+Name  like "INV_Misc_Herb%" or name like "Inv_Misc_Flower%"
+
+**Elementals 28
+Name  like "INV_Elemental%" 
+
+**First Aid 24
+Name  like "INV_Misc_Bandage%"  
+
+[**Achievement 667 we'll just do it
+ Name  like "Achievement_%" 
+
+[*Ability 499 - Could split up... Hmmm
+[**Misc Abilities 95
+Name  like "Ability_%" 
+and Name not  like "Ability_Warrior%" and Name not  like "Ability_Warlock%" and Name not  like "Ability_Shaman%" and Name not  like "Ability_Rogue%" 
+and Name not  like "Ability_Paladin%" and Name not  like "Ability_Mount%" and Name not  like "Ability_Mage%" and Name not  like "Ability_Hunter%" 
+and Name not  like "Ability_Druid%" 
+
+[**Druid 57
+ Name  like "Ability_Druid%" 
+
+[**Hunter 95
+ Name  like "Ability_Hunter%" 
+
+[**Mage 25
+ Name  like "Ability_Mage%" 
+
+[**Mount 83
+ Name  like "Ability_Mount%" 
+
+[**Paladin 22
+ Name  like "Ability_Paladin%" 
+
+[**Rogue 48
+ Name  like "Ability_Rogue%" 
+
+[**Shaman 5
+ Name  like "Ability_Shaman%" 
+
+[**Warlock 14
+ Name  like "Ability_Warlock%"
+
+[**Warrior 54
+Name  like "Ability_Warrior%" 
+
+*Spell 615 - could split up... Hmmm
+[**Misc Spells 26
+(Name  like "Spell_%" or Name  like "Racial_%")
+and Name not  like "Spell_DeathKnight%" and Name not  like "Spell_Shaman%" and Name not  like "Spell_Shadow%" and Name not  like "Spell_Nature%"
+and Name not  like "Spell_Holy%" and Name not  like "Spell_Frost_%" and Name not  like "Spell_Ice%" and Name not  like "Spell_Fire_%"
+and Name not  like "Spell_Arcane%" and Name not  like "Spell_Mag%"
+
+[**Arcane Spells 52
+or Name  like "Spell_Arcane%" or Name  like "Spell_Mag%"
+
+[**Fire Spells 59
+or Name  like "Spell_Fire_%"
+
+[**Frost Spells 37
+or Name  like "Spell_Frost_%" or Name  like "Spell_Ice%"
+
+[**Holy Spells 136
+or Name  like "Spell_Holy%"
+
+[**Nature Spells 115
+or Name  like "Spell_Nature%"
+
+[**Shadow Spells 132
+or Name  like "Spell_Shadow%"
+
+[**Shaman Spells 24
+or Name  like "Spell_Shaman%"
+
+[**DeathKnight 34
+or Name  like "Spell_DeathKnight%"
+
+INV CATEGORIES
+[*Consumables 471
+[**Potions - 168
+or Name  like "INV_Potion%" 
+
+[**Drinks 54
+or Name  like "INV_Drink%"  or Name  like "INV_Misc_Beer%"
+
+[**Food 249
+or Name  like "INV_Food%"  or Name  like "INV_Mushroom%" or Name  like "INV_Misc_Food%" or Name  like "INV_Misc_Fish%" 
+
+*Armor 1384, gotta reduce that somehow...
+
+[**Gaunlets and Bracers 182
+or Name  like "INV_Gauntlets%"  or Name  like "INV_Bracer%"
+
+[**MiscEquipment 23
+or Name  like "INV_Armor%"   or Name  like "Item_%" or Name  like "INV_Relics%"
+
+[**Boots 90
+or Name  like "INV_Boots%"
+
+[**Capes 28
+or Name  like "INV_Misc_Cape%" 
+
+[**Chest 170
+or Name  like "INV_Chest%" 
+
+[**Shoulders 131
+or Name  like "INV_Shoulder%"
+
+[**Belts 113
+or Name  like "INV_Belt%"
+
+[**Pants 160
+or Name  like "INV_Pants%" or Name  like "INV_Kilt%" 
+
+[**Headgear 180
+or Name  like "INV_Helmet%" or Name  like "INV_Mask%" or Name  like "INV_Misc_Bandana%" or Name  like "INV_Crown%"
+
+[**Shirts and Tabards 33
+or Name  like "INV_Shirt_%" or Name  like "INV_Misc_Tabard%" 
+
+[**Jewelery 203
+or Name  like "INV_Jewelry%" or Name  like "INV_Trinket%"
+
+[**Offhands and Shields 102
+or Name  like "INV_Offhand%" or Name  like "INV_Shield%" 
+
+
+[*Weapons 938 - not bad. Probably happy with that, could split it up more but I don't think it'd be worth it.
+[**Misc Weapons 5
+(Name  like "INV_Pick%" or Name  like "INV_Weapon%") 
+and Name  not like "INV_Weapon_Bow%" and Name not like "INV_Weapon_Crossbow%" and Name not like "INV_Weapon_Rifle%" and Name not like "INV_Weapon_Halbard%" 
+and Name not like "INV_Weapon_Staff%" and Name  not like "INV_Weapon_Hand%" and Name not like "INV_Weapon_ShortBlade%"  and Name not like "INV_Weapon_Hand%" 
+and Name not like "INV_Weapon_Halberd%"
+
+[**Daggers 109
+Name  like "INV_Weapon_ShortBlade%" or Name  like "INV_Knife_%"
+
+[**Polearms 47
+Name  like "INV_Spear%" 
+or Name  like "INV_Weapon_Halberd%" 
+
+[**Fist 29
+Name  like "INV_Weapon_Hand%" 
+
+[**Maces 156
+Name  like "INV_Mace%" or Name  like "INV_Hammer%" 
+
+[**Staves 116
+Name  like "INV_Staff%" 
+or Name  like "INV_Weapon_Staff%" 
+
+[**Swords 182
+Name  like "INV_Sword%"  or Name  like "INV_2h%"  or Name  like "INV_1h%"
+
+[**Axes 111
+Name  like "INV_Axe%" 
+
+[**Ranged - 218
+Name  like "INV_Weapon_Bow%" or Name  like "INV_Weapon_Crossbow%" or Name  like "INV_Weapon_Rifle%" 
+or Name  like "INV_Musket%" or Name  like "INV_Ammo%" or Name  like "Thrown_%" or Name  like "INV_Wand_%" or Name  like "INV_Misc_Ammo%"
+ or Name  like "INV_Throwing%" or Name  like "INV_Waepon_%" or Name  like "INV_Bow_%"
+
+[*Misc? Probably more categories under this, but meh - 780
+--Could be missing some, but meh Ive got 6199 or so according to my quick maths
+(Name  like "INV_%" or Name  like "INV_Bijou%")  
+and Name not like "INV_Misc_Ammo%" and Name not like "INV_Misc_Armorkit%" and Name not like "INV_Misc_Bandana%" and Name not like "INV_Misc_Bandage%" and Name not like "INV_Misc_Beer%" and Name not like "INV_Misc_Bomb%"
+and Name not like "INV_Misc_Cape%" and Name not like "INV_Misc_Eng%" and Name not like "INV_Misc_Fish%" and Name not like "INV_Misc_Food%" and Name not like "INV_Misc_Gem%" and Name not like "INV_Misc_Herb%" 
+and Name not like "INV_Misc_Leather%" and Name not like "INV_Misc_Powder%" and Name not like "INV_Misc_Wrench%" and Name not like "INV_Misc_Screwdriver%" and Name not like "INV_Misc_Tabard%" 
+and Name not like "INV_Misc_Dust%" and Name not like "INV_Misc_Flower%"
+and Name not like "INV_Weapon_Bow%" and Name not like "INV_Weapon_Crossbow%" and Name not like "INV_Weapon_Rifle%" 
+and Name not like "INV_Musket%" and Name not like "INV_Ammo%" and Name not like "Thrown_%" and Name not like "INV_Wand_%" and Name not like "INV_Misc_Ammo%"
+and Name not like "INV_Throwing%" and Name not like "INV_Waepon_%" and Name not like "INV_Bow_%"
+and Name not like "INV_Axe%" 
+and Name not like "INV_Sword%"  and Name not like "INV_2h%"  and Name not like "INV_1h%"
+and Name not like "INV_Staff%" 
+and Name not like "INV_Weapon_Staff%" 
+and Name not like "INV_Mace%" and Name not like "INV_Hammer%" 
+and Name not like "INV_Weapon_Hand%" 
+and Name not like "INV_Spear%" 
+and Name not like "INV_Weapon_Halberd%" 
+and Name not like "INV_Weapon_ShandtBlade%" and Name not like "INV_Knife_%"
+and Name not like "INV_Pick%" and Name not like "INV_Weapon%"
+and Name not like "INV_Offhand%" and Name not like "INV_Shield%" 
+and Name not like "INV_Jewelry%" and Name not like "INV_Trinket%"
+and Name not like "INV_Shirt_%" and Name not like "INV_Misc_Tabard%" 
+and Name not like "INV_Helmet%" and Name not like "INV_Mask%" and Name not like "INV_Misc_Bandana%" and Name not like "INV_Crown%"
+and Name not like "INV_Pants%" and Name not like "INV_Kilt%" 
+and Name not like "INV_Belt%"
+and Name not like "INV_Shoulder%"
+and Name not like "INV_Chest%" 
+and Name not like "INV_Misc_Cape%" 
+and Name not like "INV_Boots%"
+and Name not like "INV_Armor%"   and Name not like "Item_%" and Name not like "INV_Relics%"
+and Name not like "INV_Gauntlets%"  and Name not like "INV_Bracer%"
+and Name not like "INV_Food%"  and Name not like "INV_Mushroom%" and Name not like "INV_Misc_Food%" and Name not like "INV_Misc_Fish%" 
+and Name not like "INV_Drink%"  and Name not like "INV_Misc_Beer%"
+and Name not like "INV_Potion%" 
+and Name not like "Spell_%" and Name not like "Racial_%"
+and Name not like "Ability_%" 
+and Name not like "Achievement_%" 
+and Name not like "INV_Misc_Bandage%"  
+and Name not like "INV_Elemental%" 
+and Name not like "INV_Misc_Herb%" and Name not like "Inv_Misc_Flower%"
+and Name not like "INV_Alchemy%" 
+and Name not like "INV_Fabric%"  and Name not like "INV_Misc_Bag%"
+and Name not like "INV_Gizmo%" and Name not like "INV_Misc_Bomb%" and Name not like "INV_Misc_Eng%"  and Name not like "INV_Misc_Wrench%" and Name not like "INV_Misc_Screwdriver%" and Name not like "INV_Misc_Gear%" 
+and Name not like "INV_Misc_Leather%"  and Name not like "INV_Misc_Armandkit%" and Name not like "INV_Misc_MonsterScales%" and Name not like "Inv_Misc_Pelt%"
+and Name not like "INV_Enchant%" and Name not like "INV_Rod%" and Name not like "INV_Misc_Dust%" 
+and Name not like "INV_Inscription%" and Name not like "INV_Scroll%" 
+and Name not like "INV_Fishing%"  
+and Name not like "INV_Jewelcrafting%" and Name not like "INV_Misc_Gem%" and Name not like "INV_Misc_Powder%"  
+and Name not like "INV_Blacksmith%"  and Name not like "INV_Stone_%"
+and Name not like "INV_Stone%" and Name not like "INV_ore%" and Name not like "INV_Ingot%" and Name not like "INV_Pick%"  
+and Name not like "Trade_%"  and Name not like "INV_tradeskill%"

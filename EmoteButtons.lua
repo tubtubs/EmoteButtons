@@ -27,10 +27,12 @@ Chat commands: [CHECK]
 - /emotebuttons deckbuilder
 - /emotebuttons options
 - /emotebuttons resetposition
-- /emotebuttons resetprofile --reloads the Default deck setup*
+- /emotebuttons resetprofile 
 [BONUS] Add more icons, under tabs in the icon picker.*
 [BONUS] Allow grabbing an icon from spell or item*
 Setup Default Profile*
+
+
 
 Expand the left/right wing to a size of 8. [CHECK]
 Make the wings dynamically sized (can have less than 8 buttons) [CHECK]
@@ -172,9 +174,9 @@ local function TextMenu(arg)
 	end
 end
 -- slashcommands
-SlashCmdList['VANILLA_STORYLINE'] = TextMenu
-SLASH_VANILLA_STORYLINE1 = '/EmoteButtons'
-SLASH_VANILLA_STORYLINE2 = '/EB'
+SlashCmdList['EMOTEBUTTONS'] = TextMenu
+SLASH_EMOTEBUTTONS1 = '/EmoteButtons'
+SLASH_EMOTEBUTTONS2 = '/EB'
 
 function HideAllPopupsFrames()
 	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")

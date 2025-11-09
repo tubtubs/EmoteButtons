@@ -1497,7 +1497,7 @@
 		</Scripts>
 	</Frame>
 
-	<Frame name="EmoteButtons_ExportProfileFrame" toplevel="true" hidden="true">
+	<Frame name="EmoteButtons_ExportProfileFrame" frameStrata="DIALOG"  toplevel="true" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
 				<Offset>
@@ -1643,7 +1643,7 @@
 	</Frame>
 
 
-	<Frame name="EmoteButtons_ImportProfileFrame" toplevel="true" hidden="true">
+	<Frame name="EmoteButtons_ImportProfileFrame" frameStrata="DIALOG" toplevel="true" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
 				<Offset>
