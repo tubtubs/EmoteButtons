@@ -485,12 +485,137 @@ function IconPickerAbilitiesDropDown_OnShow()
 end
 
 function IconPickerAbilities_OnClick()
-    if (IP_CATEGORY_SELECTED == IP_CATEGORY_ABILITY) then
-        IconPickerAbilities.checked = true;
-    else
-        IconPickerAbilities.checked = false;    
-    end
 	ToggleDropDownMenu(1, nil, IconPickerAbilities, IconPickerAbilities, 0, 0);
+end
+
+function IconPickerAchievements_OnClick()
+    IP_CATEGORY_SELECTED = IP_CATEGORY_ACHIVEMENTS;
+    IP_SUBCATEGORY_SELECTED = 0;
+end
+
+function IconPickerConsumesDropDown_OnShow()
+    for i=1, getn(IP_icons_consume_categories) do
+		info = {};
+		info.text       = IP_icons_consume_categories[i];
+		info.value      = i;
+		if (IP_CATEGORY_SELECTED == IP_CATEGORY_CONSUME
+            and IP_SUBCATEGORY_SELECTED == i) then
+			info.checked =true;
+		else
+			info.checked=false;
+		end
+		info.func =  function() 
+            IP_CATEGORY_SELECTED = IP_CATEGORY_CONSUME;
+            IP_SUBCATEGORY_SELECTED = this.value;			--SaveProfile();
+			--SetProfile(this.value) 
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
+function  IconPickerConsumes_OnClick()
+	ToggleDropDownMenu(1, nil, IconPickerConsumes, IconPickerConsumes, 0, 0);
+end
+
+function IconPickerEquipmentDropDown_OnShow()
+    for i=1, getn(IP_icons_equipment_categories) do
+		info = {};
+		info.text       = IP_icons_equipment_categories[i];
+		info.value      = i;
+		if (IP_CATEGORY_SELECTED == IP_CATEGORY_EQUIPMENT
+            and IP_SUBCATEGORY_SELECTED == i) then
+			info.checked =true;
+		else
+			info.checked=false;
+		end
+		info.func =  function() 
+            IP_CATEGORY_SELECTED = IP_CATEGORY_EQUIPMENT;
+            IP_SUBCATEGORY_SELECTED = this.value;			--SaveProfile();
+			--SetProfile(this.value) 
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
+function  IconPickerEquipment_OnClick()
+    ToggleDropDownMenu(1, nil, IconPickerEquipment, IconPickerEquipment, 0, 0);
+end
+
+function IconPickerMisc_OnClick()
+    IP_CATEGORY_SELECTED = IP_CATEGORY_MISC;
+    IP_SUBCATEGORY_SELECTED = 0;
+end
+
+function IconPickerSpellsDropDown_OnShow()
+    for i=1, getn(IP_icons_spells_categories) do
+		info = {};
+		info.text       = IP_icons_spells_categories[i];
+		info.value      = i;
+		if (IP_CATEGORY_SELECTED == IP_CATEGORY_SPELLS
+            and IP_SUBCATEGORY_SELECTED == i) then
+			info.checked =true;
+		else
+			info.checked=false;
+		end
+		info.func =  function() 
+            IP_CATEGORY_SELECTED = IP_CATEGORY_SPELLS;
+            IP_SUBCATEGORY_SELECTED = this.value;			--SaveProfile();
+			--SetProfile(this.value) 
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
+function IconPickerSpells_OnClick()
+    ToggleDropDownMenu(1, nil, IconPickerSpells, IconPickerSpells, 0, 0);
+end
+
+function IconPickerTradesDropDown_OnShow()
+    for i=1, getn(IP_icons_trades_categories) do
+		info = {};
+		info.text       = IP_icons_trades_categories[i];
+		info.value      = i;
+		if (IP_CATEGORY_SELECTED == IP_CATEGORY_TRADES
+            and IP_SUBCATEGORY_SELECTED == i) then
+			info.checked =true;
+		else
+			info.checked=false;
+		end
+		info.func =  function() 
+            IP_CATEGORY_SELECTED = IP_CATEGORY_TRADES;
+            IP_SUBCATEGORY_SELECTED = this.value;			--SaveProfile();
+			--SetProfile(this.value) 
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
+function IconPickerTrades_OnClick()
+    ToggleDropDownMenu(1, nil, IconPickerTrades, IconPickerTrades, 0, 0);
+end
+
+function IconPickerWeaponsDropDown_OnShow()
+    for i=1, getn(IP_icons_weapon_categories) do
+		info = {};
+		info.text       = IP_icons_weapon_categories[i];
+		info.value      = i;
+		if (IP_CATEGORY_SELECTED == IP_CATEGORY_WEAPONS
+            and IP_SUBCATEGORY_SELECTED == i) then
+			info.checked =true;
+		else
+			info.checked=false;
+		end
+		info.func =  function() 
+            IP_CATEGORY_SELECTED = IP_CATEGORY_WEAPONS;
+            IP_SUBCATEGORY_SELECTED = this.value;			--SaveProfile();
+			--SetProfile(this.value) 
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
+function IconPickerWeapons_OnClick() 
+    ToggleDropDownMenu(1, nil, IconPickerWeapons, IconPickerWeapons, 0, 0);
 end
 
 function IconPickerFrame_Update()

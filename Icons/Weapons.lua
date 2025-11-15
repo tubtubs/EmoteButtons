@@ -218,7 +218,7 @@ IP_icons_weapon_ranged = {
   "Thrown_1H_Harpoon_D_01Bronze.blp",
   "Thrown_1H_Harpoon_D_01Silver.blp"
 }
-IP_len_iconsweapon_ranged = getn(IP_icons_weapon_ranged)
+IP_len_icons_weapon_ranged = getn(IP_icons_weapon_ranged)
 
 IP_icons_weapon_axe = {
   "Axe_1H_Draenei_B_01.blp",
@@ -334,7 +334,7 @@ IP_icons_weapon_axe = {
   "INV_Axe_98.blp",
   "INV_Axe_99.blp"
 }
-IP_len_iconsweapon_axe = getn(IP_icons_weapon_axe)
+IP_len_icons_weapon_axe = getn(IP_icons_weapon_axe)
 
 IP_icons_weapon_staff = {
   "INV_Staff_01.blp",
@@ -454,7 +454,7 @@ IP_icons_weapon_staff = {
   "INV_Staff_Medivh.blp",
   "INV_Weapon_Staff_109.blp"
 }
-IP_len_iconsweapon_staff = getn(IP_icons_weapon_staff)
+IP_len_icons_weapon_staff = getn(IP_icons_weapon_staff)
 
 IP_icons_weapon_sword = {
   "INV-Sword_53.blp",
@@ -640,7 +640,7 @@ IP_icons_weapon_sword = {
   "INV_Sword_Draenei_07.blp",
   "INV_Sword_Draenei_08.blp"
 }
-IP_len_iconsweapon_sword = getn(IP_icons_weapon_sword)
+IP_len_icons_weapon_sword = getn(IP_icons_weapon_sword)
 
 IP_icons_weapon_fistweapon = {
   "INV_Weapon_Hand_01.blp",
@@ -673,7 +673,7 @@ IP_icons_weapon_fistweapon = {
   "INV_Weapon_Hand_33.blp",
   "INV_Weapon_Hand_34.blp"
 }
-IP_len_iconsweapon_fistweapon = getn(IP_icons_weapon_fistweapon)
+IP_len_icons_weapon_fistweapon = getn(IP_icons_weapon_fistweapon)
 
 IP_icons_weapon_mace = {
   "INV_Hammer_01.blp",
@@ -833,7 +833,7 @@ IP_icons_weapon_mace = {
   "INV_Mace_98.blp",
   "INV_Mace_99.blp"
 }
-IP_len_iconsweapon_mace = getn(IP_icons_weapon_mace)
+IP_len_icons_weapon_mace = getn(IP_icons_weapon_mace)
 
 IP_icons_weapon_polearm = {
   "INV_Spear_01.blp",
@@ -884,7 +884,7 @@ IP_icons_weapon_polearm = {
   "INV_Weapon_Halberd_31.blp",
   "INV_Weapon_Halberd_AhnQiraj.blp"
 }
-IP_len_iconsweapon_polearm = getn(IP_icons_weapon_polearm)
+IP_len_icons_weapon_polearm = getn(IP_icons_weapon_polearm)
 
 IP_icons_weapon_dagger = {
   "INV_Knife_1H_PVP320_C_02.blp",
@@ -997,7 +997,7 @@ IP_icons_weapon_dagger = {
   "INV_Weapon_Shortblade_98.blp",
   "INV_Weapon_Shortblade_99.blp"
 }
-IP_len_iconsweapon_dagger = getn(IP_icons_weapon_dagger)
+IP_len_icons_weapon_dagger = getn(IP_icons_weapon_dagger)
 
 IP_icons_weapon_misc = {
   "INV_Pick_01.blp",
@@ -1006,4 +1006,4 @@ IP_icons_weapon_misc = {
   "INV_Pick_05.blp",
   "INV_Weapon_Glave_01.blp"
 }
-IP_len_iconsweapon_misc = getn(IP_icons_weapon_misc)
+IP_len_icons_weapon_misc = getn(IP_icons_weapon_misc)
