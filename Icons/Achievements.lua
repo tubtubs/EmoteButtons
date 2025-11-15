@@ -1,3 +1,4 @@
+ACHIEVEMENTTESTSTRING = "NINE"
 IP_icons_achievements = {
   "Achievement_Arena_2v2_1.blp",
   "Achievement_Arena_2v2_2.blp",

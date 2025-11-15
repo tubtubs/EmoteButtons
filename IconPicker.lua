@@ -5,9 +5,9 @@ NUM_ICON_ROWS = 4;
 ICON_ROW_HEIGHT = 36;
 
 
-
-IP_CATEGORY_SELECTED = 0
-IP_SUBCATEGORY_SELECTED = 0
+--Make druid abilities the default category, for now
+IP_CATEGORY_SELECTED = 2
+IP_SUBCATEGORY_SELECTED = 1
 
 IP_CATEGORY_ABILITY = 1
 IP_CATEGORY_ACHIVEMENTS = 2
@@ -368,14 +368,15 @@ IP_ICONS = {
 
 
 function IconPickerFrame_OnShow()
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-	IconPickerFrame_Update();
+    IconPickerFrame_Update();
 	PlaySound("igCharacterInfoOpen");
 	IconPickerEditBox:SetFocus();
 	IconPickerOkayButton_Update();
+    --[[ Disabling scrolling down to selected emote temporarlily
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+
 	IconPickerEditBox:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
-	--Disable buttons on the other window?
 
 	--Scroll down to current icon
 	local image = EmoteButtons_Vars.Actions[deck][button].image;
@@ -405,8 +406,9 @@ function IconPickerFrame_OnShow()
 		IconPickerScrollFrame:SetVerticalScroll(offset);
 		getglobal("IconPickerButton"..innerIndex):SetChecked(1);
 		IconPickerFrame.selectedIcon = found;
-	end
-
+	end ]]--
+    IconPickerUncheckAllCategories()
+    IconPickerCheckSelectedCategory()
 	HideAllPopupsFrames()
 	DeckManagerFrame:Hide();
 	EB_EmotesManager:Hide();
@@ -414,6 +416,7 @@ end
 
 function IconPickerFrame_OnHide()
 	IconPickerFrame:Hide();
+    CloseDropDownMenus()
 	PlaySound("igCharacterInfoClose");
 end
 
@@ -434,10 +437,13 @@ end
 function IconPickerOkayButton_OnClick()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
-	icon = GetMacroIconInfo(IconPickerFrame.selectedIcon)
-	EmoteButton_Icon:SetTexture(icon);
-	icon = string.sub(icon, 17, -1)
-	EmoteButtons_Vars.Actions[deck][button].image = icon
+    n = IconPickerFrame.selectedIcon;
+	cat = IP_CATEGORY_SELECTED
+    subcat = IP_SUBCATEGORY_SELECTED
+    l = IP_ICONS[cat][subcat].icons
+    icon = l[n]
+
+    EmoteButtons_Vars.Actions[deck][button].image = icon
 	if EmoteButtons_FarLeftWing_Deck==deck then
 		EmoteButtons_LoadDeck(deck, "FarLeft");
 	elseif EmoteButtons_FarRightWing_Deck==deck then
@@ -454,6 +460,43 @@ function IconPickerOkayButton_OnClick()
 		DeckBuilderFrame_UpdateActions();
 	end
 	IconPickerFrame:Hide();
+end
+
+function IconPickerFrame_Update()
+    if IP_SUBCATEGORY_SELECTED == 0 then
+        a = IP_ICONS[IP_CATEGORY_SELECTED][1]
+	else
+        a = IP_ICONS[IP_CATEGORY_SELECTED][IP_SUBCATEGORY_SELECTED]
+    end
+    numMacroIcons = a.size
+    ico = a.icons
+        --local numMacroIcons = GetNumMacroIcons();
+	local IconPickerIcon, IconPickerButton;
+	local IconPickerOffset = FauxScrollFrame_GetOffset(IconPickerScrollFrame);
+	local index;
+   --DEFAULT_CHAT_FRAME:AddMessage(format("size %s",ico[1]))
+	
+	-- Icon list
+	for i=1, NUM_ICONS_SHOWN do
+		IconPickerIcon = getglobal("IconPickerButton"..i.."Icon");
+		IconPickerButton = getglobal("IconPickerButton"..i);
+		index = (IconPickerOffset * NUM_ICONS_PER_ROW) + i;
+		if ( index <= numMacroIcons ) then
+			IconPickerIcon:SetTexture("Interface\\Icons\\"..ico[index]);
+			IconPickerButton:Show();
+		else
+			IconPickerIcon:SetTexture("");
+			IconPickerButton:Hide();
+		end
+		if ( index == IconPickerFrame.selectedIcon ) then
+			IconPickerButton:SetChecked(1);
+		else
+			IconPickerButton:SetChecked(nil);
+		end
+	end
+	
+	-- Scrollbar stuff
+	FauxScrollFrame_Update(IconPickerScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );
 end
 
 function IconPickerSwitchCategory(category, subcategory)
@@ -509,6 +552,10 @@ function IconPickerAbilitiesDropDown_OnShow()
             IP_SUBCATEGORY_SELECTED = this.value;
             IconPickerUncheckAllCategories()
             IconPickerCheckSelectedCategory()
+            IconPickerScrollFrame:SetVerticalScroll(0);
+            IconPickerFrame.selectedIcon =0;
+            IconPickerOkayButton_Update()
+            IconPickerFrame_Update();
 		end
 		UIDropDownMenu_AddButton(info);
 	end
@@ -522,9 +569,14 @@ end
 
 function IconPickerAchievements_OnClick()
     IP_CATEGORY_SELECTED = IP_CATEGORY_ACHIVEMENTS;
-    IP_SUBCATEGORY_SELECTED = 0;
+    IP_SUBCATEGORY_SELECTED = 1;
     IconPickerUncheckAllCategories()
     IconPickerCheckSelectedCategory()
+    IconPickerScrollFrame:SetVerticalScroll(0);
+    IconPickerFrame.selectedIcon =0;
+    IconPickerOkayButton_Update()
+    IconPickerFrame_Update();
+    CloseDropDownMenus()
 end
 
 function IconPickerConsumesDropDown_OnShow()
@@ -543,6 +595,10 @@ function IconPickerConsumesDropDown_OnShow()
             IP_SUBCATEGORY_SELECTED = this.value;	
             IconPickerUncheckAllCategories()
             IconPickerCheckSelectedCategory()
+            IconPickerScrollFrame:SetVerticalScroll(0);
+            IconPickerFrame.selectedIcon =0;
+            IconPickerOkayButton_Update()
+            IconPickerFrame_Update();
 		end
 		UIDropDownMenu_AddButton(info);
 	end
@@ -570,6 +626,10 @@ function IconPickerEquipmentDropDown_OnShow()
             IP_SUBCATEGORY_SELECTED = this.value;	
             IconPickerUncheckAllCategories()
             IconPickerCheckSelectedCategory()
+            IconPickerScrollFrame:SetVerticalScroll(0);
+            IconPickerFrame.selectedIcon =0;
+            IconPickerOkayButton_Update()
+            IconPickerFrame_Update();
 		end
 		UIDropDownMenu_AddButton(info);
 	end
@@ -583,9 +643,14 @@ end
 
 function IconPickerMisc_OnClick()
     IP_CATEGORY_SELECTED = IP_CATEGORY_MISC;
-    IP_SUBCATEGORY_SELECTED = 0;
+    IP_SUBCATEGORY_SELECTED = 1;
     IconPickerUncheckAllCategories()
     IconPickerCheckSelectedCategory()
+    IconPickerScrollFrame:SetVerticalScroll(0);
+    IconPickerFrame.selectedIcon =0;
+    IconPickerOkayButton_Update()
+    IconPickerFrame_Update();
+    CloseDropDownMenus()
 end
 
 function IconPickerSpellsDropDown_OnShow()
@@ -604,6 +669,10 @@ function IconPickerSpellsDropDown_OnShow()
             IP_SUBCATEGORY_SELECTED = this.value;	
             IconPickerUncheckAllCategories()
             IconPickerCheckSelectedCategory()
+            IconPickerScrollFrame:SetVerticalScroll(0);
+            IconPickerFrame.selectedIcon =0;
+            IconPickerOkayButton_Update()
+            IconPickerFrame_Update();
 		end
 		UIDropDownMenu_AddButton(info);
 	end
@@ -631,6 +700,10 @@ function IconPickerTradesDropDown_OnShow()
             IP_SUBCATEGORY_SELECTED = this.value;
             IconPickerUncheckAllCategories()
             IconPickerCheckSelectedCategory()
+            IconPickerScrollFrame:SetVerticalScroll(0);
+            IconPickerFrame.selectedIcon =0;
+            IconPickerOkayButton_Update()
+            IconPickerFrame_Update();
 		end
 		UIDropDownMenu_AddButton(info);
 	end
@@ -658,6 +731,10 @@ function IconPickerWeaponsDropDown_OnShow()
             IP_SUBCATEGORY_SELECTED = this.value;	
             IconPickerUncheckAllCategories()
             IconPickerCheckSelectedCategory()
+            IconPickerScrollFrame:SetVerticalScroll(0);
+            IconPickerFrame.selectedIcon =0;
+            IconPickerOkayButton_Update()
+            IconPickerFrame_Update();
 		end
 		UIDropDownMenu_AddButton(info);
 	end
@@ -669,34 +746,7 @@ function IconPickerWeapons_OnClick()
     IconPickerCheckSelectedCategory()
 end
 
-function IconPickerFrame_Update()
-	local numMacroIcons = GetNumMacroIcons();
-	local IconPickerIcon, IconPickerButton;
-	local IconPickerOffset = FauxScrollFrame_GetOffset(IconPickerScrollFrame);
-	local index;
-	
-	-- Icon list
-	for i=1, NUM_ICONS_SHOWN do
-		IconPickerIcon = getglobal("IconPickerButton"..i.."Icon");
-		IconPickerButton = getglobal("IconPickerButton"..i);
-		index = (IconPickerOffset * NUM_ICONS_PER_ROW) + i;
-		if ( index <= numMacroIcons ) then
-			IconPickerIcon:SetTexture(GetMacroIconInfo(index));
-			IconPickerButton:Show();
-		else
-			IconPickerIcon:SetTexture("");
-			IconPickerButton:Hide();
-		end
-		if ( index == IconPickerFrame.selectedIcon ) then
-			IconPickerButton:SetChecked(1);
-		else
-			IconPickerButton:SetChecked(nil);
-		end
-	end
-	
-	-- Scrollbar stuff
-	FauxScrollFrame_Update(IconPickerScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );
-end
+
 
 function CFGLabelEditOnShow()
 	local deck = EmoteButtons_ConfigDeck;

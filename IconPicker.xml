@@ -1,11 +1,12 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
-	<Script file="Icons\Abilities.lua"/>
-	<Script file="Icons\Achievements.lua"/>
-	<Script file="Icons\Consumables.lua"/>
-	<Script file="Icons\Misc.lua"/>
-	<Script file="Icons\Spells.lua"/>
-	<Script file="Icons\Trades.lua"/>
-	<Script file="Icons\Weapons.lua"/>
+	<Include file="Icons\Abilities.lua"/>
+	<Include file="Icons\Achievements.lua"/>
+	<Include file="Icons\Consumables.lua"/>
+    <Include file="Icons\Equipment.lua"/>
+	<Include file="Icons\Misc.lua"/>
+	<Include file="Icons\Spells.lua"/>
+	<Include file="Icons\Trades.lua"/>
+	<Include file="Icons\Weapons.lua"/>
     <Script file="IconPicker.lua"/>
     <Script file="IconPicker_localisation.lua"/>
 
