@@ -1,4 +1,4 @@
-icons_spells_misc = {
+IP_icons_spells_misc = {
   "Racial_Dwarf_FindTreasure.blp",
   "Racial_Orc_BerserkerStrength.blp",
   "Racial_Troll_Berserk.blp",
@@ -26,8 +26,9 @@ icons_spells_misc = {
   "Spell_unused.blp",
   "Spell_unused2.blp"
 }
+IP_len_icons_spells_misc = getn(IP_icons_spells_misc)
 
-icons_spells_arcane = {
+IP_icons_spells_arcane = {
   "Spell_Arcane_Arcane01.blp",
   "Spell_Arcane_Arcane02.blp",
   "Spell_Arcane_Arcane03.blp",
@@ -81,8 +82,9 @@ icons_spells_arcane = {
   "Spell_Magic_PolymorphPig.blp",
   "Spell_Magic_PolymorphRabbit.blp"
 }
+IP_len_icons_spells_arcane = getn(IP_icons_spells_arcane)
 
-icons_spells_fire = {
+IP_icons_spells_fire = {
   "Spell_FireResistanceTotem_01.blp",
   "Spell_Fire_BlueCano.blp",
   "Spell_Fire_BlueFire.blp",
@@ -143,8 +145,9 @@ icons_spells_fire = {
   "Spell_Fire_Volcano.blp",
   "Spell_Fire_WindsofWoe.blp"
 }
+IP_len_icons_spells_fire = getn(IP_icons_spells_fire)
 
-icons_spells_frost = {
+IP_icons_spells_frost = {
   "Spell_FrostResistanceTotem_01.blp",
   "Spell_Frost_ArcticWinds.blp",
   "Spell_Frost_ChainsOfIce.blp",
@@ -183,8 +186,9 @@ icons_spells_frost = {
   "Spell_Ice_MagicDamage.blp",
   "Spell_Ice_Rune.blp"
 }
+IP_len_icons_spells_frost = getn(IP_icons_spells_frost)
 
-icons_spells_holy = {
+IP_icons_spells_holy = {
   "Spell_Holy_Absolution.blp",
   "Spell_Holy_ArcaneIntellect.blp",
   "Spell_Holy_ArdentDefender.blp",
@@ -322,8 +326,9 @@ icons_spells_holy = {
   "Spell_Holy_WeaponMastery.blp",
   "Spell_Holy_WordFortitude.blp"
 }
+IP_len_icons_spells_holy = getn(IP_icons_spells_holy)
 
-icons_spells_nature = {
+IP_icons_spells_nature = {
   "Spell_Nature_AbolishMagic.blp",
   "Spell_Nature_Acid_01.blp",
   "Spell_Nature_AgitatingTotem.blp",
@@ -440,8 +445,9 @@ icons_spells_nature = {
   "Spell_Nature_WispSplodeGreen.blp",
   "Spell_Nature_WrathofAir _Totem.blp"
 }
+IP_len_icons_spells_nature = getn(IP_icons_spells_nature)
 
-icons_spells_shadow = {
+IP_icons_spells_shadow = {
   "Spell_Shadow_AbominationExplosion.blp",
   "Spell_Shadow_AnimateDead.blp",
   "Spell_Shadow_AntiMagicShell.blp",
@@ -575,8 +581,9 @@ icons_spells_shadow = {
   "Spell_Shadow_UnsummonBuilding.blp",
   "Spell_Shadow_VampiricAura.blp"
 }
+IP_len_icons_spells_shadow = getn(IP_icons_spells_shadow)
 
-icons_spells_deathknight = {
+IP_icons_spells_deathknight = {
   "Spell_DeathKnight_AntiMagicZone.blp",
   "Spell_DeathKnight_ArmyOfTheDead.blp",
   "Spell_DeathKnight_BladedArmor.blp",
@@ -612,8 +619,9 @@ icons_spells_deathknight = {
   "Spell_Deathknight_UnholyPresence.blp",
   "Spell_DeathKnight_Vendetta.blp"
 }
+IP_len_icons_spells_deathknight = getn(IP_icons_spells_deathknight)
 
-icons_spells_shaman = {
+IP_icons_spells_shaman = {
   "Spell_Shaman_AncestralAwakening.blp",
   "Spell_Shaman_AstralShift.blp",
   "Spell_Shaman_BlessingOfEternals.blp",
@@ -639,3 +647,4 @@ icons_spells_shaman = {
   "Spell_Shaman_TidalWaves.blp",
   "Spell_Shaman_TotemRecall.blp"
 }
+IP_len_icons_spells_shaman = getn(IP_icons_spells_shaman)

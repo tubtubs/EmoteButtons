@@ -1,4 +1,4 @@
-icons_trade_firstaid = {
+IP_icons_trade_firstaid = {
   "INV_Misc_Bandage_01.blp",
   "INV_Misc_Bandage_02.blp",
   "INV_Misc_Bandage_03.blp",
@@ -24,8 +24,9 @@ icons_trade_firstaid = {
   "INV_Misc_Bandage_Netherweave.blp",
   "INV_Misc_Bandage_Netherweave_Heavy.blp"
 }
+IP_len_icons_trade_firstaid = getn(IP_icons_trade_firstaid)
 
-icons_trade_alchemy = {
+IP_icons_trade_alchemy = {
   "INV_Alchemy_CrystalVial.blp",
   "INV_Alchemy_Elixir_01.blp",
   "INV_Alchemy_Elixir_02.blp",
@@ -51,8 +52,9 @@ icons_trade_alchemy = {
   "INV_Alchemy_Potion_06.blp",
   "INV_Alchemy_Potion_Empty.blp"
 }
+IP_len_icons_trade_alchemy = getn(IP_icons_trade_alchemy)
 
-icons_trade_elementals = {
+IP_icons_trade_elementals = {
   "INV_Elemental_Crystal_Air.blp",
   "INV_ELEMENTAL_CRYSTAL_EARTH.BLP",
   "INV_Elemental_Crystal_Fire.blp",
@@ -82,8 +84,9 @@ icons_trade_elementals = {
   "INV_Elemental_Primal_Shadow.blp",
   "INV_Elemental_Primal_Water.blp"
 }
+IP_len_icons_trade_elementals = getn(IP_icons_trade_elementals)
 
-icons_trade_herbalism = {
+IP_icons_trade_herbalism = {
   "INV_Misc_Flower_01.blp",
   "INV_Misc_Flower_02.blp",
   "INV_Misc_Flower_03.blp",
@@ -135,8 +138,9 @@ icons_trade_herbalism = {
   "INV_Misc_Herb_Tigerlily.blp",
   "INV_Misc_Herb_Whispervine.blp"
 }
+IP_len_icons_trade_herbalism = getn(IP_icons_trade_herbalism)
 
-icons_trade_eng = {
+IP_icons_trade_eng = {
   "INV_Gizmo_01.blp",
   "INV_Gizmo_02.blp",
   "INV_Gizmo_03.blp",
@@ -239,8 +243,9 @@ icons_trade_eng = {
   "INV_Misc_Wrench_01.blp",
   "INV_Misc_Wrench_02.blp"
 }
+IP_len_icons_trade_eng = getn(IP_icons_trade_eng)
 
-icons_trade_leatherworking = {
+IP_icons_trade_leatherworking = {
   "INV_Misc_ArmorKit_01.blp",
   "INV_Misc_ArmorKit_02.blp",
   "INV_Misc_ArmorKit_03.blp",
@@ -348,8 +353,9 @@ icons_trade_leatherworking = {
   "INV_Misc_Pelt_Wolf_Ruin_03.blp",
   "INV_Misc_Pelt_Wolf_Ruin_04.blp"
 }
+IP_len_icons_trade_leatherworking = getn(IP_icons_trade_leatherworking)
 
-icons_trade_tailoring = {
+IP_icons_trade_tailoring = {
   "INV_Fabric_Ebonweave.blp",
   "INV_Fabric_Felcloth_Ebon.blp",
   "INV_Fabric_FelRag.blp",
@@ -432,8 +438,9 @@ icons_trade_tailoring = {
   "INV_Misc_Bag_SatchelofCenarius.blp",
   "INV_Misc_Bag_Soulbag.blp"
 }
+IP_len_icons_trade_tailoring = getn(IP_icons_trade_tailoring)
 
-icons_trade_enchant = {
+IP_icons_trade_enchant = {
   "INV_Enchant_AbyssCrystal.blp",
   "INV_Enchant_Disenchant.blp",
   "INV_Enchant_DreamShard_01.blp",
@@ -495,8 +502,9 @@ icons_trade_enchant = {
   "INV_Rod_Platinum.blp",
   "INV_Rod_Titanium.blp"
 }
+IP_len_icons_trade_enchant = getn(IP_icons_trade_enchant)
 
-icons_trade_inscription = {
+IP_icons_trade_inscription = {
   "INV_Inscription_ArmorScroll01.blp",
   "INV_Inscription_ArmorScroll02.blp",
   "INV_Inscription_ArmorScroll03.blp",
@@ -639,8 +647,9 @@ icons_trade_inscription = {
   "INV_Scroll_15.blp",
   "INV_Scroll_16.blp"
 }
+IP_len_icons_trade_inscription = getn(IP_icons_trade_inscription)
 
-icons_trade_fishing = {
+IP_icons_trade_fishing = {
   "INV_FISHINGCHAIR.BLP",
   "INV_Fishingpole_01.blp",
   "INV_Fishingpole_02.blp",
@@ -648,8 +657,9 @@ icons_trade_fishing = {
   "INV_Fishingpole_05.blp",
   "INV_Fishingpole_06.blp"
 }
+IP_len_icons_trade_fishing = getn(IP_icons_trade_fishing)
 
-icons_trade_jewelcrafting = {
+IP_icons_trade_jewelcrafting = {
   "INV_Jewelcrafting_AzureBoar.blp",
   "INV_Jewelcrafting_AzureCrab.blp",
   "INV_Jewelcrafting_AzureHare.blp",
@@ -850,8 +860,9 @@ icons_trade_jewelcrafting = {
   "INV_Misc_Powder_Thorium.blp",
   "INV_Misc_Powder_Tin.blp"
 }
+IP_len_icons_trade_jewelcrafting = getn(IP_icons_trade_jewelcrafting)
 
-icons_trade_blacksmithing = {
+IP_icons_trade_blacksmithing = {
   "inv_blacksmith_anvil.blp",
   "INV_Stone_01.blp",
   "INV_Stone_02.blp",
@@ -890,8 +901,9 @@ icons_trade_blacksmithing = {
   "INV_Stone_WeightStone_07.blp",
   "INV_Stone_WeightStone_08.blp"
 }
+IP_len_icons_trade_blacksmithing = getn(IP_icons_trade_blacksmithing)
 
-icons_trade_mining = {
+IP_icons_trade_mining = {
   "INV_Ingot_01.blp",
   "INV_Ingot_02.blp",
   "INV_Ingot_03.blp",
@@ -981,8 +993,9 @@ icons_trade_mining = {
   "INV_Stone_WeightStone_07.blp",
   "INV_Stone_WeightStone_08.blp"
 }
+IP_len_icons_trade_mining = getn(IP_icons_trade_mining)
 
-icons_trade_misc = {
+IP_icons_trade_misc = {
   "INV_TradeskillItem_01.blp",
   "INV_TradeskillItem_02.blp",
   "INV_TradeskillItem_03.blp",
@@ -997,3 +1010,4 @@ icons_trade_misc = {
   "Trade_Mining.blp",
   "Trade_Tailoring.blp"
 }
+IP_len_icons_trade_misc = getn(IP_icons_trade_misc)

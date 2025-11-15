@@ -1,3 +1,22 @@
+Replaces:
+\{\n    Name = 
+\n  \}
+
+icons_
+IP_icons_
+
+len_IP_icons_
+IP_len_icons_
+
+ICON PICKER TODO:
+Export Icon Lists [CHECK]
+-Inspect them... [CHECK]
+Design new Frame
+-dropdowns
+-Change frame size, so it better matches?
+Can I make a horizontal dropdown? Kinda doubt it, ngl.
+
+
 ICON PICKER FEATURES:
 -Icons from bag slots
 -Icons from action bar?
@@ -10,7 +29,7 @@ Categories...
 
 ICON TEXT CHECKS:
 
-*Trade - 780 icons
+*Trade - 780 icons - 14 categories
 **MISC Trade 13
 Name  like "Trade_%"  or Name  like "INV_tradeskill%"
 
@@ -208,7 +227,9 @@ or Name  like "INV_Musket%" or Name  like "INV_Ammo%" or Name  like "Thrown_%" o
 
 [*Misc? Probably more categories under this, but meh - 780
 --Could be missing some, but meh Ive got 6199 or so according to my quick maths
-(Name  like "INV_%" or Name  like "INV_Bijou%")  
+select * from dbc.mytable
+where
+(Name  like "INV_%")
 and Name not like "INV_Misc_Ammo%" and Name not like "INV_Misc_Armorkit%" and Name not like "INV_Misc_Bandana%" and Name not like "INV_Misc_Bandage%" and Name not like "INV_Misc_Beer%" and Name not like "INV_Misc_Bomb%"
 and Name not like "INV_Misc_Cape%" and Name not like "INV_Misc_Eng%" and Name not like "INV_Misc_Fish%" and Name not like "INV_Misc_Food%" and Name not like "INV_Misc_Gem%" and Name not like "INV_Misc_Herb%" 
 and Name not like "INV_Misc_Leather%" and Name not like "INV_Misc_Powder%" and Name not like "INV_Misc_Wrench%" and Name not like "INV_Misc_Screwdriver%" and Name not like "INV_Misc_Tabard%" 

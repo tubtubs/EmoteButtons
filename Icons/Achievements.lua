@@ -1,4 +1,4 @@
-icons_achievements = {
+IP_icons_achievements = {
   "Achievement_Arena_2v2_1.blp",
   "Achievement_Arena_2v2_2.blp",
   "Achievement_Arena_2v2_3.blp",
@@ -666,4 +666,5 @@ icons_achievements = {
   "Achievement_Zone_ZulDrak_10.blp",
   "Achievement_Zone_ZulDrak_11.blp",
   "Achievement_Zone_ZulDrak_12.blp"
-  }
+}
+IP_len_icons_abilities_achievements = getn(IP_icons_achievements)

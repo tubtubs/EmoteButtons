@@ -1,4 +1,4 @@
-icons_abilities_druid = {
+IP_icons_abilities_druid = {
     "Ability_Druid_AquaticForm.blp",
     "Ability_Druid_BalanceofPower.blp",
     "Ability_Druid_Bash.blp",
@@ -57,8 +57,9 @@ icons_abilities_druid = {
     "Ability_Druid_TwilightsWrath.blp",
     "Ability_Druid_Typhoon.blp"
 }
+IP_len_icons_abilities_druid = getn(IP_icons_abilities_druid)
 
-icons_abilities_misc = {
+IP_icons_abilities_misc = {
   "Ability_Ambush.blp",
   "Ability_BackStab.blp",
   "Ability_BullRush.blp",
@@ -155,8 +156,9 @@ icons_abilities_misc = {
   "Ability_WIntergrasp_rank2.blp",
   "Ability_WIntergrasp_rank3.blp"
 }
+IP_len_icons_abilities_misc = getn(IP_icons_abilities_misc)
 
-icons_abilities_hunter = {
+IP_icons_abilities_hunter = {
   "Ability_Hunter_AimedShot.blp",
   "Ability_Hunter_AnimalHandler.blp",
   "Ability_Hunter_AspectMastery.blp",
@@ -253,8 +255,9 @@ icons_abilities_hunter = {
   "Ability_Hunter_WildQuiver.blp",
   "Ability_Hunter_ZenArchery.blp"
 }
+IP_len_icons_abilities_hunter = getn(IP_icons_abilities_hunter)
 
-icons_abilities_mage = {
+IP_icons_abilities_mage = {
   "Ability_Mage_ArcaneBarrage.blp",
   "Ability_Mage_BrainFreeze.blp",
   "Ability_Mage_Burnout.blp",
@@ -282,8 +285,9 @@ icons_abilities_mage = {
   "Ability_Mage_WintersGrasp.blp",
   "Ability_Mage_WorldInFlames.blp"
 }
+IP_len_icons_abilities_mage = getn(IP_icons_abilities_mage)
 
-icons_abilities_mounts = {
+IP_icons_abilities_mounts = {
   "Ability_Mount_BigBlizzardBear.blp",
   "Ability_Mount_BlackBattlestrider.blp",
   "Ability_Mount_BlackDireWolf.blp",
@@ -368,8 +372,9 @@ icons_abilities_mounts = {
   "Ability_Mount_WhiteTiger.blp",
   "Ability_Mount_Wyvern_01.blp"
 }
+IP_len_icons_abilities_mounts = getn(IP_icons_abilities_mounts)
 
-icons_abilities_paladin = {
+IP_icons_abilities_paladin = {
   "Ability_Paladin_ArtofWar.blp",
   "Ability_Paladin_BeaconofLight.blp",
   "Ability_Paladin_BlessedHands.blp",
@@ -393,8 +398,9 @@ icons_abilities_paladin = {
   "Ability_Paladin_SwiftRetribution.blp",
   "Ability_Paladin_TouchedbyLight.blp"
 }
+IP_len_icons_abilities_paladin = getn(IP_icons_abilities_paladin)
 
-icons_abilities_rogue = {
+IP_icons_abilities_rogue = {
   "Ability_Rogue_Ambush.blp",
   "Ability_Rogue_BladeTwisting.blp",
   "Ability_Rogue_BloodSplatter.blp",
@@ -444,16 +450,18 @@ icons_abilities_rogue = {
   "Ability_Rogue_Waylay.blp",
   "Ability_Rogue_WrongfullyAccused.blp"
 }
+IP_len_icons_abilities_rogue = getn(IP_icons_abilities_rogue)
 
-icons_abilities_shaman = {
+IP_icons_abilities_shaman = {
   "Ability_Shaman_CleanseSpirit.blp",
   "Ability_Shaman_Heroism.blp",
   "Ability_Shaman_Lavalash.blp",
   "Ability_Shaman_Stormstrike.blp",
   "Ability_Shaman_WaterShield.blp"
 }
+IP_len_icons_abilities_shaman = getn(IP_icons_abilities_shaman)
 
-icons_abilities_warlock = {
+IP_icons_abilities_warlock = {
   "Ability_Warlock_Avoidance.blp",
   "Ability_Warlock_Backdraft.blp",
   "Ability_Warlock_ChaosBolt.blp",
@@ -469,8 +477,9 @@ icons_abilities_warlock = {
   "Ability_Warlock_MoltenCore.blp",
   "Ability_Warlock_ShadowFlame.blp"
 }
+IP_len_icons_abilities_warlock = getn(IP_icons_abilities_warlock)
 
-icons_abilities_warrior = {
+IP_icons_abilities_warrior = {
   "Ability_Warrior_BattleShout.blp",
   "Ability_Warrior_Bladestorm.blp",
   "Ability_Warrior_BloodBath.blp",
@@ -526,3 +535,4 @@ icons_abilities_warrior = {
   "Ability_Warrior_WarCry.blp",
   "Ability_Warrior_WeaponMastery.blp"
 }
+IP_len_icons_abilities_warrior = getn(IP_icons_abilities_warrior)

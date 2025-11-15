@@ -1,4 +1,9 @@
-icons_misc = {
+IP_icons_misc = {
+  "Creature_SporeMushroom.blp",
+  "firesglow.blp",
+  "frozendeath.blp",
+  "frozenorb.blp",
+  "hev.blp",
   "INV-Mount_Raven_54.blp",
   "INV_BannerPVP_01.blp",
   "INV_BannerPVP_02.blp",
@@ -753,6 +758,13 @@ icons_misc = {
   "INV_ValentinesChocolate02.blp",
   "INV_ValentinesChocolate03.blp",
   "INV_ValentinesChocolate04.blp",
-  "INV_ZulGurubTrinket.blp"
-  }
-  
+  "Mail_GMIcon.blp",
+  "Quest_12252_Icon.blp",
+  "ship.blp",
+  "Temp.blp",
+  "T_RobotIcon.blp",
+  "vas_charactertransfer.blp",
+  "vas_factionchange.blp"
+}
+
+IP_len_icons_misc = getn(IP_icons_misc)

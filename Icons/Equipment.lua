@@ -1,4 +1,4 @@
-icons_equipment_jewelry = {
+IP_icons_equipment_jewelry = {
   "INV_Jewelry_Amulet_01.blp",
   "INV_Jewelry_Amulet_02.blp",
   "INV_Jewelry_Amulet_03.blp",
@@ -201,10 +201,12 @@ icons_equipment_jewelry = {
   "INV_Trinket_Naxxramas04.blp",
   "INV_Trinket_Naxxramas05.blp",
   "INV_Trinket_Naxxramas06.blp",
-  "INV_Trinket_Thrallmar.blp"
+  "INV_Trinket_Thrallmar.blp",
+  "INV_ZulGurubTrinket.blp"
 }
+IP_len_icons_equipment_jewelry = getn(IP_icons_equipment_jewelry)
 
-icons_equipment_offhand = {
+IP_icons_equipment_offhand = {
   "INV_Offhand_1H_UlduarRaid_D_01.blp",
   "INV_Offhand_Blood_01.blp",
   "INV_Offhand_Blood_02.blp",
@@ -308,8 +310,9 @@ icons_equipment_offhand = {
   "INV_Shield_74.blp",
   "INV_Shield_75.blp"
 }
+IP_len_icons_equipment_offhand = getn(IP_icons_equipment_offhand)
 
-icons_equipment_headgear = {
+IP_icons_equipment_headgear = {
   "INV_Crown_01.blp",
   "INV_Crown_02.blp",
   "INV_Crown_13.blp",
@@ -491,8 +494,9 @@ icons_equipment_headgear = {
   "INV_Misc_Bandana_01.blp",
   "INV_Misc_Bandana_03.blp"
 }
+IP_len_icons_headgear = getn(IP_icons_equipment_headgear)
 
-icons_equipment_shirttabard = {
+IP_icons_equipment_shirttabard = {
   "INV_Misc_TabardPVP_01.blp",
   "INV_Misc_TabardPVP_02.blp",
   "INV_Misc_TabardPVP_03.blp",
@@ -527,8 +531,9 @@ icons_equipment_shirttabard = {
   "INV_Shirt_White_01.blp",
   "INV_Shirt_Yellow_01.blp"
 }
+IP_len_icons_equipment_shirttabard = getn(IP_icons_equipment_shirttabard)
 
-icons_equipment_belts = {
+IP_icons_equipment_belts = {
   "INV_Belt_01.blp",
   "INV_Belt_02.blp",
   "INV_Belt_03.blp",
@@ -643,8 +648,9 @@ icons_equipment_belts = {
   "INV_Belt_82.blp",
   "INV_Belt_83.blp"
 }
+IP_len_icons_equipment_belts = getn(IP_icons_equipment_belts)
 
-icons_equipment_pants = {
+IP_icons_equipment_pants = {
   "INV_Kilt_Cloth_02.blp",
   "INV_Kilt_Mail_01.blp",
   "INV_Pants_01.blp",
@@ -806,8 +812,9 @@ icons_equipment_pants = {
   "INV_Pants_Plate_37.blp",
   "INV_Pants_Wolf.blp"
 }
+IP_len_icons_equipment_pants = getn(IP_icons_equipment_pants)
 
-icons_equipment_capes = {
+IP_icons_equipment_capes = {
   "INV_Misc_Cape_01.blp",
   "INV_Misc_Cape_02.blp",
   "INV_Misc_Cape_03.blp",
@@ -837,8 +844,9 @@ icons_equipment_capes = {
   "INV_Misc_Cape_Naxxramas_02.blp",
   "INV_Misc_Cape_Naxxramas_03.blp"
 }
+IP_len_icons_equipment_capes = getn(IP_icons_equipment_capes)
 
-icons_equipment_chest = {
+IP_icons_equipment_chest = {
   "INV_Chest_Chain.blp",
   "INV_Chest_Chain_03.blp",
   "INV_Chest_Chain_04.blp",
@@ -1010,8 +1018,9 @@ icons_equipment_chest = {
   "INV_Chest_Samurai.blp",
   "INV_Chest_Wolf.blp"
 }
+IP_len_icons_equipment_chest = getn(IP_icons_equipment_chest)
 
-icons_equipment_shoulder = {
+IP_icons_equipment_shoulder = {
   "INV_Shoulder_01.blp",
   "INV_Shoulder_02.blp",
   "INV_Shoulder_03.blp",
@@ -1144,8 +1153,9 @@ icons_equipment_shoulder = {
   "INV_Shoulder_99.blp",
   "INV_Shoulder_HaremMatron_D_01.blp"
 }
+IP_len_icons_equipment_shoulder = getn(IP_icons_equipment_shoulder)
 
-icons_equipment_boots = {
+IP_icons_equipment_boots = {
   "INV_Boots_01.blp",
   "INV_Boots_02.blp",
   "INV_Boots_03.blp",
@@ -1237,8 +1247,9 @@ icons_equipment_boots = {
   "INV_Boots_Plate_18.blp",
   "INV_Boots_Wolf.blp"
 }
+IP_len_icons_equipment_boots = getn(IP_icons_equipment_boots)
 
-icons_equipment_misc = {
+IP_icons_equipment_misc = {
   "INV_Armor_Helm_Plate_Naxxramas_RaidWarrior_C_01.blp",
   "INV_Armor_Shield_Naxxramas_D_01.blp",
   "INV_Armor_Shield_Naxxramas_D_02.blp",
@@ -1263,8 +1274,9 @@ icons_equipment_misc = {
   "Item_icecrownringC.blp",
   "Item_icecrownringD.blp"
 }
+IP_len_icons_equipment_misc = getn(IP_icons_equipment_misc)
 
-icons_equipment_bracersgauntlets = {
+IP_icons_equipment_bracersgauntlets = {
   "INV_Bracer_01.blp",
   "INV_Bracer_02.blp",
   "INV_Bracer_03.blp",
@@ -1448,3 +1460,4 @@ icons_equipment_bracersgauntlets = {
   "INV_Gauntlets_96.blp",
   "INV_Gauntlets_97.blp"
 }
+IP_len_icons_equipment_bracersgauntlets = getn(IP_icons_equipment_bracersgauntlets)

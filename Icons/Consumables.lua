@@ -1,4 +1,4 @@
-icons_consume_potions = {
+IP_icons_consume_potions = {
   "INV_Potion_01.blp",
   "INV_Potion_02.blp",
   "INV_Potion_03.blp",
@@ -168,8 +168,9 @@ icons_consume_potions = {
   "INV_Potion_98.blp",
   "INV_Potion_99.blp"
 }
+IP_len_icons_consume_potions = getn(IP_icons_consume_potions)
 
-icons_consume_drinks = {
+IP_icons_consume_drinks = {
   "INV_Drink_01.blp",
   "INV_Drink_02.blp",
   "INV_Drink_03.blp",
@@ -225,8 +226,9 @@ icons_consume_drinks = {
   "INV_Misc_Beer_09.blp",
   "INV_Misc_Beer_10.blp"
 }
+IP_len_icons_consume_drinks = getn(IP_icons_consume_drinks)
 
-icons_consume_food = {
+IP_icons_consume_food = {
   "INV_Food_ChristmasFruitCake_01.blp",
   "INV_Misc_Fish_01.blp",
   "INV_Misc_Fish_02.blp",
@@ -477,3 +479,4 @@ icons_consume_food = {
   "INV_Mushroom_12.blp",
   "INV_Mushroom_13.blp"
 }
+IP_len_icons_consume_food = getn(IP_icons_consume_food)
