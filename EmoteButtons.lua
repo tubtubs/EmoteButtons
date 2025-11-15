@@ -32,6 +32,17 @@ Chat commands: [CHECK]
 [BONUS] Allow grabbing an icon from spell or item*
 Setup Default Profile*
 
+Last features wish list.
+-Save profiles by default, don't really care for save prompts
+-Move button up or down
+-Rename deck
+-Gloat is also a laugh
+New section - animal sounds? took bark out of taunt and golfclap out of taunt
+Take apologize out of combat?
+-Tap in bored?Impatient?
+-CMD isnt auto filled if its first or last?
+-Still a test output somewhere when opening/closing rightwing?
+
 
 
 Expand the left/right wing to a size of 8. [CHECK]

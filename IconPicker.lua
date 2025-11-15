@@ -372,8 +372,8 @@ function IconPickerRandomIcon()
     l = getn(IP_ICONS[cat])
     subcat = math.random(l)
     m = getn(IP_ICONS[cat][subcat].icons)
-    DEFAULT_CHAT_FRAME:AddMessage(IP_ICONS[cat][subcat].icons[m])
-    return IP_ICONS[cat][subcat].icons[m]
+    DEFAULT_CHAT_FRAME:AddMessage(IP_ICONS[cat][subcat].icons[math.random(m)])
+    return IP_ICONS[cat][subcat].icons[math.random(m)]
 end
 
 function IconPickerForceShow()

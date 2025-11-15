@@ -1,1182 +1,1262 @@
 EB_EmoteList = {
   {
     Name = "ABSENT",
-    TargetEmoteText = "You look at %s absently.",
-    SelfEmoteText = "You look absent-minded."
+    SelfEmoteText = "You look absent-minded.",
+    TargetEmoteText = "You look at %s absently."
   },
   {
     Name = "AGREE",
-    TargetEmoteText = "You agree with %s.",
-    SelfEmoteText = "You agree."
+    SelfEmoteText = "You agree.",
+    TargetEmoteText = "You agree with %s."
   },
   {
     Name = "AMAZE",
-    TargetEmoteText = "You are amazed by %s!",
-    SelfEmoteText = "You are amazed!"
+    SelfEmoteText = "You are amazed!",
+    TargetEmoteText = "You are amazed by %s!"
   },
   {
     Name = "ANGRY",
-    TargetEmoteText = "You raise your fist in anger at %s.",
-    SelfEmoteText = "You raise your fist in anger."
+    SelfEmoteText = "You raise your fist in anger.",
+    TargetEmoteText = "You raise your fist in anger at %s."
   },
   {
     Name = "APOLOGIZE",
-    TargetEmoteText = "You apologize to %s.  Sorry!",
-    SelfEmoteText = "You apologize to everyone.  Sorry!"
+    SelfEmoteText = "You apologize to everyone.  Sorry!",
+    TargetEmoteText = "You apologize to %s.  Sorry!"
   },
   {
     Name = "APPLAUD",
-    TargetEmoteText = "You applaud at %s.  Bravo!",
-    SelfEmoteText = "You applaud.  Bravo!"
+    SelfEmoteText = "You applaud.  Bravo!",
+    TargetEmoteText = "You applaud at %s.  Bravo!"
   },
   {
     Name = "ARM",
-    TargetEmoteText = "You put your arm around %s\'s shoulder.",
-    SelfEmoteText = "You stretch your arms out."
+    SelfEmoteText = "You stretch your arms out.",
+    TargetEmoteText = "You put your arm around %s\'s shoulder."
   },
   {
     Name = "ATTACKMYTARGET",
-    TargetEmoteText = "You tell everyone to attack %s.",
-    SelfEmoteText = "You tell everyone to attack something."
+    SelfEmoteText = "You tell everyone to attack something.",
+    TargetEmoteText = "You tell everyone to attack %s."
   },
   {
     Name = "AWE",
-    TargetEmoteText = "You stare at %s in awe.",
-    SelfEmoteText = "You look around in awe."
+    SelfEmoteText = "You look around in awe.",
+    TargetEmoteText = "You stare at %s in awe."
+  },
+  {
+    Name = "BACKPACK",
+    SelfEmoteText = "You dig through your backpack.",
+    TargetEmoteText = ""
   },
   {
     Name = "BADFEELING",
-    TargetEmoteText = "You have a bad feeling about %s.",
-    SelfEmoteText = "You have a bad feeling about this..."
+    SelfEmoteText = "You have a bad feeling about this...",
+    TargetEmoteText = "You have a bad feeling about %s."
   },
   {
     Name = "BARK",
-    TargetEmoteText = "You bark at %s",
-    SelfEmoteText = "You bark. Woof woof!"
+    SelfEmoteText = "You bark. Woof woof!",
+    TargetEmoteText = "You bark at %s"
   },
   {
     Name = "BASHFUL",
-    TargetEmoteText = "You are so bashful...too bashful to get %s\'s attention.",
-    SelfEmoteText = "You are bashful."
+    SelfEmoteText = "You are bashful.",
+    TargetEmoteText = "You are so bashful...too bashful to get %s\'s attention."
   },
   {
     Name = "BECKON",
-    TargetEmoteText = "You beckon %s over.",
-    SelfEmoteText = "You beckon everyone over to you."
+    SelfEmoteText = "You beckon everyone over to you.",
+    TargetEmoteText = "You beckon %s over."
   },
   {
     Name = "BEG",
-    TargetEmoteText = "You beg %s.  How pathetic.",
-    SelfEmoteText = "You beg everyone around you. How pathetic."
+    SelfEmoteText = "You beg everyone around you. How pathetic.",
+    TargetEmoteText = "You beg %s.  How pathetic."
   },
   {
     Name = "BITE",
-    TargetEmoteText = "You bite %s.  Ouch!",
-    SelfEmoteText = "You look around for someone to bite."
+    SelfEmoteText = "You look around for someone to bite.",
+    TargetEmoteText = "You bite %s.  Ouch!"
   },
   {
     Name = "BLAME",
-    TargetEmoteText = "You blame %s for everything.",
-    SelfEmoteText = "You blame yourself for what happened."
+    SelfEmoteText = "You blame yourself for what happened.",
+    TargetEmoteText = "You blame %s for everything."
   },
   {
     Name = "BLANK",
-    TargetEmoteText = "You stare blankly at %s.",
-    SelfEmoteText = "You stare blankly at your surroundings."
+    SelfEmoteText = "You stare blankly at your surroundings.",
+    TargetEmoteText = "You stare blankly at %s."
+  },
+  {
+    Name = "BLEED",
+    SelfEmoteText = "Blood oozes from your wounds.",
+    TargetEmoteText = ""
   },
   {
     Name = "BLINK",
-    TargetEmoteText = "You blink at %s.",
-    SelfEmoteText = "You blink your eyes."
+    SelfEmoteText = "You blink your eyes.",
+    TargetEmoteText = "You blink at %s."
   },
   {
     Name = "BLUSH",
-    TargetEmoteText = "You blush at %s.",
-    SelfEmoteText = "You blush."
+    SelfEmoteText = "You blush.",
+    TargetEmoteText = "You blush at %s."
   },
   {
     Name = "BOGGLE",
-    TargetEmoteText = "You boggle at %s.",
-    SelfEmoteText = "You boggle at the situation."
+    SelfEmoteText = "You boggle at the situation.",
+    TargetEmoteText = "You boggle at %s."
   },
   {
     Name = "BONK",
-    TargetEmoteText = "You bonk %s on the noggin.  Doh!",
-    SelfEmoteText = "You bonk yourself on the noggin.  Doh!"
+    SelfEmoteText = "You bonk yourself on the noggin.  Doh!",
+    TargetEmoteText = "You bonk %s on the noggin.  Doh!"
   },
   {
     Name = "BORED",
-    TargetEmoteText = "You are terribly bored with %s.",
-    SelfEmoteText = "You are overcome with boredom.  Oh the drudgery!"
+    SelfEmoteText = "You are overcome with boredom.  Oh the drudgery!",
+    TargetEmoteText = "You are terribly bored with %s."
   },
   {
     Name = "BOUNCE",
-    TargetEmoteText = "You bounce up and down in front of %s.",
-    SelfEmoteText = "You bounce up and down."
+    SelfEmoteText = "You bounce up and down.",
+    TargetEmoteText = "You bounce up and down in front of %s."
   },
   {
     Name = "BOW",
-    TargetEmoteText = "You bow before %s.",
-    SelfEmoteText = "You bow down graciously."
+    SelfEmoteText = "You bow down graciously.",
+    TargetEmoteText = "You bow before %s."
   },
   {
     Name = "BRANDISH",
-    TargetEmoteText = "You brandish your weapon fiercely at %s.",
-    SelfEmoteText = "You brandish your weapon fiercely."
+    SelfEmoteText = "You brandish your weapon fiercely.",
+    TargetEmoteText = "You brandish your weapon fiercely at %s."
   },
   {
     Name = "BRB",
-    TargetEmoteText = "You let %s know you\'ll be right back.",
-    SelfEmoteText = "You let everyone know you\'ll be right back."
+    SelfEmoteText = "You let everyone know you\'ll be right back.",
+    TargetEmoteText = "You let %s know you\'ll be right back."
   },
   {
     Name = "BREATH",
-    TargetEmoteText = "You tell %s to take a deep breath.",
-    SelfEmoteText = "You take a deep breath."
+    SelfEmoteText = "You take a deep breath.",
+    TargetEmoteText = "You tell %s to take a deep breath."
   },
   {
     Name = "BURP",
-    TargetEmoteText = "You burp rudely in %s\'s face.",
-    SelfEmoteText = "You let out a loud belch."
+    SelfEmoteText = "You let out a loud belch.",
+    TargetEmoteText = "You burp rudely in %s\'s face."
   },
   {
     Name = "BYE",
-    TargetEmoteText = "You wave goodbye to %s.  Farewell!",
-    SelfEmoteText = "You wave goodbye to everyone.  Farewell!"
+    SelfEmoteText = "You wave goodbye to everyone.  Farewell!",
+    TargetEmoteText = "You wave goodbye to %s.  Farewell!"
   },
   {
     Name = "CACKLE",
-    TargetEmoteText = "You cackle maniacally at %s.",
-    SelfEmoteText = "You cackle maniacally at the situation."
+    SelfEmoteText = "You cackle maniacally at the situation.",
+    TargetEmoteText = "You cackle maniacally at %s."
   },
   {
     Name = "CALM",
-    TargetEmoteText = "You try to calm %s down.",
-    SelfEmoteText = "You remain calm."
+    SelfEmoteText = "You remain calm.",
+    TargetEmoteText = "You try to calm %s down."
   },
   {
     Name = "CHALLENGE",
-    TargetEmoteText = "You challenge %s to a duel.",
-    SelfEmoteText = "You put out a challenge to everyone. Bring it on!"
+    SelfEmoteText = "You put out a challenge to everyone. Bring it on!",
+    TargetEmoteText = "You challenge %s to a duel."
   },
   {
     Name = "CHARGE",
-    TargetEmoteText = "",
-    SelfEmoteText = "You start to charge."
+    SelfEmoteText = "You start to charge.",
+    TargetEmoteText = ""
   },
   {
     Name = "CHARM",
-    TargetEmoteText = "You think %s is charming.",
-    SelfEmoteText = "You put on the charm."
+    SelfEmoteText = "You put on the charm.",
+    TargetEmoteText = "You think %s is charming."
   },
   {
     Name = "CHEER",
-    TargetEmoteText = "You cheer at %s.",
-    SelfEmoteText = "You cheer!"
+    SelfEmoteText = "You cheer!",
+    TargetEmoteText = "You cheer at %s."
   },
   {
     Name = "CHICKEN",
-    TargetEmoteText = "With arms flapping, you strut around %s.  Cluck, Cluck, Chicken!",
-    SelfEmoteText = "With arms flapping, you strut around.  Cluck, Cluck, Chicken!"
+    SelfEmoteText = "With arms flapping, you strut around.  Cluck, Cluck, Chicken!",
+    TargetEmoteText = "With arms flapping, you strut around %s.  Cluck, Cluck, Chicken!"
   },
   {
     Name = "CHUCKLE",
-    TargetEmoteText = "You chuckle at %s.",
-    SelfEmoteText = "You let out a hearty chuckle."
+    SelfEmoteText = "You let out a hearty chuckle.",
+    TargetEmoteText = "You chuckle at %s."
   },
   {
     Name = "CHUG",
-    TargetEmoteText = "You encourage %s to chug. CHUG! CHUG! CHUG!",
-    SelfEmoteText = "You take a mighty quaff of your beverage."
+    SelfEmoteText = "You take a mighty quaff of your beverage.",
+    TargetEmoteText = "You encourage %s to chug. CHUG! CHUG! CHUG!"
   },
   {
     Name = "CLAP",
-    TargetEmoteText = "You clap excitedly for %s.",
-    SelfEmoteText = "You clap excitedly."
+    SelfEmoteText = "You clap excitedly.",
+    TargetEmoteText = "You clap excitedly for %s."
   },
   {
     Name = "COLD",
-    TargetEmoteText = "You let %s know that you are cold.",
-    SelfEmoteText = "You let everyone know that you are cold."
+    SelfEmoteText = "You let everyone know that you are cold.",
+    TargetEmoteText = "You let %s know that you are cold."
   },
   {
     Name = "COMFORT",
-    TargetEmoteText = "You comfort %s.",
-    SelfEmoteText = "You need to be comforted."
+    SelfEmoteText = "You need to be comforted.",
+    TargetEmoteText = "You comfort %s."
   },
   {
     Name = "COMMEND",
-    TargetEmoteText = "You commend %s on a job well done.",
-    SelfEmoteText = "You commend everyone on a job well done."
+    SelfEmoteText = "You commend everyone on a job well done.",
+    TargetEmoteText = "You commend %s on a job well done."
   },
   {
     Name = "CONFUSED",
-    TargetEmoteText = "You look at %s with a confused look.",
-    SelfEmoteText = "You are hopelessly confused."
+    SelfEmoteText = "You are hopelessly confused.",
+    TargetEmoteText = "You look at %s with a confused look."
   },
   {
     Name = "CONGRATULATE",
-    TargetEmoteText = "You congratulate %s.",
-    SelfEmoteText = "You congratulate everyone around you."
+    SelfEmoteText = "You congratulate everyone around you.",
+    TargetEmoteText = "You congratulate %s."
   },
   {
     Name = "COUGH",
-    TargetEmoteText = "You cough at %s.",
-    SelfEmoteText = "You let out a hacking cough."
+    SelfEmoteText = "You let out a hacking cough.",
+    TargetEmoteText = "You cough at %s."
   },
   {
     Name = "COVEREARS",
-    TargetEmoteText = "You cover %s\'s ears.",
-    SelfEmoteText = "You cover your ears."
+    SelfEmoteText = "You cover your ears.",
+    TargetEmoteText = "You cover %s\'s ears."
   },
   {
     Name = "COWER",
-    TargetEmoteText = "You cower in fear at the sight of %s.",
-    SelfEmoteText = "You cower in fear."
+    SelfEmoteText = "You cower in fear.",
+    TargetEmoteText = "You cower in fear at the sight of %s."
   },
   {
     Name = "CRACK",
-    TargetEmoteText = "You crack your knuckles while staring at %s.",
-    SelfEmoteText = "You crack your knuckles."
+    SelfEmoteText = "You crack your knuckles.",
+    TargetEmoteText = "You crack your knuckles while staring at %s."
   },
   {
     Name = "CRINGE",
-    TargetEmoteText = "You cringe away from %s.",
-    SelfEmoteText = "You cringe in fear."
+    SelfEmoteText = "You cringe in fear.",
+    TargetEmoteText = "You cringe away from %s."
   },
   {
     Name = "CROSSARMS",
-    TargetEmoteText = "You cross your arms at %s. Hmph!",
-    SelfEmoteText = "You cross your arms."
+    SelfEmoteText = "You cross your arms.",
+    TargetEmoteText = "You cross your arms at %s. Hmph!"
   },
   {
     Name = "CRY",
-    TargetEmoteText = "You cry on %s\'s shoulder.",
-    SelfEmoteText = "You cry."
+    SelfEmoteText = "You cry.",
+    TargetEmoteText = "You cry on %s\'s shoulder."
   },
   {
     Name = "CUDDLE",
-    TargetEmoteText = "You cuddle up against %s.",
-    SelfEmoteText = "You need to be cuddled."
+    SelfEmoteText = "You need to be cuddled.",
+    TargetEmoteText = "You cuddle up against %s."
   },
   {
     Name = "CURIOUS",
-    TargetEmoteText = "You are curious what %s is up to.",
-    SelfEmoteText = "You express your curiosity to those around you."
+    SelfEmoteText = "You express your curiosity to those around you.",
+    TargetEmoteText = "You are curious what %s is up to."
   },
   {
     Name = "CURTSEY",
-    TargetEmoteText = "You curtsey before %s.",
-    SelfEmoteText = "You curtsey."
+    SelfEmoteText = "You curtsey.",
+    TargetEmoteText = "You curtsey before %s."
   },
   {
     Name = "DANCE",
-    TargetEmoteText = "You dance with %s.",
-    SelfEmoteText = "You burst into dance."
+    SelfEmoteText = "You burst into dance.",
+    TargetEmoteText = "You dance with %s."
   },
   {
     Name = "DING",
-    TargetEmoteText = "You congratulate %s on a new level. DING!",
-    SelfEmoteText = "You reached a new level. DING!"
+    SelfEmoteText = "You reached a new level. DING!",
+    TargetEmoteText = "You congratulate %s on a new level. DING!"
   },
   {
     Name = "DISAGREE",
-    TargetEmoteText = "You disagree with %s.",
-    SelfEmoteText = "You disagree."
+    SelfEmoteText = "You disagree.",
+    TargetEmoteText = "You disagree with %s."
   },
   {
     Name = "DOUBT",
-    TargetEmoteText = "You doubt %s.",
-    SelfEmoteText = "You doubt the situation will end in your favor."
+    SelfEmoteText = "You doubt the situation will end in your favor.",
+    TargetEmoteText = "You doubt %s."
   },
   {
     Name = "DRINK",
-    TargetEmoteText = "You raise a drink to %s.  Cheers!",
-    SelfEmoteText = "You raise a drink in the air before chugging it down.  Cheers!"
+    SelfEmoteText = "You raise a drink in the air before chugging it down.  Cheers!",
+    TargetEmoteText = "You raise a drink to %s.  Cheers!"
   },
   {
     Name = "DROOL",
-    TargetEmoteText = "You look at %s and begin to drool.",
-    SelfEmoteText = "A tendril of drool runs down your lip."
+    SelfEmoteText = "A tendril of drool runs down your lip.",
+    TargetEmoteText = "You look at %s and begin to drool."
   },
   {
     Name = "DUCK",
-    TargetEmoteText = "You duck behind %s.",
-    SelfEmoteText = "You duck for cover."
+    SelfEmoteText = "You duck for cover.",
+    TargetEmoteText = "You duck behind %s."
   },
   {
     Name = "EAT",
-    TargetEmoteText = "You begin to eat in front of %s.",
-    SelfEmoteText = "You begin to eat."
+    SelfEmoteText = "You begin to eat.",
+    TargetEmoteText = "You begin to eat in front of %s."
   },
   {
     Name = "EMBARRASS",
-    TargetEmoteText = "You are embarrassed by %s.",
-    SelfEmoteText = "You flush with embarrassment."
+    SelfEmoteText = "You flush with embarrassment.",
+    TargetEmoteText = "You are embarrassed by %s."
   },
   {
     Name = "ENCOURAGE",
-    TargetEmoteText = "You encourage %s.",
-    SelfEmoteText = "You encourage everyone around you."
+    SelfEmoteText = "You encourage everyone around you.",
+    TargetEmoteText = "You encourage %s."
   },
   {
     Name = "ENEMY",
-    TargetEmoteText = "You warn %s that an enemy is near.",
-    SelfEmoteText = "You warn everyone that an enemy is near."
+    SelfEmoteText = "You warn everyone that an enemy is near.",
+    TargetEmoteText = "You warn %s that an enemy is near."
   },
   {
     Name = "EYE",
-    TargetEmoteText = "You eye %s up and down.",
-    SelfEmoteText = "You cross your eyes."
+    SelfEmoteText = "You cross your eyes.",
+    TargetEmoteText = "You eye %s up and down."
   },
   {
     Name = "EYEBROW",
-    TargetEmoteText = "You raise your eyebrow inquisitively at %s.",
-    SelfEmoteText = "You raise your eyebrow inquisitively."
+    SelfEmoteText = "You raise your eyebrow inquisitively.",
+    TargetEmoteText = "You raise your eyebrow inquisitively at %s."
   },
   {
     Name = "FACEPALM",
-    TargetEmoteText = "You look at %s and cover your face with your palm.",
-    SelfEmoteText = "You cover your face with your palm."
+    SelfEmoteText = "You cover your face with your palm.",
+    TargetEmoteText = "You look at %s and cover your face with your palm."
   },
   {
     Name = "FAIL",
-    TargetEmoteText = "You think %s has failed.",
-    SelfEmoteText = "You have failed."
+    SelfEmoteText = "You have failed.",
+    TargetEmoteText = "You think %s has failed."
   },
   {
     Name = "FAINT",
-    TargetEmoteText = "You faint at the sight of %s.",
-    SelfEmoteText = "You faint."
+    SelfEmoteText = "You faint.",
+    TargetEmoteText = "You faint at the sight of %s."
   },
   {
     Name = "FART",
-    TargetEmoteText = "You brush up against %s and fart loudly.",
-    SelfEmoteText = "You fart loudly.  Whew...what stinks?"
+    SelfEmoteText = "You fart loudly.  Whew...what stinks?",
+    TargetEmoteText = "You brush up against %s and fart loudly."
   },
   {
     Name = "FIDGET",
-    TargetEmoteText = "You fidget impatiently while waiting for %s.",
-    SelfEmoteText = "You fidget."
+    SelfEmoteText = "You fidget.",
+    TargetEmoteText = "You fidget impatiently while waiting for %s."
   },
   {
     Name = "FLEE",
-    TargetEmoteText = "You yell for %s to flee!",
-    SelfEmoteText = "You yell for everyone to flee!"
+    SelfEmoteText = "You yell for everyone to flee!",
+    TargetEmoteText = "You yell for %s to flee!"
   },
   {
     Name = "FLEX",
-    TargetEmoteText = "You flex at %s.  Oooooh so strong!",
-    SelfEmoteText = "You flex your muscles.  Oooooh so strong!"
+    SelfEmoteText = "You flex your muscles.  Oooooh so strong!",
+    TargetEmoteText = "You flex at %s.  Oooooh so strong!"
   },
   {
     Name = "FLIRT",
-    TargetEmoteText = "You flirt with %s.",
-    SelfEmoteText = "You flirt."
+    SelfEmoteText = "You flirt.",
+    TargetEmoteText = "You flirt with %s."
   },
   {
     Name = "FLOP",
-    TargetEmoteText = "You flop about helplessly around %s.",
-    SelfEmoteText = "You flop about helplessly."
+    SelfEmoteText = "You flop about helplessly.",
+    TargetEmoteText = "You flop about helplessly around %s."
   },
   {
     Name = "FOLLOW",
-    TargetEmoteText = "You motion for %s to follow.",
-    SelfEmoteText = "You motion for everyone to follow."
+    SelfEmoteText = "You motion for everyone to follow.",
+    TargetEmoteText = "You motion for %s to follow."
   },
   {
     Name = "FROWN",
-    TargetEmoteText = "You frown with disappointment at %s.",
-    SelfEmoteText = "You frown."
+    SelfEmoteText = "You frown.",
+    TargetEmoteText = "You frown with disappointment at %s."
   },
   {
     Name = "GASP",
-    TargetEmoteText = "You gasp at %s.",
-    SelfEmoteText = "You gasp."
+    SelfEmoteText = "You gasp.",
+    TargetEmoteText = "You gasp at %s."
   },
   {
     Name = "GAZE",
-    TargetEmoteText = "You gaze eagerly at %s.",
-    SelfEmoteText = "You gaze off into the distance."
+    SelfEmoteText = "You gaze off into the distance.",
+    TargetEmoteText = "You gaze eagerly at %s."
   },
   {
     Name = "GIGGLE",
-    TargetEmoteText = "You giggle at %s.",
-    SelfEmoteText = "You giggle."
+    SelfEmoteText = "You giggle.",
+    TargetEmoteText = "You giggle at %s."
   },
   {
     Name = "GLARE",
-    TargetEmoteText = "You glare angrily at %s.",
-    SelfEmoteText = "You glare angrily."
+    SelfEmoteText = "You glare angrily.",
+    TargetEmoteText = "You glare angrily at %s."
   },
   {
     Name = "GLOAT",
-    TargetEmoteText = "You gloat over %s\'s misfortune.",
-    SelfEmoteText = "You gloat over everyone\'s misfortune."
+    SelfEmoteText = "You gloat over everyone\'s misfortune.",
+    TargetEmoteText = "You gloat over %s\'s misfortune."
   },
   {
     Name = "GLOWER",
-    TargetEmoteText = "You glower at %s.",
-    SelfEmoteText = "You glower at averyone around you."
+    SelfEmoteText = "You glower at averyone around you.",
+    TargetEmoteText = "You glower at %s."
   },
   {
     Name = "GO",
-    TargetEmoteText = "You tell %s to go.",
-    SelfEmoteText = "You tell everyone to go."
+    SelfEmoteText = "You tell everyone to go.",
+    TargetEmoteText = "You tell %s to go."
   },
   {
     Name = "GOING",
-    TargetEmoteText = "You tell %s that you must be going.",
-    SelfEmoteText = "You must be going."
+    SelfEmoteText = "You must be going.",
+    TargetEmoteText = "You tell %s that you must be going."
   },
   {
     Name = "GOLFCLAP",
-    TargetEmoteText = "You clap for %s, clearly unimpressed.",
-    SelfEmoteText = "You clap half heartedly, clearly unimpressed."
+    SelfEmoteText = "You clap half heartedly, clearly unimpressed.",
+    TargetEmoteText = "You clap for %s, clearly unimpressed."
   },
   {
     Name = "GOODLUCK",
-    TargetEmoteText = "You wish %s good luck.",
-    SelfEmoteText = "You wish for some good luck."
+    SelfEmoteText = "You wish for some good luck.",
+    TargetEmoteText = "You wish %s good luck."
   },
   {
     Name = "GREET",
-    TargetEmoteText = "You greet %s warmly.",
-    SelfEmoteText = "You greet everyone warmly."
+    SelfEmoteText = "You greet everyone warmly.",
+    TargetEmoteText = "You greet %s warmly."
   },
   {
     Name = "GRIN",
-    TargetEmoteText = "You grin wickedly at %s.",
-    SelfEmoteText = "You grin wickedly."
+    SelfEmoteText = "You grin wickedly.",
+    TargetEmoteText = "You grin wickedly at %s."
   },
   {
     Name = "GROAN",
-    TargetEmoteText = "You look at %s and groan.",
-    SelfEmoteText = "You begin to groan."
+    SelfEmoteText = "You begin to groan.",
+    TargetEmoteText = "You look at %s and groan."
   },
   {
     Name = "GROVEL",
-    TargetEmoteText = "You grovel before %s like a subservient peon.",
-    SelfEmoteText = "You grovel on the ground, wallowing in subservience."
+    SelfEmoteText = "You grovel on the ground, wallowing in subservience.",
+    TargetEmoteText = "You grovel before %s like a subservient peon."
   },
   {
     Name = "GROWL",
-    TargetEmoteText = "You growl menacingly at %s.",
-    SelfEmoteText = "You growl menacingly."
+    SelfEmoteText = "You growl menacingly.",
+    TargetEmoteText = "You growl menacingly at %s."
   },
   {
     Name = "GUFFAW",
-    TargetEmoteText = "You take one look at %s and let out a guffaw!",
-    SelfEmoteText = "You let out a boisterous guffaw!"
+    SelfEmoteText = "You let out a boisterous guffaw!",
+    TargetEmoteText = "You take one look at %s and let out a guffaw!"
   },
   {
     Name = "HAIL",
-    TargetEmoteText = "You hail %s.",
-    SelfEmoteText = "You hail those around you."
+    SelfEmoteText = "You hail those around you.",
+    TargetEmoteText = "You hail %s."
   },
   {
     Name = "HAPPY",
-    TargetEmoteText = "You are very happy with %s!",
-    SelfEmoteText = "You are filled with happiness!"
+    SelfEmoteText = "You are filled with happiness!",
+    TargetEmoteText = "You are very happy with %s!"
   },
   {
     Name = "HEADACHE",
-    TargetEmoteText = "You are getting a headache from %s\'s antics.",
-    SelfEmoteText = "You are getting a headache."
+    SelfEmoteText = "You are getting a headache.",
+    TargetEmoteText = "You are getting a headache from %s\'s antics."
+  },
+  {
+    Name = "HEALME",
+    SelfEmoteText = "You call out for healing!",
+    TargetEmoteText = ""
   },
   {
     Name = "HELLO",
-    TargetEmoteText = "You greet %s with a hearty hello!",
-    SelfEmoteText = "You greet everyone with a hearty hello!"
+    SelfEmoteText = "You greet everyone with a hearty hello!",
+    TargetEmoteText = "You greet %s with a hearty hello!"
   },
   {
     Name = "HELPME",
-    TargetEmoteText = "",
-    SelfEmoteText = "You cry out for help!"
+    SelfEmoteText = "You cry out for help!",
+    TargetEmoteText = ""
+  },
+  {
+    Name = "HICCUP",
+    SelfEmoteText = "You hiccup loudly.",
+    TargetEmoteText = ""
   },
   {
     Name = "HIGHFIVE",
-    TargetEmoteText = "You give %s a high five!",
-    SelfEmoteText = "You put up your hand for a high five."
+    SelfEmoteText = "You put up your hand for a high five.",
+    TargetEmoteText = "You give %s a high five!"
   },
   {
     Name = "HISS",
-    TargetEmoteText = "You hiss at %s.",
-    SelfEmoteText = "You hiss at everyone around you."
+    SelfEmoteText = "You hiss at everyone around you.",
+    TargetEmoteText = "You hiss at %s."
   },
   {
     Name = "HOLDHAND",
-    TargetEmoteText = "You hold %s\'s hand.",
-    SelfEmoteText = "You wish someone would hold your hand."
+    SelfEmoteText = "You wish someone would hold your hand.",
+    TargetEmoteText = "You hold %s\'s hand."
   },
   {
     Name = "HUG",
-    TargetEmoteText = "You hug %s.",
-    SelfEmoteText = "You need a hug!"
+    SelfEmoteText = "You need a hug!",
+    TargetEmoteText = "You hug %s."
   },
   {
     Name = "HUNGRY",
-    TargetEmoteText = "You are hungry.  Maybe %s has some food...",
-    SelfEmoteText = "You are hungry!"
+    SelfEmoteText = "You are hungry!",
+    TargetEmoteText = "You are hungry.  Maybe %s has some food..."
   },
   {
     Name = "HURRY",
-    TargetEmoteText = "You tell %s to hurry up.",
-    SelfEmoteText = "You try to pick up the pace."
+    SelfEmoteText = "You try to pick up the pace.",
+    TargetEmoteText = "You tell %s to hurry up."
+  },
+  {
+    Name = "IDEA",
+    SelfEmoteText = "You have an idea!",
+    TargetEmoteText = ""
   },
   {
     Name = "INCOMING",
-    TargetEmoteText = "",
-    SelfEmoteText = "You yell incoming enemies!"
+    SelfEmoteText = "You yell incoming enemies!",
+    TargetEmoteText = ""
   },
   {
     Name = "INSULT",
-    TargetEmoteText = "You think %s is the son of a motherless ogre.",
-    SelfEmoteText = "You think everyone around you is a son of a motherless ogre."
+    SelfEmoteText = "You think everyone around you is a son of a motherless ogre.",
+    TargetEmoteText = "You think %s is the son of a motherless ogre."
   },
   {
     Name = "INTRODUCE",
-    TargetEmoteText = "You introduce yourself to %s.",
-    SelfEmoteText = "You introduce yourself to everyone."
+    SelfEmoteText = "You introduce yourself to everyone.",
+    TargetEmoteText = "You introduce yourself to %s."
   },
   {
     Name = "JEALOUS",
-    TargetEmoteText = "You are jealous of %s.",
-    SelfEmoteText = "You are jealous of everyone around you."
+    SelfEmoteText = "You are jealous of everyone around you.",
+    TargetEmoteText = "You are jealous of %s."
   },
   {
     Name = "JK",
-    TargetEmoteText = "You let %s know that you were just kidding!",
-    SelfEmoteText = "You were just kidding!"
+    SelfEmoteText = "You were just kidding!",
+    TargetEmoteText = "You let %s know that you were just kidding!"
   },
   {
     Name = "JOKE",
-    TargetEmoteText = "You tell %s a joke.",
-    SelfEmoteText = "You tell a joke."
+    SelfEmoteText = "You tell a joke.",
+    TargetEmoteText = "You tell %s a joke."
   },
   {
     Name = "KISS",
-    TargetEmoteText = "You blow a kiss to %s.",
-    SelfEmoteText = "You blow a kiss into the wind."
+    SelfEmoteText = "You blow a kiss into the wind.",
+    TargetEmoteText = "You blow a kiss to %s."
   },
   {
     Name = "KNEEL",
-    TargetEmoteText = "You kneel before %s.",
-    SelfEmoteText = "You kneel down."
+    SelfEmoteText = "You kneel down.",
+    TargetEmoteText = "You kneel before %s."
   },
   {
     Name = "LAUGH",
-    TargetEmoteText = "You laugh at %s.",
-    SelfEmoteText = "You laugh."
+    SelfEmoteText = "You laugh.",
+    TargetEmoteText = "You laugh at %s."
   },
   {
     Name = "LAYDOWN",
-    TargetEmoteText = "You lie down before %s.",
-    SelfEmoteText = "You lie down."
+    SelfEmoteText = "You lie down.",
+    TargetEmoteText = "You lie down before %s."
   },
   {
     Name = "LICK",
-    TargetEmoteText = "You lick %s.",
-    SelfEmoteText = "You lick your lips."
+    SelfEmoteText = "You lick your lips.",
+    TargetEmoteText = "You lick %s."
   },
   {
     Name = "LISTEN",
-    TargetEmoteText = "You listen intently to %s.",
-    SelfEmoteText = "You are listening!"
+    SelfEmoteText = "You are listening!",
+    TargetEmoteText = "You listen intently to %s."
   },
   {
     Name = "LOOK",
-    TargetEmoteText = "You look at %s.",
-    SelfEmoteText = "You look around."
+    SelfEmoteText = "You look around.",
+    TargetEmoteText = "You look at %s."
   },
   {
     Name = "LOST",
-    TargetEmoteText = "You want %s to know that you are hopelessly lost.",
-    SelfEmoteText = "You are hopelessly lost."
+    SelfEmoteText = "You are hopelessly lost.",
+    TargetEmoteText = "You want %s to know that you are hopelessly lost."
   },
   {
     Name = "LOVE",
-    TargetEmoteText = "You love %s.",
-    SelfEmoteText = "You feel the love."
+    SelfEmoteText = "You feel the love.",
+    TargetEmoteText = "You love %s."
   },
   {
     Name = "LUCK",
-    TargetEmoteText = "You wish %s the best of luck.",
-    SelfEmoteText = "You wish everyone good luck."
+    SelfEmoteText = "You wish everyone good luck.",
+    TargetEmoteText = "You wish %s the best of luck."
+  },
+  {
+    Name = "MAP",
+    SelfEmoteText = "You pull out your map.",
+    TargetEmoteText = ""
   },
   {
     Name = "MASSAGE",
-    TargetEmoteText = "You massage %s\'s shoulders.",
-    SelfEmoteText = "You need a massage!"
+    SelfEmoteText = "You need a massage!",
+    TargetEmoteText = "You massage %s\'s shoulders."
   },
   {
     Name = "MERCY",
-    TargetEmoteText = "You plead with %s for mercy.",
-    SelfEmoteText = "You plead for mercy."
+    SelfEmoteText = "You plead for mercy.",
+    TargetEmoteText = "You plead with %s for mercy."
   },
   {
     Name = "MOAN",
-    TargetEmoteText = "You moan suggestively at %s.",
-    SelfEmoteText = "You moan suggestively."
+    SelfEmoteText = "You moan suggestively.",
+    TargetEmoteText = "You moan suggestively at %s."
   },
   {
     Name = "MOCK",
-    TargetEmoteText = "You mock the foolishness of %s.",
-    SelfEmoteText = "You mock life and all it stands for."
+    SelfEmoteText = "You mock life and all it stands for.",
+    TargetEmoteText = "You mock the foolishness of %s."
   },
   {
     Name = "MOO",
-    TargetEmoteText = "You moo at %s. Mooooooooooo.",
-    SelfEmoteText = "Mooooooooooo."
+    SelfEmoteText = "Mooooooooooo.",
+    TargetEmoteText = "You moo at %s. Mooooooooooo."
   },
   {
     Name = "MOON",
-    TargetEmoteText = "You drop your trousers and moon %s.",
-    SelfEmoteText = "You drop your trousers and moon everyone."
+    SelfEmoteText = "You drop your trousers and moon everyone.",
+    TargetEmoteText = "You drop your trousers and moon %s."
+  },
+  {
+    Name = "MOUNTSPECIAL",
+    SelfEmoteText = "",
+    TargetEmoteText = ""
   },
   {
     Name = "MOURN",
-    TargetEmoteText = "In quiet contemplation, you mourn the death of %s.",
-    SelfEmoteText = "In quiet contemplation, you mourn the loss of the dead."
+    SelfEmoteText = "In quiet contemplation, you mourn the loss of the dead.",
+    TargetEmoteText = "In quiet contemplation, you mourn the death of %s."
   },
   {
     Name = "MUTTER",
-    TargetEmoteText = "You mutter angrily at %s. Hmmmph!",
-    SelfEmoteText = "You mutter angrily to yourself. Hmmmph!"
+    SelfEmoteText = "You mutter angrily to yourself. Hmmmph!",
+    TargetEmoteText = "You mutter angrily at %s. Hmmmph!"
   },
   {
     Name = "NERVOUS",
-    TargetEmoteText = "You look at %s nervously.",
-    SelfEmoteText = "You look around nervously."
+    SelfEmoteText = "You look around nervously.",
+    TargetEmoteText = "You look at %s nervously."
   },
   {
     Name = "NO",
-    TargetEmoteText = "You tell %s NO.  Not going to happen.",
-    SelfEmoteText = "You clearly state, NO."
+    SelfEmoteText = "You clearly state, NO.",
+    TargetEmoteText = "You tell %s NO.  Not going to happen."
   },
   {
     Name = "NOD",
-    TargetEmoteText = "You nod at %s.",
-    SelfEmoteText = "You nod."
+    SelfEmoteText = "You nod.",
+    TargetEmoteText = "You nod at %s."
   },
   {
     Name = "NOSEPICK",
-    TargetEmoteText = "You pick your nose and show it to %s.",
-    SelfEmoteText = "With a finger deep in one nostril, you pass the time."
+    SelfEmoteText = "With a finger deep in one nostril, you pass the time.",
+    TargetEmoteText = "You pick your nose and show it to %s."
   },
   {
     Name = "OBJECT",
-    TargetEmoteText = "You object to %s.",
-    SelfEmoteText = "You OBJECT!"
+    SelfEmoteText = "You OBJECT!",
+    TargetEmoteText = "You object to %s."
   },
   {
     Name = "OFFER",
-    TargetEmoteText = "You attempt to make %s an offer they can\'t refuse.",
-    SelfEmoteText = "You want to make an offer."
+    SelfEmoteText = "You want to make an offer.",
+    TargetEmoteText = "You attempt to make %s an offer they can\'t refuse."
+  },
+  {
+    Name = "OOM",
+    SelfEmoteText = "You announce that you have low mana!",
+    TargetEmoteText = ""
+  },
+  {
+    Name = "OPENFIRE",
+    SelfEmoteText = "You give the order to open fire.",
+    TargetEmoteText = ""
   },
   {
     Name = "PANIC",
-    TargetEmoteText = "You take one look at %s and panic.",
-    SelfEmoteText = "You run around in a frenzied state of panic."
+    SelfEmoteText = "You run around in a frenzied state of panic.",
+    TargetEmoteText = "You take one look at %s and panic."
   },
   {
     Name = "PAT",
-    TargetEmoteText = "You gently pat %s.",
-    SelfEmoteText = "You need a pat."
+    SelfEmoteText = "You need a pat.",
+    TargetEmoteText = "You gently pat %s."
   },
   {
     Name = "PEER",
-    TargetEmoteText = "You peer at %s searchingly.",
-    SelfEmoteText = "You peer around, searchingly."
+    SelfEmoteText = "You peer around, searchingly.",
+    TargetEmoteText = "You peer at %s searchingly."
   },
   {
     Name = "PET",
-    TargetEmoteText = "You pet %s.",
-    SelfEmoteText = "You need to be petted."
+    SelfEmoteText = "You need to be petted.",
+    TargetEmoteText = "You pet %s."
   },
   {
     Name = "PINCH",
-    TargetEmoteText = "You pinch %s.",
-    SelfEmoteText = "You pinch yourself."
+    SelfEmoteText = "You pinch yourself.",
+    TargetEmoteText = "You pinch %s."
   },
   {
     Name = "PITY",
-    TargetEmoteText = "You look down upon %s with pity.",
-    SelfEmoteText = "You pity those around you."
+    SelfEmoteText = "You pity those around you.",
+    TargetEmoteText = "You look down upon %s with pity."
   },
   {
     Name = "PLEAD",
-    TargetEmoteText = "You plead with %s.",
-    SelfEmoteText = "You drop to your knees and plead in desperation."
+    SelfEmoteText = "You drop to your knees and plead in desperation.",
+    TargetEmoteText = "You plead with %s."
   },
   {
     Name = "POINT",
-    TargetEmoteText = "You point at %s.",
-    SelfEmoteText = "You point over yonder."
+    SelfEmoteText = "You point over yonder.",
+    TargetEmoteText = "You point at %s."
   },
   {
     Name = "POKE",
-    TargetEmoteText = "You poke %s.  Hey!",
-    SelfEmoteText = "You poke your belly and giggle."
+    SelfEmoteText = "You poke your belly and giggle.",
+    TargetEmoteText = "You poke %s.  Hey!"
   },
   {
     Name = "PONDER",
-    TargetEmoteText = "You ponder %s\'s actions.",
-    SelfEmoteText = "You ponder the situation."
+    SelfEmoteText = "You ponder the situation.",
+    TargetEmoteText = "You ponder %s\'s actions."
   },
   {
     Name = "POUNCE",
-    TargetEmoteText = "You pounce on top of %s.",
-    SelfEmoteText = "You pounce out from the shadows."
+    SelfEmoteText = "You pounce out from the shadows.",
+    TargetEmoteText = "You pounce on top of %s."
   },
   {
     Name = "POUT",
-    TargetEmoteText = "You pout at %s.",
-    SelfEmoteText = "You pout at everyone around you."
+    SelfEmoteText = "You pout at everyone around you.",
+    TargetEmoteText = "You pout at %s."
   },
   {
     Name = "PRAISE",
-    TargetEmoteText = "You lavish praise upon %s.",
-    SelfEmoteText = "You praise the Light."
+    SelfEmoteText = "You praise the Light.",
+    TargetEmoteText = "You lavish praise upon %s."
   },
   {
     Name = "PRAY",
-    TargetEmoteText = "You say a prayer for %s.",
-    SelfEmoteText = "You pray to the Gods."
+    SelfEmoteText = "You pray to the Gods.",
+    TargetEmoteText = "You say a prayer for %s."
+  },
+  {
+    Name = "PROMISE",
+    SelfEmoteText = "",
+    TargetEmoteText = "You make %s a promise."
   },
   {
     Name = "PROUD",
-    TargetEmoteText = "You are proud of %s.",
-    SelfEmoteText = "You are proud of yourself."
+    SelfEmoteText = "You are proud of yourself.",
+    TargetEmoteText = "You are proud of %s."
   },
   {
     Name = "PULSE",
-    TargetEmoteText = "You check %s for a pulse. Oh no!",
-    SelfEmoteText = "You check your own pulse."
+    SelfEmoteText = "You check your own pulse.",
+    TargetEmoteText = "You check %s for a pulse. Oh no!"
   },
   {
     Name = "PUNCH",
-    TargetEmoteText = "You punch %s\'s shoulder.",
-    SelfEmoteText = "You punch yourself."
+    SelfEmoteText = "You punch yourself.",
+    TargetEmoteText = "You punch %s\'s shoulder."
   },
   {
     Name = "PURR",
-    TargetEmoteText = "You purr at %s.",
-    SelfEmoteText = "You purr like a kitten."
+    SelfEmoteText = "You purr like a kitten.",
+    TargetEmoteText = "You purr at %s."
   },
   {
     Name = "PUZZLE",
-    TargetEmoteText = "You are puzzled by %s.",
-    SelfEmoteText = "You are puzzled. What\'s going on here?"
+    SelfEmoteText = "You are puzzled. What\'s going on here?",
+    TargetEmoteText = "You are puzzled by %s."
   },
   {
     Name = "RAISE",
-    TargetEmoteText = "You look at %s and raise your hand.",
-    SelfEmoteText = "You raise your hand in the air."
+    SelfEmoteText = "You raise your hand in the air.",
+    TargetEmoteText = "You look at %s and raise your hand."
   },
   {
     Name = "RASP",
-    TargetEmoteText = "You make a rude gesture at %s.",
-    SelfEmoteText = "You make a rude gesture."
+    SelfEmoteText = "You make a rude gesture.",
+    TargetEmoteText = "You make a rude gesture at %s."
   },
   {
     Name = "READY",
-    TargetEmoteText = "You let %s know that you are ready!",
-    SelfEmoteText = "You let everyone know that you are ready!"
+    SelfEmoteText = "You let everyone know that you are ready!",
+    TargetEmoteText = "You let %s know that you are ready!"
   },
   {
     Name = "REGRET",
-    TargetEmoteText = "You think that %s will regret it.",
-    SelfEmoteText = "You are filled with regret."
+    SelfEmoteText = "You are filled with regret.",
+    TargetEmoteText = "You think that %s will regret it."
   },
   {
     Name = "REVENGE",
-    TargetEmoteText = "You vow revenge on %s.",
-    SelfEmoteText = "You vow you will have your revenge."
+    SelfEmoteText = "You vow you will have your revenge.",
+    TargetEmoteText = "You vow revenge on %s."
   },
   {
     Name = "ROAR",
-    TargetEmoteText = "You roar with bestial vigor at %s.  So fierce!",
-    SelfEmoteText = "You roar with bestial vigor.  So fierce!"
+    SelfEmoteText = "You roar with bestial vigor.  So fierce!",
+    TargetEmoteText = "You roar with bestial vigor at %s.  So fierce!"
   },
   {
     Name = "ROFL",
-    TargetEmoteText = "You roll on the floor laughing at %s.",
-    SelfEmoteText = "You roll on the floor laughing."
+    SelfEmoteText = "You roll on the floor laughing.",
+    TargetEmoteText = "You roll on the floor laughing at %s."
   },
   {
     Name = "ROLLEYES",
-    TargetEmoteText = "You roll your eyes at %s.",
-    SelfEmoteText = "You roll your eyes."
+    SelfEmoteText = "You roll your eyes.",
+    TargetEmoteText = "You roll your eyes at %s."
   },
   {
     Name = "RUDE",
-    TargetEmoteText = "You make a rude gesture at %s.",
-    SelfEmoteText = "You make a rude gesture."
+    SelfEmoteText = "You make a rude gesture.",
+    TargetEmoteText = "You make a rude gesture at %s."
   },
   {
     Name = "RUFFLE",
-    TargetEmoteText = "You ruffle %s\'s hair.",
-    SelfEmoteText = "You ruffle your hair."
+    SelfEmoteText = "You ruffle your hair.",
+    TargetEmoteText = "You ruffle %s\'s hair."
+  },
+  {
+    Name = "SAD",
+    SelfEmoteText = "You hang your head dejectedly.",
+    TargetEmoteText = ""
   },
   {
     Name = "SALUTE",
-    TargetEmoteText = "You salute %s with respect.",
-    SelfEmoteText = "You stand at attention and salute."
+    SelfEmoteText = "You stand at attention and salute.",
+    TargetEmoteText = "You salute %s with respect."
   },
   {
     Name = "SCARED",
-    TargetEmoteText = "You are scared of %s.",
-    SelfEmoteText = "You are scared!"
+    SelfEmoteText = "You are scared!",
+    TargetEmoteText = "You are scared of %s."
   },
   {
     Name = "SCOFF",
-    TargetEmoteText = "You scoff at %s.",
-    SelfEmoteText = "You scoff."
+    SelfEmoteText = "You scoff.",
+    TargetEmoteText = "You scoff at %s."
   },
   {
     Name = "SCOLD",
-    TargetEmoteText = "You scold %s.",
-    SelfEmoteText = "You scold yourself."
+    SelfEmoteText = "You scold yourself.",
+    TargetEmoteText = "You scold %s."
   },
   {
     Name = "SCOWL",
-    TargetEmoteText = "You scowl at %s.",
-    SelfEmoteText = "You scowl."
+    SelfEmoteText = "You scowl.",
+    TargetEmoteText = "You scowl at %s."
   },
   {
     Name = "SCRATCH",
-    TargetEmoteText = "You scratch %s.  How catty!",
-    SelfEmoteText = "You scratch yourself.  Ah, much better!"
+    SelfEmoteText = "You scratch yourself.  Ah, much better!",
+    TargetEmoteText = "You scratch %s.  How catty!"
   },
   {
     Name = "SEARCH",
-    TargetEmoteText = "You search %s for something.",
-    SelfEmoteText = "You search for something."
+    SelfEmoteText = "You search for something.",
+    TargetEmoteText = "You search %s for something."
   },
   {
     Name = "SERIOUS",
-    TargetEmoteText = "You think %s is serious.",
-    SelfEmoteText = "You think this is serious business."
+    SelfEmoteText = "You think this is serious business.",
+    TargetEmoteText = "You think %s is serious."
   },
   {
     Name = "SEXY",
-    TargetEmoteText = "You think %s is a sexy devil.",
-    SelfEmoteText = "You\'re too sexy for your tunic...so sexy it hurts."
+    SelfEmoteText = "You\'re too sexy for your tunic...so sexy it hurts.",
+    TargetEmoteText = "You think %s is a sexy devil."
   },
   {
     Name = "SHAKE",
-    TargetEmoteText = "You shake your rear at %s.",
-    SelfEmoteText = "You shake your rear."
+    SelfEmoteText = "You shake your rear.",
+    TargetEmoteText = "You shake your rear at %s."
   },
   {
     Name = "SHAKEFIST",
-    TargetEmoteText = "You shake your fist at %s.",
-    SelfEmoteText = "You shake your fist."
+    SelfEmoteText = "You shake your fist.",
+    TargetEmoteText = "You shake your fist at %s."
   },
   {
     Name = "SHIFTY",
-    TargetEmoteText = "You give %s a shifty look.",
-    SelfEmoteText = "Your eyes shift back and forth suspiciously."
+    SelfEmoteText = "Your eyes shift back and forth suspiciously.",
+    TargetEmoteText = "You give %s a shifty look."
   },
   {
     Name = "SHIMMY",
-    TargetEmoteText = "You shimmy before %s.",
-    SelfEmoteText = "You shimmy before the masses."
+    SelfEmoteText = "You shimmy before the masses.",
+    TargetEmoteText = "You shimmy before %s."
   },
   {
     Name = "SHIVER",
-    TargetEmoteText = "You shiver beside %s. Chilling!",
-    SelfEmoteText = "You shiver in your boots. Chilling!"
+    SelfEmoteText = "You shiver in your boots. Chilling!",
+    TargetEmoteText = "You shiver beside %s. Chilling!"
   },
   {
     Name = "SHOO",
-    TargetEmoteText = "You shoo %s away. Be gone pest!",
-    SelfEmoteText = "You shoo the measly pests away."
+    SelfEmoteText = "You shoo the measly pests away.",
+    TargetEmoteText = "You shoo %s away. Be gone pest!"
   },
   {
     Name = "SHOUT",
-    TargetEmoteText = "You shout at %s.",
-    SelfEmoteText = "You shout."
+    SelfEmoteText = "You shout.",
+    TargetEmoteText = "You shout at %s."
   },
   {
     Name = "SHRUG",
-    TargetEmoteText = "You shrug at %s.  Who knows?",
-    SelfEmoteText = "You shrug.  Who knows?"
+    SelfEmoteText = "You shrug.  Who knows?",
+    TargetEmoteText = "You shrug at %s.  Who knows?"
   },
   {
     Name = "SHUDDER",
-    TargetEmoteText = "You shudder at the sight of %s.",
-    SelfEmoteText = "You shudder."
+    SelfEmoteText = "You shudder.",
+    TargetEmoteText = "You shudder at the sight of %s."
   },
   {
     Name = "SHY",
-    TargetEmoteText = "You smile shyly at %s.",
-    SelfEmoteText = "You smile shyly."
+    SelfEmoteText = "You smile shyly.",
+    TargetEmoteText = "You smile shyly at %s."
   },
   {
     Name = "SIGH",
-    TargetEmoteText = "You sigh at %s.",
-    SelfEmoteText = "You let out a long, drawn-out sigh."
+    SelfEmoteText = "You let out a long, drawn-out sigh.",
+    TargetEmoteText = "You sigh at %s."
   },
   {
     Name = "SIGNAL",
-    TargetEmoteText = "You give %s the signal.",
-    SelfEmoteText = "You give the signal."
+    SelfEmoteText = "You give the signal.",
+    TargetEmoteText = "You give %s the signal."
   },
   {
     Name = "SILENCE",
-    TargetEmoteText = "You tell %s to be quiet. Shhh!",
-    SelfEmoteText = "You tell everyone to be quiet. Shhh!"
+    SelfEmoteText = "You tell everyone to be quiet. Shhh!",
+    TargetEmoteText = "You tell %s to be quiet. Shhh!"
   },
   {
     Name = "SING",
-    TargetEmoteText = "You serenade %s with a song.",
-    SelfEmoteText = "You burst into song."
+    SelfEmoteText = "You burst into song.",
+    TargetEmoteText = "You serenade %s with a song."
+  },
+  {
+    Name = "SIT",
+    SelfEmoteText = "",
+    TargetEmoteText = ""
   },
   {
     Name = "SLAP",
-    TargetEmoteText = "You slap %s across the face. Ouch!",
-    SelfEmoteText = "You slap yourself across the face. Ouch!"
+    SelfEmoteText = "You slap yourself across the face. Ouch!",
+    TargetEmoteText = "You slap %s across the face. Ouch!"
+  },
+  {
+    Name = "SLEEP",
+    SelfEmoteText = "You fall asleep.  Zzzzzzz.",
+    TargetEmoteText = ""
   },
   {
     Name = "SMACK",
-    TargetEmoteText = "You smack %s upside the head.",
-    SelfEmoteText = "You smack your forehead."
+    SelfEmoteText = "You smack your forehead.",
+    TargetEmoteText = "You smack %s upside the head."
   },
   {
     Name = "SMILE",
-    TargetEmoteText = "You smile at %s.",
-    SelfEmoteText = "You smile."
+    SelfEmoteText = "You smile.",
+    TargetEmoteText = "You smile at %s."
   },
   {
     Name = "SMIRK",
-    TargetEmoteText = "You smirk slyly at %s.",
-    SelfEmoteText = "A sly smirk spreads across your face."
+    SelfEmoteText = "A sly smirk spreads across your face.",
+    TargetEmoteText = "You smirk slyly at %s."
   },
   {
     Name = "SNAP",
-    TargetEmoteText = "You snap your fingers at %s.",
-    SelfEmoteText = "You snap your fingers."
+    SelfEmoteText = "You snap your fingers.",
+    TargetEmoteText = "You snap your fingers at %s."
   },
   {
     Name = "SNARL",
-    TargetEmoteText = "You bare your teeth and snarl at %s.",
-    SelfEmoteText = "You bare your teeth and snarl."
+    SelfEmoteText = "You bare your teeth and snarl.",
+    TargetEmoteText = "You bare your teeth and snarl at %s."
   },
   {
     Name = "SNEAK",
-    TargetEmoteText = "You try to sneak away from %s.",
-    SelfEmoteText = "You try to sneak away."
+    SelfEmoteText = "You try to sneak away.",
+    TargetEmoteText = "You try to sneak away from %s."
   },
   {
     Name = "SNEEZE",
-    TargetEmoteText = "You sneeze on %s. Achoo!",
-    SelfEmoteText = "You sneeze. Achoo!"
+    SelfEmoteText = "You sneeze. Achoo!",
+    TargetEmoteText = "You sneeze on %s. Achoo!"
   },
   {
     Name = "SNICKER",
-    TargetEmoteText = "You snicker at %s.",
-    SelfEmoteText = "You quietly snicker to yourself."
+    SelfEmoteText = "You quietly snicker to yourself.",
+    TargetEmoteText = "You snicker at %s."
   },
   {
     Name = "SNIFF",
-    TargetEmoteText = "You sniff %s.",
-    SelfEmoteText = "You sniff the air around you."
+    SelfEmoteText = "You sniff the air around you.",
+    TargetEmoteText = "You sniff %s."
   },
   {
     Name = "SNORT",
-    TargetEmoteText = "You snort derisively at %s.",
-    SelfEmoteText = "You snort."
+    SelfEmoteText = "You snort.",
+    TargetEmoteText = "You snort derisively at %s."
   },
   {
     Name = "SNUB",
-    TargetEmoteText = "You snub %s.",
-    SelfEmoteText = "You snub all of the lowly peons around you."
+    SelfEmoteText = "You snub all of the lowly peons around you.",
+    TargetEmoteText = "You snub %s."
   },
   {
     Name = "SOOTHE",
-    TargetEmoteText = "You soothe %s. There, there...things will be ok.",
-    SelfEmoteText = "You need to be soothed."
+    SelfEmoteText = "You need to be soothed.",
+    TargetEmoteText = "You soothe %s. There, there...things will be ok."
   },
   {
     Name = "SPIT",
-    TargetEmoteText = "You spit on %s.",
-    SelfEmoteText = "You spit on the ground."
+    SelfEmoteText = "You spit on the ground.",
+    TargetEmoteText = "You spit on %s."
   },
   {
     Name = "SQUEAL",
-    TargetEmoteText = "You squeal at %s.",
-    SelfEmoteText = "You squeal like a pig."
+    SelfEmoteText = "You squeal like a pig.",
+    TargetEmoteText = "You squeal at %s."
+  },
+  {
+    Name = "STAND",
+    SelfEmoteText = "",
+    TargetEmoteText = ""
   },
   {
     Name = "STARE",
-    TargetEmoteText = "You stare %s down.",
-    SelfEmoteText = "You stare off into the distance."
+    SelfEmoteText = "You stare off into the distance.",
+    TargetEmoteText = "You stare %s down."
   },
   {
     Name = "STINK",
-    TargetEmoteText = "You smell %s. Wow, someone stinks!",
-    SelfEmoteText = "You smell the air around you. Wow, someone stinks!"
+    SelfEmoteText = "You smell the air around you. Wow, someone stinks!",
+    TargetEmoteText = "You smell %s. Wow, someone stinks!"
   },
   {
     Name = "STOPATTACK",
-    TargetEmoteText = "You tell %s to stop attacking.",
-    SelfEmoteText = "You tell everyone to stop attacking."
+    SelfEmoteText = "You tell everyone to stop attacking.",
+    TargetEmoteText = "You tell %s to stop attacking."
   },
   {
     Name = "SURPRISED",
-    TargetEmoteText = "You are surprised by %s\'s actions.",
-    SelfEmoteText = "You are so surprised!"
+    SelfEmoteText = "You are so surprised!",
+    TargetEmoteText = "You are surprised by %s\'s actions."
   },
   {
     Name = "SURRENDER",
-    TargetEmoteText = "You surrender before %s.  Such is the agony of defeat...",
-    SelfEmoteText = "You surrender to your opponents."
+    SelfEmoteText = "You surrender to your opponents.",
+    TargetEmoteText = "You surrender before %s.  Such is the agony of defeat..."
   },
   {
     Name = "SUSPICIOUS",
-    TargetEmoteText = "You are suspicious of %s.",
-    SelfEmoteText = "You narrow your eyes in suspicion."
+    SelfEmoteText = "You narrow your eyes in suspicion.",
+    TargetEmoteText = "You are suspicious of %s."
   },
   {
     Name = "SWEAT",
-    TargetEmoteText = "You sweat at the sight of %s.",
-    SelfEmoteText = "You are sweating."
+    SelfEmoteText = "You are sweating.",
+    TargetEmoteText = "You sweat at the sight of %s."
   },
   {
     Name = "TALK",
-    TargetEmoteText = "You want to talk things over with %s.",
-    SelfEmoteText = "You talk to yourself since no one else seems interested."
+    SelfEmoteText = "You talk to yourself since no one else seems interested.",
+    TargetEmoteText = "You want to talk things over with %s."
   },
   {
     Name = "TALKEX",
-    TargetEmoteText = "You talk excitedly with %s.",
-    SelfEmoteText = "You talk excitedly with everyone."
+    SelfEmoteText = "You talk excitedly with everyone.",
+    TargetEmoteText = "You talk excitedly with %s."
   },
   {
     Name = "TALKQ",
-    TargetEmoteText = "You question %s.",
-    SelfEmoteText = "You want to know the meaning of life."
+    SelfEmoteText = "You want to know the meaning of life.",
+    TargetEmoteText = "You question %s."
   },
   {
     Name = "TAP",
-    TargetEmoteText = "You tap your foot as you wait for %s.",
-    SelfEmoteText = "You tap your foot.  Hurry up already!"
+    SelfEmoteText = "You tap your foot.  Hurry up already!",
+    TargetEmoteText = "You tap your foot as you wait for %s."
   },
   {
     Name = "TAUNT",
-    TargetEmoteText = "You make a taunting gesture at %s. Bring it!",
-    SelfEmoteText = "You taunt everyone around you. Bring it fools!"
+    SelfEmoteText = "You taunt everyone around you. Bring it fools!",
+    TargetEmoteText = "You make a taunting gesture at %s. Bring it!"
   },
   {
     Name = "TEASE",
-    TargetEmoteText = "You tease %s.",
-    SelfEmoteText = "You are such a tease."
+    SelfEmoteText = "You are such a tease.",
+    TargetEmoteText = "You tease %s."
   },
   {
     Name = "THANK",
-    TargetEmoteText = "You thank %s.",
-    SelfEmoteText = "You thank everyone around you."
+    SelfEmoteText = "You thank everyone around you.",
+    TargetEmoteText = "You thank %s."
   },
   {
     Name = "THINK",
-    TargetEmoteText = "You think about %s.",
-    SelfEmoteText = "You are lost in thought."
+    SelfEmoteText = "You are lost in thought.",
+    TargetEmoteText = "You think about %s."
   },
   {
     Name = "THIRSTY",
-    TargetEmoteText = "You let %s know you are thirsty. Spare a drink?",
-    SelfEmoteText = "You are so thirsty. Can anyone spare a drink?"
+    SelfEmoteText = "You are so thirsty. Can anyone spare a drink?",
+    TargetEmoteText = "You let %s know you are thirsty. Spare a drink?"
   },
   {
     Name = "THREATEN",
-    TargetEmoteText = "You threaten %s with the wrath of doom.",
-    SelfEmoteText = "You threaten everyone with the wrath of doom."
+    SelfEmoteText = "You threaten everyone with the wrath of doom.",
+    TargetEmoteText = "You threaten %s with the wrath of doom."
   },
   {
     Name = "TICKLE",
-    TargetEmoteText = "You tickle %s.  Hee hee!",
-    SelfEmoteText = "You want to be tickled.  Hee hee!"
+    SelfEmoteText = "You want to be tickled.  Hee hee!",
+    TargetEmoteText = "You tickle %s.  Hee hee!"
   },
   {
     Name = "TIRED",
-    TargetEmoteText = "You let %s know that you are tired.",
-    SelfEmoteText = "You let everyone know that you are tired."
+    SelfEmoteText = "You let everyone know that you are tired.",
+    TargetEmoteText = "You let %s know that you are tired."
   },
   {
     Name = "TOAST",
-    TargetEmoteText = "You raise a drink to %s.  Cheers!",
-    SelfEmoteText = "You raise a drink in the air before chugging it down.  Cheers!"
+    SelfEmoteText = "You raise a drink in the air before chugging it down.  Cheers!",
+    TargetEmoteText = "You raise a drink to %s.  Cheers!"
+  },
+  {
+    Name = "TRAIN",
+    SelfEmoteText = "",
+    TargetEmoteText = ""
   },
   {
     Name = "TRUCE",
-    TargetEmoteText = "You offer %s a truce.",
-    SelfEmoteText = "You offer a truce."
+    SelfEmoteText = "You offer a truce.",
+    TargetEmoteText = "You offer %s a truce."
+  },
+  {
+    Name = "TWIDDLE",
+    SelfEmoteText = "You twiddle your thumbs.",
+    TargetEmoteText = ""
   },
   {
     Name = "VETO",
-    TargetEmoteText = "You veto %s\'s motion.",
-    SelfEmoteText = "You veto the motion on the floor."
+    SelfEmoteText = "You veto the motion on the floor.",
+    TargetEmoteText = "You veto %s\'s motion."
   },
   {
     Name = "VICTORY",
-    TargetEmoteText = "You bask in the glory of victory with %s.",
-    SelfEmoteText = "You bask in the glory of victory."
+    SelfEmoteText = "You bask in the glory of victory.",
+    TargetEmoteText = "You bask in the glory of victory with %s."
   },
   {
     Name = "VIOLIN",
-    TargetEmoteText = "You play the world\'s smallest violin for %s.",
-    SelfEmoteText = "You begin to play the world\'s smallest violin."
+    SelfEmoteText = "You begin to play the world\'s smallest violin.",
+    TargetEmoteText = "You play the world\'s smallest violin for %s."
   },
   {
     Name = "WAIT",
-    TargetEmoteText = "You ask %s to wait.",
-    SelfEmoteText = "You ask everyone to wait."
+    SelfEmoteText = "You ask everyone to wait.",
+    TargetEmoteText = "You ask %s to wait."
   },
   {
     Name = "WARN",
-    TargetEmoteText = "You warn %s.",
-    SelfEmoteText = "You warn everyone."
+    SelfEmoteText = "You warn everyone.",
+    TargetEmoteText = "You warn %s."
   },
   {
     Name = "WAVE",
-    TargetEmoteText = "You wave at %s.",
-    SelfEmoteText = "You wave."
+    SelfEmoteText = "You wave.",
+    TargetEmoteText = "You wave at %s."
   },
   {
     Name = "WELCOME",
-    TargetEmoteText = "You welcome %s.",
-    SelfEmoteText = "You welcome everyone."
+    SelfEmoteText = "You welcome everyone.",
+    TargetEmoteText = "You welcome %s."
   },
   {
     Name = "WHINE",
-    TargetEmoteText = "You whine pathetically at %s.",
-    SelfEmoteText = "You whine pathetically."
+    SelfEmoteText = "You whine pathetically.",
+    TargetEmoteText = "You whine pathetically at %s."
   },
   {
     Name = "WHISTLE",
-    TargetEmoteText = "You whistle at %s.",
-    SelfEmoteText = "You let forth a sharp whistle."
+    SelfEmoteText = "You let forth a sharp whistle.",
+    TargetEmoteText = "You whistle at %s."
   },
   {
     Name = "WINK",
-    TargetEmoteText = "You wink slyly at %s.",
-    SelfEmoteText = "You wink slyly."
+    SelfEmoteText = "You wink slyly.",
+    TargetEmoteText = "You wink slyly at %s."
   },
   {
     Name = "WORK",
-    TargetEmoteText = "You work with %s.",
-    SelfEmoteText = "You begin to work."
+    SelfEmoteText = "You begin to work.",
+    TargetEmoteText = "You work with %s."
   },
   {
     Name = "YAWN",
-    TargetEmoteText = "You yawn sleepily at %s.",
-    SelfEmoteText = "You yawn sleepily."
+    SelfEmoteText = "You yawn sleepily.",
+    TargetEmoteText = "You yawn sleepily at %s."
   },
   {
     Name = "YW",
-    TargetEmoteText = "You were happy to help %s.",
-    SelfEmoteText = "You were happy to help."
+    SelfEmoteText = "You were happy to help.",
+    TargetEmoteText = "You were happy to help %s."
   }
 }
