@@ -1179,9 +1179,7 @@ function EmoteButtons_ChangeCommand()
 		len = getn(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck])
 		if len < EmoteButtons_ConfigButton then
 			EmoteButtons_CloseOpenDecks();
-			local numMacroIcons = GetNumMacroIcons();
-			icon = GetMacroIconInfo(math.random(numMacroIcons))
-			icon = string.sub(icon, 17, -1)
+			icon = IconPickerRandomIcon();
 			a = {action=editBox:GetText(), type=EBACTTYPE_SLASHCMD, tooltip=""
 				, image = icon}
 			table.insert(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck], a);
@@ -1206,6 +1204,7 @@ function EmoteButtons_ChangeCommand()
 	elseif EmoteButtons_FirstLevelName == deck then
 		EmoteButtons_LoadDeck(deck, "");
 	end
+	this:GetParent():Hide();
 end
 	
 	StaticPopupDialogs["EMOTEBUTTONS_CHANGECOMMAND"]={
@@ -1524,9 +1523,7 @@ function EmoteManagerSubmitButton_OnClick()
 	len = getn(EmoteButtons_Vars.Actions[deck])
 	if len < button then
 		EmoteButtons_CloseOpenDecks();
-		local numMacroIcons = GetNumMacroIcons();
-		icon = GetMacroIconInfo(math.random(numMacroIcons))
-		icon = string.sub(icon, 17, -1)
+		icon = IconPickerRandomIcon();
 
 		a = {action=EB_EmoteList[emote].Name, type=EBACTTYPE_EMOTE, tooltip=""
 			, image = icon }
@@ -1621,9 +1618,7 @@ function DeckManagerFrameSubmitButton_OnClick()
 	len = getn(EmoteButtons_Vars.Actions[deck])
 	if len < button then
 			EmoteButtons_CloseOpenDecks();
-		local numMacroIcons = GetNumMacroIcons();
-		icon = GetMacroIconInfo(math.random(numMacroIcons))
-		icon = string.sub(icon, 17, -1)
+		icon = IconPickerRandomIcon();
 		a = {action=EmoteButtons_DeckList[action], type=EBACTTYPE_DECK, tooltip=""
 			, image=icon}
 		table.insert(EmoteButtons_Vars.Actions[deck], a);
@@ -2035,6 +2030,7 @@ function DeckBuilderFrame_AddDeckButton_OnClick()
 			end
 			--EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].tooltip = editBox:GetText();
 			--EmoteButtons_UpdateConfig();
+			this:GetParent():Hide();
 		end,
 		EditBoxOnEnterPressed=function()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
@@ -2060,6 +2056,7 @@ function DeckBuilderFrame_AddDeckButton_OnClick()
 				DeckBuilderFrame_UpdateActions(0);
 				DeckBuilderFrameButtons_Update();
 			end
+			this:GetParent():Hide();
 		end,
 		EditBoxOnEscapePressed=function()
 			this:GetParent():Hide();

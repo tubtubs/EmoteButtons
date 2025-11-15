@@ -365,6 +365,17 @@ IP_ICONS = {
     IP_WEAPON_ICONS
 }
 
+NUM_CATEGORIES = 8
+
+function IconPickerRandomIcon()
+    cat = math.random(NUM_CATEGORIES)
+    l = getn(IP_ICONS[cat])
+    subcat = math.random(l)
+    m = getn(IP_ICONS[cat][subcat].icons)
+    DEFAULT_CHAT_FRAME:AddMessage(IP_ICONS[cat][subcat].icons[m])
+    return IP_ICONS[cat][subcat].icons[m]
+end
+
 function IconPickerForceShow()
     if IconPickerFrame:IsVisible() then
         IconPickerFrame:Hide();
