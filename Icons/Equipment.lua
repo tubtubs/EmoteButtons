@@ -494,7 +494,7 @@ IP_icons_equipment_headgear = {
   "INV_Misc_Bandana_01.blp",
   "INV_Misc_Bandana_03.blp"
 }
-IP_len_icons_headgear = getn(IP_icons_equipment_headgear)
+IP_len_icons_equipment_headgear = getn(IP_icons_equipment_headgear)
 
 IP_icons_equipment_shirttabard = {
   "INV_Misc_TabardPVP_01.blp",

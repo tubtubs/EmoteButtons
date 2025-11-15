@@ -667,4 +667,4 @@ IP_icons_achievements = {
   "Achievement_Zone_ZulDrak_11.blp",
   "Achievement_Zone_ZulDrak_12.blp"
 }
-IP_len_icons_abilities_achievements = getn(IP_icons_achievements)
+IP_len_icons_achievements = getn(IP_icons_achievements)

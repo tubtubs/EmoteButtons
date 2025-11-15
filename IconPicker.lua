@@ -1,0 +1,543 @@
+
+NUM_ICONS_SHOWN = 20;
+NUM_ICONS_PER_ROW = 5;
+NUM_ICON_ROWS = 4;
+ICON_ROW_HEIGHT = 36;
+
+
+
+IP_CATEGORY_SELECTED = 0
+IP_SUBCATEGORY_SELECTED = 0
+
+IP_CATEGORY_ABILITY = 1
+IP_CATEGORY_ACHIVEMENTS = 2
+IP_CATEGORY_CONSUME = 3
+IP_CATEGORY_EQUIPMENT = 4
+IP_CATEGORY_MISC = 5
+IP_CATEGORY_SPELLS = 6
+IP_CATEGORY_TRADES = 7
+IP_CATEGORY_WEAPONS = 8
+
+IP_icons_abilties_categories = {
+    "Druid",
+    "Hunter",
+    "Mage",
+    "Misc",
+    "Mounts",
+    "Paladin",
+    "Rogue",
+    "Shaman",
+    "Warlock",
+    "Warrior"
+}
+
+IP_ABILITY_ICONS = {
+    {
+        icons = IP_icons_abilities_druid,
+        size = IP_len_icons_abilities_druid
+    },
+    {
+        icons = IP_icons_abilities_hunter,
+        size = IP_len_icons_abilities_hunter
+    },
+    { 
+        icons = IP_icons_abilities_mage,
+        size = IP_len_icons_abilities_mage
+    },
+    {
+        icons = IP_icons_abilities_misc,
+        size = IP_len_icons_abilities_misc
+    },
+    {
+        icons = IP_icons_abilities_mounts,
+        size = IP_len_icons_abilities_mounts
+    },
+    {
+        icons = IP_icons_abilities_paladin,
+        size = IP_len_icons_abilities_paladin
+    },
+    {
+        icons = IP_icons_abilities_rogue,
+        size = IP_len_icons_abilities_rogue
+    },
+    {
+        icons = IP_icons_abilities_shaman,
+        size = IP_len_icons_abilities_shaman
+    },
+    {
+        icons = IP_icons_abilities_warlock,
+        size = IP_len_icons_abilities_warlock
+    },
+    {
+        icons = IP_icons_abilities_warrior,
+        size = IP_len_icons_abilities_warrior
+    }
+}
+
+IP_icons_consume_categories = {
+    "Drink",
+    "Food",
+    "Potions"
+}
+
+IP_CONSUME_ICONS = {
+    {
+        icons = IP_icons_consume_drinks,
+        size = IP_len_icons_consume_drinks
+    },
+    {
+        icons = IP_icons_consume_food,
+        size = IP_len_icons_consume_food
+    },
+    {
+        icons = IP_icons_consume_potions,
+        size = IP_len_icons_consume_potions
+    }
+}
+
+IP_icons_equipment_categories = {
+    "Belts",
+    "Boots",
+    "Bracers/Gloves",
+    "Capes",
+    "Chest",
+    "Headgear",
+    "Jewelry",
+    "Misc",
+    "Offhand",
+    "Pants",
+    "Shirts/Tabards",
+    "Shoulders",
+}
+
+IP_EQUIPMENT_ICONS = {
+    {
+        icons = IP_icons_equipment_belts,
+        size = IP_len_icons_equipment_belts
+    },
+    {
+        icons = IP_icons_equipment_boots,
+        size = IP_len_icons_equipment_boots,
+    },
+    {
+        icons = IP_icons_equipment_bracersgauntlets,
+        size = IP_len_icons_equipment_bracersgauntlets
+    },
+    {
+        icons = IP_icons_equipment_capes,
+        size = IP_len_icons_equipment_capes
+    },
+    {
+        icons = IP_icons_equipment_chest,
+        size = IP_len_icons_equipment_chest
+    },
+    {
+        icons = IP_icons_equipment_headgear,
+        size = IP_len_icons_equipment_headgear
+    },
+    {
+        icons = IP_icons_equipment_jewelry,
+        size = IP_len_icons_equipment_jewelry
+    },
+    {
+        icons = IP_icons_equipment_misc,
+        size = IP_len_icons_equipment_misc
+    },
+    {
+        icons = IP_icons_equipment_offhand,
+        size = IP_len_icons_equipment_offhand
+    },
+    {
+        icons = IP_icons_equipment_pants,
+        size = IP_len_icons_equipment_pants
+    },
+    {
+        icons = IP_icons_equipment_shirttabard,
+        size = IP_len_icons_equipment_shirttabard
+    },
+    {
+        icons = IP_icons_equipment_shoulder,
+        size = IP_len_icons_equipment_shoulder
+    }
+
+}
+
+IP_ACHIEVEMENT_ICONS = {
+    {
+        icons = IP_icons_achievements,
+        size = IP_len_icons_achievements
+    }
+}
+
+IP_MISC_ICONS = {
+    {
+        icons = IP_icons_misc,
+        size = IP_len_icons_misc
+    }
+}
+
+IP_icons_spells_categories = {
+    "Arcane",
+    "Death Knight",
+    "Fire",
+    "Frost",
+    "Holy",
+    "Misc",
+    "Nature",
+    "Shadow",
+    "Shaman"
+}
+
+IP_SPELLS_ICONS = {
+    {
+        icons = IP_icons_spells_arcane,
+        size = IP_len_icons_spells_arcane
+    },
+    {
+        icons = IP_icons_spells_deathknight,
+        size = IP_len_icons_spells_deathknight
+    },
+    {
+        icons = IP_icons_spells_fire,
+        size = IP_len_icons_spells_fire
+    },
+    {
+        icons = IP_icons_spells_frost,
+        size = IP_len_icons_spells_frost
+    },
+    {
+        icons = IP_icons_spells_holy,
+        size = IP_len_icons_spells_holy
+    },
+    {
+        icons = IP_icons_spells_misc,
+        size = IP_len_icons_spells_misc
+    },
+    {
+        icons = IP_icons_spells_nature,
+        size = IP_len_icons_spells_nature
+    },
+    {
+        icons = IP_icons_spells_shadow,
+        size = IP_len_icons_spells_shadow
+    },
+    {
+        icons = IP_icons_spells_shaman,
+        size = IP_len_icons_spells_shaman
+    },
+}
+
+IP_icons_trades_categories = {
+    "Alchemy",
+    "Blacksmithing",
+    "Elementals",
+    "Enchanting",
+    "Engineering",
+    "First Aid",
+    "Fishing",
+    "Herbalism",
+    "Inscription",
+    "Jewelcrafting",
+    "Leatherworking",
+    "Mining",
+    "Misc",
+    "Tailoring"
+}
+
+IP_TRADE_ICONS = {
+    { 
+        icons = IP_icons_trade_alchemy,
+        size = IP_len_icons_trade_alchemy
+    },
+    { 
+        icons = IP_icons_trade_blacksmithing,
+        size = IP_len_icons_trade_blacksmithing
+    },
+    { 
+        icons = IP_icons_trade_elementals,
+        size = IP_len_icons_trade_elementals
+    },
+    { 
+        icons = IP_icons_trade_enchant,
+        size = IP_len_icons_trade_enchant
+    },
+    { 
+        icons = IP_icons_trade_eng,
+        size = IP_len_icons_trade_eng
+    },
+    { 
+        icons = IP_icons_trade_firstaid,
+        size = IP_len_icons_trade_firstaid
+    },
+    { 
+        icons = IP_icons_trade_fishing,
+        size = IP_len_icons_trade_fishing
+    },
+    { 
+        icons = IP_icons_trade_herbalism,
+        size = IP_len_icons_trade_herbalism
+    },
+    { 
+        icons = IP_icons_trade_inscription,
+        size = IP_len_icons_trade_inscription
+    },
+    { 
+        icons = IP_icons_trade_jewelcrafting,
+        size = IP_len_icons_trade_jewelcrafting
+    },
+    { 
+        icons = IP_icons_trade_leatherworking,
+        size = IP_len_icons_trade_leatherworking
+    },
+    { 
+        icons = IP_icons_trade_mining,
+        size = IP_len_icons_trade_mining
+    },
+    { 
+        icons = IP_icons_trade_misc,
+        size = IP_len_icons_trade_misc
+    },
+    { 
+        icons = IP_icons_trade_tailoring,
+        size = IP_len_icons_trade_tailoring
+    },
+}
+
+IP_icons_weapon_categories = {
+    "Axe",
+    "Dagger",
+    "Fist",
+    "Mace",
+    "Misc",
+    "Polearm",
+    "Ranged",
+    "Staff",
+    "Sword"
+}
+
+IP_WEAPON_ICONS = {
+    {
+        icons = IP_icons_weapon_axe,
+        size = IP_len_icons_weapon_axe
+    },
+    {
+        icons = IP_icons_weapon_dagger,
+        size = IP_len_icons_weapon_dagger
+    },
+    {
+        icons = IP_icons_weapon_fistweapon,
+        size = IP_len_icons_weapon_fistweapon
+    },
+    {
+        icons = IP_icons_weapon_mace,
+        size = IP_len_icons_weapon_mace
+    },
+    {
+        icons = IP_icons_weapon_misc,
+        size = IP_len_icons_weapon_misc
+    },
+    {
+        icons = IP_icons_weapon_polearm,
+        size = IP_len_icons_weapon_polearm
+    },
+    {
+        icons = IP_icons_weapon_ranged,
+        size = IP_len_icons_weapon_ranged
+    },
+    {
+        icons = IP_icons_weapon_staff,
+        size = IP_len_icons_weapon_staff
+    },
+    {
+        icons = IP_icons_weapon_sword,
+        size = IP_len_icons_weapon_sword
+    }
+}
+
+IP_ICONS = {
+    IP_ABILITY_ICONS,
+    IP_ACHIEVEMENT_ICONS,
+    IP_CONSUME_ICONS,
+    IP_EQUIPMENT_ICONS,
+    IP_MISC_ICONS,
+    IP_SPELLS_ICONS,
+    IP_TRADE_ICONS,
+    IP_WEAPON_ICONS
+}
+
+
+
+function IconPickerFrame_OnShow()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	IconPickerFrame_Update();
+	PlaySound("igCharacterInfoOpen");
+	IconPickerEditBox:SetFocus();
+	IconPickerOkayButton_Update();
+	IconPickerEditBox:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
+	--Disable buttons on the other window?
+
+	--Scroll down to current icon
+	local image = EmoteButtons_Vars.Actions[deck][button].image;
+	image = string.lower(image);
+	local found = 0
+	-- Find the index of the image
+	local numMacroIcons = GetNumMacroIcons();
+	local t = ""
+	for i=1, numMacroIcons do
+		t = GetMacroIconInfo(i);
+		t = string.lower(t);
+		if t == "interface\\icons\\"..image then
+			found = i;
+		end
+	end
+	-- 36 per row
+	--Made an edge case, cuz I couldn't maths
+	--Without modulus check multiples of 5 would end up on the next row
+	if (found ~= 0) then
+		if (math.mod(found,5) == 0 ) then
+			offset = floor((found-1)/5)*36;
+				innerIndex=5;
+		else
+			offset = floor(found/5)*36;
+			innerIndex=math.mod(found,5); 
+		end
+		IconPickerScrollFrame:SetVerticalScroll(offset);
+		getglobal("IconPickerButton"..innerIndex):SetChecked(1);
+		IconPickerFrame.selectedIcon = found;
+	end
+
+	HideAllPopupsFrames()
+	DeckManagerFrame:Hide();
+	EB_EmotesManager:Hide();
+end
+
+function IconPickerFrame_OnHide()
+	IconPickerFrame:Hide();
+	PlaySound("igCharacterInfoClose");
+end
+
+function IconPickerButton_OnClick()
+	IconPickerFrame.selectedIcon =  this:GetID() + (FauxScrollFrame_GetOffset(IconPickerScrollFrame) * NUM_ICONS_PER_ROW)
+	IconPickerOkayButton_Update();
+	IconPickerFrame_Update();
+end
+
+function IconPickerOkayButton_Update() 
+	if ( IconPickerFrame.selectedIcon ) then
+		IconPickerOkayButton:Enable();
+	else
+		IconPickerOkayButton:Disable();
+	end
+end
+
+function IconPickerOkayButton_OnClick()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	icon = GetMacroIconInfo(IconPickerFrame.selectedIcon)
+	EmoteButton_Icon:SetTexture(icon);
+	icon = string.sub(icon, 17, -1)
+	EmoteButtons_Vars.Actions[deck][button].image = icon
+	if EmoteButtons_FarLeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarLeft");
+	elseif EmoteButtons_FarRightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarRight");
+	elseif EmoteButtons_LeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Left");
+	elseif EmoteButtons_RightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Right");
+	elseif EmoteButtons_FirstLevelName == deck then
+		EmoteButtons_LoadDeck(deck, "");
+	end
+	EmoteButtons_Vars.Actions[deck][button].tooltip = 	IconPickerEditBox:GetText();
+	if DeckBuilderFrame:IsShown() then
+		DeckBuilderFrame_UpdateActions();
+	end
+	IconPickerFrame:Hide();
+end
+
+function IconPickerSwitchCategory(category, subcategory)
+
+end
+
+function IconPickerAbilitiesDropDown_OnShow()
+	for i=1, getn(IP_icons_abilties_categories) do
+		info = {};
+		info.text       = IP_icons_abilties_categories[i];
+		info.value      = i;
+        IconPickerAbilities.checked = false;
+		if (IP_CATEGORY_SELECTED == IP_CATEGORY_ABILITY
+            and IP_SUBCATEGORY_SELECTED == i) then
+            IconPickerAbilities.checked = true;
+			info.checked =true;
+		else
+			info.checked=false;
+            IconPickerAbilities.checked = false;
+		end
+		info.func =  function() 
+            IconPickerAbilities.checked = true;
+            IP_CATEGORY_SELECTED = IP_CATEGORY_ABILITY;
+            IP_SUBCATEGORY_SELECTED = this.value;			--SaveProfile();
+			--SetProfile(this.value) 
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
+function IconPickerAbilities_OnClick()
+    if (IP_CATEGORY_SELECTED == IP_CATEGORY_ABILITY) then
+        IconPickerAbilities.checked = true;
+    else
+        IconPickerAbilities.checked = false;    
+    end
+	ToggleDropDownMenu(1, nil, IconPickerAbilities, IconPickerAbilities, 0, 0);
+end
+
+function IconPickerFrame_Update()
+	local numMacroIcons = GetNumMacroIcons();
+	local IconPickerIcon, IconPickerButton;
+	local IconPickerOffset = FauxScrollFrame_GetOffset(IconPickerScrollFrame);
+	local index;
+	
+	-- Icon list
+	for i=1, NUM_ICONS_SHOWN do
+		IconPickerIcon = getglobal("IconPickerButton"..i.."Icon");
+		IconPickerButton = getglobal("IconPickerButton"..i);
+		index = (IconPickerOffset * NUM_ICONS_PER_ROW) + i;
+		if ( index <= numMacroIcons ) then
+			IconPickerIcon:SetTexture(GetMacroIconInfo(index));
+			IconPickerButton:Show();
+		else
+			IconPickerIcon:SetTexture("");
+			IconPickerButton:Hide();
+		end
+		if ( index == IconPickerFrame.selectedIcon ) then
+			IconPickerButton:SetChecked(1);
+		else
+			IconPickerButton:SetChecked(nil);
+		end
+	end
+	
+	-- Scrollbar stuff
+	FauxScrollFrame_Update(IconPickerScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );
+end
+
+function CFGLabelEditOnShow()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	CFGLabelEdit:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
+end
+
+function CFGLabelEditOnEnter()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	EmoteButtons_Vars.Actions[deck][button].tooltip = CFGLabelEdit:GetText();
+	CFGLabelEdit:ClearFocus();
+end
+
+function CFGLabelEditOnEscape()
+	CFGLabelEdit:ClearFocus();
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	CFGLabelEdit:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
+end

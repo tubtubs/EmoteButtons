@@ -993,7 +993,7 @@ function EmoteButtons_UpdateConfig()
 	DeckBuilderFrame:Show();
 	DeckBuilderFrame_ScrollToSelected();
 	--EB_EmotesManager:Hide();
-	--DeckCFGFrame:Hide();
+	--IconPickerFrame:Hide();
     --EmoteButtons_PopupImageSelector(); 
 end
 
@@ -1416,151 +1416,8 @@ end
 function EmoteButtons_OnHide()
 	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
 	EB_EmotesManager:Hide();
-	DeckCFGFrame:Hide();
+	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
-end
-
-NUM_ICONS_SHOWN = 20;
-NUM_ICONS_PER_ROW = 5;
-NUM_ICON_ROWS = 4;
-ICON_ROW_HEIGHT = 36;
-
-function DeckCFGFrame_OnShow()
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-	DeckCFGFrame_Update();
-	PlaySound("igCharacterInfoOpen");
-	DeckCFGEditBox:SetFocus();
-	DeckCFGOkayButton_Update();
-	DeckCFGEditBox:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
-	--Disable buttons on the other window?
-
-	--Scroll down to current icon
-	local image = EmoteButtons_Vars.Actions[deck][button].image;
-	image = string.lower(image);
-	local found = 0
-	-- Find the index of the image
-	local numMacroIcons = GetNumMacroIcons();
-	local t = ""
-	for i=1, numMacroIcons do
-		t = GetMacroIconInfo(i);
-		t = string.lower(t);
-		if t == "interface\\icons\\"..image then
-			found = i;
-		end
-	end
-	-- 36 per row
-	--Made an edge case, cuz I couldn't maths
-	--Without modulus check multiples of 5 would end up on the next row
-	if (found ~= 0) then
-		if (math.mod(found,5) == 0 ) then
-			offset = floor((found-1)/5)*36;
-				innerIndex=5;
-		else
-			offset = floor(found/5)*36;
-			innerIndex=math.mod(found,5); 
-		end
-		DeckCFGScrollFrame:SetVerticalScroll(offset);
-		getglobal("DeckCFGButton"..innerIndex):SetChecked(1);
-		DeckCFGFrame.selectedIcon = found;
-	end
-
-	HideAllPopupsFrames()
-	DeckManagerFrame:Hide();
-	EB_EmotesManager:Hide();
-end
-
-function DeckCFGFrame_OnHide()
-	DeckCFGFrame:Hide();
-	PlaySound("igCharacterInfoClose");
-end
-
-function DeckCFGButton_OnClick()
-	DeckCFGFrame.selectedIcon =  this:GetID() + (FauxScrollFrame_GetOffset(DeckCFGScrollFrame) * NUM_ICONS_PER_ROW)
-	DeckCFGOkayButton_Update();
-	DeckCFGFrame_Update();
-end
-
-function DeckCFGOkayButton_Update() 
-	if ( DeckCFGFrame.selectedIcon ) then
-		DeckCFGOkayButton:Enable();
-	else
-		DeckCFGOkayButton:Disable();
-	end
-end
-
-function DeckCFGOkayButton_OnClick()
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-	icon = GetMacroIconInfo(DeckCFGFrame.selectedIcon)
-	EmoteButton_Icon:SetTexture(icon);
-	icon = string.sub(icon, 17, -1)
-	EmoteButtons_Vars.Actions[deck][button].image = icon
-	if EmoteButtons_FarLeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarLeft");
-	elseif EmoteButtons_FarRightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarRight");
-	elseif EmoteButtons_LeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Left");
-	elseif EmoteButtons_RightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Right");
-	elseif EmoteButtons_FirstLevelName == deck then
-		EmoteButtons_LoadDeck(deck, "");
-	end
-	EmoteButtons_Vars.Actions[deck][button].tooltip = 	DeckCFGEditBox:GetText();
-	if DeckBuilderFrame:IsShown() then
-		DeckBuilderFrame_UpdateActions();
-	end
-	DeckCFGFrame:Hide();
-end
-
-function DeckCFGFrame_Update()
-	local numMacroIcons = GetNumMacroIcons();
-	local DeckCFGIcon, DeckCFGButton;
-	local DeckCFGOffset = FauxScrollFrame_GetOffset(DeckCFGScrollFrame);
-	local index;
-	
-	-- Icon list
-	for i=1, NUM_ICONS_SHOWN do
-		DeckCFGIcon = getglobal("DeckCFGButton"..i.."Icon");
-		DeckCFGButton = getglobal("DeckCFGButton"..i);
-		index = (DeckCFGOffset * NUM_ICONS_PER_ROW) + i;
-		if ( index <= numMacroIcons ) then
-			DeckCFGIcon:SetTexture(GetMacroIconInfo(index));
-			DeckCFGButton:Show();
-		else
-			DeckCFGIcon:SetTexture("");
-			DeckCFGButton:Hide();
-		end
-		if ( index == DeckCFGFrame.selectedIcon ) then
-			DeckCFGButton:SetChecked(1);
-		else
-			DeckCFGButton:SetChecked(nil);
-		end
-	end
-	
-	-- Scrollbar stuff
-	FauxScrollFrame_Update(DeckCFGScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );
-end
-
-function CFGLabelEditOnShow()
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-	CFGLabelEdit:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
-end
-
-function CFGLabelEditOnEnter()
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-	EmoteButtons_Vars.Actions[deck][button].tooltip = CFGLabelEdit:GetText();
-	CFGLabelEdit:ClearFocus();
-end
-
-function CFGLabelEditOnEscape()
-	CFGLabelEdit:ClearFocus();
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-	CFGLabelEdit:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
 end
 
 NUM_EMOTES_SHOWN = 8;
@@ -1568,6 +1425,7 @@ EMOTE_ROW_HEIGHT = 36;
 
 function EmotesManager_OnShow()
 	DeckManagerFrame:Hide();
+	IconPickerFrame:Hide();
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	EmoteManagerFrame_Update();
@@ -1711,6 +1569,8 @@ function DeckManagerFrameUpdateText()
 end
 
 function DeckManagerFrame_OnShow()
+	EB_EmotesManager:Hide();
+	IconPickerFrame:Hide();
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 
@@ -1752,7 +1612,6 @@ function DeckManagerFrame_OnShow()
 	DeckManagerFrameSubmitButton_Update();
 	--Disable buttons on the other window?
 	--Decided against scrolling down to current Deck
-	EB_EmotesManager:Hide();
 end
 
 function DeckManagerFrameSubmitButton_OnClick()
@@ -1912,7 +1771,7 @@ function DeckBuilderFrame_OnHide()
 	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
 	StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
 	EB_EmotesManager:Hide();
-	DeckCFGFrame:Hide();
+	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
 end
 
@@ -2216,7 +2075,7 @@ function EmoteButtons_AdvancedConfigFrame_OnShow()
 	DeckBuilderFrame:Hide();
 	HideAllPopupsFrames()
 	EB_EmotesManager:Hide();
-	DeckCFGFrame:Hide();
+	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
 	EmoteButtons_AdvancedConfigFrame_SetMainShiftTitle:SetText(EMOTEBUTTONS_ROTATION);
 	EmoteButtons_AdvancedConfigFrame_SetMainSizeTitle:SetText(EMOTEBUTTONS_SIZE);
