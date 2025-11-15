@@ -365,18 +365,57 @@ IP_ICONS = {
     IP_WEAPON_ICONS
 }
 
+function IconPickerForceShow()
+    if IconPickerFrame:IsVisible() then
+        IconPickerFrame:Hide();
+    end
+    IconPickerFrame:Show();
+end
 
+function IconPickerFindIcon(icon)
+    found = 0;
+    for i, v in pairs (IP_ICONS) do
+        for j,v in pairs (IP_ICONS[i]) do
+            m = IP_ICONS[i][j].icons
+            for k=1, getn(m) do
+                if icon == m[k] then
+
+                    IP_CATEGORY_SELECTED = i;
+                    IP_SUBCATEGORY_SELECTED = j;
+                    --IconPickerScrollFrame:SetVerticalScroll(k);
+                    IconPickerFrame.selectedIcon=k;
+                    found = k;
+                end
+            end
+        end
+    end
+    if (found ~= 0) then
+		if (math.mod(found,5) == 0 ) then
+			offset = floor((found-1)/5)*36;
+				innerIndex=5;
+		else
+			offset = floor(found/5)*36;
+			innerIndex=math.mod(found,5); 
+		end
+		IconPickerScrollFrame:SetVerticalScroll(offset);
+		getglobal("IconPickerButton"..innerIndex):SetChecked(1);
+		IconPickerFrame.selectedIcon = found;
+    else
+        DEFAULT_CHAT_FRAME:AddMessage(format("Could not find %s",icon))
+	end
+end
 
 function IconPickerFrame_OnShow()
-    IconPickerFrame_Update();
 	PlaySound("igCharacterInfoOpen");
 	IconPickerEditBox:SetFocus();
 	IconPickerOkayButton_Update();
-    --[[ Disabling scrolling down to selected emote temporarlily
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 
 	IconPickerEditBox:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
+    IconPickerFindIcon(EmoteButtons_Vars.Actions[deck][button].image)
+    IconPickerFrame_Update();
+    --[[ Disabling scrolling down to selected emote temporarlily
 
 	--Scroll down to current icon
 	local image = EmoteButtons_Vars.Actions[deck][button].image;

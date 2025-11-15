@@ -239,7 +239,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-			IconPickerFrame:Show();
+			IconPickerForceShow();
 
 			EmoteButtons_ChangeTooltip();
 		</OnClick>
@@ -473,7 +473,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-					IconPickerFrame:Show();
+					IconPickerForceShow();
 				</OnClick>
 				</Scripts>
 			</Button>
@@ -2188,7 +2188,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-					IconPickerFrame:Show();
+					IconPickerForceShow();
 					</OnClick>
 				</Scripts>
 			</Button>
