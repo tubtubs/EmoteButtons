@@ -8,72 +8,31 @@ CHANGELOG:
 Expanded left and right wings to be 8 buttons
 Added far left and far right wings (increases max buttons greatly)
 Added Emote, and Deck managers
-Added Icon picker dialog (uses macro icons)
+Added Icon picker dialog (uses expanded icon list)
 Added Deckbuilder
 Advanced Config Window
 -Profiles Supported
 -Importing/Exporting Profiles supported
+All new default deck layout, featuring 250+ emotes and slash commands
 
 
 TODO:
-Advanced config window with import/export decks, and profiles, maybe config mode [check]
---Window [CHECK]
---Sliders [Check]
---Profiles [CHECK]
---Import Export? [CHECK]
----Loadstring might do this very easily... [check]
---Reset Position/Profile [Check]
-Chat commands: [CHECK]
-- /emotebuttons deckbuilder
-- /emotebuttons options
-- /emotebuttons resetposition
-- /emotebuttons resetprofile 
-[BONUS] Add more icons, under tabs in the icon picker.*
-[BONUS] Allow grabbing an icon from spell or item*
-Setup Default Profile*
+Setup Default Profile[CHECK]
+-Could always use refinement, want to shuffle some buttons around
 
 Last features wish list.
 -Save profiles by default, don't really care for save prompts
 -Move button up or down
 -Rename deck
--Gloat is also a laugh
-New section - animal sounds? took bark out of taunt and golfclap out of taunt
-Take apologize out of combat?
--Tap in bored?Impatient?
 -CMD isnt auto filled if its first or last?
 -Still a test output somewhere when opening/closing rightwing?
-
-
-
-Expand the left/right wing to a size of 8. [CHECK]
-Make the wings dynamically sized (can have less than 8 buttons) [CHECK]
-Add another level of depth to the buttons [CHECK]
-Might try to make it possible to do a more page too. Hmmm. [CHECK]
-Add action type to the button info, so they can be: Emotes, slash commands, or accessing a Deck [check]
---Implement action types [check]
-Emote list, used for generating tooltip previews of what the emote will say in chat [CHECK]
-Need to dynamically generate deck lists from the localization table, itll be easier to manage like that. [check]
-Add image to button info, instead of randomized icons -- might do this last, could tie into how I display config options [in progress]
-
-Make the decks and buttons customizable
---Add new icon picker [check]
-----Get current icon in the icon picker [CHECK]
-~~Add slash command config window (Textbox popup is good enough for now)
-~~~Debating if I want to show some common slash commands...
---Add deck manager [check]
---Add emote manager [check]
----Add search to emote manager (meh)
----Add full border around scroll area
-
---Escape to close, should be possible without textbox [check]
----It is, can I make it so it doesn't close both - just one then the other?
-----No, not really
---Main config window needs a delete  (or just have it in deck builder?)
----Deck builder is better, easily better. [CHECK]
-
-Tech Debt/TODO LIST:
- --I still kind of want to be rid of the Decklist global, but whatever.
- --Bad naming convention on frames
+-Test icon picker's ability to scroll to the current icon more. Might be scuffed
+--Also test when switching categories - the submit button doesn't update/disable its self
+Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
+-Could also move around some icons in the icon list. 
+--Some professions might be missing stuff that could be there
+-Updating/reloading wings might be messing up while using the deckbuilder. Small issue, might fix.
+-Slash command manager could be nice, but not needed
 
 	DEFAULT_CHAT_FRAME:AddMessage("TEST")
 ]]--

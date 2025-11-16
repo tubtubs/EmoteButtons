@@ -180,174 +180,180 @@ EMOTEBUTTONS_MT = {
 
 EMOTEBUTTONS_T ={
 ["Combat"]={
-{action="Taunts", type=0, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="Mercy", type=0, tooltip="", image="INV_Misc_Bandage_Netherweave_Heavy"},
-{action="Orders", type=0, tooltip="", image="INV_Misc_Cape_Naxxramas_03"},
-{action="Warnings", type=0, tooltip="", image="vas_factionchange"},
-{action="Signals", type=0, tooltip="", image="INV_Rod_Titanium"},
-{action="CHARGE", type=1, tooltip="", image="INV_Shoulder_73"},
-{action="BLEED", type=1, tooltip="", image="Trade_Fishing"},
-{action="APOLOGIZE", type=1, tooltip="", image="Spell_Magic_FeatherFall"}
+{action="Taunts", type=0, tooltip="", image="Ability_Warrior_Rampage"},
+{action="Mercy", type=0, tooltip="", image="Achievement_Halloween_Cat_01"},
+{action="Orders", type=0, tooltip="", image="Ability_Warrior_RallyingCry"},
+{action="Warnings", type=0, tooltip="", image="Ability_Warrior_FuriousResolve"},
+{action="Signals", type=0, tooltip="", image="Spell_Holy_Stoicism"},
+{action="CHARGE", type=1, tooltip="", image="Ability_Warrior_Charge"},
+{action="BLEED", type=1, tooltip="", image="Spell_DeathKnight_BloodBoil"},
+{action="APOLOGIZE", type=1, tooltip="", image="INV_Misc_BreadoftheDead"}
 },
 ["Animations"]={
-{action="SIT", type=1, tooltip="", image="Spell_Shadow_SummonSuccubus"},
-{action="STAND", type=1, tooltip="", image="INV_Belt_22"},
-{action="DANCE", type=1, tooltip="", image="Spell_DeathKnight_EmpowerRuneBlade"},
-{action="KNEEL", type=1, tooltip="", image="INV_Misc_Bandage_02"},
-{action="LAYDOWN", type=1, tooltip="", image="Spell_Shadow_SummonSuccubus"},
-{action="SLEEP", type=1, tooltip="", image="INV_Misc_Bandage_12"},
-{action="POINT", type=1, tooltip="", image="INV_Holiday_ToW_SpiceBrownie"},
-{action="MOUNTSPECIAL", type=1, tooltip="", image="INV_Misc_Map09"}
+{action="SIT", type=1, tooltip="Sit", image="INV_Misc_Toy_02"},
+{action="STAND", type=1, tooltip="Stand", image="Achievement_BG_kill_carrier_opposing_flagroom"},
+{action="DANCE", type=1, tooltip="Dance", image="INV_Misc_FireDancer_01"},
+{action="KNEEL", type=1, tooltip="", image="Ability_Paladin_GaurdedbytheLight"},
+{action="LAYDOWN", type=1, tooltip="", image="Spell_Shadow_TwistedFaith"},
+{action="SLEEP", type=1, tooltip="", image="Spell_Nature_Sleep"},
+{action="POINT", type=1, tooltip="", image="Spell_Holy_Stoicism"},
+{action="MOUNTSPECIAL", type=1, tooltip="", image="Ability_Mount_RidingHorse"}
 },
 ["Flirt2"]={
-{action="SHAKE", type=1, tooltip="", image="INV_Misc_EngGizmos_32"},
-{action="SHY", type=1, tooltip="", image="INV_Potion_164"},
-{action="CUDDLE", type=1, tooltip="", image="INV_Crystallized_Earth"},
-{action="LICK", type=1, tooltip="", image="INV_Inscription_ParchmentVar02"},
-{action="PURR", type=1, tooltip="", image="Ability_Warrior_PunishingBlow"},
-{action="LOVE", type=1, tooltip="", image="INV_Weapon_Hand_19"},
-{action="FLIRT", type=1, tooltip="", image="INV_Holiday_Christmas_Present_02"},
-{action="Flirt3", type=0, tooltip="More...", image="INV_Holiday_Thanksgiving_Empty_Cornucopia"}
+{action="SHAKE", type=1, tooltip="", image="INV_Misc_Food_99"},
+{action="SHY", type=1, tooltip="", image="Spell_Misc_EmotionHappy"},
+{action="CUDDLE", type=1, tooltip="", image="Spell_Holy_GuardianSpirit"},
+{action="LICK", type=1, tooltip="", image="Spell_Shadow_SoothingKiss"},
+{action="PURR", type=1, tooltip="", image="INV_Misc_Head_Tiger_01"},
+{action="LOVE", type=1, tooltip="", image="Achievement_WorldEvent_Valentine"},
+{action="FLIRT", type=1, tooltip="", image="Achievement_Character_Bloodelf_Female"},
+{action="Flirt3", type=0, tooltip="More...", image="Achievement_WorldEvent_Valentine"}
 },
 ["Misc RP"]={
-{action="MAP", type=1, tooltip="", image="INV_Misc_MonsterTail_01"},
-{action="PET", type=1, tooltip="", image="INV_Letter_01"},
-{action="SEARCH", type=1, tooltip="", image="INV_Potion_117"},
-{action="BACKPACK", type=1, tooltip="", image="Achievement_Zone_Sholazar_07"},
-{action="FAINT", type=1, tooltip="", image="Achievement_PVP_P_10"},
-{action="WORK", type=1, tooltip="", image="INV_Potion_69"},
-{action="SING", type=1, tooltip="", image="Spell_Holy_CircleOfRenewal"},
-{action="COVEREARS", type=1, tooltip="", image="Ability_Mage_Burnout"}
+{action="MAP", type=1, tooltip="Map", image="INV_Misc_Map02"},
+{action="PET", type=1, tooltip="", image="Spell_Holy_Resurrection"},
+{action="SEARCH", type=1, tooltip="", image="INV_Misc_Spyglass_03"},
+{action="BACKPACK", type=1, tooltip="", image="INV_Misc_Bag_07"},
+{action="FAINT", type=1, tooltip="", image="INV_Misc_Bone_HumanSkull_01"},
+{action="WORK", type=1, tooltip="", image="Trade_Mining"},
+{action="SING", type=1, tooltip="", image="Spell_Holy_DivineHymn"},
+{action="COVEREARS", type=1, tooltip="", image="Ability_Mage_StudentOfTheMind"}
 },
 ["Bored"]={
-{action="BORED", type=1, tooltip="", image="INV_Chest_Wolf"},
-{action="FIDGET", type=1, tooltip="", image="INV_Scroll_16"},
-{action="TWIDDLE", type=1, tooltip="", image="INV_Chest_Wolf"},
-{action="BOUNCE", type=1, tooltip="", image="INV_Mushroom_13"},
-{action="TAP", type=1, tooltip="", image="INV_Mace_104"}
+{action="BORED", type=1, tooltip="Bored", image="Spell_Nature_Polymorph_Cow"},
+{action="FIDGET", type=1, tooltip="", image="INV_Sigil_Thorim"},
+{action="TWIDDLE", type=1, tooltip="", image="INV_Misc_SurgeonGlove_01"},
+{action="BOUNCE", type=1, tooltip="", image="INV_Misc_ThrowingBall_01"},
+{action="TAP", type=1, tooltip="", image="Ability_Kick"}
 },
 ["Discussion2"]={
-{action="MUTTER", type=1, tooltip="", image="INV_Misc_Beer_10"},
-{action="OFFER", type=1, tooltip="", image="INV_Misc_Bandana_03"},
-{action="PROMISE", type=1, tooltip="", image="vas_factionchange"},
-{action="Discussion", type=0, tooltip="Back...", image="INV_Misc_Beer_10"}
+{action="MUTTER", type=1, tooltip="", image="Ability_Rogue_SinisterCalling"},
+{action="OFFER", type=1, tooltip="", image="Spell_Holy_Chastise"},
+{action="PROMISE", type=1, tooltip="", image="Spell_Holy_Rapture"},
+{action="Discussion", type=0, tooltip="Back...", image="Ability_Warrior_CommandingShout"}
 },
 ["Rude"]={
-{action="FACEPALM", type=1, tooltip="", image="Ability_Creature_Poison_03"},
-{action="SPIT", type=1, tooltip="", image="INV_Misc_Gift_05"},
-{action="BLAME", type=1, tooltip="", image="Achievement_PVP_G_06"},
+{action="FACEPALM", type=1, tooltip="", image="Spell_Arcane_FocusedPower"},
+{action="SPIT", type=1, tooltip="", image="INV_Elemental_Crystal_Water"},
+{action="BLAME", type=1, tooltip="", image="Spell_Misc_EmotionSad"},
 {action="RASP", type=1, tooltip="", image="INV_Sword_123"},
-{action="HISS", type=1, tooltip="", image="INV_Drink_22"},
-{action="FAIL", type=1, tooltip="", image="INV_Alchemy_Potion_06"},
-{action="CRINGE", type=1, tooltip="", image="Trade_Engineering"},
-{action="Rude2", type=0, tooltip="More..", image="INV_Misc_Sandbox_SpectralTiger_01"}
+{action="HISS", type=1, tooltip="", image="Spell_Nature_GuardianWard"},
+{action="FAIL", type=1, tooltip="", image="INV_Gizmo_SuperSapperCharge"},
+{action="CRINGE", type=1, tooltip="", image="Spell_Misc_EmotionAfraid"},
+{action="Rude2", type=0, tooltip="More..", image="Spell_Druid_feralchargecat"}
 },
 ["I'm Feeling"]={
-{action="Happy", type=0, tooltip="", image="Achievement_Halloween_Smiley_01"},
-{action="Angry", type=0, tooltip="", image="Achievement_BG_kill_carrier_opposing_flagroom"},
-{action="Sad", type=0, tooltip="", image="Inv_Misc_Tournaments_banner_Scourge"},
+{action="Happy", type=0, tooltip="", image="Spell_Misc_EmotionHappy"},
+{action="Angry", type=0, tooltip="", image="Spell_Misc_EmotionAngry"},
+{action="Sad", type=0, tooltip="", image="Spell_Misc_EmotionSad"},
 {action="Surprised", type=0, tooltip="", image="INV_Holiday_Christmas_Present_01"},
-{action="Scared", type=0, tooltip="", image="INV_Misc_Fish_27"},
+{action="Scared", type=0, tooltip="", image="Spell_Misc_EmotionAfraid"},
 {action="Bored", type=0, tooltip="", image="Spell_Magic_PolymorphRabbit"},
 {action="Tired", type=0, tooltip="", image="Spell_Nature_Sleep"},
 {action="I'm Feeling 2", type=0, tooltip="More Emotes", image="Ability_Rogue_Disguise"}
 },
-["Conversation"]={
-{action="Discussion", type=0, tooltip="", image="Ability_Hunter_ZenArchery"},
-{action="Silly", type=0, tooltip="", image="INV_Fishingpole_06"},
-{action="Comfort", type=0, tooltip="", image="Spell_unused2"},
-{action="Sus", type=0, tooltip="", image="INV_Chest_Wolf"},
-{action="Direction", type=0, tooltip="", image="INV_Potion_99"},
-{action="Agree", type=0, tooltip="", image="Spell_Magic_PolymorphRabbit"},
-{action="Disagree", type=0, tooltip="", image="Ability_Mount_Wyvern_01"},
-{action="Celebrations", type=0, tooltip="", image="INV_Misc_Herb_DreamFoil"}
+["Flirt3"]={
+{action="WINK", type=1, tooltip="", image="Spell_Nature_FocusedMind"},
+{action="HOLDHAND", type=1, tooltip="", image="Spell_Holy_Chastise"},
+{action="SCRATCH", type=1, tooltip="", image="INV_Misc_Bone_06"},
+{action="WHISTLE", type=1, tooltip="", image="Ability_Hunter_BeastCall"},
+{action="TICKLE", type=1, tooltip="", image="INV_Feather_06"},
+{action="POKE", type=1, tooltip="", image="Achievement_Reputation_Ogre"},
+{action="RUFFLE", type=1, tooltip="", image="INV_Misc_Comb_01"},
+{action="Flirt4", type=0, tooltip="More...", image="Achievement_WorldEvent_Valentine"}
 },
-["Boats"]={
-{action="/use Darnassian Gondola", type=2, tooltip="", image="INV_HELMET_127"},
-{action="/use Thalassian Sampan", type=2, tooltip="", image="INV_Helmet_46"},
-{action="/use Theramore Rowboat", type=2, tooltip="", image="INV_Mace_90"}
+["Conversation"]={
+{action="Discussion", type=0, tooltip="", image="Ability_Warrior_CommandingShout"},
+{action="Silly", type=0, tooltip="", image="Spell_Shadow_Charm"},
+{action="Comfort", type=0, tooltip="", image="Spell_Holy_Heroism"},
+{action="Sus", type=0, tooltip="", image="Ability_Rogue_MasterOfSubtlety"},
+{action="Direction", type=0, tooltip="", image="INV_Misc_Map02"},
+{action="Agree", type=0, tooltip="", image="Achievement_BG_tophealer_WSG"},
+{action="Disagree", type=0, tooltip="", image="Achievement_Boss_Exarch_Maladaar"},
+{action="Flirt", type=0, tooltip="", image="Achievement_WorldEvent_Valentine"}
 },
 ["CMDs"]={
-{action="/script ReloadUI()", type=2, tooltip="Reload UI", image="INV_Chest_Mail_05"},
-{action="/who", type=2, tooltip="who", image="INV_Bracer_50"},
-{action="/dnd I'm busy", type=2, tooltip="DND", image="Achievement_BG_hld4bases_EOS"},
-{action="/afk smoke break", type=2, tooltip="Smoke Break", image="INV_Misc_Beer_01"},
-{action="/eb deckbuilder", type=2, tooltip="Emote Buttons Options", image="INV_Misc_Food_101_SourCheese"},
-{action="/eb options", type=2, tooltip="Emote Buttons Options", image="INV_Staff_55"},
-{action="/script ResetInstances()", type=2, tooltip="Reset Instances", image="INV_Misc_Cape_06"}
-},
-["Flirt3"]={
-{action="WINK", type=1, tooltip="", image="INV_Hammer_06"},
-{action="HOLDHAND", type=1, tooltip="", image="Spell_Nature_UnleashedRage"},
-{action="SCRATCH", type=1, tooltip="", image="INV_Misc_Desecrated_PlateBracer"},
-{action="WHISTLE", type=1, tooltip="", image="INV_Misc_Rune_11"},
-{action="TICKLE", type=1, tooltip="", image="Ability_Warlock_EverlastingAffliction"},
-{action="POKE", type=1, tooltip="", image="INV_Misc_Food_58"},
-{action="RUFFLE", type=1, tooltip="", image="INV_Pet_SleepyWilly"},
-{action="Flirt4", type=0, tooltip="More...", image="Spell_DeathKnight_FrostFever"}
+{action="/script ReloadUI()", type=2, tooltip="Reload UI", image="INV_Misc_PunchCards_Blue"},
+{action="/who", type=2, tooltip="who", image="INV_Misc_Spyglass_02"},
+{action="/dnd I'm busy", type=2, tooltip="DND", image="Spell_Shadow_SacrificialShield"},
+{action="/afk smoke break", type=2, tooltip="Smoke Break", image="INV_Misc_Pipe_01"},
+{action="/eb deckbuilder", type=2, tooltip="Emote Buttons Options", image="INV_Misc_Wrench_01"},
+{action="/eb options", type=2, tooltip="Emote Buttons Options", image="INV_Misc_Wrench_02"},
+{action="/script ResetInstances()", type=2, tooltip="Reset Instances", image="Achievement_Boss_Algalon_01"}
 },
 ["Taunts2"]={
-{action="REGRET", type=1, tooltip="", image="INV_Stone_SharpeningStone_02"},
-{action="BRANDISH", type=1, tooltip="", image="INV_Potion_142"},
-{action="CHALLENGE", type=1, tooltip="", image="INV_Misc_Food_33"},
-{action="SHAKEFIST", type=1, tooltip="", image="Spell_Misc_Drink"},
-{action="SHOUT", type=1, tooltip="", image="Ability_Shaman_Lavalash"},
-{action="SNARL", type=1, tooltip="", image="Achievement_Boss_GrandMagusTelestra"},
-{action="CRACK", type=1, tooltip="", image="Ability_Paladin_BeaconofLight"},
-{action="Taunts", type=0, tooltip="Back...", image="INV_Shield_71"}
-},
-["Mercy"]={
-{action="BEG", type=1, tooltip="", image="INV_Elemental_Eternal_Water"},
-{action="MERCY", type=1, tooltip="", image="Spell_Frost_SummonWaterElemental"},
-{action="GROVEL", type=1, tooltip="", image="INV_Misc_Herb_DreamFoil"},
-{action="PLEAD", type=1, tooltip="", image="INV_Drink_06"},
-{action="SURRENDER", type=1, tooltip="", image="INV_Stone_04"},
-{action="TRUCE", type=1, tooltip="", image="Ability_Warrior_StrengthOfArms"},
-{action="SQUEAL", type=1, tooltip="", image="INV_ELEMENTAL_CRYSTAL_EARTH"},
-{action="ARM", type=1, tooltip="", image="INV_Inscription_MajorGlyph19"}
+{action="REGRET", type=1, tooltip="", image="Ability_Druid_Enrage"},
+{action="BRANDISH", type=1, tooltip="", image="INV_Sword_06"},
+{action="CHALLENGE", type=1, tooltip="", image="Achievement_BG_most_damage_killingblow_dieleast"},
+{action="SHAKEFIST", type=1, tooltip="", image="Ability_Warrior_BloodFrenzy"},
+{action="SHOUT", type=1, tooltip="", image="Ability_Warrior_WarCry"},
+{action="SNARL", type=1, tooltip="", image="Ability_Hunter_Pet_Bear"},
+{action="CRACK", type=1, tooltip="", image="Ability_Paladin_BlessedHands"},
+{action="Taunts", type=0, tooltip="Back...", image="Ability_Warrior_Rampage"}
 },
 ["Thinking"]={
-{action="THINK", type=1, tooltip="", image="INV_Weapon_Rifle_03"},
-{action="PUZZLE", type=1, tooltip="", image="Spell_Shaman_MaelstromWeapon"},
-{action="PONDER", type=1, tooltip="", image="Achievement_Boss_Harbinger_Skyriss"}
+{action="THINK", type=1, tooltip="", image="Spell_Holy_AuraMastery"},
+{action="PUZZLE", type=1, tooltip="", image="Spell_Shaman_Hex"},
+{action="PONDER", type=1, tooltip="", image="Achievement_Boss_Auriaya_01"}
+},
+["Mercy"]={
+{action="BEG", type=1, tooltip="", image="Spell_Holy_Chastise"},
+{action="MERCY", type=1, tooltip="", image="Ability_Seal"},
+{action="GROVEL", type=1, tooltip="", image="Ability_Paladin_GaurdedbytheLight"},
+{action="PLEAD", type=1, tooltip="", image="Spell_Holy_SealOfBlood"},
+{action="SURRENDER", type=1, tooltip="", image="Achievement_BG_kill_carrier_opposing_flagroom"},
+{action="TRUCE", type=1, tooltip="", image="INV_Letter_20"},
+{action="SQUEAL", type=1, tooltip="", image="Spell_Magic_PolymorphPig"},
+{action="ARM", type=1, tooltip="", image="Spell_Holy_Renew"}
 },
 ["Sad"]={
-{action="CRY", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="MOURN", type=1, tooltip="", image="Ability_Druid_Typhoon"},
-{action="VIOLIN", type=1, tooltip="", image="INV_Chest_Wolf"},
-{action="FROWN", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="GROAN", type=1, tooltip="", image="INV_Boots_Wolf"},
-{action="SIGH", type=1, tooltip="", image="vas_factionchange"},
-{action="POUT", type=1, tooltip="", image="vas_factionchange"},
-{action="SAD", type=1, tooltip="", image="vas_factionchange"}
+{action="CRY", type=1, tooltip="", image="Ability_Rogue_BloodyEye"},
+{action="MOURN", type=1, tooltip="", image="INV_Misc_Bone_HumanSkull_02"},
+{action="VIOLIN", type=1, tooltip="", image="INV_Misc_Drum_01"},
+{action="FROWN", type=1, tooltip="", image="Spell_Misc_EmotionSad"},
+{action="GROAN", type=1, tooltip="", image="Ability_Devour"},
+{action="SIGH", type=1, tooltip="", image="Ability_Suffocate"},
+{action="POUT", type=1, tooltip="", image="INV_Misc_Fish_34"},
+{action="SAD", type=1, tooltip="", image="Achievement_Leader_Prophet_Velen"}
+},
+["Spells"]={
+{action="/cast Hearth", type=2, tooltip="", image="INV_Misc_Rune_01"},
+{action="Professions", type=0, tooltip="", image="Trade_Engineering"},
+{action="Mounts", type=0, tooltip="Mounts", image="Ability_Mount_BigBlizzardBear"},
+{action="Pets", type=0, tooltip="", image="INV_Box_Birdcage_01"},
+{action="Boats", type=0, tooltip="", image="ship"}
 },
 ["Thanks"]={
-{action="BOW", type=1, tooltip="", image="Spell_Shadow_VampiricAura"},
-{action="CURTSEY", type=1, tooltip="", image="Thrown_1H_Harpoon_D_01Silver"},
-{action="THANK", type=1, tooltip="", image="INV_Stone_WeightStone_08"},
-{action="YW", type=1, tooltip="", image="INV_Weapon_Staff_109"}
-},
-["Comfort"]={
-{action="SOOTHE", type=1, tooltip="", image="Spell_Fire_WindsofWoe"},
-{action="COMFORT", type=1, tooltip="", image="INV_Boots_Wolf"},
-{action="PAT", type=1, tooltip="", image="Trade_Tailoring"},
-{action="ENCOURAGE", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="PULSE", type=1, tooltip="", image="INV_Misc_Cape_Naxxramas_03"}
-},
-["Agree"]={
-{action="AGREE", type=1, tooltip="", image="Spell_Ice_Rune"},
-{action="NOD", type=1, tooltip="", image="INV_Misc_Cape_Naxxramas_03"},
-{action="RAISE", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"}
+{action="BOW", type=1, tooltip="", image="Ability_Paladin_GaurdedbytheLight"},
+{action="CURTSEY", type=1, tooltip="", image="INV_Kilt_Cloth_02"},
+{action="THANK", type=1, tooltip="", image="Spell_Holy_DevineAegis"},
+{action="YW", type=1, tooltip="", image="Spell_Misc_EmotionHappy"},
+{action="APOLOGIZE", type=1, tooltip="", image="Spell_Misc_EmotionSad"}
 },
 ["Angry"]={
-{action="ANGRY", type=1, tooltip="", image="Ability_Warlock_ShadowFlame"},
-{action="GLOWER", type=1, tooltip="", image="vas_factionchange"},
-{action="REVENGE", type=1, tooltip="", image="INV_Mace_99"},
-{action="SCOFF", type=1, tooltip="", image="INV_Sword_Draenei_08"},
-{action="SCOLD", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="SCOWL", type=1, tooltip="", image="INV_Shoulder_HaremMatron_D_01"},
-{action="CROSSARMS", type=1, tooltip="", image="INV_Belt_83"},
-{action="HEADACHE", type=1, tooltip="", image="vas_factionchange"}
+{action="ANGRY", type=1, tooltip="", image="Ability_Warrior_BloodFrenzy"},
+{action="GLOWER", type=1, tooltip="", image="Ability_Hunter_MasterTactitian"},
+{action="REVENGE", type=1, tooltip="", image="Ability_Warrior_RallyingCry"},
+{action="SCOFF", type=1, tooltip="", image="Ability_Warrior_CommandingShout"},
+{action="SCOLD", type=1, tooltip="", image="Achievement_Dungeon_UlduarRaid_Titan_01"},
+{action="SCOWL", type=1, tooltip="", image="Achievement_Boss_Illidan"},
+{action="CROSSARMS", type=1, tooltip="", image="Achievement_Arena_2v2_1"},
+{action="HEADACHE", type=1, tooltip="", image="Ability_Mage_StudentOfTheMind"}
+},
+["Agree"]={
+{action="AGREE", type=1, tooltip="", image="Achievement_BG_tophealer_WSG"},
+{action="NOD", type=1, tooltip="", image="INV_Helmet128"},
+{action="RAISE", type=1, tooltip="", image="Ability_Paladin_BlessedHands"}
+},
+["Flirt"]={
+{action="BASHFUL", type=1, tooltip="", image="INV_Hammer_18"},
+{action="BLUSH", type=1, tooltip="", image="ACHIEVEMENT_BOSS_KILJAEDAN"},
+{action="HUG", type=1, tooltip="", image="Ability_Druid_Maul"},
+{action="KISS", type=1, tooltip="", image="Spell_Shadow_SoothingKiss"},
+{action="MASSAGE", type=1, tooltip="", image="INV_Gauntlets_06"},
+{action="MOAN", type=1, tooltip="", image="Achievement_Boss_Auriaya_01"},
+{action="SEXY", type=1, tooltip="", image="INV_Misc_Idol_01"},
+{action="Flirt2", type=0, tooltip="More...", image="Achievement_WorldEvent_Valentine"}
 },
 ["Main"]={
 {action="I'm Feeling", type=0, tooltip="Emotions", image="Ability_Rogue_Disguise"},
@@ -356,36 +362,36 @@ EMOTEBUTTONS_T ={
 {action="Conversation", type=0, tooltip="", image="INV_Drink_22"},
 {action="Combat", type=0, tooltip="", image="Achievement_Arena_2v2_7"},
 {action="RP", type=0, tooltip="", image="Achievement_Zone_Stonetalon_01"},
-{action="Spells", type=0, tooltip="", image="INV_Misc_Food_107_Venison"},
-{action="CMDs", type=0, tooltip="", image="Ability_Mage_MissileBarrage"}
+{action="Spells", type=0, tooltip="", image="Ability_Racial_Ultravision"},
+{action="CMDs", type=0, tooltip="", image="Mail_GMIcon"}
 },
 ["Warnings"]={
-{action="WARN", type=1, tooltip="", image="INV_Egg_08"},
-{action="ENEMY", type=1, tooltip="", image="INV_Misc_ArmorKit_31"},
-{action="INCOMING", type=1, tooltip="", image="INV_Drink_09"}
+{action="WARN", type=1, tooltip="", image="Spell_Misc_EmotionAfraid"},
+{action="ENEMY", type=1, tooltip="", image="Achievement_Boss_CThun"},
+{action="INCOMING", type=1, tooltip="", image="Achievement_BG_KillXEnemies_GeneralsRoom"}
 },
 ["LOL"]={
-{action="CACKLE", type=1, tooltip="", image="vas_factionchange"},
-{action="CHUCKLE", type=1, tooltip="", image="Ability_Shaman_WaterShield"},
-{action="GUFFAW", type=1, tooltip="", image="INV_Misc_Powder_Tin"},
-{action="ROFL", type=1, tooltip="", image="Spell_Nature_WrathofAir _Totem"},
-{action="SNICKER", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="GLOAT", type=1, tooltip="", image="INV_Mushroom_13"},
-{action="LAUGH", type=1, tooltip="", image="Spell_Fire_WindsofWoe"},
-{action="GIGGLE", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"}
+{action="CACKLE", type=1, tooltip="", image="Spell_Shadow_CurseOfTounges"},
+{action="CHUCKLE", type=1, tooltip="", image="Achievement_Boss_Auriaya_01"},
+{action="GUFFAW", type=1, tooltip="", image="Achievement_Character_Dwarf_Male"},
+{action="ROFL", type=1, tooltip="", image="INV_Misc_Toy_09"},
+{action="SNICKER", type=1, tooltip="", image="Ability_Hunter_Pet_Hyena"},
+{action="GLOAT", type=1, tooltip="", image="INV_Misc_Coin_02"},
+{action="LAUGH", type=1, tooltip="", image="Spell_Fire_LavaSpawn"},
+{action="GIGGLE", type=1, tooltip="", image="Achievement_Character_Gnome_Female"}
 },
 ["Signals"]={
-{action="READY", type=1, tooltip="", image="Spell_Fire_BluePyroblast"},
-{action="SNAP", type=1, tooltip="", image="INV_Drink_Waterskin_12"},
-{action="SIGNAL", type=1, tooltip="", image="INV_ValentinesCandy"},
-{action="OOM", type=1, tooltip="", image="Achievement_Boss_KelidanTheBreaker"}
+{action="READY", type=1, tooltip="", image="Achievement_BG_tophealer_WSG"},
+{action="SNAP", type=1, tooltip="", image="Achievement_BG_killingblow_30"},
+{action="SIGNAL", type=1, tooltip="", image="Achievement_BG_tophealer_AB"},
+{action="OOM", type=1, tooltip="", image="INV_Drink_18"}
 },
 ["Happy"]={
-{action="HAPPY", type=1, tooltip="", image="INV_Weapon_Glave_01"},
-{action="TALKEX", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
+{action="HAPPY", type=1, tooltip="", image="INV_Misc_PenguinPet"},
+{action="TALKEX", type=1, tooltip="", image="Temp"},
 {action="SMIRK", type=1, tooltip="", image="Achievement_Boss_Kael'thasSunstrider_01"},
 {action="SMILE", type=1, tooltip="", image="Achievement_WorldEvent_Brewmaster"},
-{action="GRIN", type=1, tooltip="", image="Ability_Mount_Wyvern_01"}
+{action="GRIN", type=1, tooltip="", image="Spell_Shadow_Charm"}
 },
 ["Sarcastic"]={
 {action="ROLLEYES", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
@@ -393,265 +399,262 @@ EMOTEBUTTONS_T ={
 {action="GROAN", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"}
 },
 ["Disagree"]={
-{action="NO", type=1, tooltip="", image="Spell_Shadow_VampiricAura"},
-{action="OBJECT", type=1, tooltip="", image="Ability_Druid_Typhoon"},
-{action="VETO", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="DISAGREE", type=1, tooltip="", image="Trade_Tailoring"},
-{action="SNUB", type=1, tooltip="", image="Ability_Mount_Wyvern_01"},
-{action="DOUBT", type=1, tooltip="", image="Spell_DeathKnight_Vendetta"},
-{action="SILENCE", type=1, tooltip="", image="INV_Chest_Wolf"}
+{action="NO", type=1, tooltip="", image="Spell_Shadow_DemonicPact"},
+{action="OBJECT", type=1, tooltip="", image="Spell_Shadow_SacrificialShield"},
+{action="VETO", type=1, tooltip="", image="Spell_ChargeNegative"},
+{action="DISAGREE", type=1, tooltip="", image="Inv_Helm_Mask_ZulGurub_D_01"},
+{action="SNUB", type=1, tooltip="Snub", image="Achievement_Boss_GrandWidowFaerlina"},
+{action="DOUBT", type=1, tooltip="Bad Feeling", image="Achievement_Dungeon_UlduarRaid_Titan_01"},
+{action="SILENCE", type=1, tooltip="", image="Ability_Racial_Avatar"}
 },
 ["Rude2"]={
-{action="EMBARRASS", type=1, tooltip="", image="INV_Fishingpole_03"},
-{action="RUDE", type=1, tooltip="", image="INV_Shirt_GuildTabard_01"},
-{action="INSULT", type=1, tooltip="", image="Achievement_Boss_Thorim"},
-{action="MOCK", type=1, tooltip="", image="Trade_Tailoring"},
-{action="SHOO", type=1, tooltip="", image="Spell_Druid_feralchargecat"},
-{action="PITY", type=1, tooltip="", image="Spell_Shaman_LavaBurst"},
-{action="MOON", type=1, tooltip="", image="INV_Axe_30"},
-{action="Rude", type=0, tooltip="Back...", image="INV_Fishingpole_03"}
+{action="EMBARRASS", type=1, tooltip="", image="INV_Misc_Bone_Skull_02"},
+{action="RUDE", type=1, tooltip="", image="Ability_Warlock_FireandBrimstone"},
+{action="INSULT", type=1, tooltip="", image="Achievement_Boss_trollgore"},
+{action="MOCK", type=1, tooltip="", image="INV_Mask_01"},
+{action="SHOO", type=1, tooltip="", image="Ability_Hunter_BeastSoothe"},
+{action="PITY", type=1, tooltip="", image="Spell_Shadow_RaiseDead"},
+{action="MOON", type=1, tooltip="", image="Spell_Nature_MoonGlow"},
+{action="Rude", type=0, tooltip="Back...", image="Spell_Druid_feralchargecat"}
 },
 ["Celebrations"]={
-{action="APPLAUD", type=1, tooltip="", image="INV_Weapon_Hand_34"},
-{action="CHEER", type=1, tooltip="", image="Trade_Tailoring"},
-{action="CLAP", type=1, tooltip="", image="INV_Scroll_16"},
-{action="CONGRATULATE", type=1, tooltip="", image="Spell_Holy_WordFortitude"},
-{action="COMMEND", type=1, tooltip="", image="INV_Weapon_Shortblade_99"},
-{action="PRAISE", type=1, tooltip="", image="INV_Misc_Cape_Naxxramas_03"},
-{action="TOAST", type=1, tooltip="", image="Ability_Mage_WorldInFlames"},
-{action="Celebrations2", type=0, tooltip="More...", image="Spell_Holy_WordFortitude"}
+{action="APPLAUD", type=1, tooltip="", image="Achievement_BG_tophealer_AB"},
+{action="CHEER", type=1, tooltip="", image="Achievement_BG_most_damage_killingblow_dieleast"},
+{action="CLAP", type=1, tooltip="", image="Spell_Holy_BlindingHeal"},
+{action="CONGRATULATE", type=1, tooltip="", image="Achievement_Dungeon_HEROIC_GloryoftheRaider"},
+{action="COMMEND", type=1, tooltip="", image="Achievement_BG_tophealer_AV"},
+{action="PRAISE", type=1, tooltip="", image="Spell_Holy_GreaterBlessingofLight"},
+{action="TOAST", type=1, tooltip="", image="INV_Drink_13"},
+{action="Celebrations2", type=0, tooltip="More...", image="Achievement_Quests_Completed_06"}
 },
 ["Small Talk"]={
-{action="LOL", type=0, tooltip="", image="INV_Fishingpole_06"},
-{action="Rude", type=0, tooltip="", image="vas_factionchange"},
-{action="Thanks", type=0, tooltip="", image="INV_Mushroom_13"},
-{action="Who Stinks?", type=0, tooltip="", image="Spell_Fire_WindsofWoe"},
-{action="Celebrations", type=0, tooltip="", image="INV_Pants_Wolf"}
+{action="LOL", type=0, tooltip="", image="Racial_Troll_Berserk"},
+{action="Rude", type=0, tooltip="", image="Spell_Druid_feralchargecat"},
+{action="Thanks", type=0, tooltip="", image="Spell_Holy_Chastise"},
+{action="Who Stinks?", type=0, tooltip="", image="Spell_Deathknight_UnholyPresence"},
+{action="Celebrations", type=0, tooltip="", image="Achievement_Quests_Completed_06"}
 },
 ["RP"]={
-{action="Animations", type=0, tooltip="", image="INV_Mushroom_13"},
-{action="Body Functions", type=0, tooltip="", image="Ability_Paladin_TouchedbyLight"},
-{action="Food/Drink", type=0, tooltip="", image="Spell_Shaman_TotemRecall"},
-{action="Look", type=0, tooltip="", image="vas_factionchange"},
-{action="Thinking", type=0, tooltip="", image="vas_factionchange"},
-{action="Attacks", type=0, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="Misc RP", type=0, tooltip="", image="INV_Misc_Wrench_02"}
-},
-["Flirt"]={
-{action="BASHFUL", type=1, tooltip="", image="Achievement_Dungeon_Ulduar77_10man"},
-{action="BLUSH", type=1, tooltip="", image="Spell_Misc_HellifrePVPThrallmarFavor"},
-{action="HUG", type=1, tooltip="", image="Ability_Warrior_IntensifyRage"},
-{action="KISS", type=1, tooltip="", image="Ability_Warlock_DemonicEmpowerment"},
-{action="MASSAGE", type=1, tooltip="", image="INV_Gizmo_RocketBoot_01"},
-{action="MOAN", type=1, tooltip="", image="Trade_Mining"},
-{action="SEXY", type=1, tooltip="", image="INV_Misc_Horn_01"},
-{action="Flirt2", type=0, tooltip="More...", image="Achievement_Boss_Aeonus_01"}
-},
-["Orders"]={
-{action="OPENFIRE", type=1, tooltip="", image="INV_Shield_04"},
-{action="ATTACKMYTARGET", type=1, tooltip="", image="Spell_DeathKnight_SummonDeathCharger"},
-{action="STOPATTACK", type=1, tooltip="", image="INV_Pants_07"},
-{action="HEALME", type=1, tooltip="", image="INV_Letter_03"},
-{action="HELPME", type=1, tooltip="", image="INV_Jewelry_Necklace_35"},
-{action="FLEE", type=1, tooltip="", image="INV_Weapon_Hand_11"},
-{action="HURRY", type=1, tooltip="", image="INV_Axe_38"},
-{action="GO", type=1, tooltip="", image="INV_Misc_ShadowEgg"}
+{action="Animations", type=0, tooltip="", image="INV_Misc_Drum_03"},
+{action="Body Functions", type=0, tooltip="", image="INV_Holiday_ToW_SpicePotion02"},
+{action="Food/Drink", type=0, tooltip="", image="INV_Misc_Food_68"},
+{action="Look", type=0, tooltip="", image="Ability_Hunter_MasterMarksman"},
+{action="Thinking", type=0, tooltip="", image="Spell_Arcane_MindMastery"},
+{action="Attacks", type=0, tooltip="", image="Ability_Warrior_Devastate"},
+{action="Misc RP", type=0, tooltip="", image="Achievement_Zone_Terrokar"}
 },
 ["Attacks"]={
-{action="SLAP", type=1, tooltip="", image="INV_Elemental_Crystal_Air"},
-{action="PUNCH", type=1, tooltip="", image="Spell_Shadow_PainSpike"},
-{action="SMACK", type=1, tooltip="", image="Ability_Paladin_DivineStorm"},
-{action="BONK", type=1, tooltip="", image="Spell_Deathknight_FrostPresence"},
-{action="PINCH", type=1, tooltip="", image="Achievement_Zone_GrizzlyHills_03"},
-{action="BITE", type=1, tooltip="", image="INV_Staff_17"},
-{action="POUNCE", type=1, tooltip="", image="Achievement_Zone_StormPeaks_09"},
+{action="SLAP", type=1, tooltip="", image="Ability_Hunter_BeastSoothe"},
+{action="PUNCH", type=1, tooltip="", image="Ability_Rogue_KidneyShot"},
+{action="SMACK", type=1, tooltip="", image="Ability_Warrior_Devastate"},
+{action="BONK", type=1, tooltip="", image="INV_Mace_10"},
+{action="PINCH", type=1, tooltip="", image="INV_Weapon_Hand_01"},
+{action="BITE", type=1, tooltip="", image="Ability_Druid_Berserk"},
+{action="POUNCE", type=1, tooltip="", image="Ability_Druid_SupriseAttack"},
 {action="PULSE", type=1, tooltip="", image="Achievement_BG_tophealer_AB"}
 },
-["Pets"]={
-{action="/use Cat Carrier (Bombay)", type=2, tooltip="Bombay Cat", image="Ability_Rogue_FanofKnives"},
-{action="/use Cat Carrier (Cornish Rex)", type=2, tooltip="", image="INV_Sword_92"},
-{action="/use Cat Carrier (Orange Tabby)", type=2, tooltip="", image="Achievement_FeatsOfStrength_Gladiator_06"},
-{action="/use Cat Carrier (Silver Tabby)", type=2, tooltip="", image="INV_Misc_Food_02"}
+["Orders"]={
+{action="OPENFIRE", type=1, tooltip="", image="INV_Musket_04"},
+{action="ATTACKMYTARGET", type=1, tooltip="", image="INV_Sword_06"},
+{action="STOPATTACK", type=1, tooltip="", image="Spell_Shadow_SacrificialShield"},
+{action="HEALME", type=1, tooltip="", image="Spell_Holy_DivineProvidence"},
+{action="HELPME", type=1, tooltip="", image="Spell_Druid_feralchargecat"},
+{action="FLEE", type=1, tooltip="", image="Ability_Rogue_Sprint"},
+{action="HURRY", type=1, tooltip="", image="INV_Misc_Crop_02"},
+{action="GO", type=1, tooltip="", image="Ability_Warrior_CommandingShout"}
 },
 ["Body Functions2"]={
-{action="SNORT", type=1, tooltip="", image="INV_Elemental_Primal_Earth"},
-{action="SPIT", type=1, tooltip="", image="INV_Gauntlets_23"},
-{action="NOSEPICK", type=1, tooltip="", image="INV_Potion_13"},
-{action="Body Functions", type=0, tooltip="Back...", image="INV_Misc_Food_146_CakeSlice"}
+{action="SNORT", type=1, tooltip="", image="Ability_Hunter_Pet_Boar"},
+{action="SPIT", type=1, tooltip="", image="INV_Misc_Slime_01"},
+{action="NOSEPICK", type=1, tooltip="", image="INV_Misc_Coin_01"},
+{action="SCRATCH", type=1, tooltip="Scratch", image="INV_Misc_Bone_06"},
+{action="Body Functions", type=0, tooltip="Back...", image="INV_Holiday_ToW_SpicePotion02"}
+},
+["Sus"]={
+{action="TALKQ", type=1, tooltip="", image="INV_Misc_QuestionMark"},
+{action="SUSPICIOUS", type=1, tooltip="", image="Ability_Rogue_MasterOfSubtlety"},
+{action="PUZZLE", type=1, tooltip="", image="Inv_Helm_Mask_ZulGurub_D_01"}
+},
+["Boats"]={
+{action="/use Darnassian Gondola", type=2, tooltip="", image="ship"},
+{action="/use Thalassian Sampan", type=2, tooltip="", image="ship"},
+{action="/use Theramore Rowboat", type=2, tooltip="", image="ship"}
 },
 ["Discussion"]={
-{action="AMAZE", type=1, tooltip="", image="INV_Weapon_Shortblade_99"},
-{action="CURIOUS", type=1, tooltip="", image="Item_icecrownringD"},
-{action="SHRUG", type=1, tooltip="", image="INV_Misc_Powder_Tin"},
-{action="TALK", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="WHINE", type=1, tooltip="", image="Ability_Mount_Wyvern_01"},
-{action="LISTEN", type=1, tooltip="", image="INV_Potion_99"},
-{action="IDEA", type=1, tooltip="", image="INV_Weapon_Staff_109"},
-{action="Discussion2", type=0, tooltip="More...", image="INV_Shirt_Yellow_01"}
+{action="AMAZE", type=1, tooltip="", image="Spell_Holy_DivineIllumination"},
+{action="CURIOUS", type=1, tooltip="", image="Ability_Ambush"},
+{action="SHRUG", type=1, tooltip="", image="INV_Jewelcrafting_AzureHare"},
+{action="TALK", type=1, tooltip="", image="Ability_Warrior_CommandingShout"},
+{action="WHINE", type=1, tooltip="", image="Achievement_Character_Bloodelf_Female"},
+{action="LISTEN", type=1, tooltip="", image="Ability_Hunter_Pet_Turtle"},
+{action="IDEA", type=1, tooltip="", image="INV_Misc_Coin_19"},
+{action="Discussion2", type=0, tooltip="More...", image="Ability_Warrior_CommandingShout"}
 },
 ["Look2"]={
-{action="AWE", type=1, tooltip="", image="Achievement_Zone_ZulDrak_05"},
-{action="LOOK", type=1, tooltip="", image="Spell_Shaman_BlessingOfEternals"},
-{action="SHIFTY", type=1, tooltip="", image="INV_Misc_Food_26"},
-{action="SHUDDER", type=1, tooltip="", image="INV_Weapon_Bow_15"},
-{action="PEER", type=1, tooltip="", image="Ability_Hunter_Misdirection"},
-{action="CONFUSED", type=1, tooltip="", image="INV_Belt_66Black"},
-{action="Look", type=0, tooltip="Back...", image="Ability_Druid_GaleWinds"}
+{action="AWE", type=1, tooltip="", image="Ability_Warrior_Revenge"},
+{action="LOOK", type=1, tooltip="", image="Spell_Shaman_Hex"},
+{action="SHIFTY", type=1, tooltip="", image="Ability_Rogue_MasterOfSubtlety"},
+{action="SHUDDER", type=1, tooltip="", image="Spell_Misc_EmotionAfraid"},
+{action="PEER", type=1, tooltip="", image="INV_Misc_Spyglass_01"},
+{action="CONFUSED", type=1, tooltip="", image="Spell_Frost_Stun"},
+{action="Look", type=0, tooltip="Back...", image="Ability_Hunter_MasterMarksman"}
 },
 ["Taunts"]={
-{action="CHICKEN", type=1, tooltip="", image="INV_Glyph_MajorMage"},
-{action="FLEX", type=1, tooltip="", image="Spell_Shadow_LastingAffliction"},
-{action="GLARE", type=1, tooltip="", image="INV_Drink_11"},
-{action="ROAR", type=1, tooltip="", image="INV_TradeskillItem_01"},
-{action="THREATEN", type=1, tooltip="", image="INV_Misc_MissileLargeCluster_Green"},
-{action="TAUNT", type=1, tooltip="", image="Achievement_PVP_O_12"},
-{action="GROWL", type=1, tooltip="", image="Ability_Hunter_ZenArchery"},
-{action="Taunts2", type=0, tooltip="More...", image="INV_Shield_29"}
+{action="CHICKEN", type=1, tooltip="", image="Spell_Magic_PolymorphChicken"},
+{action="FLEX", type=1, tooltip="", image="Ability_Warrior_StrengthOfArms"},
+{action="GLARE", type=1, tooltip="", image="Ability_Warrior_ImprovedDisciplines"},
+{action="ROAR", type=1, tooltip="", image="Ability_Warrior_BattleShout"},
+{action="THREATEN", type=1, tooltip="", image="Achievement_Boss_Archimonde "},
+{action="TAUNT", type=1, tooltip="", image="Ability_Warrior_WarCry"},
+{action="GROWL", type=1, tooltip="", image="Racial_Orc_BerserkerStrength"},
+{action="Taunts2", type=0, tooltip="More...", image="Ability_Warrior_Rampage"}
 },
 ["Look"]={
-{action="STARE", type=1, tooltip="", image="INV_Pants_Cloth_24"},
-{action="BLINK", type=1, tooltip="", image="Spell_DeathKnight_ArmyOfTheDead"},
-{action="EYE", type=1, tooltip="", image="INV_Weapon_ShortBlade_15"},
-{action="GAZE", type=1, tooltip="", image="Racial_Dwarf_FindTreasure"},
-{action="BLANK", type=1, tooltip="", image="INV_Misc_Bandage_05"},
-{action="EYEBROW", type=1, tooltip="", image="INV_Misc_Marrigolds_01"},
-{action="ABSENT", type=1, tooltip="", image="INV_Sword_78"},
-{action="Look2", type=0, tooltip="More...", image="Achievement_PVP_H_15"}
+{action="STARE", type=1, tooltip="", image="Spell_Holy_PowerInfusion"},
+{action="BLINK", type=1, tooltip="", image="Spell_Nature_Sleep"},
+{action="EYE", type=1, tooltip="", image="INV_Misc_Eye_01"},
+{action="GAZE", type=1, tooltip="", image="Spell_Holy_DivineIllumination"},
+{action="BLANK", type=1, tooltip="", image="INV_Mask_06"},
+{action="EYEBROW", type=1, tooltip="", image="Achievement_Boss_Kael'thasSunstrider_01"},
+{action="ABSENT", type=1, tooltip="", image="INV_Mask_03"},
+{action="Look2", type=0, tooltip="More...", image="Ability_Hunter_MasterMarksman"}
 },
 ["Greetings"]={
-{action="Greets", type=0, tooltip="", image="vas_factionchange"},
-{action="Farewells", type=0, tooltip="", image="Item_icecrownringD"}
+{action="Greets", type=0, tooltip="", image="INV_Misc_Toy_07"},
+{action="Farewells", type=0, tooltip="", image="INV_Relics_IdolofFerocity"}
 },
 ["Food/Drink"]={
-{action="DRINK", type=1, tooltip="", image="INV_Jewelry_Ring_70"},
-{action="EAT", type=1, tooltip="", image="INV_Misc_Eye_04"},
-{action="CHUG", type=1, tooltip="", image="INV_Misc_Gem_Pearl_01"},
-{action="THIRSTY", type=1, tooltip="", image="Achievement_Zone_GrizzlyHills_08"},
-{action="HUNGRY", type=1, tooltip="", image="INV_Drink_26_GoatsMilk"}
+{action="DRINK", type=1, tooltip="", image="INV_Drink_05"},
+{action="EAT", type=1, tooltip="", image="INV_Misc_Food_11"},
+{action="CHUG", type=1, tooltip="", image="INV_Misc_Beer_03"},
+{action="THIRSTY", type=1, tooltip="", image="Achievement_OgrimsHammer"},
+{action="HUNGRY", type=1, tooltip="", image="Ability_Warrior_BattleShout"}
 },
 ["Greets"]={
-{action="HAIL", type=1, tooltip="", image="INV_Mushroom_13"},
-{action="HELLO", type=1, tooltip="", image="INV_Mace_99"},
-{action="INTRODUCE", type=1, tooltip="", image="INV_Misc_Beer_10"},
-{action="WELCOME", type=1, tooltip="", image="INV_Sword_Draenei_08"},
-{action="GREET", type=1, tooltip="", image="INV_Sword_Draenei_08"},
-{action="SALUTE", type=1, tooltip="", image="Spell_unused2"},
-{action="WAVE", type=1, tooltip="", image="INV_Sword_Draenei_08"},
-{action="POKE", type=1, tooltip="", image="Ability_WIntergrasp_rank3"}
+{action="HAIL", type=1, tooltip="Hail", image="Achievement_BG_3flagcap_nodeaths"},
+{action="HELLO", type=1, tooltip="Hello", image="Spell_Holy_GreaterHeal"},
+{action="INTRODUCE", type=1, tooltip="", image="Achievement_Reputation_04"},
+{action="WELCOME", type=1, tooltip="", image="Achievement_Reputation_08"},
+{action="GREET", type=1, tooltip="", image="firesglow"},
+{action="SALUTE", type=1, tooltip="", image="Achievement_PVP_P_04"},
+{action="WAVE", type=1, tooltip="", image="INV_Gauntlets_06"},
+{action="POKE", type=1, tooltip="", image="INV_Staff_22"}
 },
 ["Body Functions"]={
-{action="HICCUP", type=1, tooltip="", image="INV_Qiraj_JewelEncased"},
-{action="DROOL", type=1, tooltip="", image="Achievement_Dungeon_Ulduar80_25man"},
-{action="FART", type=1, tooltip="", image="Achievement_Dungeon_UlduarRaid_IronDwarf_01"},
-{action="BURP", type=1, tooltip="", image="Spell_Fire_MeteorStorm"},
-{action="BREATH", type=1, tooltip="", image="INV_Misc_Food_100_HardCheese"},
-{action="COUGH", type=1, tooltip="", image="INV_Mace_20"},
-{action="SNEEZE", type=1, tooltip="", image="Spell_Shadow_UnholyStrength"},
-{action="Body Functions2", type=0, tooltip="", image="Achievement_Zone_HowlingFjord_04"}
+{action="HICCUP", type=1, tooltip="", image="Ability_Creature_Disease_02"},
+{action="DROOL", type=1, tooltip="", image="Spell_Nature_UnrelentingStorm"},
+{action="FART", type=1, tooltip="", image="Spell_Holiday_ToW_SpiceCloud"},
+{action="BURP", type=1, tooltip="", image="Ability_BullRush"},
+{action="BREATH", type=1, tooltip="", image="Ability_Suffocate"},
+{action="COUGH", type=1, tooltip="", image="INV_Misc_AhnQirajTrinket_03"},
+{action="SNEEZE", type=1, tooltip="", image="INV_Misc_Bandage_07"},
+{action="Body Functions2", type=0, tooltip="", image="INV_Holiday_ToW_SpicePotion02"}
 },
 ["Flirt4"]={
-{action="CHARM", type=1, tooltip="", image="INV_Letter_17"},
-{action="SHIMMY", type=1, tooltip="", image="Ability_Mount_WhiteTiger"},
-{action="TEASE", type=1, tooltip="", image="INV_Misc_Fish_42"},
-{action="Flirt", type=0, tooltip="Back...", image="Achievement_Forgemaster"}
+{action="CHARM", type=1, tooltip="", image="Spell_Shadow_SoothingKiss"},
+{action="SHIMMY", type=1, tooltip="", image="INV_Misc_FireDancer_01"},
+{action="TEASE", type=1, tooltip="", image="Spell_Shadow_SummonSuccubus"},
+{action="Flirt", type=0, tooltip="Back...", image="Achievement_WorldEvent_Valentine"}
 },
 ["Celebrations2"]={
-{action="DING", type=1, tooltip="", image="Spell_Ice_Rune"},
-{action="PROUD", type=1, tooltip="", image="INV_Shoulder_HaremMatron_D_01"},
-{action="HIGHFIVE", type=1, tooltip="", image="INV_Shoulder_HaremMatron_D_01"},
-{action="VICTORY", type=1, tooltip="", image="Ability_Mount_Wyvern_01"},
-{action="Celebrations", type=0, tooltip="Back...", image="INV_Potion_99"}
+{action="DING", type=1, tooltip="", image="Achievement_Level_60"},
+{action="PROUD", type=1, tooltip="", image="Achievement_Boss_KingYmiron"},
+{action="HIGHFIVE", type=1, tooltip="", image="Spell_Holy_Chastise"},
+{action="VICTORY", type=1, tooltip="", image="Achievement_BG_winWSG"},
+{action="Celebrations", type=0, tooltip="Back...", image="Achievement_Quests_Completed_06"}
 },
 ["Scared"]={
-{action="SWEAT", type=1, tooltip="", image="vas_factionchange"},
-{action="SCARED", type=1, tooltip="", image="INV_Weapon_Halberd_AhnQiraj"},
-{action="BADFEELING", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="COWER", type=1, tooltip="", image="Spell_Nature_WrathofAir _Totem"},
-{action="PRAY", type=1, tooltip="", image="INV_Mushroom_13"},
-{action="PANIC", type=1, tooltip="", image="vas_factionchange"},
-{action="DUCK", type=1, tooltip="", image="Ability_Shaman_WaterShield"},
-{action="NERVOUS", type=1, tooltip="", image="INV_Fishingpole_06"}
+{action="SWEAT", type=1, tooltip="", image="INV_Elemental_Mote_Water01"},
+{action="SCARED", type=1, tooltip="", image="Ability_Rogue_SurpriseAttack"},
+{action="BADFEELING", type=1, tooltip="", image="Achievement_Boss_CThun"},
+{action="COWER", type=1, tooltip="", image="Spell_Shadow_ConeOfSilence"},
+{action="PRAY", type=1, tooltip="", image="Ability_Paladin_BeaconofLight"},
+{action="PANIC", type=1, tooltip="", image="Spell_Shadow_UnstableAffliction_3"},
+{action="DUCK", type=1, tooltip="", image="INV_Misc_TheGoldenCheep"},
+{action="NERVOUS", type=1, tooltip="", image="Spell_Shadow_PsychicScream"}
 },
 ["Direction"]={
-{action="BECKON", type=1, tooltip="", image="INV_Mushroom_13"},
-{action="FOLLOW", type=1, tooltip="", image="INV_Shoulder_HaremMatron_D_01"},
-{action="WAIT", type=1, tooltip="", image="vas_factionchange"},
-{action="POINT", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="GO", type=1, tooltip="", image="vas_factionchange"},
-{action="HURRY", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="LOST", type=1, tooltip="", image="INV_Belt_83"}
+{action="FOLLOW", type=1, tooltip="", image="Achievement_BG_captureflag_WSG"},
+{action="WAIT", type=1, tooltip="", image="INV_Misc_SurgeonGlove_01"},
+{action="POINT", type=1, tooltip="", image="Spell_Holy_Stoicism"},
+{action="GO", type=1, tooltip="", image="Spell_Holy_AshesToAshes"},
+{action="HURRY", type=1, tooltip="", image="Ability_Warrior_FuriousResolve"},
+{action="LOST", type=1, tooltip="", image="INV_Misc_Map_01"},
+{action="BECKON", type=1, tooltip="", image="Spell_Holy_Chastise"}
 },
 ["Who Stinks?"]={
-{action="SNIFF", type=1, tooltip="", image="INV_Misc_Beer_10"},
-{action="STINK", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"}
+{action="SNIFF", type=1, tooltip="", image="INV_Misc_Birdbeck_01"},
+{action="STINK", type=1, tooltip="", image="Ability_Rogue_DeviousPoisons"}
 },
 ["Surprised"]={
 {action="BOGGLE", type=1, tooltip="", image="INV_Elemental_Primal_Water"},
-{action="SURPRISED", type=1, tooltip="", image="vas_factionchange"},
-{action="GASP", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"}
+{action="SURPRISED", type=1, tooltip="", image="Achievement_Dungeon_ClassicDungeonMaster"},
+{action="GASP", type=1, tooltip="", image="Ability_Creature_Disease_03"}
 },
 ["Mounts"]={
-{action="/use Swift Zulian Tiger", type=2, tooltip="", image="Spell_Holy_RetributionAura"},
-{action="/use Swift Razzashi Raptor", type=2, tooltip="", image="INV_Jewelcrafting_CrimsonSpinel_01"},
-{action="/use Mekgineer's Chopper", type=2, tooltip="", image="Ability_Warlock_ImprovedSoulLeech"},
-{action="/use Swift White Hawkstrider", type=2, tooltip="", image="Achievement_BG_winSOA"}
+{action="/use Swift Zulian Tiger", type=2, tooltip="Tiger", image="Ability_Mount_JungleTiger"},
+{action="/use Swift Razzashi Raptor", type=2, tooltip="", image="Ability_Mount_Raptor"},
+{action="/use Mekgineer's Chopper", type=2, tooltip="", image="INV_Misc_Key_06"},
+{action="/use Swift White Hawkstrider", type=2, tooltip="", image="Ability_Mount_CockatriceMountElite_White"}
 },
-["Sus"]={
-{action="TALKQ", type=1, tooltip="", image="INV_Misc_Gem_Pearl_11"},
-{action="SUSPICIOUS", type=1, tooltip="", image="INV_Chest_Cloth_31"},
-{action="PUZZLE", type=1, tooltip="", image="INV_Potion_57"}
+["Pets"]={
+{action="/use Cat Carrier (Bombay)", type=2, tooltip="Bombay Cat", image="INV_Box_PetCarrier_01"},
+{action="/use Cat Carrier (Cornish Rex)", type=2, tooltip="", image="INV_Box_PetCarrier_01"},
+{action="/use Cat Carrier (Orange Tabby)", type=2, tooltip="", image="INV_Box_PetCarrier_01"},
+{action="/use Cat Carrier (Silver Tabby)", type=2, tooltip="", image="INV_Box_PetCarrier_01"}
+},
+["Comfort"]={
+{action="SOOTHE", type=1, tooltip="", image="Spell_Holy_Silence"},
+{action="COMFORT", type=1, tooltip="", image="Ability_Paladin_SacredCleansing"},
+{action="PAT", type=1, tooltip="", image="Spell_Holy_Heal"},
+{action="ENCOURAGE", type=1, tooltip="", image="Ability_Warrior_RallyingCry"},
+{action="PULSE", type=1, tooltip="", image="frozendeath"}
+},
+["Silly"]={
+{action="MOO", type=1, tooltip="", image="Spell_Nature_Polymorph_Cow"},
+{action="JOKE", type=1, tooltip="", image="INV_Misc_Bomb_04"},
+{action="TICKLE", type=1, tooltip="", image="INV_Feather_16"},
+{action="TRAIN", type=1, tooltip="choochoo", image="INV_Misc_Toy_10"},
+{action="JK", type=1, tooltip="", image="Achievement_Boss_Mekgineer_Thermaplugg "},
+{action="FLOP", type=1, tooltip="", image="Ability_Racial_Avatar"},
+{action="TEASE", type=1, tooltip="", image="Racial_Troll_Berserk"}
+},
+["Professions"]={
+{action="/cast First Aid", type=2, tooltip="First Aid", image="Spell_Holy_SealOfSacrifice"},
+{action="/cast Cooking", type=2, tooltip="", image="INV_Misc_Food_15"},
+{action="/cast Fishing", type=2, tooltip="", image="Trade_Fishing"},
+{action="/cast Bushcraft", type=2, tooltip="", image="INV_Torch_Lit"},
+{action="/cast Woodcutting", type=2, tooltip="", image="INV_TradeskillItem_03"},
+{action="/cast Investigate", type=2, tooltip="", image="Ability_Hunter_MasterMarksman"},
+{action="/cast Camouflage", type=2, tooltip="", image="ability_hunter_camouflage"},
+{action="/cast Navigate", type=2, tooltip="", image="INV_Misc_Map02"}
+},
+["Tired"]={
+{action="TIRED", type=1, tooltip="", image="Spell_Nature_Sleep"},
+{action="YAWN", type=1, tooltip="", image="Ability_Warrior_BattleShout"},
+{action="SLEEP", type=1, tooltip="", image="INV_Misc_Bandage_07"}
+},
+["Farewells"]={
+{action="BYE", type=1, tooltip="", image="INV_Gauntlets_04"},
+{action="SALUTE", type=1, tooltip="", image="Achievement_PVP_G_04"},
+{action="GOODLUCK", type=1, tooltip="", image="INV_Misc_Herb_GoldClover"},
+{action="LUCK", type=1, tooltip="", image="INV_Misc_Herb_GoldClover"},
+{action="SNEAK", type=1, tooltip="", image="Ability_Stealth"},
+{action="GOING", type=1, tooltip="", image="Achievement_BG_captureflag_WSG"},
+{action="BRB", type=1, tooltip="", image="Achievement_BG_returnXflags_def_WSG"}
 },
 ["I'm Feeling 2"]={
 {action="CALM", type=1, tooltip="Calm", image="Achievement_Character_Draenei_Male"},
-{action="JEALOUS", type=1, tooltip="Jealous", image="INV_Rod_Titanium"},
+{action="JEALOUS", type=1, tooltip="Jealous", image="Achievement_Character_Bloodelf_Female"},
 {action="SERIOUS", type=1, tooltip="Serious", image="Achievement_Character_Orc_Male"},
-{action="GLOAT", type=1, tooltip="Boastful", image="INV_Mace_99"},
+{action="GLOAT", type=1, tooltip="Boastful", image="INV_Misc_Coin_02"},
 {action="GRIN", type=1, tooltip="Evil", image="Achievement_Leader_King_Varian_Wrynn"},
-{action="TAP", type=1, tooltip="Impatient...", image="Spell_Nature_StormReach"},
 {action="COLD", type=1, tooltip="Cold", image="Spell_Frost_FrostArmor"},
-{action="SHIVER", type=1, tooltip="Shivering", image="INV_Boots_Cloth_03"}
-},
-["Silly"]={
-{action="MOO", type=1, tooltip="", image="INV_Shirt_Yellow_01"},
-{action="JOKE", type=1, tooltip="", image="INV_Misc_Wrench_02"},
-{action="TICKLE", type=1, tooltip="", image="INV_Misc_Bag_Soulbag"},
-{action="TRAIN", type=1, tooltip="choochoo", image="Achievement_Zone_ZulDrak_12"},
-{action="JK", type=1, tooltip="", image="Spell_Shaman_TotemRecall"},
-{action="FLOP", type=1, tooltip="", image="Ability_WIntergrasp_rank3"},
-{action="TEASE", type=1, tooltip="", image="Spell_Nature_WrathofAir _Totem"}
-},
-["Professions"]={
-{action="/cast First Aid", type=2, tooltip="", image="INV_Letter_01"},
-{action="/cast Cooking", type=2, tooltip="", image="Ability_Vehicle_OilJets"},
-{action="/cast Fishing", type=2, tooltip="", image="Spell_Frost_SummonWaterElemental"},
-{action="/cast Bushcraft", type=2, tooltip="", image="Spell_Nature_NullifyPoison_02"},
-{action="/cast Woodcutting", type=2, tooltip="", image="INV_Fishingpole_03"},
-{action="/cast Investigate", type=2, tooltip="", image="INV_Misc_Toy_10"},
-{action="/cast Camouflage", type=2, tooltip="", image="INV_Misc_Marrigolds_01"},
-{action="/cast Navigate", type=2, tooltip="", image="INV_Drink_Waterskin_04"}
-},
-["Tired"]={
-{action="TIRED", type=1, tooltip="", image="INV_Axe_99"},
-{action="YAWN", type=1, tooltip="", image="Spell_Magic_PolymorphRabbit"},
-{action="SLEEP", type=1, tooltip="", image="INV_Stone_WeightStone_08"}
-},
-["Farewells"]={
-{action="BYE", type=1, tooltip="", image="INV_Mushroom_13"},
-{action="SALUTE", type=1, tooltip="", image="Ability_Warlock_ShadowFlame"},
-{action="GOODLUCK", type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-{action="LUCK", type=1, tooltip="", image="INV_Misc_Bandana_03"},
-{action="SNEAK", type=1, tooltip="", image="vas_factionchange"},
-{action="GOING", type=1, tooltip="", image="Ability_WIntergrasp_rank3"},
-{action="BRB", type=1, tooltip="", image="INV_Shoulder_HaremMatron_D_01"}
-},
-["Spells"]={
-{action="/cast Hearth", type=2, tooltip="", image="INV_Misc_Rune_01"},
-{action="Professions", type=0, tooltip="", image="INV_Potion_140"},
-{action="Mounts", type=0, tooltip="", image="INV_Potion_34"},
-{action="Pets", type=0, tooltip="", image="INV_Weapon_Hand_02"},
-{action="Boats", type=0, tooltip="", image="Spell_DeathKnight_Subversion"}
+{action="SHIVER", type=1, tooltip="Shivering", image="INV_Boots_Cloth_03"},
+{action="CONFUSED", type=1, tooltip="Confused", image="Spell_Frost_Stun"}
 }
 }
+
 
 
 EMOTEBUTTONS_PROFILES = {
