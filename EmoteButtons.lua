@@ -13,13 +13,8 @@ Added Deckbuilder
 Advanced Config Window
 -Profiles Supported
 -Importing/Exporting Profiles supported
+Macro Support
 All new default deck layout, featuring 250+ emotes and slash commands
-
-KNOWN ISSUES:
-*Icon Picker doesn't always scroll down to icon very well on certain tabs
-If you scroll up, or down, close the iconpicker and then re-open it
-it should scroll down properly to your icon. Really stumped for a fix,
-but its an opulent feature as is.
 
 TODO:
 Setup Default Profile[CHECK]
@@ -33,16 +28,13 @@ Setup Default Profile[CHECK]
 -Move button up or down [Check]
 -Random icon button would be REALLY cool [CHECK]
 -Clean up visuals on deckbuilder, move deck/action items down and maybe add border [CHECK]
-
-Last features wish list.
+Macro Support (lol) [CHECK]
 
 High Priority:
 -Save profiles by default, don't really care for save prompts
 
+
 Medium priority:
--Slash command manager could be nice, but not needed
---Just build in some common useful ones from the community imo
---Build in get rested XP, can't think of any other cool /commands
 
 **Low priority:
 -Could also move around some icons in the icon list. 
@@ -842,7 +834,6 @@ end
 
 function EmoteButtons_DoAction(text)
 	for w in string.gfind(text, "([^\r\n]+)") do
-		DEFAULT_CHAT_FRAME:AddMessage(w)
 		EmoteButtons_EditBox:SetText(w);
 		ChatEdit_SendText(EmoteButtons_EditBox);
 	end
@@ -994,7 +985,9 @@ function EmoteButtons_UpdateConfig()
 	DeckBuilderFrame:Show();
 	DeckBuilderFrame_ScrollToSelected();
 	--EB_EmotesManager:Hide();
+
 	IconPickerFrame:Hide();
+	EmoteButtons_ChangeCMDFrame:Hide();
     --EmoteButtons_PopupImageSelector(); 
 end
 
@@ -1177,23 +1170,23 @@ function EmoteButtons_ChangeCommand()
 
 	local accept = function() 
 		local editBox=getglobal(this:GetParent():GetName().."EditBox");
-		len = getn(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck])
-		if len < EmoteButtons_ConfigButton then
-			EmoteButtons_CloseOpenDecks();
-			icon = IconPickerRandomIcon();
-			a = {action=editBox:GetText(), type=EBACTTYPE_SLASHCMD, tooltip=""
-				, image = icon}
-			table.insert(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck], a);
-			EmoteButtons_ReOpenDecks();
-		else
-			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
-			EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_SLASHCMD;
-			--EmoteButtons_UpdateConfig();
-		end
-		if(DeckBuilderFrame:IsShown()) then
-			DeckBuilderFrame_UpdateActions(DeckBuilderFrame.selectedIcon);
-			DeckBuilderFrameButtons_Update();
-		end
+	len = getn(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck])
+	if len < EmoteButtons_ConfigButton then
+		EmoteButtons_CloseOpenDecks();
+		icon = IconPickerRandomIcon();
+		a = {action=editBox:GetText(), type=EBACTTYPE_SLASHCMD, tooltip=""
+			, image = icon}
+		table.insert(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck], a);
+		EmoteButtons_ReOpenDecks();
+	else
+		EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action = editBox:GetText();
+		EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type = EBACTTYPE_SLASHCMD;
+		--EmoteButtons_UpdateConfig();
+	end
+	if(DeckBuilderFrame:IsShown()) then
+		DeckBuilderFrame_UpdateActions(DeckBuilderFrame.selectedIcon);
+		DeckBuilderFrameButtons_Update();
+	end
 	if EmoteButtons_FarLeftWing_Deck==deck then
 		EmoteButtons_LoadDeck(deck, "FarLeft");
 	elseif EmoteButtons_FarRightWing_Deck==deck then
@@ -1428,6 +1421,7 @@ EMOTE_ROW_HEIGHT = 36;
 function EmotesManager_OnShow()
 	DeckManagerFrame:Hide();
 	IconPickerFrame:Hide();
+	EmoteButtons_ChangeCMDFrame:Hide();
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	EmoteManagerFrame_Update();
@@ -1571,6 +1565,7 @@ end
 function DeckManagerFrame_OnShow()
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
+	EmoteButtons_ChangeCMDFrame:Hide();
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 
@@ -1771,6 +1766,7 @@ function DeckBuilderFrame_OnHide()
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
+	EmoteButtons_ChangeCMDFrame:Hide();
 end
 
 function DeckBuilderFrameDeckActionButton_OnClick()
@@ -1785,6 +1781,7 @@ function DeckBuilderFrameDeckActionButton_OnClick()
 	EB_EmotesManager:Hide();
 	DeckManagerFrame:Hide();
 	IconPickerFrame:Hide();
+	EmoteButtons_ChangeCMDFrame:Hide();
 	HideAllPopupsFrames();
 	--StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
 	--StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
@@ -1800,6 +1797,7 @@ function DeckBuilderFrameDeckButton_OnClick()
 	EB_EmotesManager:Hide();
 	DeckManagerFrame:Hide();
 	IconPickerFrame:Hide();
+	EmoteButtons_ChangeCMDFrame:Hide();
 	HideAllPopupsFrames();
 	--StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
 	--StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
@@ -2122,6 +2120,11 @@ function DeckBuilderFrame_MoveUpButton_OnClick()
 	end
 	EmoteButtons_CloseOpenDecks();
 	EmoteButtons_ReOpenDecks();
+	EmoteButtons_ChangeCMDFrame:Hide();
+	HideAllPopupsFrames()
+	EB_EmotesManager:Hide();
+	IconPickerFrame:Hide();
+	DeckManagerFrame:Hide();
 end
 
 function DeckBuilderFrame_MoveDownButton_OnClick()
@@ -2147,6 +2150,11 @@ function DeckBuilderFrame_MoveDownButton_OnClick()
 	end
 	EmoteButtons_CloseOpenDecks();
 	EmoteButtons_ReOpenDecks();
+	EmoteButtons_ChangeCMDFrame:Hide();
+	HideAllPopupsFrames()
+	EB_EmotesManager:Hide();
+	IconPickerFrame:Hide();
+	DeckManagerFrame:Hide();
 end
 
 function DeckBuilderFrame_RenameDeckButton_OnClick()
@@ -2238,6 +2246,7 @@ end
 
 function EmoteButtons_AdvancedConfigFrame_OnShow()
 	DeckBuilderFrame:Hide();
+	EmoteButtons_ChangeCMDFrame:Hide();
 	HideAllPopupsFrames()
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
@@ -2600,4 +2609,58 @@ function ExportProfile()
 							EmoteButtons_Vars.Profile)
 	EmoteButtons_ExportProfileFrame_ScrollFrame_ExportEditBox:SetText(TempDecks..TempProfile)
 	EmoteButtons_ExportProfileFrame:Show();
+end
+
+function EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	act = EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:GetText();
+	len = getn(EmoteButtons_Vars.Actions[deck])
+	if len < EmoteButtons_ConfigButton then
+		EmoteButtons_CloseOpenDecks();
+		icon = IconPickerRandomIcon();
+		a = {action=act, type=EBACTTYPE_SLASHCMD, tooltip=""
+			, image = icon}
+		table.insert(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck], a);
+		EmoteButtons_ReOpenDecks();
+	else
+		EmoteButtons_Vars.Actions[deck][button].action = act;
+		EmoteButtons_Vars.Actions[deck][button].type = EBACTTYPE_SLASHCMD;
+		--EmoteButtons_UpdateConfig();
+	end
+	if(DeckBuilderFrame:IsShown()) then
+		DeckBuilderFrame_UpdateActions();
+		DeckBuilderFrameButtons_Update();
+	end
+	if EmoteButtons_FarLeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarLeft");
+	elseif EmoteButtons_FarRightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarRight");
+	elseif EmoteButtons_LeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Left");
+	elseif EmoteButtons_RightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Right");
+	elseif EmoteButtons_FirstLevelName == deck then
+		EmoteButtons_LoadDeck(deck, "");
+	end
+	EmoteButtons_ChangeCMDFrame:Hide();
+end
+
+function EmoteButtons_ChangeCMDFrame_OnShow()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	acttype = EmoteButtons_Vars.Actions[deck][button].type
+	if (acttype == EBACTTYPE_SLASHCMD) then
+		act = EmoteButtons_Vars.Actions[deck][button].action
+		EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:SetText(act);
+	end
+end
+
+function EmoteButtons_ChangeCMDFrame_SubmitButton_Update()
+	txt = EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:GetText();
+	if string.len(txt) > 0 then
+		EmoteButtons_ChangeCMDFrame_SubmitButton:Enable();
+	else
+		EmoteButtons_ChangeCMDFrame_SubmitButton:Disable();
+	end
 end
