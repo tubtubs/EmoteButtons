@@ -210,13 +210,15 @@
 					</Layer>
 				</Layers>
 				<Scripts>
-					<OnTextChanged>
-						IconPickerOkayButton_Update();
-						<!-- MacroFrameSelectedMacroName:SetText(this:GetText()); -->
-					</OnTextChanged>
+					<OnShow>
+					IconPickerEditBox:SetAutoFocus(0);
+					</OnShow>
 					<OnEscapePressed>
-						IconPickerFrame:Hide();
+					IconPickerEditBox:ClearFocus();
 					</OnEscapePressed>
+					<OnTextChanged>
+					IconPickerOkayButton_Update();
+					</OnTextChanged>
 					<OnEnterPressed>
 						if ( IconPickerOkayButton:IsEnabled() ~= 0 ) then
 							IconPickerOkayButton_OnClick();
@@ -225,7 +227,24 @@
 				</Scripts>
 				<FontString inherits="ChatFontNormal"/>
 			</EditBox>
-
+			
+			<Button name="IconPickerRandomButton" text="Random" inherits="EmoteButtons_OptionButton_Template">
+				<Size>
+					<AbsDimension x="60" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-15" y="-35"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+               <Scripts>
+                   <OnClick>
+					IconPickerRandomIconButton()
+                   </OnClick>
+               </Scripts>
+            </Button>
 
             <CheckButton name="IconPickerAbilities" inherits="IconPickerCategoryTemplate">
                 <Size>
@@ -699,6 +718,7 @@
 		</Frames>
 		<Scripts>
 			<OnShow>
+				tinsert(UISpecialFrames, "IconPickerFrame");
 				IconPickerFrame_OnShow();
 			</OnShow>
 			<OnHide>

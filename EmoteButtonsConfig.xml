@@ -1364,7 +1364,7 @@
                        ResetPosition();
                    </OnClick>
                </Scripts>
-           </Button>
+            </Button>
 
 			<Button name="$parent_ResetProfileButton" text="Reset Current Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
@@ -1382,7 +1382,7 @@
                        ResetProfile();
                    </OnClick>
                </Scripts>
-           </Button>
+            </Button>
 
 
 			<Button name="$parent_ProfileSetDropdownButton" text="Profiles" inherits="EmoteButtons_OptionButton_Template">

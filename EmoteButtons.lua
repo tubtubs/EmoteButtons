@@ -31,13 +31,13 @@ Setup Default Profile[CHECK]
 --updating okay button in iconpicker when changing categories
 -Rename deck[Check]
 -Move button up or down [Check]
+-Random icon button would be REALLY cool [CHECK]
 
 
 Last features wish list.
 
 High Priority:
 -Save profiles by default, don't really care for save prompts
--Random icon button would be REALLY cool
 -Clean up visuals on deckbuilder, move deck/action items down and maybe add border
 
 Medium priority:
@@ -47,7 +47,7 @@ Medium priority:
 
 **Low priority:
 -Could also move around some icons in the icon list. 
---Some professions might be missing stuff that could be there
+--Some professions might be missing icons that could be there
 --Would need to force searching MISC last if there's overlap
 Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
 

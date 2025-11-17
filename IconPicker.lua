@@ -372,8 +372,30 @@ function IconPickerRandomIcon()
     l = getn(IP_ICONS[cat])
     subcat = math.random(l)
     m = getn(IP_ICONS[cat][subcat].icons)
-    --DEFAULT_CHAT_FRAME:AddMessage(IP_ICONS[cat][subcat].icons[math.random(m)])
     return IP_ICONS[cat][subcat].icons[math.random(m)]
+end
+
+function IconPickerRandomIconButton()
+    cat = math.random(NUM_CATEGORIES)
+    l = getn(IP_ICONS[cat])
+    subcat = math.random(l)
+    m = getn(IP_ICONS[cat][subcat].icons)
+    IP_CATEGORY_SELECTED = cat;
+    IP_SUBCATEGORY_SELECTED = subcat;
+    found = math.random(m)
+    if (math.mod(found,5) == 0 ) then
+        offset = floor((found-1)/5)*36;
+            innerIndex=5;
+    else
+        offset = floor(found/5)*36;
+        innerIndex=math.mod(found,5); 
+    end
+    getglobal("IconPickerButton"..innerIndex):SetChecked(1);
+    IconPickerFrame.selectedIcon = found;
+    IconPickerFrame_Update();
+    IconPickerScrollFrame:SetVerticalScroll(offset);
+    IconPickerUncheckAllCategories()
+    IconPickerCheckSelectedCategory()
 end
 
 function IconPickerForceShow()
@@ -390,7 +412,6 @@ function IconPickerFindIcon(icon)
             m = IP_ICONS[i][j].icons
             for k=1, getn(m) do
                 if icon == m[k] then
-
                     IP_CATEGORY_SELECTED = i;
                     IP_SUBCATEGORY_SELECTED = j;
                     IconPickerFrame.selectedIcon=k;
@@ -407,10 +428,12 @@ function IconPickerFindIcon(icon)
 			offset = floor(found/5)*36;
 			innerIndex=math.mod(found,5); 
 		end
+        getglobal("IconPickerButton"..innerIndex):SetChecked(1);
+		IconPickerFrame.selectedIcon = found;
+        IconPickerFrame_Update()
 		IconPickerScrollFrame:SetVerticalScroll(offset);
         --DEFAULT_CHAT_FRAME:AddMessage(format("offset: %s",offset))
-		getglobal("IconPickerButton"..innerIndex):SetChecked(1);
-		IconPickerFrame.selectedIcon = found;
+
     else
         DEFAULT_CHAT_FRAME:AddMessage(format("Could not find %s",icon))
 	end
@@ -418,7 +441,7 @@ end
 
 function IconPickerFrame_OnShow()
 	PlaySound("igCharacterInfoOpen");
-	IconPickerEditBox:SetFocus();
+	IconPickerEditBox:ClearFocus();
 	IconPickerOkayButton_Update();
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
