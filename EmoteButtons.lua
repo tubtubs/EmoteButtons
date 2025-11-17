@@ -9,12 +9,11 @@ Expanded left and right wings to be 8 buttons
 Added far left and far right wings (increases max buttons greatly)
 Added Emote, and Deck managers
 Added Icon picker dialog (uses expanded icon list)
-Added Deckbuilder
+Added Deckbuilder (replaces original config window)
 Advanced Config Window
--Profiles Supported
--Importing/Exporting Profiles supported
+-Importing/Exporting Profiles
 Macro Support
-All new default deck layout, featuring 250+ emotes and slash commands
+All new default deck layout, featuring 250+ emotes and slash commands, and macros
 
 TODO:
 Setup Default Profile[CHECK]
@@ -31,20 +30,19 @@ Setup Default Profile[CHECK]
 Macro Support (lol) [CHECK]
 
 High Priority:
--Save profiles by default, don't really care for save prompts
-
+*-Save profiles by default, don't really care for save prompts
 
 Medium priority:
 
-**Low priority:
--Could also move around some icons in the icon list. 
+Low priority:
+*Could also move around some icons in the icon list. 
 --Some professions might be missing icons that could be there
 --Would need to force searching MISC last if there's overlap
 --Rockets/Clusters should be in engineering...
 --Some faction tabards in misc
 --Feathers could be in Inscription, but I think theyre fine in misc
 --Grlyphs in inscription?
-Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
+*Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
 
 	DEFAULT_CHAT_FRAME:AddMessage("TEST")
 ]]--
@@ -1596,8 +1594,10 @@ function DeckManagerFrame_OnShow()
 				break;
 			end
 		end
-		if found > 9 then
-			DeckManagerFrame_DeckScrollFrame:SetVerticalScroll(floor((found-1)*8));
+		if found > 8 then
+			DeckManagerFrame_DeckScrollFrame:SetVerticalScroll((found)*7);
+		else
+			DeckManagerFrame_DeckScrollFrame:SetVerticalScroll(0);
 		end --only scroll down if its past first page, glitches out less than 8 entries with no scroll bar
 		getglobal("DeckManagerFrame_DeckActionButton".."1"):SetChecked(1);
 		DeckManagerFrame.selectedIcon = found;
@@ -1747,8 +1747,10 @@ function DeckBuilderFrame_ScrollToSelected()
 	end
 	DeckBuilderFrame.selectedIcon = found;
 	DeckBuilderFrame.selectedAction = button;
-	if (found > 9 ) then
-		DeckBuilderFrame_DeckScrollFrame:SetVerticalScroll(found);
+	if (found > 8 ) then
+		DeckBuilderFrame_DeckScrollFrame:SetVerticalScroll(found*7);
+	else
+		DeckBuilderFrame_DeckScrollFrame:SetVerticalScroll(1)
 	end -- only scroll if its past the first page, not worth it otherwise.
 	PlaySound("igCharacterInfoOpen");
 	DeckBuilderFrame_Update();
@@ -2586,7 +2588,7 @@ function ExportProfile()
 			tip = EmoteButtons_Vars.Actions[i][j].tooltip
 			img = EmoteButtons_Vars.Actions[i][j].image
 			TempDecks = format(
-				"%s{action=\"%s\", type=%s, tooltip=\"%s\", image=\"%s\"}",
+				"%s{action=[[%s]], type=%s, tooltip=\"%s\", image=\"%s\"}",
 				TempDecks,act,actType,tip,img
 			)
 			--does it get a comma, or just a newline?
