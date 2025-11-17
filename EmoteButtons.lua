@@ -841,8 +841,11 @@ function EmoteButtons_LoadDeck(deck, wing)
 end
 
 function EmoteButtons_DoAction(text)
-	EmoteButtons_EditBox:SetText(text);
-	ChatEdit_SendText(EmoteButtons_EditBox);
+	for w in string.gfind(text, "([^\r\n]+)") do
+		DEFAULT_CHAT_FRAME:AddMessage(w)
+		EmoteButtons_EditBox:SetText(w);
+		ChatEdit_SendText(EmoteButtons_EditBox);
+	end
 end
 
 function EmoteButtons_DoEmote(text)
@@ -943,14 +946,23 @@ function EmoteButtons_ShowTooltip(framename)
 		end
 		if (found ~= 0 and EB_EmoteList[found] and trg and trg ~= plr) then
 			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. trg;
-			fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. format(EB_EmoteList[found].TargetEmoteText,trg);
+			action = format(EB_EmoteList[found].TargetEmoteText,trg)
+			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. format(EB_EmoteList[found].TargetEmoteText,trg);
 		else
 			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. "EMOTE";
-			fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. EB_EmoteList[found].SelfEmoteText;
+			action = EB_EmoteList[found].SelfEmoteText
+			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. EB_EmoteList[found].SelfEmoteText;
 		end
+
+	end
+	if string.len(tooltip) == 0 then
+		fulltext = "|cFFFFFFFF"..action;
+	elseif (acttype == EBACTTYPE_SLASHCMD) then
+		fulltext = "|cFFFFFFFF"..tooltip;
 	else
 		fulltext = "|cFFFFFFFF"..tooltip.."|n|r"..action;
 	end
+
 
 	GameTooltip:SetOwner(getglobal(framename), anchor);
 	if EmoteButtons_Config:IsShown() then
@@ -1218,7 +1230,9 @@ end
 	else
 		txt = "";
 	end
-
+		getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_CHANGECOMMAND")):GetName().."EditBox"):SetHeight(200);
+	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_CHANGECOMMAND")):GetName().."EditBox"):SetWidth(200);
+	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_CHANGECOMMAND")):GetName().."EditBox"):SetMultiLine(true);
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_CHANGECOMMAND")):GetName().."EditBox"):SetText(txt);
 end
 
