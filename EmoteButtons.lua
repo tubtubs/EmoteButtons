@@ -29,27 +29,27 @@ Setup Default Profile[CHECK]
 -Tighten up UI constraints [check]
 --closing iconpicker/CMD prompt when other action or deck is picked
 --updating okay button in iconpicker when changing categories
+-Rename deck[Check]
+-Move button up or down [Check]
+
 
 Last features wish list.
 
 High Priority:
 -Save profiles by default, don't really care for save prompts
--Move button up or down
 -Random icon button would be REALLY cool
+-Clean up visuals on deckbuilder, move deck/action items down and maybe add border
 
 Medium priority:
--Updating/reloading wings might be messing up while using the deckbuilder. Small issue, might fix.
 -Slash command manager could be nice, but not needed
 --Just build in some common useful ones from the community imo
+--Build in get rested XP, can't think of any other cool /commands
 
 **Low priority:
 -Could also move around some icons in the icon list. 
 --Some professions might be missing stuff that could be there
 --Would need to force searching MISC last if there's overlap
 Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
--Rename deck
--Always reloads when deleting a deck, only really needs to reload when it deletes an in use one imo
-
 
 	DEFAULT_CHAT_FRAME:AddMessage("TEST")
 ]]--
@@ -177,6 +177,7 @@ function HideAllPopupsFrames()
 	StaticPopup_Hide ("SAVE_PROFILE_CONFIRMATION")
 	StaticPopup_Hide ("EMOTEBUTTONS_NEWDECK")
 	StaticPopup_Hide ("SET_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_RENAMEDECK")
 end
 
 function sort_alphabetical(a, b)
@@ -1870,10 +1871,13 @@ function DeckBuilderFrame_Update()
 end
 
 function DeckBuilderFrameButtons_Update() 
-	if ( DeckBuilderFrame.selectedIcon~=0 ) then
+	d = DeckBuilderFrame.selectedIcon
+	if ( d~=0 and EmoteButtons_DeckList[d] ~= EmoteButtons_FirstLevelName) then
 		DeckBuilderFrame_DeleteDeckButton:Enable();
+		DeckBuilderFrame_RenameDeckButton:Enable();
 	else
 		DeckBuilderFrame_DeleteDeckButton:Disable();
+		DeckBuilderFrame_RenameDeckButton:Disable();
 	end
 	
 	if ( DeckBuilderFrame.selectedAction~=0 ) then
@@ -1881,16 +1885,35 @@ function DeckBuilderFrameButtons_Update()
 		DeckBuilderFrame_ChangeCMDActionButton:Enable();
 		DeckBuilderFrame_ChangeDeckActionButton:Enable();
 
-		d = DeckBuilderFrame.selectedIcon
+
 		deck = EmoteButtons_DeckList[d]
 		a = DeckBuilderFrame.selectedAction
+
 
 		if (EmoteButtons_Vars.Actions[deck][a]) then
 			DeckBuilderFrame_DeleteActionButton:Enable();
 			DeckBuilderFrame_ChangeTooltipButton:Enable();
+			l = getn(EmoteButtons_Vars.Actions[deck])
+			--find first and last actions and disable move up or move down
+			if (l==1) then --if its just 1 element, totally un-needed
+				DeckBuilderFrame_MoveDownButton:Disable();
+				DeckBuilderFrame_MoveUpButton:Disable();
+			elseif (a==1) then --if its first element, but more than 1
+				DeckBuilderFrame_MoveDownButton:Enable();
+				DeckBuilderFrame_MoveUpButton:Disable();
+			elseif (a==l) then --last selected, but more than 1
+				DeckBuilderFrame_MoveDownButton:Disable();
+				DeckBuilderFrame_MoveUpButton:Enable();
+			else
+				DeckBuilderFrame_MoveDownButton:Enable();
+				DeckBuilderFrame_MoveUpButton:Enable();
+			end
+
 		else
 			DeckBuilderFrame_DeleteActionButton:Disable();
 			DeckBuilderFrame_ChangeTooltipButton:Disable();
+			DeckBuilderFrame_MoveDownButton:Disable();
+			DeckBuilderFrame_MoveUpButton:Disable();
 		end
 	else
 		DeckBuilderFrame_ChangeTooltipButton:Disable();
@@ -1898,6 +1921,8 @@ function DeckBuilderFrameButtons_Update()
 		DeckBuilderFrame_ChangeEmoteActionButton:Disable();
 		DeckBuilderFrame_ChangeCMDActionButton:Disable();
 		DeckBuilderFrame_DeleteActionButton:Disable();
+		DeckBuilderFrame_MoveDownButton:Disable();
+		DeckBuilderFrame_MoveUpButton:Disable();
 	end
 end
 
@@ -1926,7 +1951,7 @@ function DeckBuilderFrame_DeleteActionButton_OnClick()
 end
 
 function DeckBuilderFrame_DeleteDeckButton_OnClick()
---check if the deck is used in any other decks...
+    --check if the deck is used in any other decks...
 	local deck = EmoteButtons_ConfigDeck;
 	if deck == EmoteButtons_FirstLevelName then
 		DEFAULT_CHAT_FRAME:AddMessage("Cannot delete Main deck")
@@ -2055,6 +2080,143 @@ function DeckBuilderFrame_AddDeckButton_OnClick()
 	};
 	StaticPopup_Show("EMOTEBUTTONS_NEWDECK");
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_NEWDECK")):GetName().."EditBox"):SetText("");
+end
+
+function DeckBuilderFrame_MoveUpButton_OnClick()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	temp = EmoteButtons_Vars.Actions[deck][button-1]
+	EmoteButtons_Vars.Actions[deck][button-1]=EmoteButtons_Vars.Actions[deck][button]
+	EmoteButtons_Vars.Actions[deck][button] = temp
+	DeckBuilderFrame.selectedAction = button-1;
+	EmoteButtons_ConfigButton = button - 1;
+	DeckBuilderFrameButtons_Update();
+	DeckBuilderFrame_UpdateActions();
+	if EmoteButtons_FarLeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarLeft");
+	elseif EmoteButtons_FarRightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarRight");
+	elseif EmoteButtons_LeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Left");
+	elseif EmoteButtons_RightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Right");
+	elseif EmoteButtons_FirstLevelName == deck then
+		EmoteButtons_LoadDeck(deck, "");
+	end
+	EmoteButtons_CloseOpenDecks();
+	EmoteButtons_ReOpenDecks();
+end
+
+function DeckBuilderFrame_MoveDownButton_OnClick()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	temp = EmoteButtons_Vars.Actions[deck][button+1]
+	EmoteButtons_Vars.Actions[deck][button+1]=EmoteButtons_Vars.Actions[deck][button]
+	EmoteButtons_Vars.Actions[deck][button] = temp
+	DeckBuilderFrame.selectedAction = button+1;
+	EmoteButtons_ConfigButton = button +1;
+	DeckBuilderFrameButtons_Update();
+	DeckBuilderFrame_UpdateActions();
+	if EmoteButtons_FarLeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarLeft");
+	elseif EmoteButtons_FarRightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarRight");
+	elseif EmoteButtons_LeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Left");
+	elseif EmoteButtons_RightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Right");
+	elseif EmoteButtons_FirstLevelName == deck then
+		EmoteButtons_LoadDeck(deck, "");
+	end
+	EmoteButtons_CloseOpenDecks();
+	EmoteButtons_ReOpenDecks();
+end
+
+function DeckBuilderFrame_RenameDeckButton_OnClick()
+	local deck = EmoteButtons_ConfigDeck;
+	local accept = function()
+		local editBox=getglobal(this:GetParent():GetName().."EditBox");
+		local newDeck = editBox:GetText();
+			found = 0
+			for i=1, getn(EmoteButtons_DeckList) do
+				if EmoteButtons_DeckList[i] == newDeck then
+					found = 1
+				end
+			end
+			if found == 1 then
+				DEFAULT_CHAT_FRAME:AddMessage("Deck name already in use!");
+			else
+				--Add new entry...
+				EmoteButtons_Vars.Actions[newDeck] = EmoteButtons_Vars.Actions[deck];
+				table.insert(EmoteButtons_DeckList, newDeck);
+				--Delete old entry...
+				EmoteButtons_Vars.Actions[deck] = nil;
+				for i=1, getn(EmoteButtons_DeckList) do
+					if EmoteButtons_DeckList[i] == deck then
+						found = i
+					end
+				end
+				table.remove(EmoteButtons_DeckList,found)
+				table.sort(EmoteButtons_DeckList,sort_alphabetical);
+				--Updated old entries in other decks...
+				for i=1, getn(EmoteButtons_DeckList) do
+					d = EmoteButtons_DeckList[i]
+					l=getn(EmoteButtons_Vars.Actions[d])
+					for n=1, l do
+						if (n>getn(EmoteButtons_Vars.Actions[d])) then
+							break
+						end
+						if(EmoteButtons_Vars.Actions[d][n].type == EBACTTYPE_DECK and
+							EmoteButtons_Vars.Actions[d][n].action == deck) then
+							EmoteButtons_Vars.Actions[d][n].action = newDeck;
+							--DEFAULT_CHAT_FRAME:AddMessage(format("Updating deck:%s index:%s", d, n))
+						end			
+					end
+				end
+				--Sort potentially messes up indexes on deck list, so need to reset deck selection
+				DeckBuilderFrame.selectedAction = 0;
+				DeckBuilderFrame.selectedIcon = 0;
+				DeckBuilderFrame_Update();
+				DeckBuilderFrame_UpdateActions();
+				DeckBuilderFrameButtons_Update();
+				--Reload relevant decks, and re-fresh all buttons
+				if EmoteButtons_FarLeftWing_Deck==deck then
+					EmoteButtons_LoadDeck(newDeck, "FarLeft");
+				elseif EmoteButtons_FarRightWing_Deck==deck then
+					EmoteButtons_LoadDeck(newDeck, "FarRight");
+				elseif EmoteButtons_LeftWing_Deck==deck then
+					EmoteButtons_LoadDeck(newDeck, "Left");
+				elseif EmoteButtons_RightWing_Deck==deck then
+					EmoteButtons_LoadDeck(newDeck, "Right");
+				end
+				EmoteButtons_CloseOpenDecks();
+				EmoteButtons_ReOpenDecks();
+				DEFAULT_CHAT_FRAME:AddMessage("Deck rename success!");
+			--EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].tooltip = editBox:GetText();
+			--EmoteButtons_UpdateConfig();
+		end
+		this:GetParent():Hide();
+	end
+	StaticPopupDialogs["EMOTEBUTTONS_RENAMEDECK"]={
+		text=TEXT(EMOTEBUTTONS_NEWDECK),
+		button1=TEXT(ACCEPT),
+		button2=TEXT(CANCEL),
+		hasEditBox=1,
+		maxLetters=200,
+		OnAccept=accept,
+		EditBoxOnEnterPressed=accept,
+		EditBoxOnEscapePressed=function()
+			this:GetParent():Hide();
+		end,
+		timeout=0,
+		exclusive=1
+	};
+	if deck == EmoteButtons_FirstLevelName then
+			DEFAULT_CHAT_FRAME:AddMessage("Cannnot rename Main deck.")
+	else
+	StaticPopup_Show("EMOTEBUTTONS_RENAMEDECK");
+	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_RENAMEDECK")):GetName().."EditBox"):SetText(deck);
+	end
 end
 
 function EmoteButtons_AdvancedConfigFrame_OnShow()

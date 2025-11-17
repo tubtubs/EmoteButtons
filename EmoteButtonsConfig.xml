@@ -606,7 +606,7 @@
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="EmoteButtons_ConfigMain">
 				<Offset>
-					<AbsDimension x="0" y="-180"/>
+					<AbsDimension x="0" y="-210"/>
 				</Offset>
 			</Anchor>
 		</Anchors>
@@ -893,12 +893,12 @@
 				</Anchor>
 			</Anchors>
 		</NormalTexture>
-	<!--	<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
+		<!--	<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
 		<CheckedTexture alphaMode="ADD" file="Interface\Buttons\CheckButtonHilight"/> -->
 	</CheckButton>
 
 	<CheckButton name="DeckManagerActionButtonTemplate" inherits="DeckManagerActionTemplate" virtual="true">
-	<!-- Don't actually need scripts for the action buttons in the manager. It's just a picker.	
+		<!-- Don't actually need scripts for the action buttons in the manager. It's just a picker.	
 		<Scripts>
 			<OnClick>
 				DeckManagerFrameDeckActionButton_OnClick();	
@@ -918,7 +918,7 @@
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="EmoteButtons_ConfigMain"> <!-- TODO -->
 				<Offset>
-					<AbsDimension x="0" y="-180"/>
+					<AbsDimension x="0" y="-210"/>
 				</Offset>
 			</Anchor>
 		</Anchors>
@@ -1196,7 +1196,7 @@
 		</Scripts>
 	</Frame>
 
-<!-- Advanced Config-->
+	<!-- Advanced Config-->
 	<Frame name="EmoteButtons_AdvancedConfigFrame" frameStrata="HIGH" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
@@ -1642,7 +1642,6 @@
 		</Scripts>
 	</Frame>
 
-
 	<Frame name="EmoteButtons_ImportProfileFrame" frameStrata="DIALOG" toplevel="true" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
@@ -1805,7 +1804,7 @@
 		</Scripts>
 	</Frame>
 
-<!-- Deck Builder -->
+	<!-- Deck Builder -->
 
 	<CheckButton name="DeckBuilderTemplate" virtual="true">
 		<Size>
@@ -1914,7 +1913,7 @@
 			</Anchor>
 		</Anchors>
 		<Size>
-			<AbsDimension x="600" y="180" />
+			<AbsDimension x="600" y="240" />
 		</Size>
 		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<BackgroundInsets>
@@ -2138,7 +2137,7 @@
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="RIGHT">
 						<Offset>
-							<AbsDimension x="-12" y="-80"/>
+							<AbsDimension x="-12" y="-90"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -2148,6 +2147,22 @@
 					</OnClick>
 				</Scripts>
 			</Button>
+
+			<Button name="$parent_RenameDeckButton" text="EMOTEBUTTONS_RENAMEDECK" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_DeleteDeckButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="0" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+					DeckBuilderFrame_RenameDeckButton_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+
 			<Button name="$parent_AddDeckButton" text="EMOTEBUTTONS_ADDDECK" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parent_DeleteDeckButton" relativePoint="LEFT">
@@ -2158,7 +2173,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						DeckBuilderFrame_AddDeckButton_OnClick();
+					DeckBuilderFrame_AddDeckButton_OnClick();
 					</OnClick>
 				</Scripts>
 			</Button>
@@ -2234,11 +2249,42 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parent_AdvancedConfig" text="EMOTEBUTTONS_ADVANCEDCONFIG" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_MoveDownButton" text="EMOTEBUTTONS_MOVEDOWN" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parent_ChangeCMDActionButton" relativePoint="LEFT">
 						<Offset>
-							<AbsDimension x="-120" y="20"/>
+							<AbsDimension x="0" y="20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+					DeckBuilderFrame_MoveDownButton_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_MoveUpButton" text="EMOTEBUTTONS_MOVEUP" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_MoveDownButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="0" y="20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+					DeckBuilderFrame_MoveUpButton_OnClick()
+					</OnClick>
+				</Scripts>
+			</Button>
+
+
+
+			<Button name="$parent_AdvancedConfig" text="EMOTEBUTTONS_ADVANCEDCONFIG" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="TOP" relativeTo="$parent" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="130" y="-10"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -2279,7 +2325,7 @@
 	</Frame>
 
 
-<!--- End of Deck Builder -->
+	<!--- End of Deck Builder -->
 	
 	<!-- Obsolete, delete this soon -->
 	<Frame name="EmoteButtons_SelectAction" hidden="true" frameStrata="HIGH">
