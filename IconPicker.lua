@@ -372,7 +372,7 @@ function IconPickerRandomIcon()
     l = getn(IP_ICONS[cat])
     subcat = math.random(l)
     m = getn(IP_ICONS[cat][subcat].icons)
-    DEFAULT_CHAT_FRAME:AddMessage(IP_ICONS[cat][subcat].icons[math.random(m)])
+    --DEFAULT_CHAT_FRAME:AddMessage(IP_ICONS[cat][subcat].icons[math.random(m)])
     return IP_ICONS[cat][subcat].icons[math.random(m)]
 end
 
@@ -393,7 +393,6 @@ function IconPickerFindIcon(icon)
 
                     IP_CATEGORY_SELECTED = i;
                     IP_SUBCATEGORY_SELECTED = j;
-                    --IconPickerScrollFrame:SetVerticalScroll(k);
                     IconPickerFrame.selectedIcon=k;
                     found = k;
                 end
@@ -409,6 +408,7 @@ function IconPickerFindIcon(icon)
 			innerIndex=math.mod(found,5); 
 		end
 		IconPickerScrollFrame:SetVerticalScroll(offset);
+        --DEFAULT_CHAT_FRAME:AddMessage(format("offset: %s",offset))
 		getglobal("IconPickerButton"..innerIndex):SetChecked(1);
 		IconPickerFrame.selectedIcon = found;
     else
@@ -477,7 +477,7 @@ function IconPickerButton_OnClick()
 end
 
 function IconPickerOkayButton_Update() 
-	if ( IconPickerFrame.selectedIcon ) then
+	if ( IconPickerFrame.selectedIcon and IconPickerFrame.selectedIcon ~= 0 ) then
 		IconPickerOkayButton:Enable();
 	else
 		IconPickerOkayButton:Disable();
@@ -523,6 +523,8 @@ function IconPickerFrame_Update()
         --local numMacroIcons = GetNumMacroIcons();
 	local IconPickerIcon, IconPickerButton;
 	local IconPickerOffset = FauxScrollFrame_GetOffset(IconPickerScrollFrame);
+   -- DEFAULT_CHAT_FRAME:AddMessage(format("offset: %s",IconPickerOffset))
+
 	local index;
    --DEFAULT_CHAT_FRAME:AddMessage(format("size %s",ico[1]))
 	
@@ -544,6 +546,8 @@ function IconPickerFrame_Update()
 			IconPickerButton:SetChecked(nil);
 		end
 	end
+
+   -- DEFAULT_CHAT_FRAME:AddMessage(format("offset: %s",IconPickerScrollFrame:GetVerticalScroll()))
 	
 	-- Scrollbar stuff
 	FauxScrollFrame_Update(IconPickerScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );

@@ -15,24 +15,41 @@ Advanced Config Window
 -Importing/Exporting Profiles supported
 All new default deck layout, featuring 250+ emotes and slash commands
 
+KNOWN ISSUES:
+*Icon Picker doesn't always scroll down to icon very well on certain tabs
+If you scroll up, or down, close the iconpicker and then re-open it
+it should scroll down properly to your icon. Really stumped for a fix,
+but its an opulent feature as is.
 
 TODO:
 Setup Default Profile[CHECK]
 -Could always use refinement, want to shuffle some buttons around
+-CMD isnt auto filled if its first or last? [FIXED]
+-Still a test output somewhere when opening/closing rightwing? [check]
+-Tighten up UI constraints [check]
+--closing iconpicker/CMD prompt when other action or deck is picked
+--updating okay button in iconpicker when changing categories
 
 Last features wish list.
+
+High Priority:
 -Save profiles by default, don't really care for save prompts
 -Move button up or down
--Rename deck
--CMD isnt auto filled if its first or last?
--Still a test output somewhere when opening/closing rightwing?
--Test icon picker's ability to scroll to the current icon more. Might be scuffed
---Also test when switching categories - the submit button doesn't update/disable its self
-Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
--Could also move around some icons in the icon list. 
---Some professions might be missing stuff that could be there
+-Random icon button would be REALLY cool
+
+Medium priority:
 -Updating/reloading wings might be messing up while using the deckbuilder. Small issue, might fix.
 -Slash command manager could be nice, but not needed
+--Just build in some common useful ones from the community imo
+
+**Low priority:
+-Could also move around some icons in the icon list. 
+--Some professions might be missing stuff that could be there
+--Would need to force searching MISC last if there's overlap
+Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
+-Rename deck
+-Always reloads when deleting a deck, only really needs to reload when it deletes an in use one imo
+
 
 	DEFAULT_CHAT_FRAME:AddMessage("TEST")
 ]]--
@@ -230,7 +247,6 @@ end
 
 function EmoteButtons_LoadedVars()
 	EmoteButtons_WipeVars();
-	--DEFAULT_CHAT_FRAME:AddMessage("testing testing")
 	EmoteButtons_AdvancedConfigFrame_SetMainShift:SetValue(EmoteButtons_Vars.Main_Shift);
 	EmoteButtons_AdvancedConfigFrame_SetMainSize:SetValue(EmoteButtons_Vars.Main_Ratio);
 	EmoteButtons_ArrangeFrames();
@@ -544,7 +560,6 @@ function EmoteButtons_ToggleRightWing()
 	local rwc = getn(EmoteButtons_RightWing);
 	for i=1, rwc do
 		obj = getglobal(EmoteButtons_RightWing[i]);
-		DEFAULT_CHAT_FRAME:AddMessage(format("%s", EmoteButtons_RightWing_Deck))
 		if (EmoteButtons_Levels["Right"]) then
 			FadeOutFrame(obj, 0.1*i);
 		elseif (EmoteButtons_Vars.Actions[EmoteButtons_RightWing_Deck][i]~=nil and 
@@ -963,7 +978,7 @@ function EmoteButtons_UpdateConfig()
 	DeckBuilderFrame:Show();
 	DeckBuilderFrame_ScrollToSelected();
 	--EB_EmotesManager:Hide();
-	--IconPickerFrame:Hide();
+	IconPickerFrame:Hide();
     --EmoteButtons_PopupImageSelector(); 
 end
 
@@ -1193,7 +1208,7 @@ end
 	};
 	StaticPopup_Show("EMOTEBUTTONS_CHANGECOMMAND");
 	len = getn(EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck])
-	if (len > EmoteButtons_ConfigButton
+	if (len >= EmoteButtons_ConfigButton
 		and EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].type == EBACTTYPE_SLASHCMD) then 
 		txt = EmoteButtons_Vars.Actions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].action;
 	else
@@ -1751,8 +1766,10 @@ function DeckBuilderFrameDeckActionButton_OnClick()
 	end
 	EB_EmotesManager:Hide();
 	DeckManagerFrame:Hide();
-	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
-	StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
+	IconPickerFrame:Hide();
+	HideAllPopupsFrames();
+	--StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
+	--StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
 	DeckBuilderFrameButtons_Update();
 	DeckBuilderFrame_Update();
 end
@@ -1764,8 +1781,10 @@ function DeckBuilderFrameDeckButton_OnClick()
 	EmoteButtons_ConfigDeck = EmoteButtons_DeckList[DeckBuilderFrame.selectedIcon];
 	EB_EmotesManager:Hide();
 	DeckManagerFrame:Hide();
-	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
-	StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
+	IconPickerFrame:Hide();
+	HideAllPopupsFrames();
+	--StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
+	--StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
 	DeckBuilderFrame_UpdateActions(found);
 	DeckBuilderFrameButtons_Update() 
 	DeckBuilderFrame_Update();
@@ -2296,7 +2315,6 @@ function EmoteButtons_ImportProfileFrame_SubmitButton_OnClick()
 	f = loadstring(l);
 	a,b = f();
 	b.Decks = a;
-	--DEFAULT_CHAT_FRAME:AddMessage(format("Import Profile %s %s",a["Main"][1].action, b.Decks["Main"][1].action))
 	--check for profile name conflicts, offer to rename.	
 	p = b.Name;
 	found = 0
@@ -2391,7 +2409,6 @@ function ExportProfile()
 			end
 			act_counter = act_counter + 1;
 		end
-		DEFAULT_CHAT_FRAME:AddMessage(format("ech %s %s", deck_counter, getn(EmoteButtons_Vars.Actions)))
 		if (deck_counter == getn(EmoteButtons_DeckList)) then
 			TempDecks = format("%s}\n",TempDecks);	
 		else
@@ -2400,14 +2417,8 @@ function ExportProfile()
 		deck_counter = deck_counter + 1;
 	end
 	TempDecks = format("%s}\n", TempDecks)
-	--TempDecks = format("%s return TempD",TempDecks)
-
 	TempProfile = format(",{Name = \"%s\", Decks=TempDecks}\n",
 							EmoteButtons_Vars.Profile)
---	f = loadstring(TempDecks)
---	TempD = f();
-	--DEFAULT_CHAT_FRAME:AddMessage(format("%s",getn(TempD)))
---	DEFAULT_CHAT_FRAME:AddMessage(format("%s",TempD["Main"][1].action))
 	EmoteButtons_ExportProfileFrame_ScrollFrame_ExportEditBox:SetText(TempDecks..TempProfile)
 	EmoteButtons_ExportProfileFrame:Show();
 end
