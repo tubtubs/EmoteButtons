@@ -32,13 +32,12 @@ Setup Default Profile[CHECK]
 -Rename deck[Check]
 -Move button up or down [Check]
 -Random icon button would be REALLY cool [CHECK]
-
+-Clean up visuals on deckbuilder, move deck/action items down and maybe add border [CHECK]
 
 Last features wish list.
 
 High Priority:
 -Save profiles by default, don't really care for save prompts
--Clean up visuals on deckbuilder, move deck/action items down and maybe add border
 
 Medium priority:
 -Slash command manager could be nice, but not needed
@@ -49,6 +48,10 @@ Medium priority:
 -Could also move around some icons in the icon list. 
 --Some professions might be missing icons that could be there
 --Would need to force searching MISC last if there's overlap
+--Rockets/Clusters should be in engineering...
+--Some faction tabards in misc
+--Feathers could be in Inscription, but I think theyre fine in misc
+--Grlyphs in inscription?
 Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
 
 	DEFAULT_CHAT_FRAME:AddMessage("TEST")

@@ -256,7 +256,7 @@
 				<Scripts>
 					<OnLoad>
 						<!-- EmoteButtons_Init(); -->
-			<!--	this:RegisterEvent("ADDON_LOADED"); -->
+						<!--	this:RegisterEvent("ADDON_LOADED"); -->
 					</OnLoad>
 					<OnClick>
 				EmoteButtons_Config:Hide();
@@ -447,7 +447,6 @@
 				</Scripts>
 				<FontString inherits="ChatFontNormal"/>
 			</EditBox>
-
 			<Button name="$parent_DeckBuilder" text="EMOTEBUTTONS_DECKBUILDER" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="CENTER" relativeTo="$parent">
@@ -462,7 +461,6 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-
 			<Button name="$parent_SetIcon" text="EMOTEBUTTONS_SETICON" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="CFGLabelEdit">
@@ -836,7 +834,6 @@
 			</OnShow>
 		</Scripts>
 	</Frame>
-	
 	<CheckButton name="DeckManagerTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="108" y="16"/>
@@ -860,7 +857,6 @@
 		<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
 		<CheckedTexture alphaMode="ADD" file="Interface\Buttons\CheckButtonHilight"/>
 	</CheckButton>
-
 	<CheckButton name="DeckManagerActionTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="108" y="16"/>
@@ -896,7 +892,6 @@
 		<!--	<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
 		<CheckedTexture alphaMode="ADD" file="Interface\Buttons\CheckButtonHilight"/> -->
 	</CheckButton>
-
 	<CheckButton name="DeckManagerActionButtonTemplate" inherits="DeckManagerActionTemplate" virtual="true">
 		<!-- Don't actually need scripts for the action buttons in the manager. It's just a picker.	
 		<Scripts>
@@ -905,7 +900,6 @@
 			</OnClick>
 		</Scripts> -->
 	</CheckButton>
-
 	<CheckButton name="DeckManagerDeckButtonTemplate" inherits="DeckManagerTemplate" virtual="true">
 		<Scripts>
 			<OnClick>
@@ -913,10 +907,10 @@
 			</OnClick>
 		</Scripts>
 	</CheckButton>
-
 	<Frame name="DeckManagerFrame" frameStrata="HIGH" hidden="true">
 		<Anchors>
-			<Anchor point="CENTER" relativeTo="EmoteButtons_ConfigMain"> <!-- TODO -->
+			<Anchor point="CENTER" relativeTo="EmoteButtons_ConfigMain">
+				<!-- TODO -->
 				<Offset>
 					<AbsDimension x="0" y="-210"/>
 				</Offset>
@@ -975,7 +969,7 @@
 					</Shadow>
 				</FontString>
 			</Layer>
-		</Layers> 
+		</Layers>
 		<Frames>
 			<ScrollFrame name="$parent_DeckScrollFrame" inherits="ClassTrainerListScrollFrameTemplate">
 				<Size>
@@ -989,7 +983,8 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnVerticalScroll> <!-- TODO: Create new update method-->
+					<OnVerticalScroll>
+						<!-- TODO: Create new update method-->
 						FauxScrollFrame_OnVerticalScroll(NUM_DECKS_SHOWN, DeckManagerFrame_Update);
 					</OnVerticalScroll>
 				</Scripts>
@@ -1066,8 +1061,6 @@
 					</Anchor>
 				</Anchors>
 			</CheckButton>
-
-
 			<CheckButton name="$parent_DeckActionButton1" inherits="DeckManagerActionButtonTemplate" id="1">
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="$parent_DeckScrollFrame">
@@ -1140,9 +1133,6 @@
 					</Anchor>
 				</Anchors>
 			</CheckButton>
-
-
-
 			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="RIGHT">
@@ -1195,7 +1185,6 @@
 			</OnShow>
 		</Scripts>
 	</Frame>
-
 	<!-- Advanced Config-->
 	<Frame name="EmoteButtons_AdvancedConfigFrame" frameStrata="HIGH" hidden="true">
 		<Anchors>
@@ -1258,7 +1247,7 @@
 					</Shadow>
 				</FontString>
 			</Layer>
-		</Layers> 
+		</Layers>
 		<Frames>
 			<!-- 
 			Size Slider
@@ -1268,7 +1257,6 @@
 			Export/Import Decks
 			Reset Position
 			-->
-
 			<Slider name="$parent_SetMainShift" inherits="EBSliderTemp">
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativePoint="TOP">
@@ -1289,7 +1277,6 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-
 			<Slider name="$parent_SetMainSize" inherits="EBSliderTemp">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativePoint="TOP">
@@ -1310,7 +1297,6 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-
 			<Button name="$parent_ImportProfileButton" text="Import Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
@@ -1322,13 +1308,12 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
-                   <OnClick>
+				<Scripts>
+					<OnClick>
                        ImportProfile();
                    </OnClick>
-               </Scripts>
-           </Button>
-
+				</Scripts>
+			</Button>
 			<Button name="$parent_ExportProfileButton" text="Export Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
@@ -1340,14 +1325,12 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
-                   <OnClick>
+				<Scripts>
+					<OnClick>
                        ExportProfile();
                    </OnClick>
-               </Scripts>
-           </Button>
-
-
+				</Scripts>
+			</Button>
 			<Button name="$parent_ResetPositionButton" text="Reset Main Button Position" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="185" y="20" />
@@ -1359,13 +1342,12 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
-                   <OnClick>
+				<Scripts>
+					<OnClick>
                        ResetPosition();
                    </OnClick>
-               </Scripts>
-            </Button>
-
+				</Scripts>
+			</Button>
 			<Button name="$parent_ResetProfileButton" text="Reset Current Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
@@ -1377,14 +1359,12 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
-                   <OnClick>
+				<Scripts>
+					<OnClick>
                        ResetProfile();
                    </OnClick>
-               </Scripts>
-            </Button>
-
-
+				</Scripts>
+			</Button>
 			<Button name="$parent_ProfileSetDropdownButton" text="Profiles" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="CENTER" relativePoint="TOP">
@@ -1393,16 +1373,15 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
+				<Scripts>
 					<OnShow>
                        UIDropDownMenu_Initialize(self, ProfileSetDropDown_OnShow);
                    </OnShow>
-                   <OnClick>
+					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick();
                    </OnClick>
-               </Scripts>
-           </Button>
-
+				</Scripts>
+			</Button>
 			<Button name="$parent_ProfileDeleteDropdownButton" text="Delete Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileSetDropdownButton">
@@ -1411,16 +1390,15 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
+				<Scripts>
 					<OnShow>
                        UIDropDownMenu_Initialize(self, ProfileDeleteDropDown_OnShow);
                    </OnShow>
-                   <OnClick>
+					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick();
                    </OnClick>
-               </Scripts>
-           </Button>
-
+				</Scripts>
+			</Button>
 			<Button name="$parent_ProfileDuplicateDropdownButton" text="Duplicate Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="120" y="20" />
@@ -1432,16 +1410,15 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
+				<Scripts>
 					<OnShow>
                        UIDropDownMenu_Initialize(self, ProfileDuplicateDropDown_OnShow);
                    </OnShow>
-                   <OnClick>
+					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick();
                    </OnClick>
-               </Scripts>
-           </Button>
-
+				</Scripts>
+			</Button>
 			<Button name="$parent_ProfileCreateButton" text="Create Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileDuplicateDropdownButton">
@@ -1450,13 +1427,12 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
-                   <OnClick>
+				<Scripts>
+					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick();
                    </OnClick>
-               </Scripts>
-           </Button>
-
+				</Scripts>
+			</Button>
 			<Button name="$parent_ProfileSaveButton" text="Save Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileCreateButton">
@@ -1465,13 +1441,12 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
-                   <OnClick>
+				<Scripts>
+					<OnClick>
 					SaveProfile()
                    </OnClick>
-               </Scripts>
-           </Button>
-
+				</Scripts>
+			</Button>
 			<Button name="$parent_Close" inherits="UIPanelCloseButton">
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
@@ -1496,7 +1471,6 @@
 			</OnShow>
 		</Scripts>
 	</Frame>
-
 	<Frame name="EmoteButtons_ExportProfileFrame" frameStrata="DIALOG"  toplevel="true" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
@@ -1558,9 +1532,8 @@
 					</Shadow>
 				</FontString>
 			</Layer>
-		</Layers> 
+		</Layers>
 		<Frames>
-
 			<ScrollFrame name="$parent_ScrollFrame" inherits="UIPanelScrollFrameTemplate">
 				<Size>
 					<AbsDimension x="300" y="480"/>
@@ -1615,7 +1588,6 @@
 					</EditBox>
 				</ScrollChild>
 			</ScrollFrame>
-
 			<Button name="$parent_Close" inherits="UIPanelCloseButton">
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
@@ -1630,8 +1602,7 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-			
-		</Frames>		
+		</Frames>
 		<Scripts>
 			<OnLoad>             
 				tinsert(UISpecialFrames, "EmoteButtons_ExportProfileFrame");
@@ -1641,7 +1612,6 @@
 			</OnShow>
 		</Scripts>
 	</Frame>
-
 	<Frame name="EmoteButtons_ImportProfileFrame" frameStrata="DIALOG" toplevel="true" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
@@ -1663,7 +1633,7 @@
 			<EdgeSize>
 				<AbsValue val="32" />
 			</EdgeSize>
-		</Backdrop> 
+		</Backdrop>
 		<Layers>
 			<Layer>
 				<Texture name="$parentTitleBorder" file="Interface\DialogFrame\UI-DialogBox-Header">
@@ -1703,9 +1673,8 @@
 					</Shadow>
 				</FontString>
 			</Layer>
-		</Layers> 
+		</Layers>
 		<Frames>
-
 			<ScrollFrame name="$parent_ScrollFrame" inherits="UIPanelScrollFrameTemplate">
 				<Size>
 					<AbsDimension x="300" y="480"/>
@@ -1759,7 +1728,6 @@
 					</EditBox>
 				</ScrollChild>
 			</ScrollFrame>
-			
 			<Button name="$parent_SubmitButton" text="Import Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
@@ -1771,13 +1739,12 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
-                   <OnClick>
+				<Scripts>
+					<OnClick>
                        EmoteButtons_ImportProfileFrame_SubmitButton_OnClick();
                    </OnClick>
-               </Scripts>
-           </Button>
-
+				</Scripts>
+			</Button>
 			<Button name="$parent_Close" inherits="UIPanelCloseButton">
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
@@ -1792,8 +1759,7 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-			
-		</Frames>		
+		</Frames>
 		<Scripts>
 			<OnLoad>             
 				tinsert(UISpecialFrames, "EmoteButtons_ImportProfileFrame");
@@ -1803,9 +1769,7 @@
 			</OnShow>
 		</Scripts>
 	</Frame>
-
 	<!-- Deck Builder -->
-
 	<CheckButton name="DeckBuilderTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="108" y="16"/>
@@ -1829,7 +1793,6 @@
 		<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
 		<CheckedTexture alphaMode="ADD" file="Interface\Buttons\CheckButtonHilight"/>
 	</CheckButton>
-
 	<CheckButton name="DeckBuilderActionTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="300" y="16"/>
@@ -1863,31 +1826,30 @@
 			</Anchors>
 		</NormalTexture>
 		<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square">
-					<Size>
-						<AbsDimension x="300" y="16"/>
-					</Size>
-										<Anchors>
-						<Anchor point="BOTTOMLEFT" relativeTo="$parent">
-							<Offset>
-								<AbsDimension x="18" y="0"/>
-							</Offset>
-						</Anchor>
-					</Anchors>
+			<Size>
+				<AbsDimension x="300" y="16"/>
+			</Size>
+			<Anchors>
+				<Anchor point="BOTTOMLEFT" relativeTo="$parent">
+					<Offset>
+						<AbsDimension x="18" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
 		</HighlightTexture>
 		<CheckedTexture alphaMode="ADD" file="Interface\Buttons\CheckButtonHilight">
-					<Size>
-						<AbsDimension x="300" y="16"/>
-					</Size>
-										<Anchors>
-						<Anchor point="BOTTOMLEFT" relativeTo="$parent">
-							<Offset>
-								<AbsDimension x="18" y="0"/>
-							</Offset>
-						</Anchor>
-					</Anchors>
+			<Size>
+				<AbsDimension x="300" y="16"/>
+			</Size>
+			<Anchors>
+				<Anchor point="BOTTOMLEFT" relativeTo="$parent">
+					<Offset>
+						<AbsDimension x="18" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
 		</CheckedTexture>
 	</CheckButton>
-
 	<CheckButton name="DeckBuilderActionButtonTemplate" inherits="DeckBuilderActionTemplate" virtual="true">
 		<Scripts>
 			<OnClick>
@@ -1895,7 +1857,6 @@
 			</OnClick>
 		</Scripts>
 	</CheckButton>
-
 	<CheckButton name="DeckBuilderDeckButtonTemplate" inherits="DeckBuilderTemplate" virtual="true">
 		<Scripts>
 			<OnClick>
@@ -1903,7 +1864,6 @@
 			</OnClick>
 		</Scripts>
 	</CheckButton>
-
 	<Frame name="DeckBuilderFrame" frameStrata="HIGH" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
@@ -1965,8 +1925,31 @@
 					</Shadow>
 				</FontString>
 			</Layer>
-		</Layers> 
+		</Layers>
 		<Frames>
+			<Frame name="DeckBuilderFrameLayer2">
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="-50" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="475" y="150" />
+				</Size>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="8" right="9" top="6" bottom="8" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+			</Frame>
 			<ScrollFrame name="$parent_DeckScrollFrame" inherits="ClassTrainerListScrollFrameTemplate">
 				<Size>
 					<AbsDimension x="134" y="125"/>
@@ -1974,13 +1957,14 @@
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="$parent">
 						<Offset>
-							<AbsDimension x="-20" y="-35"/>
+							<AbsDimension x="-10" y="-55"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnVerticalScroll> <!-- TODO: Create new update method-->
-						FauxScrollFrame_OnVerticalScroll(NUM_DECKS_SHOWN, DeckBuilderFrame_Update);
+					<OnVerticalScroll>
+						<!-- TODO: Create new update method-->
+							FauxScrollFrame_OnVerticalScroll(NUM_DECKS_SHOWN, DeckBuilderFrame_Update);
 					</OnVerticalScroll>
 				</Scripts>
 			</ScrollFrame>
@@ -2056,8 +2040,6 @@
 					</Anchor>
 				</Anchors>
 			</CheckButton>
-
-
 			<CheckButton name="$parent_DeckActionButton1" inherits="DeckBuilderActionButtonTemplate" id="1">
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="$parent_DeckScrollFrame">
@@ -2130,9 +2112,6 @@
 					</Anchor>
 				</Anchors>
 			</CheckButton>
-
-
-
 			<Button name="$parent_DeleteDeckButton" text="EMOTEBUTTONS_DELETEDECK" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="RIGHT">
@@ -2147,7 +2126,6 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-
 			<Button name="$parent_RenameDeckButton" text="EMOTEBUTTONS_RENAMEDECK" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parent_DeleteDeckButton" relativePoint="LEFT">
@@ -2162,7 +2140,6 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-
 			<Button name="$parent_AddDeckButton" text="EMOTEBUTTONS_ADDDECK" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parent_DeleteDeckButton" relativePoint="LEFT">
@@ -2177,8 +2154,6 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-
-
 			<Button name="$parent_DeleteActionButton" text="EMOTEBUTTONS_DELETEBUTTON" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parent_AddDeckButton" relativePoint="LEFT">
@@ -2277,9 +2252,6 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-
-
-
 			<Button name="$parent_AdvancedConfig" text="EMOTEBUTTONS_ADVANCEDCONFIG" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="TOP" relativeTo="$parent" relativePoint="TOP">
@@ -2297,8 +2269,6 @@
 					</OnClick>
 				</Scripts>
 			</Button>
-
-
 			<Button name="$parent_Close" inherits="UIPanelCloseButton">
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
@@ -2323,10 +2293,7 @@
 			</OnShow>
 		</Scripts>
 	</Frame>
-
-
 	<!--- End of Deck Builder -->
-	
 	<!-- Obsolete, delete this soon -->
 	<Frame name="EmoteButtons_SelectAction" hidden="true" frameStrata="HIGH">
 		<Size>
@@ -2495,5 +2462,4 @@
 			</Button>
 		</Frames>
 	</Frame>
-
 </Ui>
