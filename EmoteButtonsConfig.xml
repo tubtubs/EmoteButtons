@@ -1334,7 +1334,7 @@
 			</Button>
 			<Button name="$parent_ResetPositionButton" text="Reset Main Button Position" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
-					<AbsDimension x="185" y="20" />
+					<AbsDimension x="155" y="20" />
 				</Size>
 				<Anchors>
 					<Anchor point="CENTER" relativePoint="TOP">
@@ -1366,11 +1366,11 @@
                    </OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parent_ProfileSetDropdownButton" text="Profiles" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_ProfileSetDropdownButton" text="Set Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="CENTER" relativePoint="TOP">
 						<Offset>
-							<AbsDimension x="0" y="-45"/>
+							<AbsDimension x="0" y="-55"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -1401,13 +1401,10 @@
 				</Scripts>
 			</Button>
 			<Button name="$parent_ProfileDuplicateDropdownButton" text="Duplicate Profile" inherits="EmoteButtons_OptionButton_Template">
-				<Size>
-					<AbsDimension x="120" y="20" />
-				</Size>
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileDeleteDropdownButton">
 						<Offset>
-							<AbsDimension x="10" y="-30"/>
+							<AbsDimension x="0" y="-30"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -1424,7 +1421,7 @@
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileDuplicateDropdownButton">
 						<Offset>
-							<AbsDimension x="-10" y="-20"/>
+							<AbsDimension x="" y="-20"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -1434,6 +1431,7 @@
                    </OnClick>
 				</Scripts>
 			</Button>
+			<!---
 			<Button name="$parent_ProfileSaveButton" text="Save Profile" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileCreateButton">
@@ -1448,6 +1446,7 @@
                    </OnClick>
 				</Scripts>
 			</Button>
+			-->
 			<Button name="$parent_Close" inherits="UIPanelCloseButton">
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">

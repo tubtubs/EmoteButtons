@@ -446,13 +446,13 @@ function IconPickerFrame_OnShow()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 
-	IconPickerEditBox:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
-    IconPickerFindIcon(EmoteButtons_Vars.Actions[deck][button].image)
+	IconPickerEditBox:SetText(EB_CurrentActions[deck][button].tooltip);
+    IconPickerFindIcon(EB_CurrentActions[deck][button].image)
     IconPickerFrame_Update();
     --[[ Disabling scrolling down to selected emote temporarlily
 
 	--Scroll down to current icon
-	local image = EmoteButtons_Vars.Actions[deck][button].image;
+	local image = EB_CurrentActions[deck][button].image;
 	image = string.lower(image);
 	local found = 0
 	-- Find the index of the image
@@ -516,7 +516,7 @@ function IconPickerOkayButton_OnClick()
     l = IP_ICONS[cat][subcat].icons
     icon = l[n]
 
-    EmoteButtons_Vars.Actions[deck][button].image = icon
+    EB_CurrentActions[deck][button].image = icon
 	if EmoteButtons_FarLeftWing_Deck==deck then
 		EmoteButtons_LoadDeck(deck, "FarLeft");
 	elseif EmoteButtons_FarRightWing_Deck==deck then
@@ -528,7 +528,7 @@ function IconPickerOkayButton_OnClick()
 	elseif EmoteButtons_FirstLevelName == deck then
 		EmoteButtons_LoadDeck(deck, "");
 	end
-	EmoteButtons_Vars.Actions[deck][button].tooltip = 	IconPickerEditBox:GetText();
+	EB_CurrentActions[deck][button].tooltip = 	IconPickerEditBox:GetText();
 	if DeckBuilderFrame:IsShown() then
 		DeckBuilderFrame_UpdateActions();
 	end
@@ -828,13 +828,13 @@ end
 function CFGLabelEditOnShow()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
-	CFGLabelEdit:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
+	CFGLabelEdit:SetText(EB_CurrentActions[deck][button].tooltip);
 end
 
 function CFGLabelEditOnEnter()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
-	EmoteButtons_Vars.Actions[deck][button].tooltip = CFGLabelEdit:GetText();
+	EB_CurrentActions[deck][button].tooltip = CFGLabelEdit:GetText();
 	CFGLabelEdit:ClearFocus();
 end
 
@@ -842,5 +842,5 @@ function CFGLabelEditOnEscape()
 	CFGLabelEdit:ClearFocus();
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
-	CFGLabelEdit:SetText(EmoteButtons_Vars.Actions[deck][button].tooltip);
+	CFGLabelEdit:SetText(EB_CurrentActions[deck][button].tooltip);
 end
