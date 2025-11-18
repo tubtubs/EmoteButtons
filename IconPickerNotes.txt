@@ -44,20 +44,23 @@ Name  like "INV_Blacksmith%"  or Name  like "INV_Stone_%"
 **Jewelcrafting 199
 Name  like "INV_Jewelcrafting%" or Name  like "INV_Misc_Gem%" or Name  like "INV_Misc_Powder%"  
 
-**Fishing 6
-Name  like "INV_Fishing%"  
+**Fishing 6 (7 updated)
+Name  like "INV_Fishing%"  or name like "INV_MISC_HOOK_01.BLP"
 
-**Inscription 141
-Name  like "INV_Inscription%" or Name  like "INV_Scroll%" 
+**Inscription 141 (177 after update)
+Name  like "INV_Inscription%" or Name  like "INV_Scroll%"  or Name like "INV_Feather%"
+or Name like "INV_Glyph%"
 
 **Enchanting 60 --Probably missing shards?
 Name  like "INV_Enchant%" or Name  like "INV_Rod%" or Name like "INV_Misc_Dust%" 
 
-**Leatherworking 105
+**Leatherworking 105 (107 updated)
 Name  like "INV_Misc_Leather%"  or Name  like "INV_Misc_Armorkit%" or Name like "INV_Misc_MonsterScales%" or Name like "Inv_Misc_Pelt%"
+or name like "INV_Misc_NerubianChitin_01.blp"
 
-**Engineering 101
+**Engineering 101 (125 after update)
 Name  like "INV_Gizmo%" or Name  like "INV_Misc_Bomb%" or Name  like "INV_Misc_Eng%"  or Name  like "INV_Misc_Wrench%" or Name  like "INV_Misc_Screwdriver%" or Name  like "INV_Misc_Gear%" 
+or name like "INV_Misc_Missile%"
 
 **Tailoring 81
 Name  like "INV_Fabric%"  or Name  like "INV_Misc_Bag%"
@@ -65,8 +68,8 @@ Name  like "INV_Fabric%"  or Name  like "INV_Misc_Bag%"
 **Alchemy 24
 Name  like "INV_Alchemy%" 
 
-**Herbalism 50
-Name  like "INV_Misc_Herb%" or name like "Inv_Misc_Flower%"
+**Herbalism 50 (53 updated)
+Name  like "INV_Misc_Herb%" or name like "Inv_Misc_Flower%" or name like "Inv_Misc_Plant%"
 
 **Elementals 28
 Name  like "INV_Elemental%" 
@@ -179,14 +182,16 @@ or Name  like "INV_Belt%"
 [**Pants 160
 or Name  like "INV_Pants%" or Name  like "INV_Kilt%" 
 
-[**Headgear 180
+[**Headgear 180 (181 updated)
 or Name  like "INV_Helmet%" or Name  like "INV_Mask%" or Name  like "INV_Misc_Bandana%" or Name  like "INV_Crown%"
+or Name like "Inv_Helm%"
 
-[**Shirts and Tabards 33
-or Name  like "INV_Shirt_%" or Name  like "INV_Misc_Tabard%" 
+[**Shirts and Tabards 33 (43 updated)
+Name  like "INV_Shirt_%" or Name  like "INV_Misc_Tabard%"  or name like "Inv_Misc_Tournaments_Tabard%"
 
-[**Jewelery 203
-or Name  like "INV_Jewelry%" or Name  like "INV_Trinket%"
+[**Jewelery 203 (224 updated)
+Name  like "INV_Jewelry%" or Name  like "INV_Trinket%"
+or name like "inv_misc_rubysanctum%" or name like "INV_Misc_Ticket_Taro%"
 
 [**Offhands and Shields 102
 or Name  like "INV_Offhand%" or Name  like "INV_Shield%" 
@@ -222,17 +227,17 @@ Name  like "INV_Sword%"  or Name  like "INV_2h%"  or Name  like "INV_1h%"
 [**Axes 111
 Name  like "INV_Axe%" 
 
-[**Ranged - 218
+[**Ranged - 218 (228 updated)
 Name  like "INV_Weapon_Bow%" or Name  like "INV_Weapon_Crossbow%" or Name  like "INV_Weapon_Rifle%" 
 or Name  like "INV_Musket%" or Name  like "INV_Ammo%" or Name  like "Thrown_%" or Name  like "INV_Wand_%" or Name  like "INV_Misc_Ammo%"
  or Name  like "INV_Throwing%" or Name  like "INV_Waepon_%" or Name  like "INV_Bow_%"
+or name like "INV_Misc_Quiver%"
 
 [*Misc? Probably more categories under this, but meh - 780
 --Could be missing some, but meh Ive got 6199 or so according to my quick maths
 select * from dbc.mytable
 where
-(Name  like "INV_%")
-and Name not like "INV_Misc_Ammo%" and Name not like "INV_Misc_Armorkit%" and Name not like "INV_Misc_Bandana%" and Name not like "INV_Misc_Bandage%" and Name not like "INV_Misc_Beer%" and Name not like "INV_Misc_Bomb%"
+Name not like "INV_Misc_Ammo%" and Name not like "INV_Misc_Armorkit%" and Name not like "INV_Misc_Bandana%" and Name not like "INV_Misc_Bandage%" and Name not like "INV_Misc_Beer%" and Name not like "INV_Misc_Bomb%"
 and Name not like "INV_Misc_Cape%" and Name not like "INV_Misc_Eng%" and Name not like "INV_Misc_Fish%" and Name not like "INV_Misc_Food%" and Name not like "INV_Misc_Gem%" and Name not like "INV_Misc_Herb%" 
 and Name not like "INV_Misc_Leather%" and Name not like "INV_Misc_Powder%" and Name not like "INV_Misc_Wrench%" and Name not like "INV_Misc_Screwdriver%" and Name not like "INV_Misc_Tabard%" 
 and Name not like "INV_Misc_Dust%" and Name not like "INV_Misc_Flower%"

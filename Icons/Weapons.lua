@@ -1,4 +1,4 @@
-IP_icons_weapon_ranged = {
+IP_icons_weapon_ranged  = {
   "INV_Ammo_Arrow_01",
   "INV_Ammo_Arrow_02",
   "INV_Ammo_Arrow_03",
@@ -34,6 +34,16 @@ IP_icons_weapon_ranged = {
   "Inv_Misc_ammo_Gunpowder_05",
   "Inv_Misc_ammo_Gunpowder_06",
   "Inv_Misc_ammo_Gunpowder_07",
+  "INV_Misc_Quiver_01",
+  "INV_Misc_Quiver_02",
+  "INV_Misc_Quiver_03",
+  "INV_Misc_Quiver_04",
+  "INV_Misc_Quiver_05",
+  "INV_Misc_Quiver_06",
+  "INV_Misc_Quiver_07",
+  "INV_Misc_Quiver_08",
+  "INV_Misc_Quiver_09",
+  "INV_Misc_Quiver_10",
   "INV_Musket_01",
   "INV_Musket_02",
   "INV_Musket_03",
