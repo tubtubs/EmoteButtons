@@ -30,22 +30,20 @@ Setup Default Profile[CHECK]
 Macro Support (lol) [CHECK]
 *-Save profiles by default, don't really care for save prompts
 --Removed save prompt, and made changes immediately permanent
-
-High Priority:
-
-
-Medium priority:
-
-Low priority:
 *Could also move around some icons in the icon list. 
 --Some professions might be missing icons that could be there
 --Would need to force searching MISC last if there's overlap
 --Rockets/Clusters should be in engineering...
 --Some faction tabards in misc
 --Feathers could be in Inscription, but I think theyre fine in misc
---Grlyphs in inscription?
-*Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
+--Glyphs in inscription?
 
+***Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
+Clean up EmoteButtons.lua
+-DeckBuilder.lua
+-DeckBuilder.xml
+--Include all the relevant code, and frames. Delete replaced old frames.
+--Deprecate EmoteButtonsConfig.xml
 	DEFAULT_CHAT_FRAME:AddMessage("TEST")
 ]]--
 
