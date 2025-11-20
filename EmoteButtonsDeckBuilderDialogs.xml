@@ -1,0 +1,810 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Frame name="EmoteButtons_ChangeCMDFrame" frameStrata="DIALOG" toplevel="true" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="DeckBuilderFrame">
+				<Offset>
+					<AbsDimension x="0" y="250"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Size>
+			<AbsDimension x="400" y="250" />
+		</Size>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer>
+				<Texture name="$parentTitleBorder" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="160" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
+				</Texture>
+				<FontString name="$parentTitleString" font="GameFontNormal" text="Change Command">
+					<!--Window Title -->
+					<Size>
+						<AbsDimension x="140" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentLayer2">
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset x="40" y="-50" />
+					</Anchor>
+					<Anchor point="TOP">
+						<Offset x="50" y="-50" />
+					</Anchor>
+					<Anchor point="BOTTOM">
+						<Offset x="50" y="50" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="320" y="180" />
+				</Size>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="8" right="9" top="6" bottom="8" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+			</Frame>
+			<ScrollFrame name="$parent_ScrollFrame" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="300" y="130"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset x="50" y="-60" />
+					</Anchor>
+					<Anchor point="TOP">
+						<Offset x="50" y="-60" />
+					</Anchor>
+					<Anchor point="BOTTOM">
+						<Offset x="50" y="60" />
+					</Anchor>
+				</Anchors>
+				<ScrollChild>
+					<EditBox name="$parent_CMDEditBox" multiLine="1" font="GameFontNormal">
+						<Size>
+							<AbsDimension x="300" y="480" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_ScrollFrame">
+								<Offset x="-80" y="80" />
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT"  relativeTo="$parent_ScrollFrame">
+								<Offset x="20" y="20" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								EmoteButtons_ChangeCMDFrame_OnShow()
+							</OnShow>
+							<OnTextChanged>
+								local scrollBar = getglobal(this:GetParent():GetName().."ScrollBar")
+								this:GetParent():UpdateScrollChildRect();
+								local min;
+								local max;
+								min, max = scrollBar:GetMinMaxValues();
+								if ( max > 0 and (this.max ~= max) ) then
+									this.max = max;
+									scrollBar:SetValue(max);
+								end
+								EmoteButtons_ChangeCMDFrame_SubmitButton_Update();
+							</OnTextChanged>
+							<OnEnterPressed>
+							if (EmoteButtons_ChangeCMDFrame_SubmitButton:IsEnabled() ~= 0 ) then
+								EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick();
+							end
+							</OnEnterPressed>
+							<OnEscapePressed>
+							EmoteButtons_ChangeCMDFrame:Hide();
+							</OnEscapePressed>
+						</Scripts>
+					</EditBox>
+				</ScrollChild>
+			</ScrollFrame>
+			<Button name="$parent_SubmitButton" text="Submit" inherits="EmoteButtons_OptionButton_Template">
+				<Size>
+					<AbsDimension x="155" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="0" y="-85"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+					EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick()
+                   </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Close" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="-4"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EmoteButtons_ChangeCMDFrame:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>             
+				tinsert(UISpecialFrames, "EmoteButtons_ChangeCMDFrame");
+			</OnLoad>
+			<OnShow>
+
+			</OnShow>
+		</Scripts>
+	</Frame>
+
+    <!-- EmotesManager -->
+	<CheckButton name="EmoteManagerTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="108" y="16"/>
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentName" text="Test" justifyH="LEFT" inherits="GameFontHighlightSmallOutline">
+					<Size>
+						<AbsDimension x="108" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parent">
+							<Offset>
+
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
+		<CheckedTexture alphaMode="ADD" file="Interface\Buttons\CheckButtonHilight"/>
+	</CheckButton>
+	<CheckButton name="EmoteManagerButtonTemplate" inherits="EmoteManagerTemplate" virtual="true">
+		<Scripts>
+			<OnClick>
+				EmoteManagerButton_OnClick();	
+			</OnClick>
+		</Scripts>
+	</CheckButton>
+	<Frame name="EB_EmotesManager" frameStrata="HIGH" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="DeckBuilderFrame">
+				<Offset>
+					<AbsDimension x="0" y="-210"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Size>
+			<AbsDimension x="600" y="180" />
+		</Size>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer>
+				<Texture name="$parentTitleBorder" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="160" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
+				</Texture>
+				<FontString name="$parentTitleString" font="GameFontNormal" text="EMOTEBUTTONS_EMOTEMANAGER">
+					<!--Window Title -->
+					<Size>
+						<AbsDimension x="140" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
+			</Layer>
+			<Layer>
+				<FontString name="$parent_SelectedEmote" inherits="GameFontWhite" text="EMOTEBUTTONS_TEST" justifyH="LEFT">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="140" y="-35"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_PreviewEmote1" inherits="GameFontWhite" text="EMOTEBUTTONS_TEST" justifyH="LEFT">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent_SelectedEmote" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="-16"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parent_PreviewEmote2" inherits="GameFontWhite" text="EMOTEBUTTONS_TEST" justifyH="LEFT">
+					<Anchors>
+						<Anchor point="TOPLEFT" relativeTo="$parent_PreviewEmote1" relativePoint="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="-16"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<ScrollFrame name="$parent_ScrollFrame" inherits="ClassTrainerListScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="134" y="125"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="EB_EmotesManager">
+						<Offset>
+							<AbsDimension x="-20" y="-35"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>
+						FauxScrollFrame_OnVerticalScroll(NUM_EMOTES_SHOWN, EmoteManagerFrame_Update);
+					</OnVerticalScroll>
+				</Scripts>
+			</ScrollFrame>
+			<CheckButton name="$parent_Button1" inherits="EmoteManagerButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_ScrollFrame">
+						<Offset>
+							<AbsDimension x="32" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button2" inherits="EmoteManagerButtonTemplate" id="2">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Button1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button3" inherits="EmoteManagerButtonTemplate" id="3">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Button2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button4" inherits="EmoteManagerButtonTemplate" id="4">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Button3" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button5" inherits="EmoteManagerButtonTemplate" id="5">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Button4" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button6" inherits="EmoteManagerButtonTemplate" id="6">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Button5" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button7" inherits="EmoteManagerButtonTemplate" id="7">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Button6" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_Button8" inherits="EmoteManagerButtonTemplate" id="8">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_Button7" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-12" y="-80"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EB_EmotesManager:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_CancelButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-110" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EmoteManagerSubmitButton_OnClick();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Close" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="-4"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>             
+						tinsert(UISpecialFrames, "EB_EmotesManager");
+					</OnLoad>
+					<OnClick>
+						EB_EmotesManager:Hide();
+						<!-- EmoteButtons_HideSelector(); -->
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				EmotesManager_OnShow();
+			</OnShow>
+		</Scripts>
+	</Frame>
+    <!-- End of EmotesManager -->
+
+    <!-- DeckManager -->
+	<CheckButton name="DeckManagerTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="108" y="16"/>
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentName" text="Test" justifyH="LEFT" inherits="GameFontHighlightSmallOutline">
+					<Size>
+						<AbsDimension x="300" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parent">
+							<Offset>
+
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
+		<CheckedTexture alphaMode="ADD" file="Interface\Buttons\CheckButtonHilight"/>
+	</CheckButton>
+	<CheckButton name="DeckManagerActionTemplate" virtual="true">
+		<Size>
+			<AbsDimension x="108" y="16"/>
+		</Size>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parentName" text="Test" justifyH="LEFT" inherits="GameFontHighlightSmallOutline">
+					<Size>
+						<AbsDimension x="300" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT" relativeTo="$parent">
+							<Offset>
+								<AbsDimension x="18" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<NormalTexture name="$parentIcon">
+			<Size>
+				<AbsDimension x="16" y="16"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="0" y="-1"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</NormalTexture>
+		<!--	<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
+		<CheckedTexture alphaMode="ADD" file="Interface\Buttons\CheckButtonHilight"/> -->
+	</CheckButton>
+	<CheckButton name="DeckManagerActionButtonTemplate" inherits="DeckManagerActionTemplate" virtual="true">
+		<!-- Don't actually need scripts for the action buttons in the manager. It's just a picker.	
+		<Scripts>
+			<OnClick>
+				DeckManagerFrameDeckActionButton_OnClick();	
+			</OnClick>
+		</Scripts> -->
+	</CheckButton>
+	<CheckButton name="DeckManagerDeckButtonTemplate" inherits="DeckManagerTemplate" virtual="true">
+		<Scripts>
+			<OnClick>
+				DeckManagerFrameDeckButton_OnClick();	
+			</OnClick>
+		</Scripts>
+	</CheckButton>
+	<Frame name="DeckManagerFrame" frameStrata="HIGH" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="DeckBuilderFrame">
+				<!-- TODO -->
+				<Offset>
+					<AbsDimension x="0" y="-210"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Size>
+			<AbsDimension x="600" y="180" />
+		</Size>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer>
+				<Texture name="$parentTitleBorder" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="160" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
+				</Texture>
+				<FontString name="$parentTitleString" font="GameFontNormal" text="EMOTEBUTTONS_DECKMANAGER">
+					<!--Window Title -->
+					<Size>
+						<AbsDimension x="140" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<ScrollFrame name="$parent_DeckScrollFrame" inherits="ClassTrainerListScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="134" y="125"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="-20" y="-35"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>
+						<!-- TODO: Create new update method-->
+						FauxScrollFrame_OnVerticalScroll(NUM_DECKS_SHOWN, DeckManagerFrame_Update);
+					</OnVerticalScroll>
+				</Scripts>
+			</ScrollFrame>
+			<CheckButton name="$parent_DeckButton1" inherits="DeckManagerDeckButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="$parent_DeckScrollFrame">
+						<Offset>
+							<AbsDimension x="32" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckButton2" inherits="DeckManagerDeckButtonTemplate" id="2">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckButton1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckButton3" inherits="DeckManagerDeckButtonTemplate" id="3">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckButton2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckButton4" inherits="DeckManagerDeckButtonTemplate" id="4">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckButton3" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckButton5" inherits="DeckManagerDeckButtonTemplate" id="5">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckButton4" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckButton6" inherits="DeckManagerDeckButtonTemplate" id="6">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckButton5" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckButton7" inherits="DeckManagerDeckButtonTemplate" id="7">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckButton6" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckButton8" inherits="DeckManagerDeckButtonTemplate" id="8">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckButton7" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckActionButton1" inherits="DeckManagerActionButtonTemplate" id="1">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent_DeckScrollFrame">
+						<Offset>
+							<AbsDimension x="140" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckActionButton2" inherits="DeckManagerActionButtonTemplate" id="2">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckActionButton1" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckActionButton3" inherits="DeckManagerActionButtonTemplate" id="3">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckActionButton2" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckActionButton4" inherits="DeckManagerActionButtonTemplate" id="4">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckActionButton3" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckActionButton5" inherits="DeckManagerActionButtonTemplate" id="5">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckActionButton4" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckActionButton6" inherits="DeckManagerActionButtonTemplate" id="6">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckActionButton5" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckActionButton7" inherits="DeckManagerActionButtonTemplate" id="7">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckActionButton6" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<CheckButton name="$parent_DeckActionButton8" inherits="DeckManagerActionButtonTemplate" id="8">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_DeckActionButton7" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="0" y="-24"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</CheckButton>
+			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="-12" y="-80"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DeckManagerFrame:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_CancelButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="0" y="20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DeckManagerFrameSubmitButton_OnClick();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Close" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="-4"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>             
+						tinsert(UISpecialFrames, "DeckManagerFrame");
+					</OnLoad>
+					<OnClick>
+						DeckManagerFrame:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				DeckManagerFrame_OnShow();
+			</OnShow>
+		</Scripts>
+	</Frame>
+    <!-- End of DeckManager -->
+</Ui>
