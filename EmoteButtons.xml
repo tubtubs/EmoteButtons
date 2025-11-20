@@ -83,6 +83,8 @@
 				<Scripts>
 					<OnLoad>
 						this:RegisterForDrag("RightButton");
+						EmoteButtons_Init();
+						this:RegisterEvent("ADDON_LOADED");
 					</OnLoad>
 					<OnDragStart>
 						this:StartMoving();
@@ -101,6 +103,9 @@
 					<OnLeave>
 						GameTooltip:Hide();
 					</OnLeave>
+					<OnEvent>
+						EmoteButtons_LoadedVars();
+					</OnEvent>
 				</Scripts>
 			</Button>
 			

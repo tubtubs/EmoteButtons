@@ -6,5 +6,5 @@
 ## LoadOnDemand: 0
 ## SavedVariables: EmoteButtons_Vars
 EmoteButtons.xml
-EmoteButtonsConfig.xml
+EmoteButtonsDeckBuilder.xml
 IconPicker.xml
