@@ -167,7 +167,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-                       ExportProfile();
+                       EmoteButtons_ExportProfile();
                    </OnClick>
 				</Scripts>
 			</Button>
@@ -215,7 +215,7 @@
 				</Anchors>
 				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, ProfileSetDropDown_OnShow);
+                       UIDropDownMenu_Initialize(self, EmoteButtons_AdvancedConfigFrame_ProfileSetDropDown_OnShow);
                    </OnShow>
 					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick();
@@ -232,7 +232,7 @@
 				</Anchors>
 				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, ProfileDeleteDropDown_OnShow);
+                       UIDropDownMenu_Initialize(self, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropDown_OnShow);
                    </OnShow>
 					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick();
@@ -249,7 +249,7 @@
 				</Anchors>
 				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, ProfileDuplicateDropDown_OnShow);
+                       UIDropDownMenu_Initialize(self, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropDown_OnShow);
                    </OnShow>
 					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick();

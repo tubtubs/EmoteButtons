@@ -17,29 +17,6 @@ function EmoteButtons_SliderChanged(sender, units)
 
 end
 
-function EmoteButtons_CloseOpenDecks()
-	local deck = EmoteButtons_ConfigDeck;
-	EmoteButtons_SaveOpenDecks();
-	if(EmoteButtons_Levels["Main"] and
-		EmoteButtons_FirstLevelName == deck) then
-		EmoteButtons_ToggleFirstLevel();
-	elseif(EmoteButtons_Levels["FarLeft"] and 
-		EmoteButtons_FarLeftWing_Deck==deck) then 
-		--EmoteButtons_ToggleLeftWing();
-		EmoteButtons_ToggleFarLeftWing();
-	elseif (EmoteButtons_Levels["Left"] and 
-			EmoteButtons_LeftWing_Deck==deck) then 
-		EmoteButtons_ToggleLeftWing();
-	elseif (EmoteButtons_Levels["FarRight"] and
-		EmoteButtons_FarRightWing_Deck==deck) then 
-		--EmoteButtons_ToggleRightWing();
-		EmoteButtons_ToggleFarRightWing();
-	elseif (EmoteButtons_Levels["Right"] and
-			EmoteButtons_RightWing_Deck==deck) then
-		EmoteButtons_ToggleRightWing();
-	end
-end
-
 function EmoteButtons_AdvancedConfigFrame_OnShow()
 	DeckBuilderFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
@@ -71,65 +48,71 @@ function EmoteButtons_SetProfile(index)
 
 end
 
---Did this onshow, instead of load since my variables weren't loaded on time for on load.
---Might just need to change when the AddonLoaded event is called?
-function ProfileSetDropDown_OnShow()
+function EmoteButtons_ResetProfile()
+	index = 0;
 	for i=1, getn(EmoteButtons_Vars.Profiles) do
-		info = {};
-		info.text       = EmoteButtons_Vars.Profiles[i].Name;
-		info.value      = i;
-		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
-			info.checked =true;
-		else
-			info.checked=false;
+		if EmoteButtons_Vars.Profiles[i].Name==EmoteButtons_Vars.Profile then
+			index = i;
 		end
-		info.func =  function() 
-			EmoteButtons_SetProfile(this.value) 
-		end
-		UIDropDownMenu_AddButton(info);
 	end
-end
-
-function EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick()
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, 0, 0);
-end
-
-function EmoteButtons_DeleteProfile(index)
-	StaticPopupDialogs["DELETE_PROFILE_CONFIRMATION"] = {
-	text = "Do you want to delete the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
+	StaticPopupDialogs["RESET_PROFILE_CONFIRMATION"] = {
+	text = "Do you want to reset the current decks config in the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
 	button1 = "Yes",
 	button2 = "No",
 	OnAccept = function()
-		table.remove(EmoteButtons_Vars.Profiles, index);
-
+		EmoteButtons_Vars.Profiles[index].Decks = EMOTEBUTTONS_SE;
+		EB_CurrentActions = EMOTEBUTTONS_SE;
+		ReloadUI();
 	end,
 	timeout = 0,
 	whileDead = true,
 	hideOnEscape = true,
 	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
 	}
-	StaticPopup_Show("DELETE_PROFILE_CONFIRMATION")
+	StaticPopup_Show("RESET_PROFILE_CONFIRMATION")
 end
 
-function ProfileDeleteDropDown_OnShow()
-	for i=1, getn(EmoteButtons_Vars.Profiles) do
-		info = {};
-		info.text       = EmoteButtons_Vars.Profiles[i].Name;
-		info.value      = i;
-		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
-			info.checked =true;
-		else -- only add if its not currently in use...
-			info.checked=false;
-			info.func =  function() 
-				EmoteButtons_DeleteProfile(this.value) 
+function EmoteButtons_ImportProfile()
+	EmoteButtons_ImportProfileFrame:Show();
+end
+
+function EmoteButtons_ExportProfile()
+	--Load Decks for export.
+	TempDecks = "return {\n"
+
+	deck_counter = 1;
+	for i,v in pairs(EB_CurrentActions) do
+		deck =  i
+		TempDecks = format("%s[\"%s\"]={\n",TempDecks, deck);
+		act_counter = 1
+		for j,v in pairs (EB_CurrentActions[i]) do
+			act = EB_CurrentActions[i][j].action
+			actType = EB_CurrentActions[i][j].type
+			tip = EB_CurrentActions[i][j].tooltip
+			img = EB_CurrentActions[i][j].image
+			TempDecks = format(
+				"%s{action=[[%s]], type=%s, tooltip=\"%s\", image=\"%s\"}",
+				TempDecks,act,actType,tip,img
+			)
+			if (act_counter == getn(EB_CurrentActions[i])) then
+				TempDecks = format("%s\n",TempDecks);	
+			else
+				TempDecks = format("%s,\n",TempDecks);	
 			end
-			UIDropDownMenu_AddButton(info);
+			act_counter = act_counter + 1;
 		end
+		if (deck_counter == getn(EmoteButtons_DeckList)) then
+			TempDecks = format("%s}\n",TempDecks);	
+		else
+			TempDecks = format("%s},\n",TempDecks);	
+		end
+		deck_counter = deck_counter + 1;
 	end
-end
-
-function EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick()
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, 0, 0);
+	TempDecks = format("%s}\n", TempDecks)
+	TempProfile = format(",{Name = \"%s\", Decks=TempDecks}\n",
+							EmoteButtons_Vars.Profile)
+	EmoteButtons_ExportProfileFrame_ScrollFrame_ExportEditBox:SetText(TempDecks..TempProfile)
+	EmoteButtons_ExportProfileFrame:Show();
 end
 
 function EmoteButtons_DuplicateProfile(index)
@@ -176,7 +159,68 @@ function EmoteButtons_DuplicateProfile(index)
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_DUPLICATEPROFILE")):GetName().."EditBox"):SetText("");
 end
 
-function ProfileDuplicateDropDown_OnShow()
+function EmoteButtons_DeleteProfile(index)
+	StaticPopupDialogs["DELETE_PROFILE_CONFIRMATION"] = {
+	text = "Do you want to delete the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
+	button1 = "Yes",
+	button2 = "No",
+	OnAccept = function()
+		table.remove(EmoteButtons_Vars.Profiles, index);
+
+	end,
+	timeout = 0,
+	whileDead = true,
+	hideOnEscape = true,
+	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
+	}
+	StaticPopup_Show("DELETE_PROFILE_CONFIRMATION")
+end
+
+--Did this onshow, instead of load since my variables weren't loaded on time for on load.
+--Might just need to change when the AddonLoaded event is called?
+function EmoteButtons_AdvancedConfigFrame_ProfileSetDropDown_OnShow()
+	for i=1, getn(EmoteButtons_Vars.Profiles) do
+		info = {};
+		info.text       = EmoteButtons_Vars.Profiles[i].Name;
+		info.value      = i;
+		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
+			info.checked =true;
+		else
+			info.checked=false;
+		end
+		info.func =  function() 
+			EmoteButtons_SetProfile(this.value) 
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
+function EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick()
+	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, 0, 0);
+end
+
+function EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropDown_OnShow()
+	for i=1, getn(EmoteButtons_Vars.Profiles) do
+		info = {};
+		info.text       = EmoteButtons_Vars.Profiles[i].Name;
+		info.value      = i;
+		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
+			info.checked =true;
+		else -- only add if its not currently in use...
+			info.checked=false;
+			info.func =  function() 
+				EmoteButtons_DeleteProfile(this.value) 
+			end
+			UIDropDownMenu_AddButton(info);
+		end
+	end
+end
+
+function EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick()
+	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, 0, 0);
+end
+
+function EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropDown_OnShow()
 	for i=1, getn(EmoteButtons_Vars.Profiles) do
 		info = {};
 		info.text       = EmoteButtons_Vars.Profiles[i].Name;
@@ -233,39 +277,6 @@ function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()
 	};
 	StaticPopup_Show("EMOTEBUTTONS_NEWPROFILE");
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_NEWPROFILE")):GetName().."EditBox"):SetText("");
-end
-
-function EmoteButtons_ResetPosition()
-	EmoteButtons_Main:ClearAllPoints()
-	EmoteButtons_Main:SetPoint("CENTER", UIParent ,"CENTER", 0, 0)
-end
-
-function EmoteButtons_ResetProfile()
-	index = 0;
-	for i=1, getn(EmoteButtons_Vars.Profiles) do
-		if EmoteButtons_Vars.Profiles[i].Name==EmoteButtons_Vars.Profile then
-			index = i;
-		end
-	end
-	StaticPopupDialogs["RESET_PROFILE_CONFIRMATION"] = {
-	text = "Do you want to reset the current decks config in the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
-	button1 = "Yes",
-	button2 = "No",
-	OnAccept = function()
-		EmoteButtons_Vars.Profiles[index].Decks = EMOTEBUTTONS_SE;
-		EB_CurrentActions = EMOTEBUTTONS_SE;
-		ReloadUI();
-	end,
-	timeout = 0,
-	whileDead = true,
-	hideOnEscape = true,
-	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
-	}
-	StaticPopup_Show("RESET_PROFILE_CONFIRMATION")
-end
-
-function EmoteButtons_ImportProfile()
-	EmoteButtons_ImportProfileFrame:Show();
 end
 
 function EmoteButtons_ImportProfileFrame_SubmitButton_OnClick()
@@ -326,43 +337,4 @@ function EmoteButtons_ImportProfileFrame_SubmitButton_OnClick()
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_IMPORTPROFILE")):GetName().."EditBox"):SetText("");
 	end
 	EmoteButtons_ImportProfileFrame:Hide();
-end
-
-function ExportProfile()
-	--Load Decks for export.
-	TempDecks = "return {\n"
-
-	deck_counter = 1;
-	for i,v in pairs(EB_CurrentActions) do
-		deck =  i
-		TempDecks = format("%s[\"%s\"]={\n",TempDecks, deck);
-		act_counter = 1
-		for j,v in pairs (EB_CurrentActions[i]) do
-			act = EB_CurrentActions[i][j].action
-			actType = EB_CurrentActions[i][j].type
-			tip = EB_CurrentActions[i][j].tooltip
-			img = EB_CurrentActions[i][j].image
-			TempDecks = format(
-				"%s{action=[[%s]], type=%s, tooltip=\"%s\", image=\"%s\"}",
-				TempDecks,act,actType,tip,img
-			)
-			if (act_counter == getn(EB_CurrentActions[i])) then
-				TempDecks = format("%s\n",TempDecks);	
-			else
-				TempDecks = format("%s,\n",TempDecks);	
-			end
-			act_counter = act_counter + 1;
-		end
-		if (deck_counter == getn(EmoteButtons_DeckList)) then
-			TempDecks = format("%s}\n",TempDecks);	
-		else
-			TempDecks = format("%s},\n",TempDecks);	
-		end
-		deck_counter = deck_counter + 1;
-	end
-	TempDecks = format("%s}\n", TempDecks)
-	TempProfile = format(",{Name = \"%s\", Decks=TempDecks}\n",
-							EmoteButtons_Vars.Profile)
-	EmoteButtons_ExportProfileFrame_ScrollFrame_ExportEditBox:SetText(TempDecks..TempProfile)
-	EmoteButtons_ExportProfileFrame:Show();
 end

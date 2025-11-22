@@ -144,6 +144,11 @@ local function sort_alphabetical(a, b)
 	return a < b
 end
 
+function EmoteButtons_ResetPosition()
+	EmoteButtons_Main:ClearAllPoints()
+	EmoteButtons_Main:SetPoint("CENTER", UIParent ,"CENTER", 0, 0)
+end
+
 function EmoteButtons_WipeVars()
 	if not EmoteButtons_Vars then
 		EmoteButtons_Vars = {
@@ -925,6 +930,29 @@ end
 
 function EmoteButtons_HideTooltip()
 	GameTooltip:Hide();
+end
+
+function EmoteButtons_CloseOpenDecks()
+	local deck = EmoteButtons_ConfigDeck;
+	EmoteButtons_SaveOpenDecks();
+	if(EmoteButtons_Levels["Main"] and
+		EmoteButtons_FirstLevelName == deck) then
+		EmoteButtons_ToggleFirstLevel();
+	elseif(EmoteButtons_Levels["FarLeft"] and 
+		EmoteButtons_FarLeftWing_Deck==deck) then 
+		--EmoteButtons_ToggleLeftWing();
+		EmoteButtons_ToggleFarLeftWing();
+	elseif (EmoteButtons_Levels["Left"] and 
+			EmoteButtons_LeftWing_Deck==deck) then 
+		EmoteButtons_ToggleLeftWing();
+	elseif (EmoteButtons_Levels["FarRight"] and
+		EmoteButtons_FarRightWing_Deck==deck) then 
+		--EmoteButtons_ToggleRightWing();
+		EmoteButtons_ToggleFarRightWing();
+	elseif (EmoteButtons_Levels["Right"] and
+			EmoteButtons_RightWing_Deck==deck) then
+		EmoteButtons_ToggleRightWing();
+	end
 end
 
 function EmoteButtons_ReOpenDecks()
