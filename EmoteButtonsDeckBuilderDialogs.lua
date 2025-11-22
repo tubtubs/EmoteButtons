@@ -102,7 +102,7 @@ function EmoteManagerSubmitButton_OnClick()
 	emote = EB_EmotesManager.selectedIcon;
 	len = getn(EB_CurrentActions[deck])
 	if len < button then
-		EB_AddButton(deck, EB_EmoteList[emote].Name, EBACTTYPE_EMOTE,"")
+		EmoteButtons_AddButton(deck, EB_EmoteList[emote].Name, EBACTTYPE_EMOTE,"")
 	else
 		EB_CurrentActions[deck][button].action = EB_EmoteList[emote].Name;
 		EB_CurrentActions[deck][button].type = EBACTTYPE_EMOTE;
@@ -111,7 +111,7 @@ function EmoteManagerSubmitButton_OnClick()
 		DeckBuilderFrame_UpdateActions(DeckBuilderFrame.selectedIcon);
 		DeckBuilderFrameButtons_Update();
 	end
-	EB_ReloadDeck(deck)
+	EmoteButtons_ReloadDeck(deck)
 	PlaySound("igChatScrollUp");
 	EB_EmotesManager:Hide();
 end
@@ -171,13 +171,13 @@ function DeckManagerFrameSubmitButton_OnClick()
 	action = DeckManagerFrame.selectedIcon;
 	len = getn(EB_CurrentActions[deck])
 	if len < button then
-		EB_AddButton(deck, EmoteButtons_DeckList[action], EBACTTYPE_DECK, "")
+		EmoteButtons_AddButton(deck, EmoteButtons_DeckList[action], EBACTTYPE_DECK, "")
 	else
 		EB_CurrentActions[deck][button].action = EmoteButtons_DeckList[action];
 		EB_CurrentActions[deck][button].type = EBACTTYPE_DECK;
 	end
 	DeckBuilderFrame_UpdateActions();
-	EB_ReloadDeck(deck);
+	EmoteButtons_ReloadDeck(deck);
 	PlaySound("igChatScrollUp");
 	DeckManagerFrame:Hide();
 end
@@ -277,7 +277,7 @@ function EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick()
 	act = EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:GetText();
 	len = getn(EB_CurrentActions[deck])
 	if len < EmoteButtons_ConfigButton then
-		EB_AddButton(deck, act,EBACTTYPE_SLASHCMD,"")
+		EmoteButtons_AddButton(deck, act,EBACTTYPE_SLASHCMD,"")
 	else
 		EB_CurrentActions[deck][button].action = act;
 		EB_CurrentActions[deck][button].type = EBACTTYPE_SLASHCMD;
@@ -287,7 +287,7 @@ function EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick()
 		DeckBuilderFrame_UpdateActions();
 		DeckBuilderFrameButtons_Update();
 	end
-	EB_ReloadDeck(deck);
+	EmoteButtons_ReloadDeck(deck);
 	EmoteButtons_ChangeCMDFrame:Hide();
 end
 

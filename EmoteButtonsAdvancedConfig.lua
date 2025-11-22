@@ -20,7 +20,7 @@ end
 function EmoteButtons_AdvancedConfigFrame_OnShow()
 	DeckBuilderFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EB_HideAllPopupsFrames()
+	EmoteButtons_HideAllPopupsFrames()
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
@@ -72,12 +72,9 @@ function EmoteButtons_ResetProfile()
 	StaticPopup_Show("RESET_PROFILE_CONFIRMATION")
 end
 
-function EmoteButtons_ImportProfile()
-	EmoteButtons_ImportProfileFrame:Show();
-end
-
 function EmoteButtons_ExportProfile()
-	--Load Decks for export.
+	--Iterates through the deck creating executable lua table
+	--Places this inside of the export EditBox.
 	TempDecks = "return {\n"
 
 	deck_counter = 1;
@@ -166,7 +163,6 @@ function EmoteButtons_DeleteProfile(index)
 	button2 = "No",
 	OnAccept = function()
 		table.remove(EmoteButtons_Vars.Profiles, index);
-
 	end,
 	timeout = 0,
 	whileDead = true,
@@ -217,7 +213,8 @@ function EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropDown_OnShow()
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick()
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, 0, 0);
+	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, 
+	EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, 0, 0);
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropDown_OnShow()
@@ -238,7 +235,8 @@ function EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropDown_OnShow()
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick()
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 0, 0);
+	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 
+	EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 0, 0);
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()

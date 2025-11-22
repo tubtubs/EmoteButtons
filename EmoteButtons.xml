@@ -2,7 +2,6 @@
 	<Script file="localization.lua"/>
 	<script file="EmoteButtonsImages.lua"/>
 	<Script file="EmoteButtons.lua"/>
-	<Script file="EmoteList.lua"/>
 
 			<Button name="EmoteButtons_temp_noscript" toplevel="true" virtual="true">
 				<Size>
@@ -43,27 +42,6 @@
 				</Scripts>
 			</Button>
 
-			<Button name="EmoteButtons_SelectImage_template" virtual="true" movable="false">
-				<Scripts>
-					<OnEnter>
-						EmoteButtons_RegisterForSlide(this:GetID());
-					</OnEnter>
-					<OnLeave>
-						EmoteButtons_SlideImageMouseLeave(this:GetID());
-					</OnLeave>
-					<OnClick>
-						EmoteButtons_ImageSelected(this:GetID());
-					</OnClick>
-				</Scripts>
-			</Button>
-
-			<Button name="EmoteButtons_SelectImage_Init" virtual="true" movable="false" inherits="EmoteButtons_SelectImage_template">
-				<Scripts>
-					<OnUpdate>
-						EmoteButtons_SlideImageUpdate();
-					</OnUpdate>
-				</Scripts>
-			</Button>
 
 			<Button name="EmoteButtons_Main" parent="UIParent" toplevel="true" movable="true" inherits="EmoteButtons_temp_noscript">
 				<Anchors>

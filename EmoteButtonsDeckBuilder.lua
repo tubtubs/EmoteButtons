@@ -1,7 +1,7 @@
 --DeckBuilder functions
 --Functions relating to Deck config and modification
 
-function EB_ReloadDeck(deck)
+function EmoteButtons_ReloadDeck(deck)
 	if EmoteButtons_FarLeftWing_Deck==deck then
 		EmoteButtons_LoadDeck(deck, "FarLeft");
 	elseif EmoteButtons_FarRightWing_Deck==deck then
@@ -15,7 +15,7 @@ function EB_ReloadDeck(deck)
 	end
 end
 
-function EB_AddButton(deck, act, acttype, tip)
+function EmoteButtons_AddButton(deck, act, acttype, tip)
 	EmoteButtons_CloseOpenDecks();
 	a = {action=act, type=acttype, 
 		 tooltip=tip, image=IconPickerRandomIcon()}
@@ -25,7 +25,7 @@ function EB_AddButton(deck, act, acttype, tip)
 	EmoteButtons_ReOpenDecks();
 end
 
-function EB_HideAllPopupsFrames()
+function EmoteButtons_HideAllPopupsFrames()
 	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
 	StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
 	StaticPopup_Hide ("EMOTEBUTTONS_CHANGETOOLTIP")
@@ -77,7 +77,7 @@ function DeckBuilderFrame_OnShow()
 end
 
 function DeckBuilderFrame_OnHide()
-	EB_HideAllPopupsFrames();
+	EmoteButtons_HideAllPopupsFrames();
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
@@ -96,7 +96,7 @@ function DeckBuilderFrameDeckActionButton_OnClick()
 	DeckManagerFrame:Hide();
 	IconPickerFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EB_HideAllPopupsFrames();
+	EmoteButtons_HideAllPopupsFrames();
 	DeckBuilderFrameButtons_Update();
 	DeckBuilderFrame_Update();
 end
@@ -110,7 +110,7 @@ function DeckBuilderFrameDeckButton_OnClick()
 	DeckManagerFrame:Hide();
 	IconPickerFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EB_HideAllPopupsFrames();
+	EmoteButtons_HideAllPopupsFrames();
 	DeckBuilderFrame_UpdateActions(found);
 	DeckBuilderFrameButtons_Update() 
 	DeckBuilderFrame_Update();
@@ -253,7 +253,7 @@ function DeckBuilderFrame_DeleteActionButton_OnClick()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	table.remove(EB_CurrentActions[deck], DeckBuilderFrame.selectedAction);
-	EB_ReloadDeck(deck);
+	EmoteButtons_ReloadDeck(deck);
 	--reset deck builder action buttons and what not
 	DeckBuilderFrame.selectedAction = 0;
 	DeckBuilderFrame_UpdateActions();
@@ -378,11 +378,11 @@ function DeckBuilderFrame_MoveUpButton_OnClick()
 	EmoteButtons_ConfigButton = button - 1;
 	DeckBuilderFrameButtons_Update();
 	DeckBuilderFrame_UpdateActions();
-	EB_ReloadDeck(deck)
+	EmoteButtons_ReloadDeck(deck)
 	EmoteButtons_CloseOpenDecks();
 	EmoteButtons_ReOpenDecks();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EB_HideAllPopupsFrames()
+	EmoteButtons_HideAllPopupsFrames()
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
@@ -398,11 +398,11 @@ function DeckBuilderFrame_MoveDownButton_OnClick()
 	EmoteButtons_ConfigButton = button +1;
 	DeckBuilderFrameButtons_Update();
 	DeckBuilderFrame_UpdateActions();
-	EB_ReloadDeck(deck)
+	EmoteButtons_ReloadDeck(deck)
 	EmoteButtons_CloseOpenDecks();
 	EmoteButtons_ReOpenDecks();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EB_HideAllPopupsFrames()
+	EmoteButtons_HideAllPopupsFrames()
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
@@ -456,7 +456,7 @@ function DeckBuilderFrame_RenameDeckButton_OnClick()
 				DeckBuilderFrame_UpdateActions();
 				DeckBuilderFrameButtons_Update();
 				--Reload relevant decks, and re-fresh all buttons
-				EB_ReloadDeck(deck)
+				EmoteButtons_ReloadDeck(deck)
 				EmoteButtons_CloseOpenDecks();
 				EmoteButtons_ReOpenDecks();
 				DEFAULT_CHAT_FRAME:AddMessage("Deck rename success!");
