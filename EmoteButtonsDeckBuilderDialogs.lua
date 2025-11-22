@@ -281,7 +281,7 @@ function EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick()
 	else
 		EB_CurrentActions[deck][button].action = act;
 		EB_CurrentActions[deck][button].type = EBACTTYPE_SLASHCMD;
-		--EmoteButtons_UpdateConfig();
+		--EmoteButtons_OpenDeckBuilder();
 	end
 	if(DeckBuilderFrame:IsShown()) then
 		DeckBuilderFrame_UpdateActions();

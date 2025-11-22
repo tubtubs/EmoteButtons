@@ -118,7 +118,7 @@ local function TextMenu(arg)
 			EmoteButtons_AdvancedConfigFrame:Show();
 		elseif arg == "deckbuilder" then
 			--DeckBuilderFrame:Show();
-			EmoteButtons_UpdateConfig()
+			EmoteButtons_OpenDeckBuilder()
 		else
 			DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r unknown command",1,0.3,0.3);
 		end
@@ -543,7 +543,7 @@ function EmoteButtons_ClickAction(framename)
 		if IsShiftKeyDown() then
 			EmoteButtons_ConfigDeck = EmoteButtons_FirstLevelName;
 			EmoteButtons_ConfigButton = found;
-			EmoteButtons_UpdateConfig();
+			EmoteButtons_OpenDeckBuilder();
 		elseif acttype==EBACTTYPE_DECK then
 			EmoteButtons_ToggleDeck(action, wing);
 		elseif acttype==EBACTTYPE_EMOTE then
@@ -564,7 +564,7 @@ function EmoteButtons_ClickAction(framename)
 			if IsShiftKeyDown() then
 				EmoteButtons_ConfigDeck = EmoteButtons_LeftWing_Deck;
 				EmoteButtons_ConfigButton = found;
-				EmoteButtons_UpdateConfig();
+				EmoteButtons_OpenDeckBuilder();
 			elseif acttype==EBACTTYPE_DECK then
 				EmoteButtons_ToggleDeck(action, "FarLeft");
 			elseif acttype==EBACTTYPE_EMOTE then
@@ -584,7 +584,7 @@ function EmoteButtons_ClickAction(framename)
 				if IsShiftKeyDown() then
 					EmoteButtons_ConfigDeck = EmoteButtons_RightWing_Deck;
 					EmoteButtons_ConfigButton = found;
-					EmoteButtons_UpdateConfig();
+					EmoteButtons_OpenDeckBuilder();
 				elseif acttype==EBACTTYPE_DECK then
 					EmoteButtons_ToggleDeck(action, "FarRight");
 				elseif acttype==EBACTTYPE_EMOTE then
@@ -605,7 +605,7 @@ function EmoteButtons_ClickAction(framename)
 					if IsShiftKeyDown() then
 						EmoteButtons_ConfigDeck = EmoteButtons_FarLeftWing_Deck;
 						EmoteButtons_ConfigButton = found;
-						EmoteButtons_UpdateConfig();
+						EmoteButtons_OpenDeckBuilder();
 					elseif acttype==EBACTTYPE_DECK then
 						EmoteButtons_ToggleDeck(action, "FarLeft");
 					elseif acttype==EBACTTYPE_EMOTE then
@@ -627,7 +627,7 @@ function EmoteButtons_ClickAction(framename)
 					if IsShiftKeyDown() then
 						EmoteButtons_ConfigDeck = EmoteButtons_FarRightWing_Deck;
 						EmoteButtons_ConfigButton = found;
-						EmoteButtons_UpdateConfig();
+						EmoteButtons_OpenDeckBuilder();
 					elseif acttype==EBACTTYPE_DECK then
 						EmoteButtons_ToggleDeck(action, "FarRight");
 					elseif acttype==EBACTTYPE_EMOTE then
