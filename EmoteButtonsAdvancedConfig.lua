@@ -1,6 +1,6 @@
 
 function EmoteButtons_SetProfile(index)
-	StaticPopupDialogs["SET_PROFILE_CONFIRMATION"] = {
+	StaticPopupDialogs["EMOTEBUTTONS_SET_PROFILE_CONFIRMATION"] = {
 	text = "Do you want to set your current decks config to the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
 	button1 = "Yes",
 	button2 = "No",
@@ -15,12 +15,12 @@ function EmoteButtons_SetProfile(index)
 	hideOnEscape = true,
 	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
 	}
-	StaticPopup_Show("SET_PROFILE_CONFIRMATION")
+	StaticPopup_Show("EMOTEBUTTONS_SET_PROFILE_CONFIRMATION")
 
 end
 
 function EmoteButtons_DeleteProfile(index)
-	StaticPopupDialogs["DELETE_PROFILE_CONFIRMATION"] = {
+	StaticPopupDialogs["EMOTEBUTTONS_DELETE_PROFILE_CONFIRMATION"] = {
 	text = "Do you want to delete the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
 	button1 = "Yes",
 	button2 = "No",
@@ -33,7 +33,7 @@ function EmoteButtons_DeleteProfile(index)
 	hideOnEscape = true,
 	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
 	}
-	StaticPopup_Show("DELETE_PROFILE_CONFIRMATION")
+	StaticPopup_Show("EMOTEBUTTONS_DELETE_PROFILE_CONFIRMATION")
 end
 
 function EmoteButtons_AdvancedConfigFrame_OnShow()
@@ -201,7 +201,7 @@ function EmoteButtons_ResetProfile()
 			index = i;
 		end
 	end
-	StaticPopupDialogs["RESET_PROFILE_CONFIRMATION"] = {
+	StaticPopupDialogs["EMOTEBUTTONS_RESET_PROFILE_CONFIRMATION"] = {
 	text = "Do you want to reset the current decks config in the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
 	button1 = "Yes",
 	button2 = "No",
@@ -215,7 +215,7 @@ function EmoteButtons_ResetProfile()
 	hideOnEscape = true,
 	preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
 	}
-	StaticPopup_Show("RESET_PROFILE_CONFIRMATION")
+	StaticPopup_Show("EMOTEBUTTONS_RESET_PROFILE_CONFIRMATION")
 end
 
 function EmoteButtons_ImportProfileFrame_SubmitButton_OnClick()

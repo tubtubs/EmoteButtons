@@ -126,7 +126,7 @@ local function TextMenu(arg)
 			EmoteButtons_AdvancedConfigFrame:Show();
 		elseif arg == "deckbuilder" then
 			--DeckBuilderFrame:Show();
-			EmoteButtons_UpdateConfig()
+			EmoteButtons_OpenDeckBuilder()
 		else
 			DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r unknown command",1,0.3,0.3);
 		end
@@ -144,47 +144,6 @@ end
 function EmoteButtons_ResetPosition()
 	EmoteButtons_Main:ClearAllPoints()
 	EmoteButtons_Main:SetPoint("CENTER", UIParent ,"CENTER", 0, 0)
-end
-
-function EB_ReloadDeck(deck)
-	if EmoteButtons_FarLeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarLeft");
-	elseif EmoteButtons_FarRightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarRight");
-	elseif EmoteButtons_LeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Left");
-	elseif EmoteButtons_RightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Right");
-	elseif EmoteButtons_FirstLevelName == deck then
-		EmoteButtons_LoadDeck(deck, "");
-	end
-end
-
---Could replace a lot of code while adding new buttons
---for set deck, set command, etc
-function EB_AddButton(deck, act, acttype, tip)
-	EmoteButtons_CloseOpenDecks();
-	a = {action=act, type=acttype, 
-		 tooltip=tip, image=IconPickerRandomIcon()}
-	table.insert(EB_CurrentActions[deck], a);
-	DeckBuilderFrameButtons_Update();
-	DeckBuilderFrame_UpdateActions();
-	EmoteButtons_ReOpenDecks();
-end
-
-function EB_HideAllPopupsFrames()
-	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
-	StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
-	StaticPopup_Hide ("EMOTEBUTTONS_CHANGETOOLTIP")
-	StaticPopup_Hide ("RESET_PROFILE_CONFIRMATION")
-	StaticPopup_Hide ("EMOTEBUTTONS_NEWPROFILE")
-	StaticPopup_Hide ("EMOTEBUTTONS_DUPLICATEPROFILE")
-	StaticPopup_Hide ("DELETE_PROFILE_CONFIRMATION")
-	StaticPopup_Hide ("SET_PROFILE_CONFIRMATION")
-	StaticPopup_Hide ("SAVE_PROFILE_CONFIRMATION")
-	StaticPopup_Hide ("EMOTEBUTTONS_NEWDECK")
-	StaticPopup_Hide ("SET_PROFILE_CONFIRMATION")
-	StaticPopup_Hide ("EMOTEBUTTONS_RENAMEDECK")
 end
 
 function EmoteButtons_WipeVars()
@@ -592,7 +551,7 @@ function EmoteButtons_ClickAction(framename)
 		if IsShiftKeyDown() then
 			EmoteButtons_ConfigDeck = EmoteButtons_FirstLevelName;
 			EmoteButtons_ConfigButton = found;
-			EmoteButtons_UpdateConfig();
+			EmoteButtons_OpenDeckBuilder();
 		elseif acttype==EBACTTYPE_DECK then
 			EmoteButtons_ToggleDeck(action, wing);
 		elseif acttype==EBACTTYPE_EMOTE then
@@ -613,7 +572,7 @@ function EmoteButtons_ClickAction(framename)
 			if IsShiftKeyDown() then
 				EmoteButtons_ConfigDeck = EmoteButtons_LeftWing_Deck;
 				EmoteButtons_ConfigButton = found;
-				EmoteButtons_UpdateConfig();
+				EmoteButtons_OpenDeckBuilder();
 			elseif acttype==EBACTTYPE_DECK then
 				EmoteButtons_ToggleDeck(action, "FarLeft");
 			elseif acttype==EBACTTYPE_EMOTE then
@@ -633,7 +592,7 @@ function EmoteButtons_ClickAction(framename)
 				if IsShiftKeyDown() then
 					EmoteButtons_ConfigDeck = EmoteButtons_RightWing_Deck;
 					EmoteButtons_ConfigButton = found;
-					EmoteButtons_UpdateConfig();
+					EmoteButtons_OpenDeckBuilder();
 				elseif acttype==EBACTTYPE_DECK then
 					EmoteButtons_ToggleDeck(action, "FarRight");
 				elseif acttype==EBACTTYPE_EMOTE then
@@ -654,7 +613,7 @@ function EmoteButtons_ClickAction(framename)
 					if IsShiftKeyDown() then
 						EmoteButtons_ConfigDeck = EmoteButtons_FarLeftWing_Deck;
 						EmoteButtons_ConfigButton = found;
-						EmoteButtons_UpdateConfig();
+						EmoteButtons_OpenDeckBuilder();
 					elseif acttype==EBACTTYPE_DECK then
 						EmoteButtons_ToggleDeck(action, "FarLeft");
 					elseif acttype==EBACTTYPE_EMOTE then
@@ -676,7 +635,7 @@ function EmoteButtons_ClickAction(framename)
 					if IsShiftKeyDown() then
 						EmoteButtons_ConfigDeck = EmoteButtons_FarRightWing_Deck;
 						EmoteButtons_ConfigButton = found;
-						EmoteButtons_UpdateConfig();
+						EmoteButtons_OpenDeckBuilder();
 					elseif acttype==EBACTTYPE_DECK then
 						EmoteButtons_ToggleDeck(action, "FarRight");
 					elseif acttype==EBACTTYPE_EMOTE then
@@ -921,7 +880,7 @@ function EmoteButtons_HideTooltip()
 	GameTooltip:Hide();
 end
 
-function EmoteButtons_UpdateConfig()
+function EmoteButtons_OpenDeckBuilder()
 	DeckBuilderFrame:Show();
 	DeckBuilderFrame_ScrollToSelected();
 	IconPickerFrame:Hide();

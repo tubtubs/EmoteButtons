@@ -23,18 +23,14 @@ function EmoteButtons_ReloadDeck(deck)
 end
 
 function EmoteButtons_HideAllPopups()
-	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
-	StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
-	StaticPopup_Hide ("EMOTEBUTTONS_CHANGETOOLTIP")
-	StaticPopup_Hide ("RESET_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_DELETE_DECK_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_NEWDECK")
+	StaticPopup_Hide ("EMOTEBUTTONS_RENAMEDECK")
 	StaticPopup_Hide ("EMOTEBUTTONS_NEWPROFILE")
 	StaticPopup_Hide ("EMOTEBUTTONS_DUPLICATEPROFILE")
-	StaticPopup_Hide ("DELETE_PROFILE_CONFIRMATION")
-	StaticPopup_Hide ("SET_PROFILE_CONFIRMATION")
-	StaticPopup_Hide ("SAVE_PROFILE_CONFIRMATION")
-	StaticPopup_Hide ("EMOTEBUTTONS_NEWDECK")
-	StaticPopup_Hide ("SET_PROFILE_CONFIRMATION")
-	StaticPopup_Hide ("EMOTEBUTTONS_RENAMEDECK")
+	StaticPopup_Hide ("EMOTEBUTTONS_DELETE_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_RESET_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_SET_PROFILE_CONFIRMATION")
 end
 -- Deck Builder --
 
@@ -272,7 +268,7 @@ function DeckBuilderFrame_DeleteDeckButton_OnClick()
 			txt = txt .. " This deck is used by other decks, these buttons will be deleted."
 		end
 		confirmation = 0 
-		StaticPopupDialogs["DELETE_DECK_CONFIRMATION"] = {
+		StaticPopupDialogs["EMOTEBUTTONS_DELETE_DECK_CONFIRMATION"] = {
 		text = txt,
 		button1 = "Yes",
 		button2 = "No",
@@ -306,7 +302,7 @@ function DeckBuilderFrame_DeleteDeckButton_OnClick()
 		hideOnEscape = true,
 		preferredIndex = 3,  -- avoid some UI taint, see http://www.wowace.com/announcements/how-to-avoid-some-ui-taint/
 		}
-		StaticPopup_Show("DELETE_DECK_CONFIRMATION")
+		StaticPopup_Show("EMOTEBUTTONS_DELETE_DECK_CONFIRMATION")
 
 	end
 end
@@ -449,8 +445,6 @@ function DeckBuilderFrame_RenameDeckButton_OnClick()
 				EmoteButtons_CloseOpenDecks();
 				EmoteButtons_ReOpenDecks();
 				DEFAULT_CHAT_FRAME:AddMessage("Deck rename success!");
-			--EB_CurrentActions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].tooltip = editBox:GetText();
-			--EmoteButtons_UpdateConfig();
 		end
 		this:GetParent():Hide();
 	end

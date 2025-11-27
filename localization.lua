@@ -34,7 +34,6 @@ EMOTEBUTTONS_OPENDECK		= "Open Deck";
 EMOTEBUTTONS_SLASHCOMMAND	= "Do Emote";
 
 EMOTEBUTTONS_CHANGELABEL	= "Change label to:";
-EMOTEBUTTONS_CHANGECOMMAND	= "Change action command to:";
 EMOTEBUTTONS_CHANGEEMOTE	= "Change emote to:";
 EMOTEBUTTONS_CHANGEDECK	= "Change deck action to:";
 
