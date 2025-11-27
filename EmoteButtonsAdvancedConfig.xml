@@ -150,7 +150,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-                       EmoteButtons_ImportProfile();
+					EmoteButtons_ImportProfileFrame:Show();
                    </OnClick>
 				</Scripts>
 			</Button>

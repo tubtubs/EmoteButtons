@@ -1,3 +1,41 @@
+function EmoteButtons_AddButton(deck, act, acttype, tip)
+	EmoteButtons_CloseOpenDecks();
+	a = {action=act, type=acttype, 
+		 tooltip=tip, image=IconPickerRandomIcon()}
+	table.insert(EB_CurrentActions[deck], a);
+	DeckBuilderFrameButtons_Update();
+	DeckBuilderFrame_UpdateActions();
+	EmoteButtons_ReOpenDecks();
+end
+
+function EmoteButtons_ReloadDeck(deck)
+	if EmoteButtons_FarLeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarLeft");
+	elseif EmoteButtons_FarRightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "FarRight");
+	elseif EmoteButtons_LeftWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Left");
+	elseif EmoteButtons_RightWing_Deck==deck then
+		EmoteButtons_LoadDeck(deck, "Right");
+	elseif EmoteButtons_FirstLevelName == deck then
+		EmoteButtons_LoadDeck(deck, "");
+	end
+end
+
+function EmoteButtons_HideAllPopups()
+	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
+	StaticPopup_Hide ("DELETE_DECK_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_CHANGETOOLTIP")
+	StaticPopup_Hide ("RESET_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_NEWPROFILE")
+	StaticPopup_Hide ("EMOTEBUTTONS_DUPLICATEPROFILE")
+	StaticPopup_Hide ("DELETE_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("SET_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("SAVE_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_NEWDECK")
+	StaticPopup_Hide ("SET_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_RENAMEDECK")
+end
 -- Deck Builder --
 
 function DeckBuilderFrame_ScrollToSelected()
@@ -28,7 +66,7 @@ function DeckBuilderFrame_OnShow()
 end
 
 function DeckBuilderFrame_OnHide()
-	EB_HideAllPopupsFrames();
+	EmoteButtons_HideAllPopups();
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
@@ -47,7 +85,7 @@ function DeckBuilderFrameDeckActionButton_OnClick()
 	DeckManagerFrame:Hide();
 	IconPickerFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EB_HideAllPopupsFrames();
+	EmoteButtons_HideAllPopups();
 	DeckBuilderFrameButtons_Update();
 	DeckBuilderFrame_Update();
 end
@@ -61,7 +99,7 @@ function DeckBuilderFrameDeckButton_OnClick()
 	DeckManagerFrame:Hide();
 	IconPickerFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EB_HideAllPopupsFrames();
+	EmoteButtons_HideAllPopups();
 	DeckBuilderFrame_UpdateActions(found);
 	DeckBuilderFrameButtons_Update() 
 	DeckBuilderFrame_Update();
@@ -204,7 +242,7 @@ function DeckBuilderFrame_DeleteActionButton_OnClick()
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	table.remove(EB_CurrentActions[deck], DeckBuilderFrame.selectedAction);
-	EB_ReloadDeck(deck);
+	EmoteButtons_ReloadDeck(deck);
 	--reset deck builder action buttons and what not
 	DeckBuilderFrame.selectedAction = 0;
 	DeckBuilderFrame_UpdateActions();
@@ -329,11 +367,11 @@ function DeckBuilderFrame_MoveUpButton_OnClick()
 	EmoteButtons_ConfigButton = button - 1;
 	DeckBuilderFrameButtons_Update();
 	DeckBuilderFrame_UpdateActions();
-	EB_ReloadDeck(deck)
+	EmoteButtons_ReloadDeck(deck)
 	EmoteButtons_CloseOpenDecks();
 	EmoteButtons_ReOpenDecks();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EB_HideAllPopupsFrames()
+	EmoteButtons_HideAllPopups()
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
@@ -349,11 +387,11 @@ function DeckBuilderFrame_MoveDownButton_OnClick()
 	EmoteButtons_ConfigButton = button +1;
 	DeckBuilderFrameButtons_Update();
 	DeckBuilderFrame_UpdateActions();
-	EB_ReloadDeck(deck)
+	EmoteButtons_ReloadDeck(deck)
 	EmoteButtons_CloseOpenDecks();
 	EmoteButtons_ReOpenDecks();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EB_HideAllPopupsFrames()
+	EmoteButtons_HideAllPopups()
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
@@ -407,7 +445,7 @@ function DeckBuilderFrame_RenameDeckButton_OnClick()
 				DeckBuilderFrame_UpdateActions();
 				DeckBuilderFrameButtons_Update();
 				--Reload relevant decks, and re-fresh all buttons
-				EB_ReloadDeck(deck)
+				EmoteButtons_ReloadDeck(deck)
 				EmoteButtons_CloseOpenDecks();
 				EmoteButtons_ReOpenDecks();
 				DEFAULT_CHAT_FRAME:AddMessage("Deck rename success!");

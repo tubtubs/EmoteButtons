@@ -39,7 +39,7 @@ end
 function EmoteButtons_AdvancedConfigFrame_OnShow()
 	DeckBuilderFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EB_HideAllPopupsFrames()
+	EmoteButtons_HideAllPopups()
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
@@ -218,10 +218,6 @@ function EmoteButtons_ResetProfile()
 	StaticPopup_Show("RESET_PROFILE_CONFIRMATION")
 end
 
-function EmoteButtons_ImportProfile()
-	EmoteButtons_ImportProfileFrame:Show();
-end
-
 function EmoteButtons_ImportProfileFrame_SubmitButton_OnClick()
 	l = EmoteButtons_ImportProfileFrame_ScrollFrame_ImportEditBox:GetText();
 	f = loadstring(l);
@@ -322,24 +318,4 @@ function EmoteButtons_ExportProfile()
 							EmoteButtons_Vars.Profile)
 	EmoteButtons_ExportProfileFrame_ScrollFrame_ExportEditBox:SetText(TempDecks..TempProfile)
 	EmoteButtons_ExportProfileFrame:Show();
-end
-
-function EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick()
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-	act = EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:GetText();
-	len = getn(EB_CurrentActions[deck])
-	if len < EmoteButtons_ConfigButton then
-		EB_AddButton(deck, act,EBACTTYPE_SLASHCMD,"")
-	else
-		EB_CurrentActions[deck][button].action = act;
-		EB_CurrentActions[deck][button].type = EBACTTYPE_SLASHCMD;
-		--EmoteButtons_UpdateConfig();
-	end
-	if(DeckBuilderFrame:IsShown()) then
-		DeckBuilderFrame_UpdateActions();
-		DeckBuilderFrameButtons_Update();
-	end
-	EB_ReloadDeck(deck);
-	EmoteButtons_ChangeCMDFrame:Hide();
 end

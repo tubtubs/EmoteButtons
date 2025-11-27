@@ -26,6 +26,7 @@ Clean up EmoteButtons.lua
 -DeckBuilder.xml
 --Include all the relevant code, and frames. Delete replaced old frames.
 --Deprecate EmoteButtonsConfig.xml
+Make a 2nd reset, reset and default
 
 NOTE: Only seems to lag with larger deck sizes. (open wings)
 	--probably about how the deck lookup is handled, not fading
@@ -102,9 +103,6 @@ EmoteButtons_OldLevels={["Main"]=false,["Left"]=false, ["Right"]=false,
 
 EmoteButtons_ConfigDeck = "#0";
 EmoteButtons_ConfigButton = 0;
-
---needed hack
-EmoteButtons_CanChangeSlider = false;
 
 --Needed for options menu
 EmoteButtons_DeckList={}
@@ -218,6 +216,26 @@ function EmoteButtons_Reset()
 	EmoteButtons_ToggleFirstLevel();
 	EmoteButtons_WipeVars();
 end
+
+function EmoteButtons_ToggleWing(wing)
+	local i=0
+	local obj;
+	local wc=getglobal("EmoteButtons_"..wing.."Wing")
+	local deck = getglobal("EmoteButtons_"..wing.."Wing_Deck")
+	local lwc = getn(wc);
+	for i=1, lwc do
+		obj = getglobal(wc[i]);
+		if (EmoteButtons_Levels[wing]) then
+			FadeOutFrame(obj, 0.1*i);
+		elseif (EB_CurrentActions[deck][i]~=nil and 
+		EB_CurrentActions[deck][i].action~=nil) then
+			FadeInFrame(obj,0.15*(lwc-i));
+		end
+	end
+	--flip the flag on the way out
+	EmoteButtons_Levels[wing] = not EmoteButtons_Levels[wing]
+end
+
 
 function EmoteButtons_Init()
 	local i;
@@ -476,16 +494,16 @@ function EmoteButtons_ToggleFirstLevel()
 	local obj;
 	local flc = getn(EB_CurrentActions[EmoteButtons_FirstLevelName]);
 	if EmoteButtons_Levels["FarLeft"] then
-		EmoteButtons_ToggleFarLeftWing();
+		EmoteButtons_ToggleWing("FarLeft");
 	end
 	if EmoteButtons_Levels["FarRight"] then
-		EmoteButtons_ToggleFarRightWing();
+		EmoteButtons_ToggleWing("FarRight");
 	end
 	if EmoteButtons_Levels["Left"] then
-		EmoteButtons_ToggleLeftWing();
+		EmoteButtons_ToggleWing("Left");
 	end
 	if EmoteButtons_Levels["Right"] then
-		EmoteButtons_ToggleRightWing();
+		EmoteButtons_ToggleWing("Right");
 	end
 
 	
@@ -500,75 +518,6 @@ function EmoteButtons_ToggleFirstLevel()
 		end
 	end
 	EmoteButtons_Levels["Main"] = not EmoteButtons_Levels["Main"]
-end
-
---Could maybe condense into one function, if desired.
-function EmoteButtons_ToggleFarLeftWing()
-	local i=0
-	local obj;
-	local lwc = getn(EmoteButtons_FarLeftWing);
-	for i=1, lwc do
-		obj = getglobal(EmoteButtons_FarLeftWing[i]);
-		if (EmoteButtons_Levels["FarLeft"]) then
-			FadeOutFrame(obj, 0.1*i);
-		elseif (EB_CurrentActions[EmoteButtons_FarLeftWing_Deck][i]~=nil and 
-		EB_CurrentActions[EmoteButtons_FarLeftWing_Deck][i].action~=nil) then
-			FadeInFrame(obj,0.15*(lwc-i));
-		end
-	end
-	--flip the flag on the way out
-	EmoteButtons_Levels["FarLeft"] = not EmoteButtons_Levels["FarLeft"]
-end
-
-function EmoteButtons_ToggleFarRightWing()
-	local i=0
-	local obj;
-	local lwc = getn(EmoteButtons_FarRightWing);
-	for i=1, lwc do
-		obj = getglobal(EmoteButtons_FarRightWing[i]);
-		if (EmoteButtons_Levels["FarRight"]) then
-			FadeOutFrame(obj, 0.1*i);
-		elseif (EB_CurrentActions[EmoteButtons_FarRightWing_Deck][i]~=nil and 
-		EB_CurrentActions[EmoteButtons_FarRightWing_Deck][i].action~=nil) then
-			FadeInFrame(obj,0.15*(lwc-i));
-		end
-	end
-	--flip the flag on the way out
-	EmoteButtons_Levels["FarRight"] = not EmoteButtons_Levels["FarRight"]
-end
-
-function EmoteButtons_ToggleLeftWing()
-	local i=0
-	local obj;
-	local lwc = getn(EmoteButtons_LeftWing);
-	for i=1, lwc do
-		obj = getglobal(EmoteButtons_LeftWing[i]);
-		if (EmoteButtons_Levels["Left"]) then
-			FadeOutFrame(obj, 0.1*i);
-		elseif (EB_CurrentActions[EmoteButtons_LeftWing_Deck][i]~=nil and 
-		EB_CurrentActions[EmoteButtons_LeftWing_Deck][i].action~=nil) then
-			FadeInFrame(obj,0.15*(lwc-i));
-		end
-	end
-	--flip the flag on the way out
-	EmoteButtons_Levels["Left"] = not EmoteButtons_Levels["Left"]
-end
-
-function EmoteButtons_ToggleRightWing()
-	local i=0
-	local obj;
-	local rwc = getn(EmoteButtons_RightWing);
-	for i=1, rwc do
-		obj = getglobal(EmoteButtons_RightWing[i]);
-		if (EmoteButtons_Levels["Right"]) then
-			FadeOutFrame(obj, 0.1*i);
-		elseif (EB_CurrentActions[EmoteButtons_RightWing_Deck][i]~=nil and 
-		EB_CurrentActions[EmoteButtons_RightWing_Deck][i].action~=nil) then
-			FadeInFrame(obj,0.15*(rwc-i));
-		end
-	end
-	--flip the flag on the way out
-	EmoteButtons_Levels["Right"] = not EmoteButtons_Levels["Right"]
 end
 
 function EmoteButtons_FadeWing(wing)
@@ -745,57 +694,57 @@ function EmoteButtons_ToggleDeck(deck, wing)
 	if wing=="Left" then
 		if EmoteButtons_LeftWing_Deck==deck then
 			if(EmoteButtons_Levels["FarLeft"]) then
-				EmoteButtons_ToggleFarLeftWing();
+				EmoteButtons_ToggleWing("FarLeft");
 			end
-			EmoteButtons_ToggleLeftWing();
+			EmoteButtons_ToggleWing("Left");
 		else
 			EmoteButtons_LoadDeck(deck, wing); 
 			if (EmoteButtons_Levels["Left"]) then
 				if(EmoteButtons_Levels["FarLeft"]) then
-					EmoteButtons_ToggleFarLeftWing();
+					EmoteButtons_ToggleWing("FarLeft");
 				end
 				EmoteButtons_FadeWing("left");
 			else
-				EmoteButtons_ToggleLeftWing();
+				EmoteButtons_ToggleWing("Left");
 			end
 		end
 	elseif wing=="Right" then
 		if EmoteButtons_RightWing_Deck==deck then
 			if(EmoteButtons_Levels["FarRight"]) then
-				EmoteButtons_ToggleFarRightWing();
+				EmoteButtons_ToggleWing("FarRight");
 			end
-			EmoteButtons_ToggleRightWing();
+			EmoteButtons_ToggleWing("Right");
 		else
 			EmoteButtons_LoadDeck(deck, wing);
 			if (EmoteButtons_Levels["Right"]) then
 				if(EmoteButtons_Levels["FarRight"]) then
-					EmoteButtons_ToggleFarRightWing();
+					EmoteButtons_ToggleWing("FarRight");
 				end
 				EmoteButtons_FadeWing("right");
 			else
-				EmoteButtons_ToggleRightWing();
+				EmoteButtons_ToggleWing("Right");
 			end
 		end
 	elseif wing=="FarLeft" then		
 		if EmoteButtons_FarLeftWing_Deck==deck then
-			EmoteButtons_ToggleFarLeftWing();
+			EmoteButtons_ToggleWing("FarLeft");
 		else
 			EmoteButtons_LoadDeck(deck, wing);
 			if (EmoteButtons_Levels["FarLeft"]) then
 				EmoteButtons_FadeWing("farleft");
 			else
-				EmoteButtons_ToggleFarLeftWing();
+				EmoteButtons_ToggleWing("FarLeft");
 			end
 		end	
 	elseif wing=="FarRight" then		
 		if EmoteButtons_FarRightWing_Deck==deck then
-			EmoteButtons_ToggleFarRightWing();
+			EmoteButtons_ToggleWing("FarRight");
 		else
 			EmoteButtons_LoadDeck(deck, wing);
 			if (EmoteButtons_Levels["FarRight"]) then
 				EmoteButtons_FadeWing("farright");
 			else
-				EmoteButtons_ToggleFarRightWing();
+				EmoteButtons_ToggleWing("FarRight");
 			end
 		end	
 	end
@@ -1003,18 +952,18 @@ function EmoteButtons_CloseOpenDecks()
 		EmoteButtons_ToggleFirstLevel();
 	elseif(EmoteButtons_Levels["FarLeft"] and 
 		EmoteButtons_FarLeftWing_Deck==deck) then 
-		--EmoteButtons_ToggleLeftWing();
-		EmoteButtons_ToggleFarLeftWing();
+		--EmoteButtons_ToggleWing("Left");
+		EmoteButtons_ToggleWing("FarLeft");
 	elseif (EmoteButtons_Levels["Left"] and 
 			EmoteButtons_LeftWing_Deck==deck) then 
-		EmoteButtons_ToggleLeftWing();
+		EmoteButtons_ToggleWing("Left");
 	elseif (EmoteButtons_Levels["FarRight"] and
 		EmoteButtons_FarRightWing_Deck==deck) then 
-		--EmoteButtons_ToggleRightWing();
-		EmoteButtons_ToggleFarRightWing();
+		--EmoteButtons_ToggleWing("Right");
+		EmoteButtons_ToggleWing("FarRight");
 	elseif (EmoteButtons_Levels["Right"] and
 			EmoteButtons_RightWing_Deck==deck) then
-		EmoteButtons_ToggleRightWing();
+		EmoteButtons_ToggleWing("Right");
 	end
 end
 
@@ -1025,19 +974,19 @@ function EmoteButtons_ReOpenDecks()
 	end
 	if(EmoteButtons_OldLevels["FarLeft"] and
 		not EmoteButtons_Levels["FarLeft"]) then 
-		--EmoteButtons_ToggleLeftWing();
-		EmoteButtons_ToggleFarLeftWing();
+		--EmoteButtons_ToggleWing("Left");
+		EmoteButtons_ToggleWing("FarLeft");
 	elseif (EmoteButtons_OldLevels["Left"] and
 		not EmoteButtons_Levels["Left"]) then 
-		EmoteButtons_ToggleLeftWing();
+		EmoteButtons_ToggleWing("Left");
 	end
 	if (EmoteButtons_OldLevels["FarRight"] and
 		not EmoteButtons_Levels["FarRight"]) then 
-		--EmoteButtons_ToggleRightWing();
-		EmoteButtons_ToggleFarRightWing();
+		--EmoteButtons_ToggleWing("Right");
+		EmoteButtons_ToggleWing("FarRight");
 	elseif (EmoteButtons_OldLevels["Right"] and
 		not EmoteButtons_Levels["Right"]) then
-		EmoteButtons_ToggleRightWing();
+		EmoteButtons_ToggleWing("Right");
 	end
 
 end
