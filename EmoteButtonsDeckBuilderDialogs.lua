@@ -291,3 +291,23 @@ function EmoteButtons_ChangeCMDFrame_SubmitButton_Update()
 		EmoteButtons_ChangeCMDFrame_SubmitButton:Disable();
 	end
 end
+
+function EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	act = EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:GetText();
+	len = getn(EB_CurrentActions[deck])
+	if len < EmoteButtons_ConfigButton then
+		EB_AddButton(deck, act,EBACTTYPE_SLASHCMD,"")
+	else
+		EB_CurrentActions[deck][button].action = act;
+		EB_CurrentActions[deck][button].type = EBACTTYPE_SLASHCMD;
+		--EmoteButtons_UpdateConfig();
+	end
+	if(DeckBuilderFrame:IsShown()) then
+		DeckBuilderFrame_UpdateActions();
+		DeckBuilderFrameButtons_Update();
+	end
+	EB_ReloadDeck(deck);
+	EmoteButtons_ChangeCMDFrame:Hide();
+end

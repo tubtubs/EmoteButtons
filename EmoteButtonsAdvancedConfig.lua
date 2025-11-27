@@ -1,16 +1,5 @@
 
-function EmoteButtons_AdvancedConfigFrame_OnShow()
-	DeckBuilderFrame:Hide();
-	EmoteButtons_ChangeCMDFrame:Hide();
-	EB_HideAllPopupsFrames()
-	EB_EmotesManager:Hide();
-	IconPickerFrame:Hide();
-	DeckManagerFrame:Hide();
-	EmoteButtons_AdvancedConfigFrame_SetMainShiftTitle:SetText(EMOTEBUTTONS_ROTATION);
-	EmoteButtons_AdvancedConfigFrame_SetMainSizeTitle:SetText(EMOTEBUTTONS_SIZE);
-end
-
-function SetProfile(index)
+function EmoteButtons_SetProfile(index)
 	StaticPopupDialogs["SET_PROFILE_CONFIRMATION"] = {
 	text = "Do you want to set your current decks config to the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
 	button1 = "Yes",
@@ -30,30 +19,7 @@ function SetProfile(index)
 
 end
 
---Did this onshow, instead of load since my variables weren't loaded on time for on load.
---Might just need to change when the AddonLoaded event is called?
-function ProfileSetDropDown_OnShow()
-	for i=1, getn(EmoteButtons_Vars.Profiles) do
-		info = {};
-		info.text       = EmoteButtons_Vars.Profiles[i].Name;
-		info.value      = i;
-		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
-			info.checked =true;
-		else
-			info.checked=false;
-		end
-		info.func =  function() 
-			SetProfile(this.value) 
-		end
-		UIDropDownMenu_AddButton(info);
-	end
-end
-
-function EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick()
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, 0, 0);
-end
-
-function DeleteProfile(index)
+function EmoteButtons_DeleteProfile(index)
 	StaticPopupDialogs["DELETE_PROFILE_CONFIRMATION"] = {
 	text = "Do you want to delete the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
 	button1 = "Yes",
@@ -70,7 +36,41 @@ function DeleteProfile(index)
 	StaticPopup_Show("DELETE_PROFILE_CONFIRMATION")
 end
 
-function ProfileDeleteDropDown_OnShow()
+function EmoteButtons_AdvancedConfigFrame_OnShow()
+	DeckBuilderFrame:Hide();
+	EmoteButtons_ChangeCMDFrame:Hide();
+	EB_HideAllPopupsFrames()
+	EB_EmotesManager:Hide();
+	IconPickerFrame:Hide();
+	DeckManagerFrame:Hide();
+	EmoteButtons_AdvancedConfigFrame_SetMainShiftTitle:SetText(EMOTEBUTTONS_ROTATION);
+	EmoteButtons_AdvancedConfigFrame_SetMainSizeTitle:SetText(EMOTEBUTTONS_SIZE);
+end
+
+--Did this onshow, instead of load since my variables weren't loaded on time for on load.
+--Might just need to change when the AddonLoaded event is called?
+function EmoteButtons_ProfileSetDropDown_OnShow()
+	for i=1, getn(EmoteButtons_Vars.Profiles) do
+		info = {};
+		info.text       = EmoteButtons_Vars.Profiles[i].Name;
+		info.value      = i;
+		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
+			info.checked =true;
+		else
+			info.checked=false;
+		end
+		info.func =  function() 
+			EmoteButtons_SetProfile(this.value) 
+		end
+		UIDropDownMenu_AddButton(info);
+	end
+end
+
+function EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick()
+	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, 0, 0);
+end
+
+function EmoteButtons_ProfileDeleteDropDown_OnShow()
 	for i=1, getn(EmoteButtons_Vars.Profiles) do
 		info = {};
 		info.text       = EmoteButtons_Vars.Profiles[i].Name;
@@ -80,7 +80,7 @@ function ProfileDeleteDropDown_OnShow()
 		else -- only add if its not currently in use...
 			info.checked=false;
 			info.func =  function() 
-				DeleteProfile(this.value) 
+				EmoteButtons_DeleteProfile(this.value) 
 			end
 			UIDropDownMenu_AddButton(info);
 		end
@@ -91,7 +91,7 @@ function EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick()
 	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, 0, 0);
 end
 
-function DuplicateProfile(index)
+function EmoteButtons_DuplicateProfile(index)
 	--prompt for a new name
 	--make a new profile, use that name and old deck
 	--need to test if its by ref or by val?
@@ -135,7 +135,7 @@ function DuplicateProfile(index)
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_DUPLICATEPROFILE")):GetName().."EditBox"):SetText("");
 end
 
-function ProfileDuplicateDropDown_OnShow()
+function EmoteButtons_ProfileDuplicateDropDown_OnShow()
 	for i=1, getn(EmoteButtons_Vars.Profiles) do
 		info = {};
 		info.text       = EmoteButtons_Vars.Profiles[i].Name;
@@ -146,7 +146,7 @@ function ProfileDuplicateDropDown_OnShow()
 			info.checked=false;
 		end
 		info.func =  function() 
-			DuplicateProfile(this.value) 
+			EmoteButtons_DuplicateProfile(this.value) 
 		end
 		UIDropDownMenu_AddButton(info);
 	end
@@ -194,12 +194,7 @@ function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_NEWPROFILE")):GetName().."EditBox"):SetText("");
 end
 
-function ResetPosition()
-	EmoteButtons_Main:ClearAllPoints()
-	EmoteButtons_Main:SetPoint("CENTER", UIParent ,"CENTER", 0, 0)
-end
-
-function ResetProfile()
+function EmoteButtons_ResetProfile()
 	index = 0;
 	for i=1, getn(EmoteButtons_Vars.Profiles) do
 		if EmoteButtons_Vars.Profiles[i].Name==EmoteButtons_Vars.Profile then
@@ -223,7 +218,7 @@ function ResetProfile()
 	StaticPopup_Show("RESET_PROFILE_CONFIRMATION")
 end
 
-function ImportProfile()
+function EmoteButtons_ImportProfile()
 	EmoteButtons_ImportProfileFrame:Show();
 end
 
@@ -290,7 +285,7 @@ end
 ---How do I want it to look on export? Like valid lua table probably.
 --
 
-function ExportProfile()
+function EmoteButtons_ExportProfile()
 	--Load Decks for export.
 	TempDecks = "return {\n"
 

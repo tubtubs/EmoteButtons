@@ -121,9 +121,9 @@ local function TextMenu(arg)
 		DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetprofile|r - resets the current profile, and deck config to default.",1,1,1)
 	else
 		if arg == "resetposition" then
-			ResetPosition()
+			EmoteButtons_ResetPosition()
 		elseif arg == "resetprofile" then
-			ResetProfile()
+			EmoteButtons_ResetProfile()
 		elseif arg == "options" then
 			EmoteButtons_AdvancedConfigFrame:Show();
 		elseif arg == "deckbuilder" then
@@ -141,6 +141,11 @@ SLASH_EMOTEBUTTONS2 = '/EB'
 
 local function sort_alphabetical(a, b)
 	return a < b
+end
+
+function EmoteButtons_ResetPosition()
+	EmoteButtons_Main:ClearAllPoints()
+	EmoteButtons_Main:SetPoint("CENTER", UIParent ,"CENTER", 0, 0)
 end
 
 function EB_ReloadDeck(deck)

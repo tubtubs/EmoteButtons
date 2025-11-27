@@ -150,7 +150,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-                       ImportProfile();
+                       EmoteButtons_ImportProfile();
                    </OnClick>
 				</Scripts>
 			</Button>
@@ -167,7 +167,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-                       ExportProfile();
+                       EmoteButtons_ExportProfile();
                    </OnClick>
 				</Scripts>
 			</Button>
@@ -184,7 +184,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-                       ResetPosition();
+                       EmoteButtons_ResetPosition();
                    </OnClick>
 				</Scripts>
 			</Button>
@@ -201,7 +201,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-                       ResetProfile();
+                       EmoteButtons_ResetProfile();
                    </OnClick>
 				</Scripts>
 			</Button>
@@ -215,7 +215,7 @@
 				</Anchors>
 				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, ProfileSetDropDown_OnShow);
+                       UIDropDownMenu_Initialize(self, EmoteButtons_ProfileSetDropDown_OnShow);
                    </OnShow>
 					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick();
@@ -232,7 +232,7 @@
 				</Anchors>
 				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, ProfileDeleteDropDown_OnShow);
+                       UIDropDownMenu_Initialize(self, EmoteButtons_ProfileDeleteDropDown_OnShow);
                    </OnShow>
 					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick();
@@ -249,7 +249,7 @@
 				</Anchors>
 				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, ProfileDuplicateDropDown_OnShow);
+                       UIDropDownMenu_Initialize(self, EmoteButtons_ProfileDuplicateDropDown_OnShow);
                    </OnShow>
 					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick();
