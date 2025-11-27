@@ -1,0 +1,668 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<Include file="EmoteButtonsAdvancedConfig.lua"/>
+	<!-- Advanced Config-->
+    <!-- Slider with the value shown, virtual, saved from TargetButtons -->
+    <Slider name="EBSliderTemp" inherits="OptionsSliderTemplate" virtual="true">
+		<Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentTitle" text ="LOL" inherits="GameFontNormal">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="12" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentValue" inherits="GameFontNormal">
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-13" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+	</Slider>
+	<Frame name="EmoteButtons_AdvancedConfigFrame" frameStrata="HIGH" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="UIParent">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Size>
+			<AbsDimension x="600" y="180" />
+		</Size>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer>
+				<Texture name="$parentTitleBorder" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="160" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
+				</Texture>
+				<FontString name="$parentTitleString" font="GameFontNormal" text="EMOTEBUTTONS_ADVANCEDCONFIG">
+					<!--Window Title -->
+					<Size>
+						<AbsDimension x="140" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<!-- 
+			Size Slider
+			Rotation Slider
+			Profiles Dropdown
+			-Add/Remove Profiles too.
+			Export/Import Decks
+			Reset Position
+			-->
+			<Slider name="$parent_SetMainShift" inherits="EBSliderTemp">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="-130" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+					this:SetMinMaxValues(0,359);
+					this:SetValueStep(2);
+					getglobal(this:GetName().."High"):SetText("359'");
+					getglobal(this:GetName().."Low"):SetText("0'");
+					</OnLoad>
+					<OnValueChanged>
+					EmoteButtons_SliderChanged(this:GetName(), "'");
+					</OnValueChanged>
+				</Scripts>
+			</Slider>
+			<Slider name="$parent_SetMainSize" inherits="EBSliderTemp">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="130" y="-40"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>
+					this:SetMinMaxValues(24,64);
+					this:SetValueStep(1);
+					getglobal(this:GetName().."High"):SetText("64");
+					getglobal(this:GetName().."Low"):SetText("24");
+					</OnLoad>
+					<OnValueChanged>
+					EmoteButtons_SliderChanged(this:GetName(), "px");
+					</OnValueChanged>
+				</Scripts>
+			</Slider>
+			<Button name="$parent_ImportProfileButton" text="Import Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Size>
+					<AbsDimension x="155" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="-195" y="-95"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                       ImportProfile();
+                   </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_ExportProfileButton" text="Export Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Size>
+					<AbsDimension x="155" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parent_ImportProfileButton">
+						<Offset>
+							<AbsDimension x="0" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                       ExportProfile();
+                   </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_ResetPositionButton" text="Reset Main Button Position" inherits="EmoteButtons_OptionButton_Template">
+				<Size>
+					<AbsDimension x="155" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="195" y="-95"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                       ResetPosition();
+                   </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_ResetProfileButton" text="Reset Current Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Size>
+					<AbsDimension x="155" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parent_ResetPositionButton">
+						<Offset>
+							<AbsDimension x="0" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                       ResetProfile();
+                   </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_ProfileSetDropdownButton" text="Set Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="TOP">
+						<Offset>
+							<AbsDimension x="0" y="-55"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+                       UIDropDownMenu_Initialize(self, ProfileSetDropDown_OnShow);
+                   </OnShow>
+					<OnClick>
+                       EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick();
+                   </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_ProfileDeleteDropdownButton" text="Delete Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileSetDropdownButton">
+						<Offset>
+							<AbsDimension x="0" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+                       UIDropDownMenu_Initialize(self, ProfileDeleteDropDown_OnShow);
+                   </OnShow>
+					<OnClick>
+                       EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick();
+                   </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_ProfileDuplicateDropdownButton" text="Duplicate Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileDeleteDropdownButton">
+						<Offset>
+							<AbsDimension x="0" y="-30"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnShow>
+                       UIDropDownMenu_Initialize(self, ProfileDuplicateDropDown_OnShow);
+                   </OnShow>
+					<OnClick>
+                       EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick();
+                   </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_ProfileCreateButton" text="Create Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileDuplicateDropdownButton">
+						<Offset>
+							<AbsDimension x="" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                       EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick();
+                   </OnClick>
+				</Scripts>
+			</Button>
+			<!---
+			<Button name="$parent_ProfileSaveButton" text="Save Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileCreateButton">
+						<Offset>
+							<AbsDimension x="0" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+					SaveProfile()
+                   </OnClick>
+				</Scripts>
+			</Button>
+			-->
+			<Button name="$parent_Close" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="-4"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnLoad>             
+						tinsert(UISpecialFrames, "EmoteButtons_AdvancedConfigFrame");
+					</OnLoad>
+					<OnClick>
+						EmoteButtons_AdvancedConfigFrame:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnShow>
+				EmoteButtons_AdvancedConfigFrame_OnShow();
+			</OnShow>
+		</Scripts>
+	</Frame>
+	<Frame name="EmoteButtons_ExportProfileFrame" frameStrata="DIALOG"  toplevel="true" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="UIParent">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Size>
+			<AbsDimension x="400" y="600" />
+		</Size>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer>
+				<Texture name="$parentTitleBorder" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="160" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
+				</Texture>
+				<FontString name="$parentTitleString" font="GameFontNormal" text="Export Profile">
+					<!--Window Title -->
+					<Size>
+						<AbsDimension x="140" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentLayer2">
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset x="40" y="-50" />
+					</Anchor>
+					<Anchor point="TOP">
+						<Offset x="50" y="-50" />
+					</Anchor>
+					<Anchor point="BOTTOM">
+						<Offset x="50" y="50" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="320" y="180" />
+				</Size>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="8" right="9" top="6" bottom="8" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+			</Frame>
+
+			<ScrollFrame name="$parent_ScrollFrame" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="300" y="480"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset x="50" y="-60" />
+					</Anchor>
+					<Anchor point="TOP">
+						<Offset x="50" y="-60" />
+					</Anchor>
+					<Anchor point="BOTTOM">
+						<Offset x="50" y="60" />
+					</Anchor>
+				</Anchors>
+				<ScrollChild>
+					<EditBox name="$parent_ExportEditBox" multiLine="1" font="GameFontNormal">
+						<Size>
+							<AbsDimension x="300" y="480" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_ScrollFrame">
+								<Offset x="-80" y="80" />
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT"  relativeTo="$parent_ScrollFrame">
+								<Offset x="20" y="20" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnCursorChanged>
+							this:HighlightText();
+							</OnCursorChanged>
+							<OnShow>
+							this:HighlightText();
+							EmoteButtons_ImportProfileFrame:Hide();
+							</OnShow>
+							<OnTextChanged>
+								local scrollBar = getglobal(this:GetParent():GetName().."ScrollBar")
+								this:GetParent():UpdateScrollChildRect();
+								local min;
+								local max;
+								min, max = scrollBar:GetMinMaxValues();
+								if ( max > 0 and (this.max ~= max) ) then
+									this.max = max;
+									scrollBar:SetValue(max);
+								end
+							</OnTextChanged>
+							<OnEscapePressed>
+							EmoteButtons_ExportProfileFrame:Hide();
+							</OnEscapePressed>
+						</Scripts>
+					</EditBox>
+				</ScrollChild>
+			</ScrollFrame>
+			<Button name="$parent_Close" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="-4"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EmoteButtons_ExportProfileFrame:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>             
+				tinsert(UISpecialFrames, "EmoteButtons_ExportProfileFrame");
+			</OnLoad>
+			<OnShow>
+
+			</OnShow>
+		</Scripts>
+	</Frame>
+	<Frame name="EmoteButtons_ImportProfileFrame" frameStrata="DIALOG" toplevel="true" hidden="true">
+		<Anchors>
+			<Anchor point="CENTER" relativeTo="UIParent">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Size>
+			<AbsDimension x="400" y="600" />
+		</Size>
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="11" right="12" top="12" bottom="11" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="32" />
+			</EdgeSize>
+		</Backdrop>
+		<Layers>
+			<Layer>
+				<Texture name="$parentTitleBorder" file="Interface\DialogFrame\UI-DialogBox-Header">
+					<Size>
+						<AbsDimension x="160" y="32" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
+				</Texture>
+				<FontString name="$parentTitleString" font="GameFontNormal" text="Import Profile">
+					<!--Window Title -->
+					<Size>
+						<AbsDimension x="140" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-5" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="$parentLayer2">
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset x="40" y="-50" />
+					</Anchor>
+					<Anchor point="TOP">
+						<Offset x="50" y="-50" />
+					</Anchor>
+					<Anchor point="BOTTOM">
+						<Offset x="50" y="50" />
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="320" y="180" />
+				</Size>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="8" right="9" top="6" bottom="8" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+			</Frame>
+
+			<ScrollFrame name="$parent_ScrollFrame" inherits="UIPanelScrollFrameTemplate">
+				<Size>
+					<AbsDimension x="300" y="480"/>
+				</Size>
+				<Anchors>
+					<Anchor point="LEFT">
+						<Offset x="50" y="-60" />
+					</Anchor>
+					<Anchor point="TOP">
+						<Offset x="50" y="-60" />
+					</Anchor>
+					<Anchor point="BOTTOM">
+						<Offset x="50" y="60" />
+					</Anchor>
+				</Anchors>
+				<ScrollChild>
+					<EditBox name="$parent_ImportEditBox" multiLine="1" font="GameFontNormal">
+						<Size>
+							<AbsDimension x="300" y="480" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativeTo="$parent_ScrollFrame">
+								<Offset x="-80" y="80" />
+							</Anchor>
+							<Anchor point="BOTTOMRIGHT"  relativeTo="$parent_ScrollFrame">
+								<Offset x="20" y="20" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnShow>
+								EmoteButtons_ExportProfileFrame:Hide();
+							</OnShow>
+							<OnTextChanged>
+								local scrollBar = getglobal(this:GetParent():GetName().."ScrollBar")
+								this:GetParent():UpdateScrollChildRect();
+								local min;
+								local max;
+								min, max = scrollBar:GetMinMaxValues();
+								if ( max > 0 and (this.max ~= max) ) then
+									this.max = max;
+									scrollBar:SetValue(max);
+								end
+							</OnTextChanged>
+							<OnEnterPressed>
+							EmoteButtons_ImportProfileFrame_SubmitButton_OnClick();
+							</OnEnterPressed>
+							<OnEscapePressed>
+							EmoteButtons_ImportProfileFrame:Hide();
+							</OnEscapePressed>
+						</Scripts>
+					</EditBox>
+				</ScrollChild>
+			</ScrollFrame>
+			<Button name="$parent_SubmitButton" text="Import Profile" inherits="EmoteButtons_OptionButton_Template">
+				<Size>
+					<AbsDimension x="155" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="0" y="-260"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+                       EmoteButtons_ImportProfileFrame_SubmitButton_OnClick();
+                   </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_Close" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+						<Offset>
+							<AbsDimension x="-2" y="-4"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EmoteButtons_ImportProfileFrame:Hide();
+					</OnClick>
+				</Scripts>
+			</Button>
+		</Frames>
+		<Scripts>
+			<OnLoad>             
+				tinsert(UISpecialFrames, "EmoteButtons_ImportProfileFrame");
+			</OnLoad>
+			<OnShow>
+
+			</OnShow>
+		</Scripts>
+	</Frame>
+	<!-- End of Advanced Config-->
+</Ui>

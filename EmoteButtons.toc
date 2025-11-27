@@ -7,4 +7,6 @@
 ## SavedVariables: EmoteButtons_Vars
 EmoteButtons.xml
 EmoteButtonsDeckBuilder.xml
+EmoteButtonsAdvancedConfig.xml
+EmoteButtonsDeckBuilderDialogs.xml
 IconPicker.xml
