@@ -1,5 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Include file="EmoteButtonsDeckBuilderDialogs.lua"/>
+    <Include file="EmoteList.lua"/>
 
 	<Frame name="EmoteButtons_ChangeCMDFrame" frameStrata="DIALOG" toplevel="true" hidden="true">
 		<Anchors>

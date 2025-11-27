@@ -26,6 +26,9 @@ Clean up EmoteButtons.lua
 -DeckBuilder.xml
 --Include all the relevant code, and frames. Delete replaced old frames.
 --Deprecate EmoteButtonsConfig.xml
+
+NOTE: Only seems to lag with larger deck sizes. (open wings)
+	--probably about how the deck lookup is handled, not fading
 	DEFAULT_CHAT_FRAME:AddMessage("TEST")
 ]]--
 
@@ -102,10 +105,6 @@ EmoteButtons_ConfigButton = 0;
 
 --needed hack
 EmoteButtons_CanChangeSlider = false;
-
---image slider
-EmoteButtons_ImageSlideCenter = floor(EmoteButtons_ImageCount/2);
-EmoteButtons_LastSlide = 0;
 
 --Needed for options menu
 EmoteButtons_DeckList={}
