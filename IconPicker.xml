@@ -90,11 +90,7 @@
 			<AbsDimension x="297" y="370"/>
 		</Size>
 		<Anchors>
-			<Anchor point="CENTER" relativeTo="UIParent">
-				<Offset>
-					<AbsDimension x="480" y="45"/>
-				</Offset>
-			</Anchor>
+			<Anchor point="CENTER" relativeTo="UIParent"/>
 		</Anchors>
 		<Layers>
 			<Layer level="BACKGROUND">

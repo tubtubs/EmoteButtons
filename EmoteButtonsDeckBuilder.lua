@@ -471,3 +471,32 @@ function DeckBuilderFrame_RenameDeckButton_OnClick()
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_RENAMEDECK")):GetName().."EditBox"):SetText(deck);
 	end
 end
+
+function DeckBuilderFrame_IconPickerOkay(icon,text)
+    local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+    EB_CurrentActions[deck][button].image = icon;
+    EmoteButtons_ReloadDeck(deck);
+	EB_CurrentActions[deck][button].tooltip = text;
+    DeckBuilderFrame_UpdateActions();
+end
+
+function DeckBuilderFrame_ChangeTooltipButton_OnClick()
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	txt = EB_CurrentActions[deck][button].tooltip
+	icon = EB_CurrentActions[deck][button].image
+	anchor = {
+		Point="RIGHT",
+		RelativeTo = "DeckBuilderFrame",
+		RelativePoint = "TOPRIGHT",
+		x=300,
+		y=90;
+	};
+	f = DeckBuilderFrame_IconPickerOkay
+	IconPickerForceShow(icon,txt,f,anchor)
+	DeckManagerFrame:Hide();
+    EmoteButtons_ChangeCMDFrame:Hide();
+	EB_EmotesManager:Hide();
+	EmoteButtons_HideAllPopups()
+end

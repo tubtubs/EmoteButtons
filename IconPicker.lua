@@ -366,13 +366,40 @@ IP_ICONS = {
 }
 
 NUM_CATEGORIES = 8
+OKAY_FUNC = ""
 
+--Can be called externally to get random icon
+--Truncated tho, has path removed.
 function IconPickerRandomIcon()
     cat = math.random(NUM_CATEGORIES)
     l = getn(IP_ICONS[cat])
     subcat = math.random(l)
     m = getn(IP_ICONS[cat][subcat].icons)
     return IP_ICONS[cat][subcat].icons[math.random(m)]
+end
+
+--Can be forced to draw externally
+--icon to scroll to, can be blank
+--text to fill in, can be blank
+--must have a return function that takes icon,text
+--anchor can be nil, will draw to center screen.
+function IconPickerForceShow(icon,text,func,anchor)
+    if IconPickerFrame:IsVisible() then
+        IconPickerFrame:Hide();
+    end
+    OKAY_FUNC = func;
+    if anchor ~= nil then
+        IconPickerFrame:SetPoint(anchor.Point,anchor.RelativeTo,
+            anchor.RelativePoint,anchor.x,anchor.y);
+    else    
+        IconPickerFrame:SetPoint("CENTER","UIParent",
+            "CENTER",0,0);
+    end
+    if icon ~= "" then
+        IconPickerFindIcon(icon);
+    end
+    IconPickerFrame:Show();
+    IconPickerEditBox:SetText(text);
 end
 
 function IconPickerRandomIconButton()
@@ -396,13 +423,6 @@ function IconPickerRandomIconButton()
     IconPickerScrollFrame:SetVerticalScroll(offset);
     IconPickerUncheckAllCategories()
     IconPickerCheckSelectedCategory()
-end
-
-function IconPickerForceShow()
-    if IconPickerFrame:IsVisible() then
-        IconPickerFrame:Hide();
-    end
-    IconPickerFrame:Show();
 end
 
 function IconPickerFindIcon(icon)
@@ -448,54 +468,14 @@ function IconPickerFrame_OnShow()
 	PlaySound("igCharacterInfoOpen");
 	IconPickerEditBox:ClearFocus();
 	IconPickerOkayButton_Update();
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-
-	IconPickerEditBox:SetText(EB_CurrentActions[deck][button].tooltip);
-    IconPickerFindIcon(EB_CurrentActions[deck][button].image)
     IconPickerFrame_Update();
-    --[[ Disabling scrolling down to selected emote temporarlily
-
-	--Scroll down to current icon
-	local image = EB_CurrentActions[deck][button].image;
-	image = string.lower(image);
-	local found = 0
-	-- Find the index of the image
-	local numMacroIcons = GetNumMacroIcons();
-	local t = ""
-	for i=1, numMacroIcons do
-		t = GetMacroIconInfo(i);
-		t = string.lower(t);
-		if t == "interface\\icons\\"..image then
-			found = i;
-		end
-	end
-	-- 36 per row
-	--Made an edge case, cuz I couldn't maths
-	--Without modulus check multiples of 5 would end up on the next row
-	if (found ~= 0) then
-		if (math.mod(found,5) == 0 ) then
-			offset = floor((found-1)/5)*36;
-				innerIndex=5;
-		else
-			offset = floor(found/5)*36;
-			innerIndex=math.mod(found,5); 
-		end
-		IconPickerScrollFrame:SetVerticalScroll(offset);
-		getglobal("IconPickerButton"..innerIndex):SetChecked(1);
-		IconPickerFrame.selectedIcon = found;
-	end ]]--
     IconPickerUncheckAllCategories()
     IconPickerCheckSelectedCategory()
-	EmoteButtons_HideAllPopups()
-	DeckManagerFrame:Hide();
-    EmoteButtons_ChangeCMDFrame:Hide();
-	EB_EmotesManager:Hide();
 end
 
 function IconPickerFrame_OnHide()
 	IconPickerFrame:Hide();
-    CloseDropDownMenus()
+    CloseDropDownMenus();
 	PlaySound("igCharacterInfoClose");
 end
 
@@ -514,19 +494,14 @@ function IconPickerOkayButton_Update()
 end
 
 function IconPickerOkayButton_OnClick()
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
     n = IconPickerFrame.selectedIcon;
-	cat = IP_CATEGORY_SELECTED
-    subcat = IP_SUBCATEGORY_SELECTED
-    l = IP_ICONS[cat][subcat].icons
-    icon = l[n]
-
-    EB_CurrentActions[deck][button].image = icon
-    EmoteButtons_ReloadDeck(deck)
-	EB_CurrentActions[deck][button].tooltip = 	IconPickerEditBox:GetText();
-    DeckBuilderFrame_UpdateActions();
-	IconPickerFrame:Hide();
+	cat = IP_CATEGORY_SELECTED;
+    subcat = IP_SUBCATEGORY_SELECTED;
+    l = IP_ICONS[cat][subcat].icons;
+    icon = l[n];
+    text = IconPickerEditBox:GetText();
+    IconPickerFrame:Hide();
+    OKAY_FUNC(icon,text);
 end
 
 function IconPickerFrame_Update()
@@ -537,14 +512,9 @@ function IconPickerFrame_Update()
     end
     numMacroIcons = a.size
     ico = a.icons
-        --local numMacroIcons = GetNumMacroIcons();
 	local IconPickerIcon, IconPickerButton;
 	local IconPickerOffset = FauxScrollFrame_GetOffset(IconPickerScrollFrame);
-   -- DEFAULT_CHAT_FRAME:AddMessage(format("offset: %s",IconPickerOffset))
-
-	local index;
-   --DEFAULT_CHAT_FRAME:AddMessage(format("size %s",ico[1]))
-	
+	local index;	
 	-- Icon list
 	for i=1, NUM_ICONS_SHOWN do
 		IconPickerIcon = getglobal("IconPickerButton"..i.."Icon");
@@ -562,16 +532,9 @@ function IconPickerFrame_Update()
 		else
 			IconPickerButton:SetChecked(nil);
 		end
-	end
-
-   -- DEFAULT_CHAT_FRAME:AddMessage(format("offset: %s",IconPickerScrollFrame:GetVerticalScroll()))
-	
+	end	
 	-- Scrollbar stuff
 	FauxScrollFrame_Update(IconPickerScrollFrame, ceil(numMacroIcons / NUM_ICONS_PER_ROW) , NUM_ICON_ROWS, ICON_ROW_HEIGHT );
-end
-
-function IconPickerSwitchCategory(category, subcategory)
-
 end
 
 function IconPickerUncheckAllCategories()
@@ -815,26 +778,4 @@ function IconPickerWeapons_OnClick()
     ToggleDropDownMenu(1, nil, IconPickerWeapons, IconPickerWeapons, 0, 0);
     IconPickerUncheckAllCategories()
     IconPickerCheckSelectedCategory()
-end
-
-
-
-function CFGLabelEditOnShow()
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-	CFGLabelEdit:SetText(EB_CurrentActions[deck][button].tooltip);
-end
-
-function CFGLabelEditOnEnter()
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-	EB_CurrentActions[deck][button].tooltip = CFGLabelEdit:GetText();
-	CFGLabelEdit:ClearFocus();
-end
-
-function CFGLabelEditOnEscape()
-	CFGLabelEdit:ClearFocus();
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-	CFGLabelEdit:SetText(EB_CurrentActions[deck][button].tooltip);
 end
