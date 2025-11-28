@@ -127,7 +127,7 @@ function DeckBuilderFrame_UpdateActions(deck)
 		txt = txt .. d[i].action 
 		txt = txt .. " Tooltip: " .. d[i].tooltip
 		buttontxt:SetText(txt);
-		buttonicon:SetTexture("Interface\\Icons\\"..d[i].image)
+		buttonicon:SetTexture(IP_ICONPATH..d[i].image)
 		if ( i == DeckBuilderFrame.selectedAction  ) then
 			button:SetChecked(1);
 		else

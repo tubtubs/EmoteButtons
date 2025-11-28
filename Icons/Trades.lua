@@ -1,4 +1,5 @@
 IP_icons_trade_firstaid = {
+  "Spell_Holy_SealOfSacrifice",
   "INV_Misc_Bandage_01",
   "INV_Misc_Bandage_02",
   "INV_Misc_Bandage_03",
@@ -1061,6 +1062,8 @@ IP_icons_trade_mining = {
 IP_len_icons_trade_mining = getn(IP_icons_trade_mining)
 
 IP_icons_trade_misc = {
+  "INV_Misc_Food_15",
+  "firesglow",
   "INV_TradeskillItem_01",
   "INV_TradeskillItem_02",
   "INV_TradeskillItem_03",

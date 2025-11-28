@@ -215,7 +215,7 @@ function DeckManagerFrame_UpdateActions(deck)
 		txt = txt .. d[i].action 
 		txt = txt .. " Tooltip: " .. d[i].tooltip
 		buttontxt:SetText(txt);
-		buttonicon:SetTexture("Interface\\Icons\\"..d[i].image)
+		buttonicon:SetTexture(IP_ICONPATH..d[i].image)
 	end
 	if getn(d) ~= 8 then
 		for i=getn(d)+1, 8 do

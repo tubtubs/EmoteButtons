@@ -290,6 +290,8 @@ IP_ICONS = {
     IP_MISC_ICONS
 }
 
+IP_ICONPATH = "Interface\\Icons\\"
+
 NUM_CATEGORIES = 8
 OKAY_FUNC = ""
 
@@ -445,7 +447,7 @@ function IconPickerFrame_Update()
 		IconPickerButton = getglobal("IconPickerButton"..i);
 		index = (IconPickerOffset * NUM_ICONS_PER_ROW) + i;
 		if ( index <= numMacroIcons ) then
-			IconPickerIcon:SetTexture("Interface\\Icons\\"..ico[index]);
+			IconPickerIcon:SetTexture(IP_ICONPATH..ico[index]);
 			IconPickerButton:Show();
 		else
 			IconPickerIcon:SetTexture("");

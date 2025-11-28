@@ -7,9 +7,8 @@ and macros. Supports profiles, and export and importing of profiles.
 Shift click a button, or type /eb for more options.
 
 TODO:
-***Readme.md
-***Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
-Make a 2nd reset, empty and default
+*Isolate IconPicker to its own Addon
+*Maybe add camp fire to Misc professions icons
 ]]--
 
 
@@ -133,6 +132,16 @@ function EmoteButtons_WipeVars()
 			Profile=EMOTEBUTTONS_PROFILES[1].Name,
 			PIndex=1;
 		};
+	elseif not EmoteButtons_Vars.PIndex then --compatability for V1
+		EmoteButtons_Vars = {
+			Main_Ratio = 42,
+			Main_Shift = 0,
+			Wing_Shift = 0,
+			Profiles = EMOTEBUTTONS_PROFILES,
+			Profile=EMOTEBUTTONS_PROFILES[1].Name,
+			PIndex=1;
+		};
+		
 	end
 
 	--populate deck list
@@ -317,50 +326,6 @@ function EmoteButtons_ArrangeFrames()
 	end
 end
 
---Test code, considered re-arranging for different button quantities.
---Might experiment, and enable later now that it's easier to test with deck manager.
-function ReArrangeLeftWing()
-	local i, obj, correction;
-
-	--button size
-	local mra = EmoteButtons_Vars.Main_Ratio;
-	--icon size inside the button
-	local mri = floor(0.6*mra);
-	--main deck distance from center
-	local mr = floor(mra*1.29);
-	--main deck shift in degrees
-	local ms = EmoteButtons_Vars.Main_Shift;
-	--main deck correction to get eclipse
-	local mrc = floor(mr/5);
-	--wings distance from center
-	local wr = floor(mra*2.29);
-	--wings shift in degrees
-	local ws = EmoteButtons_Vars.Wing_Shift;
-
-	--left wing
-	real_size = 0
-	for i=1, getn(EmoteButtons_LeftWing) do
-		if (EB_CurrentActions[EmoteButtons_Wings_Decks[2]][i]~=nil) then
-			real_size = real_size+1
-		else
-			break
-		end
-	end
-	size = real_size+3;
-	deg = floor((180)/real_size)
-	--deg = 20
-	shift = -1;
-	for i=1, size-3 do
-		obj = getglobal(EmoteButtons_LeftWing[i]);
-		obj:SetPoint("CENTER", EmoteButtons_Main, "CENTER", - wr*sin(i*deg+ws),wr*cos(i*deg+ws));
-		obj:SetWidth(mra);
-		obj:SetHeight(mra);
-		obj = getglobal(obj:GetName().."_Icon");
-		obj:SetWidth(mri);
-		obj:SetHeight(mri);
-	end
-end
-
 --maybe should make local?
 function FadeOutFrame( frame, time )
 	local fadeInfo = {}
@@ -442,7 +407,6 @@ function EmoteButtons_ToggleFirstLevel()
 	if EmoteButtons_Levels["Right"] then
 		EmoteButtons_ToggleWing("Right");
 	end
-
 	
 	for i=1, flc do
 		obj = getglobal(EmoteButtons_FirstLevel[i]);
@@ -450,7 +414,7 @@ function EmoteButtons_ToggleFirstLevel()
 			FadeOutFrame(obj,0.1*i);
 		else
 			image = EB_CurrentActions[EmoteButtons_FirstLevelName][i].image;
-			getglobal(EmoteButtons_FirstLevel[i].."_Icon"):SetTexture("Interface\\Icons\\"..image);
+			getglobal(EmoteButtons_FirstLevel[i].."_Icon"):SetTexture(IP_ICONPATH..image);
 			FadeInFrame(obj,0.15*(flc-i));
 		end
 	end
@@ -597,7 +561,6 @@ function EmoteButtons_ToggleDeck(deck, wing)
 			if (EmoteButtons_Levels["FarRight"]) then
 				EmoteButtons_FadeWing("farright");
 				EmoteButtons_HideTooltip();
-				DEFAULT_CHAT_FRAME:AddMessage("hls")
 			else
 				EmoteButtons_ToggleWing("FarRight");
 			end
@@ -612,31 +575,31 @@ function EmoteButtons_LoadDeck(deck, wing)
 	if wing== '' then
 		for i=1, getn( EB_CurrentActions[deck]) do
 			image = EB_CurrentActions[deck][i].image;
-			getglobal(EmoteButtons_FirstLevel[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
+			getglobal(EmoteButtons_FirstLevel[i].."_Icon"):SetTexture(IP_ICONPATH..image)
 		end
 	elseif wing == "Left" then
 		EmoteButtons_Wings_Decks[2] = deck
 		for i=1, getn( EB_CurrentActions[deck]) do
 			image = EB_CurrentActions[deck][i].image;
-			getglobal(EmoteButtons_LeftWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
+			getglobal(EmoteButtons_LeftWing[i].."_Icon"):SetTexture(IP_ICONPATH..image)
 		end
 	elseif wing == "Right" then
 		EmoteButtons_Wings_Decks[3] = deck
 		for i=1, getn( EB_CurrentActions[deck]) do
 			image = EB_CurrentActions[deck][i].image;
-			getglobal(EmoteButtons_RightWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
+			getglobal(EmoteButtons_RightWing[i].."_Icon"):SetTexture(IP_ICONPATH..image)
 		end
 	elseif wing =="FarLeft" then
 		EmoteButtons_Wings_Decks[4] = deck
 		for i=1, getn( EB_CurrentActions[deck]) do
 			image = EB_CurrentActions[deck][i].image;
-			getglobal(EmoteButtons_FarLeftWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
+			getglobal(EmoteButtons_FarLeftWing[i].."_Icon"):SetTexture(IP_ICONPATH..image)
 		end
 	elseif wing =="FarRight" then
 		EmoteButtons_Wings_Decks[5] = deck
 		for i=1, getn( EB_CurrentActions[deck]) do
 			image = EB_CurrentActions[deck][i].image;
-			getglobal(EmoteButtons_FarRightWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
+			getglobal(EmoteButtons_FarRightWing[i].."_Icon"):SetTexture(IP_ICONPATH..image)
 		end
 	end
 end
@@ -706,11 +669,16 @@ function EmoteButtons_ShowTooltip(framename)
 		else
 			action = EB_EmoteList[found].SelfEmoteText
 		end
+		if string.len(action) == 0 and string.len(tooltip) == 0 then --some emotes have no text
+			action = EB_EmoteList[found].Name;
+		end
 	end
 	--prioritizes showing a tooltip instead of CMD or emote text
 	if string.len(tooltip) == 0 then
 		fulltext = "|cFFFFFFFF"..action;
 	elseif (acttype == EBACTTYPE_SLASHCMD) then
+		fulltext = "|cFFFFFFFF"..tooltip;
+	elseif string.len(action) == 0 then
 		fulltext = "|cFFFFFFFF"..tooltip;
 	else
 		fulltext = "|cFFFFFFFF"..tooltip.."|n|r"..action;

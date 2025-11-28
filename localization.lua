@@ -98,32 +98,26 @@ EMOTEBUTTONS_T = {
 	["Animations"]={
 	{action=[[SIT]], type=1, tooltip="Sit", image="INV_Misc_Toy_02"},
 	{action=[[STAND]], type=1, tooltip="Stand", image="Achievement_BG_kill_carrier_opposing_flagroom"},
-	{action=[[DANCE]], type=1, tooltip="Dance", image="INV_Misc_FireDancer_01"},
+	{action=[[DANCE]], type=1, tooltip="", image="INV_Misc_FireDancer_01"},
 	{action=[[KNEEL]], type=1, tooltip="", image="Ability_Paladin_GaurdedbytheLight"},
 	{action=[[LAYDOWN]], type=1, tooltip="", image="Spell_Shadow_TwistedFaith"},
 	{action=[[SLEEP]], type=1, tooltip="", image="Spell_Nature_Sleep"},
 	{action=[[POINT]], type=1, tooltip="", image="Spell_Holy_Stoicism"},
 	{action=[[MOUNTSPECIAL]], type=1, tooltip="Mount Special", image="Ability_Mount_RidingHorse"}
 	},
-	["Flirt2"]={
-	{action=[[SHAKE]], type=1, tooltip="", image="INV_Misc_Food_99"},
-	{action=[[SHY]], type=1, tooltip="", image="Spell_Misc_EmotionHappy"},
-	{action=[[CUDDLE]], type=1, tooltip="", image="Spell_Holy_GuardianSpirit"},
-	{action=[[LICK]], type=1, tooltip="", image="Spell_Shadow_SoothingKiss"},
-	{action=[[PURR]], type=1, tooltip="", image="INV_Misc_Head_Tiger_01"},
-	{action=[[LOVE]], type=1, tooltip="", image="Achievement_WorldEvent_Valentine"},
-	{action=[[FLIRT]], type=1, tooltip="", image="Achievement_Character_Bloodelf_Female"},
-	{action=[[Flirt3]], type=0, tooltip="More...", image="Achievement_WorldEvent_Valentine"}
+	["Who Stinks?"]={
+	{action=[[SNIFF]], type=1, tooltip="", image="INV_Misc_Birdbeck_01"},
+	{action=[[STINK]], type=1, tooltip="", image="Ability_Rogue_DeviousPoisons"}
 	},
-	["Attacks"]={
-	{action=[[SLAP]], type=1, tooltip="", image="Ability_Hunter_BeastSoothe"},
-	{action=[[PUNCH]], type=1, tooltip="", image="Ability_Rogue_KidneyShot"},
-	{action=[[SMACK]], type=1, tooltip="", image="Ability_Warrior_Devastate"},
-	{action=[[BONK]], type=1, tooltip="", image="INV_Mace_10"},
-	{action=[[PINCH]], type=1, tooltip="", image="INV_Weapon_Hand_01"},
-	{action=[[BITE]], type=1, tooltip="", image="Ability_Druid_Berserk"},
-	{action=[[POUNCE]], type=1, tooltip="", image="Ability_Druid_SupriseAttack"},
-	{action=[[PULSE]], type=1, tooltip="", image="Achievement_BG_tophealer_AB"}
+	["Sad"]={
+	{action=[[CRY]], type=1, tooltip="", image="Ability_Rogue_BloodyEye"},
+	{action=[[MOURN]], type=1, tooltip="", image="INV_Misc_Bone_HumanSkull_02"},
+	{action=[[VIOLIN]], type=1, tooltip="", image="INV_Misc_Drum_01"},
+	{action=[[FROWN]], type=1, tooltip="", image="Spell_Misc_EmotionSad"},
+	{action=[[GROAN]], type=1, tooltip="", image="Ability_Devour"},
+	{action=[[SIGH]], type=1, tooltip="", image="Ability_Suffocate"},
+	{action=[[POUT]], type=1, tooltip="", image="INV_Misc_Fish_34"},
+	{action=[[SAD]], type=1, tooltip="", image="Achievement_Leader_Prophet_Velen"}
 	},
 	["Misc RP"]={
 	{action=[[MAP]], type=1, tooltip="", image="INV_Misc_Map02"},
@@ -145,7 +139,7 @@ EMOTEBUTTONS_T = {
 	["Discussion2"]={
 	{action=[[MUTTER]], type=1, tooltip="", image="Ability_Rogue_SinisterCalling"},
 	{action=[[OFFER]], type=1, tooltip="", image="Spell_Holy_Chastise"},
-	{action=[[PROMISE]], type=1, tooltip="Promise", image="Spell_Holy_Heroism"},
+	{action=[[PROMISE]], type=1, tooltip="Promise", image="Spell_Holy_ImpHolyConcentration"},
 	{action=[[Discussion]], type=0, tooltip="Back...", image="Ability_Warrior_CommandingShout"}
 	},
 	["Rude"]={
@@ -168,24 +162,15 @@ EMOTEBUTTONS_T = {
 	{action=[[Tired]], type=0, tooltip="Tired", image="Spell_Nature_Sleep"},
 	{action=[[I'm Feeling 2]], type=0, tooltip="More Emotes", image="Ability_Rogue_Disguise"}
 	},
-	["Conversation"]={
-	{action=[[Discussion]], type=0, tooltip="", image="Ability_Warrior_CommandingShout"},
-	{action=[[Silly]], type=0, tooltip="", image="Spell_Shadow_Charm"},
-	{action=[[Comfort]], type=0, tooltip="", image="Spell_Holy_Heroism"},
-	{action=[[Sus]], type=0, tooltip="", image="Ability_Rogue_MasterOfSubtlety"},
-	{action=[[Direction]], type=0, tooltip="", image="INV_Misc_Map02"},
-	{action=[[Agree]], type=0, tooltip="", image="Achievement_BG_tophealer_WSG"},
-	{action=[[Disagree]], type=0, tooltip="", image="Achievement_Boss_Exarch_Maladaar"},
-	{action=[[Flirt]], type=0, tooltip="", image="Achievement_WorldEvent_Valentine"}
-	},
-	["Spells"]={
-	{action=[[/cast Hearth]], type=2, tooltip="", image="INV_Misc_Rune_01"},
-	{action=[[Misc Buffs]], type=0, tooltip="", image="INV_Potion_99"},
-	{action=[[Elixirs]], type=0, tooltip="", image="INV_Alchemy_EndlessFlask_04"},
-	{action=[[Scrolls]], type=0, tooltip="", image="INV_Inscription_Parchment"},
-	{action=[[Professions]], type=0, tooltip="", image="Trade_Engineering"},
-	{action=[[Mounts]], type=0, tooltip="Mounts", image="Ability_Mount_BigBlizzardBear"},
-	{action=[[Pets]], type=0, tooltip="", image="INV_Box_Birdcage_01"}
+	["Flirt3"]={
+	{action=[[WINK]], type=1, tooltip="", image="Spell_Nature_FocusedMind"},
+	{action=[[HOLDHAND]], type=1, tooltip="", image="Spell_Holy_Chastise"},
+	{action=[[SCRATCH]], type=1, tooltip="", image="INV_Misc_Bone_06"},
+	{action=[[WHISTLE]], type=1, tooltip="", image="Ability_Hunter_BeastCall"},
+	{action=[[TICKLE]], type=1, tooltip="", image="INV_Feather_06"},
+	{action=[[POKE]], type=1, tooltip="", image="Achievement_Reputation_Ogre"},
+	{action=[[RUFFLE]], type=1, tooltip="", image="INV_Misc_Comb_01"},
+	{action=[[Flirt4]], type=0, tooltip="More...", image="Achievement_WorldEvent_Valentine"}
 	},
 	["Taunts2"]={
 	{action=[[REGRET]], type=1, tooltip="", image="Ability_Druid_Enrage"},
@@ -203,6 +188,16 @@ EMOTEBUTTONS_T = {
 	{action=[[PONDER]], type=1, tooltip="", image="Achievement_Boss_Auriaya_01"},
 	{action=[[CONFUSED]], type=1, tooltip="", image="Spell_Frost_Stun"}
 	},
+	["Conversation"]={
+	{action=[[Discussion]], type=0, tooltip="", image="Ability_Warrior_CommandingShout"},
+	{action=[[Silly]], type=0, tooltip="", image="Spell_Shadow_Charm"},
+	{action=[[Comfort]], type=0, tooltip="", image="Spell_Holy_Heroism"},
+	{action=[[Sus]], type=0, tooltip="", image="Ability_Rogue_MasterOfSubtlety"},
+	{action=[[Direction]], type=0, tooltip="", image="INV_Misc_Map02"},
+	{action=[[Agree]], type=0, tooltip="", image="Achievement_BG_tophealer_WSG"},
+	{action=[[Disagree]], type=0, tooltip="", image="Achievement_Boss_Exarch_Maladaar"},
+	{action=[[Flirt]], type=0, tooltip="", image="Achievement_WorldEvent_Valentine"}
+	},
 	["CMDs"]={
 	{action=[[/script ReloadUI()]], type=2, tooltip="Reload UI", image="INV_Misc_PunchCards_Blue"},
 	{action=[[/who]], type=2, tooltip="who", image="INV_Misc_Spyglass_02"},
@@ -213,16 +208,6 @@ EMOTEBUTTONS_T = {
 	{action=[[/eb deckbuilder]], type=2, tooltip="Emote Buttons Deckbuilder", image="INV_Misc_Wrench_01"},
 	{action=[[/eb options]], type=2, tooltip="Emote Buttons Options", image="INV_Misc_Wrench_02"}
 	},
-	["Flirt"]={
-	{action=[[BASHFUL]], type=1, tooltip="", image="INV_Hammer_18"},
-	{action=[[BLUSH]], type=1, tooltip="", image="ACHIEVEMENT_BOSS_KILJAEDAN"},
-	{action=[[HUG]], type=1, tooltip="", image="Ability_Druid_Maul"},
-	{action=[[KISS]], type=1, tooltip="", image="Spell_Shadow_SoothingKiss"},
-	{action=[[MASSAGE]], type=1, tooltip="", image="INV_Gauntlets_06"},
-	{action=[[MOAN]], type=1, tooltip="", image="Achievement_Boss_Auriaya_01"},
-	{action=[[SEXY]], type=1, tooltip="", image="INV_Misc_Idol_01"},
-	{action=[[Flirt2]], type=0, tooltip="More...", image="Achievement_WorldEvent_Valentine"}
-	},
 	["Scrolls"]={
 	{action=[[/use Scroll of Spirit]], type=2, tooltip="Scroll of Spirit", image="INV_Scroll_01"},
 	{action=[[/use Scroll of Protection]], type=2, tooltip="Scroll of Protection", image="INV_Scroll_07"},
@@ -230,6 +215,16 @@ EMOTEBUTTONS_T = {
 	{action=[[/use Scroll of Intellect]], type=2, tooltip="Scroll of Intellect", image="INV_Scroll_01"},
 	{action=[[/use Scroll of Strength]], type=2, tooltip="Scroll of Strength", image="INV_Scroll_02"},
 	{action=[[/use Scroll of Agility]], type=2, tooltip="Scroll of Agility", image="INV_Scroll_02"}
+	},
+	["Flirt2"]={
+	{action=[[SHAKE]], type=1, tooltip="", image="INV_Misc_Food_99"},
+	{action=[[SHY]], type=1, tooltip="", image="Spell_Misc_EmotionHappy"},
+	{action=[[CUDDLE]], type=1, tooltip="", image="Spell_Holy_GuardianSpirit"},
+	{action=[[LICK]], type=1, tooltip="", image="Spell_Shadow_SoothingKiss"},
+	{action=[[PURR]], type=1, tooltip="", image="INV_Misc_Head_Tiger_01"},
+	{action=[[LOVE]], type=1, tooltip="", image="Achievement_WorldEvent_Valentine"},
+	{action=[[FLIRT]], type=1, tooltip="", image="Achievement_Character_Bloodelf_Female"},
+	{action=[[Flirt3]], type=0, tooltip="More...", image="Achievement_WorldEvent_Valentine"}
 	},
 	["Mercy"]={
 	{action=[[BEG]], type=1, tooltip="", image="Spell_Holy_Chastise"},
@@ -241,27 +236,6 @@ EMOTEBUTTONS_T = {
 	{action=[[SQUEAL]], type=1, tooltip="", image="Spell_Magic_PolymorphPig"},
 	{action=[[ARM]], type=1, tooltip="", image="Spell_Holy_Renew"}
 	},
-	["Who Stinks?"]={
-	{action=[[SNIFF]], type=1, tooltip="", image="INV_Misc_Birdbeck_01"},
-	{action=[[STINK]], type=1, tooltip="", image="Ability_Rogue_DeviousPoisons"}
-	},
-	["Sad"]={
-	{action=[[CRY]], type=1, tooltip="", image="Ability_Rogue_BloodyEye"},
-	{action=[[MOURN]], type=1, tooltip="", image="INV_Misc_Bone_HumanSkull_02"},
-	{action=[[VIOLIN]], type=1, tooltip="", image="INV_Misc_Drum_01"},
-	{action=[[FROWN]], type=1, tooltip="", image="Spell_Misc_EmotionSad"},
-	{action=[[GROAN]], type=1, tooltip="", image="Ability_Devour"},
-	{action=[[SIGH]], type=1, tooltip="", image="Ability_Suffocate"},
-	{action=[[POUT]], type=1, tooltip="", image="INV_Misc_Fish_34"},
-	{action=[[SAD]], type=1, tooltip="", image="Achievement_Leader_Prophet_Velen"}
-	},
-	["Thanks"]={
-	{action=[[BOW]], type=1, tooltip="", image="Ability_Paladin_GaurdedbytheLight"},
-	{action=[[CURTSEY]], type=1, tooltip="", image="INV_Kilt_Cloth_02"},
-	{action=[[THANK]], type=1, tooltip="", image="Spell_Holy_DevineAegis"},
-	{action=[[YW]], type=1, tooltip="", image="Spell_Misc_EmotionHappy"},
-	{action=[[APOLOGIZE]], type=1, tooltip="", image="Spell_Misc_EmotionSad"}
-	},
 	["Disagree"]={
 	{action=[[NO]], type=1, tooltip="", image="Spell_Shadow_DemonicPact"},
 	{action=[[OBJECT]], type=1, tooltip="", image="Spell_Shadow_SacrificialShield"},
@@ -270,6 +244,32 @@ EMOTEBUTTONS_T = {
 	{action=[[SNUB]], type=1, tooltip="Snub", image="Achievement_Boss_GrandWidowFaerlina"},
 	{action=[[DOUBT]], type=1, tooltip="Bad Feeling", image="Achievement_Dungeon_UlduarRaid_Titan_01"},
 	{action=[[SILENCE]], type=1, tooltip="", image="Ability_Racial_Avatar"}
+	},
+	["Spells"]={
+	{action=[[/cast Hearth]], type=2, tooltip="", image="INV_Misc_Rune_01"},
+	{action=[[Misc Buffs]], type=0, tooltip="", image="INV_Potion_99"},
+	{action=[[Elixirs]], type=0, tooltip="", image="INV_Alchemy_EndlessFlask_04"},
+	{action=[[Scrolls]], type=0, tooltip="", image="INV_Inscription_Parchment"},
+	{action=[[Professions]], type=0, tooltip="", image="Trade_Engineering"},
+	{action=[[Mounts]], type=0, tooltip="Mounts", image="Ability_Mount_BigBlizzardBear"},
+	{action=[[Pets]], type=0, tooltip="", image="INV_Box_Birdcage_01"}
+	},
+	["Thanks"]={
+	{action=[[BOW]], type=1, tooltip="", image="Ability_Paladin_GaurdedbytheLight"},
+	{action=[[CURTSEY]], type=1, tooltip="", image="INV_Kilt_Cloth_02"},
+	{action=[[THANK]], type=1, tooltip="", image="Spell_Holy_DevineAegis"},
+	{action=[[YW]], type=1, tooltip="", image="Spell_Misc_EmotionHappy"},
+	{action=[[APOLOGIZE]], type=1, tooltip="", image="Spell_Misc_EmotionSad"}
+	},
+	["Attacks"]={
+	{action=[[SLAP]], type=1, tooltip="", image="Ability_Hunter_BeastSoothe"},
+	{action=[[PUNCH]], type=1, tooltip="", image="Ability_Rogue_KidneyShot"},
+	{action=[[SMACK]], type=1, tooltip="", image="Ability_Warrior_Devastate"},
+	{action=[[BONK]], type=1, tooltip="", image="INV_Mace_10"},
+	{action=[[PINCH]], type=1, tooltip="", image="INV_Weapon_Hand_01"},
+	{action=[[BITE]], type=1, tooltip="", image="Ability_Druid_Berserk"},
+	{action=[[POUNCE]], type=1, tooltip="", image="Ability_Druid_SupriseAttack"},
+	{action=[[PULSE]], type=1, tooltip="", image="Achievement_BG_tophealer_AB"}
 	},
 	["Agree"]={
 	{action=[[AGREE]], type=1, tooltip="", image="Achievement_BG_tophealer_WSG"},
@@ -325,15 +325,10 @@ EMOTEBUTTONS_T = {
 	{action=[[SMIRK]], type=1, tooltip="", image="Achievement_Boss_Kael'thasSunstrider_01"},
 	{action=[[GRIN]], type=1, tooltip="", image="Spell_Shadow_Charm"}
 	},
-	["Angry"]={
-	{action=[[ANGRY]], type=1, tooltip="", image="Ability_Warrior_BloodFrenzy"},
-	{action=[[GLOWER]], type=1, tooltip="", image="Ability_Hunter_MasterTactitian"},
-	{action=[[REVENGE]], type=1, tooltip="", image="Ability_Warrior_RallyingCry"},
-	{action=[[SCOFF]], type=1, tooltip="", image="Ability_Warrior_CommandingShout"},
-	{action=[[SCOLD]], type=1, tooltip="", image="Achievement_Dungeon_UlduarRaid_Titan_01"},
-	{action=[[SCOWL]], type=1, tooltip="", image="Achievement_Boss_Illidan"},
-	{action=[[CROSSARMS]], type=1, tooltip="", image="Achievement_Arena_2v2_1"},
-	{action=[[HEADACHE]], type=1, tooltip="", image="Ability_Mage_StudentOfTheMind"}
+	["Sarcastic"]={
+	{action=[[ROLLEYES]], type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
+	{action=[[SNORT]], type=1, tooltip="", image="Ability_Hunter_ZenArchery"},
+	{action=[[GROAN]], type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"}
 	},
 	["Body Functions2"]={
 	{action=[[SNORT]], type=1, tooltip="", image="Ability_Hunter_Pet_Boar"},
@@ -398,18 +393,29 @@ EMOTEBUTTONS_T = {
 	{action=[[HURRY]], type=1, tooltip="", image="INV_Misc_Crop_02"},
 	{action=[[GO]], type=1, tooltip="", image="Ability_Warrior_CommandingShout"}
 	},
-	["Look2"]={
-	{action=[[AWE]], type=1, tooltip="", image="Ability_Warrior_Revenge"},
-	{action=[[LOOK]], type=1, tooltip="", image="Spell_Shaman_Hex"},
-	{action=[[SHIFTY]], type=1, tooltip="", image="Ability_Rogue_MasterOfSubtlety"},
-	{action=[[SHUDDER]], type=1, tooltip="", image="Spell_Misc_EmotionAfraid"},
-	{action=[[PEER]], type=1, tooltip="", image="INV_Misc_Spyglass_01"},
-	{action=[[Look]], type=0, tooltip="Back...", image="Ability_Hunter_MasterMarksman"}
+	["Misc Buffs"]={
+	{action=[[/use Shiny Bauble
+		/script PickupInventoryItem(16);
+		/run ReplaceEnchant();]], type=2, tooltip="Shiny Bauble", image="INV_Misc_Orb_03"},
+	{action=[[/use Spiced Wolf Meat]], type=2, tooltip="Spiced Wolf Meat", image="INV_Misc_Food_65"},
+	{action=[[/use Rough Sharpening Stone
+		/script PickupInventoryItem(16);
+		/run ReplaceEnchant();
+			]], type=2, tooltip="Rough Sharpening Stone", image="INV_Stone_SharpeningStone_01"},
+	{action=[[/use Minor Wizard Oil
+		/script PickupInventoryItem(16);
+		/run ReplaceEnchant();
+			]], type=2, tooltip="Minor Wizard Oil", image="INV_Potion_100"},
+	{action=[[/use Rough Weightstone
+		/script PickupInventoryItem(16);
+		/run ReplaceEnchant();
+			]], type=2, tooltip="Rough Weightstone", image="INV_Stone_SharpeningStone_02"}
 	},
-	["Sus"]={
-	{action=[[TALKQ]], type=1, tooltip="", image="INV_Misc_QuestionMark"},
-	{action=[[SUSPICIOUS]], type=1, tooltip="", image="Ability_Rogue_MasterOfSubtlety"},
-	{action=[[PUZZLE]], type=1, tooltip="", image="Inv_Helm_Mask_ZulGurub_D_01"}
+	["Pets"]={
+	{action=[[/use Cat Carrier (Bombay)]], type=2, tooltip="Bombay Cat", image="INV_Box_PetCarrier_01"},
+	{action=[[/use Cat Carrier (Cornish Rex)]], type=2, tooltip="", image="INV_Box_PetCarrier_01"},
+	{action=[[/use Cat Carrier (Orange Tabby)]], type=2, tooltip="", image="INV_Box_PetCarrier_01"},
+	{action=[[/use Cat Carrier (Silver Tabby)]], type=2, tooltip="", image="INV_Box_PetCarrier_01"}
 	},
 	["Elixirs"]={
 	{action=[[/use Elixir of Minor Defense]], type=2, tooltip="Elixir of Minor Defense", image="INV_Potion_63"},
@@ -428,23 +434,13 @@ EMOTEBUTTONS_T = {
 	{action=[[GROWL]], type=1, tooltip="", image="Racial_Orc_BerserkerStrength"},
 	{action=[[Taunts2]], type=0, tooltip="More...", image="Ability_Warrior_Rampage"}
 	},
-	["Misc Buffs"]={
-	{action=[[/use Shiny Bauble
-	/script PickupInventoryItem(16);
-	/run ReplaceEnchant();]], type=2, tooltip="Shiny Bauble", image="INV_Misc_Orb_03"},
-	{action=[[/use Spiced Wolf Meat]], type=2, tooltip="Spiced Wolf Meat", image="INV_Misc_Food_65"},
-	{action=[[/use Rough Sharpening Stone
-	/script PickupInventoryItem(16);
-	/run ReplaceEnchant();
-		]], type=2, tooltip="Rough Sharpening Stone", image="INV_Stone_SharpeningStone_01"},
-	{action=[[/use Minor Wizard Oil
-	/script PickupInventoryItem(16);
-	/run ReplaceEnchant();
-		]], type=2, tooltip="Minor Wizard Oil", image="INV_Potion_100"},
-	{action=[[/use Rough Weightstone
-	/script PickupInventoryItem(16);
-	/run ReplaceEnchant();
-		]], type=2, tooltip="Rough Weightstone", image="INV_Stone_SharpeningStone_02"}
+	["Look2"]={
+	{action=[[AWE]], type=1, tooltip="", image="Ability_Warrior_Revenge"},
+	{action=[[LOOK]], type=1, tooltip="", image="Spell_Shaman_Hex"},
+	{action=[[SHIFTY]], type=1, tooltip="", image="Ability_Rogue_MasterOfSubtlety"},
+	{action=[[SHUDDER]], type=1, tooltip="", image="Spell_Misc_EmotionAfraid"},
+	{action=[[PEER]], type=1, tooltip="", image="INV_Misc_Spyglass_01"},
+	{action=[[Look]], type=0, tooltip="Back...", image="Ability_Hunter_MasterMarksman"}
 	},
 	["Discussion"]={
 	{action=[[AMAZE]], type=1, tooltip="", image="Spell_Holy_DivineIllumination"},
@@ -520,11 +516,10 @@ EMOTEBUTTONS_T = {
 	{action=[[DUCK]], type=1, tooltip="", image="INV_Misc_TheGoldenCheep"},
 	{action=[[NERVOUS]], type=1, tooltip="", image="Spell_Shadow_PsychicScream"}
 	},
-	["Pets"]={
-	{action=[[/use Cat Carrier (Bombay)]], type=2, tooltip="Bombay Cat", image="INV_Box_PetCarrier_01"},
-	{action=[[/use Cat Carrier (Cornish Rex)]], type=2, tooltip="", image="INV_Box_PetCarrier_01"},
-	{action=[[/use Cat Carrier (Orange Tabby)]], type=2, tooltip="", image="INV_Box_PetCarrier_01"},
-	{action=[[/use Cat Carrier (Silver Tabby)]], type=2, tooltip="", image="INV_Box_PetCarrier_01"}
+	["Sus"]={
+	{action=[[TALKQ]], type=1, tooltip="", image="INV_Misc_QuestionMark"},
+	{action=[[SUSPICIOUS]], type=1, tooltip="", image="Ability_Rogue_MasterOfSubtlety"},
+	{action=[[PUZZLE]], type=1, tooltip="", image="Inv_Helm_Mask_ZulGurub_D_01"}
 	},
 	["Comfort"]={
 	{action=[[SOOTHE]], type=1, tooltip="", image="Spell_Holy_Silence"},
@@ -544,25 +539,25 @@ EMOTEBUTTONS_T = {
 	{action=[[/use Mekgineer's Chopper]], type=2, tooltip="", image="INV_Misc_Key_06"},
 	{action=[[/use Swift White Hawkstrider]], type=2, tooltip="", image="Ability_Mount_CockatriceMountElite_White"}
 	},
-	["I'm Feeling 2"]={
-	{action=[[CALM]], type=1, tooltip="Calm", image="Achievement_Character_Draenei_Male"},
-	{action=[[JEALOUS]], type=1, tooltip="Jealous", image="Achievement_Character_Bloodelf_Female"},
-	{action=[[SERIOUS]], type=1, tooltip="Serious", image="Achievement_Character_Orc_Male"},
-	{action=[[GLOAT]], type=1, tooltip="Boastful", image="INV_Misc_Coin_02"},
-	{action=[[GRIN]], type=1, tooltip="Evil", image="Achievement_Leader_King_Varian_Wrynn"},
-	{action=[[COLD]], type=1, tooltip="Cold", image="Spell_Frost_FrostArmor"},
-	{action=[[SHIVER]], type=1, tooltip="Shivering", image="INV_Boots_Cloth_03"},
-	{action=[[CONFUSED]], type=1, tooltip="Confused", image="Spell_Frost_Stun"}
+	["Angry"]={
+	{action=[[ANGRY]], type=1, tooltip="", image="Ability_Warrior_BloodFrenzy"},
+	{action=[[GLOWER]], type=1, tooltip="", image="Ability_Hunter_MasterTactitian"},
+	{action=[[REVENGE]], type=1, tooltip="", image="Ability_Warrior_RallyingCry"},
+	{action=[[SCOFF]], type=1, tooltip="", image="Ability_Warrior_CommandingShout"},
+	{action=[[SCOLD]], type=1, tooltip="", image="Achievement_Dungeon_UlduarRaid_Titan_01"},
+	{action=[[SCOWL]], type=1, tooltip="", image="Achievement_Boss_Illidan"},
+	{action=[[CROSSARMS]], type=1, tooltip="", image="Achievement_Arena_2v2_1"},
+	{action=[[HEADACHE]], type=1, tooltip="", image="Ability_Mage_StudentOfTheMind"}
 	},
-	["Flirt3"]={
-	{action=[[WINK]], type=1, tooltip="", image="Spell_Nature_FocusedMind"},
-	{action=[[HOLDHAND]], type=1, tooltip="", image="Spell_Holy_Chastise"},
-	{action=[[SCRATCH]], type=1, tooltip="", image="INV_Misc_Bone_06"},
-	{action=[[WHISTLE]], type=1, tooltip="", image="Ability_Hunter_BeastCall"},
-	{action=[[TICKLE]], type=1, tooltip="", image="INV_Feather_06"},
-	{action=[[POKE]], type=1, tooltip="", image="Achievement_Reputation_Ogre"},
-	{action=[[RUFFLE]], type=1, tooltip="", image="INV_Misc_Comb_01"},
-	{action=[[Flirt4]], type=0, tooltip="More...", image="Achievement_WorldEvent_Valentine"}
+	["Flirt"]={
+	{action=[[BASHFUL]], type=1, tooltip="", image="INV_Hammer_18"},
+	{action=[[BLUSH]], type=1, tooltip="", image="ACHIEVEMENT_BOSS_KILJAEDAN"},
+	{action=[[HUG]], type=1, tooltip="", image="Ability_Druid_Maul"},
+	{action=[[KISS]], type=1, tooltip="", image="Spell_Shadow_SoothingKiss"},
+	{action=[[MASSAGE]], type=1, tooltip="", image="INV_Gauntlets_06"},
+	{action=[[MOAN]], type=1, tooltip="", image="Achievement_Boss_Auriaya_01"},
+	{action=[[SEXY]], type=1, tooltip="", image="INV_Misc_Idol_01"},
+	{action=[[Flirt2]], type=0, tooltip="More...", image="Achievement_WorldEvent_Valentine"}
 	},
 	["Silly"]={
 	{action=[[MOO]], type=1, tooltip="", image="Spell_Nature_Polymorph_Cow"},
@@ -597,10 +592,15 @@ EMOTEBUTTONS_T = {
 	{action=[[GOING]], type=1, tooltip="", image="Achievement_BG_captureflag_WSG"},
 	{action=[[BRB]], type=1, tooltip="", image="Achievement_BG_returnXflags_def_WSG"}
 	},
-	["Sarcastic"]={
-	{action=[[ROLLEYES]], type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"},
-	{action=[[SNORT]], type=1, tooltip="", image="Ability_Hunter_ZenArchery"},
-	{action=[[GROAN]], type=1, tooltip="", image="Achievement_Zone_ZulDrak_12"}
+	["I'm Feeling 2"]={
+	{action=[[CALM]], type=1, tooltip="Calm", image="Achievement_Character_Draenei_Male"},
+	{action=[[JEALOUS]], type=1, tooltip="Jealous", image="Achievement_Character_Bloodelf_Female"},
+	{action=[[SERIOUS]], type=1, tooltip="Serious", image="Achievement_Character_Orc_Male"},
+	{action=[[GLOAT]], type=1, tooltip="Boastful", image="INV_Misc_Coin_02"},
+	{action=[[GRIN]], type=1, tooltip="Evil", image="Achievement_Leader_King_Varian_Wrynn"},
+	{action=[[COLD]], type=1, tooltip="Cold", image="Spell_Frost_FrostArmor"},
+	{action=[[SHIVER]], type=1, tooltip="Shivering", image="INV_Boots_Cloth_03"},
+	{action=[[CONFUSED]], type=1, tooltip="Confused", image="Spell_Frost_Stun"}
 	}
 }
 
