@@ -28,14 +28,14 @@
 	<Button name="EmoteButtons_template" movable="false" hidden="true" virtual="true" inherits="EmoteButtons_temp_noscript">
 		<Scripts>
 			<OnClick>
-						EmoteButtons_ClickAction(this:GetName());
-					</OnClick>
+			EmoteButtons_ClickAction(this:GetName());
+			</OnClick>
 			<OnEnter>
-						EmoteButtons_ShowTooltip(this:GetName());
-					</OnEnter>
+			EmoteButtons_ShowTooltip(this:GetName());
+			</OnEnter>
 			<OnLeave>
-						EmoteButtons_HideTooltip();
-					</OnLeave>
+			EmoteButtons_HideTooltip();
+			</OnLeave>
 		</Scripts>
 	</Button>
 	<Button name="EmoteButtons_Main" parent="UIParent" toplevel="true" movable="true" inherits="EmoteButtons_temp_noscript">
@@ -48,37 +48,37 @@
 		</Anchors>
 		<Scripts>
 			<OnLoad>
-						this:RegisterForDrag("RightButton");
-						EmoteButtons_Init();
-						this:RegisterEvent("ADDON_LOADED");
-					</OnLoad>
+			this:RegisterForDrag("RightButton");
+			EmoteButtons_Init();
+			this:RegisterEvent("ADDON_LOADED");
+			</OnLoad>
 			<OnDragStart>
-						this:StartMoving();
-					</OnDragStart>
+			this:StartMoving();
+			</OnDragStart>
 			<OnDragStop>
-						this:StopMovingOrSizing();
-					</OnDragStop>
+			this:StopMovingOrSizing();
+			</OnDragStop>
 			<OnClick>
-						EmoteButtons_ToggleFirstLevel();
-					</OnClick>
+			EmoteButtons_ToggleFirstLevel();
+			</OnClick>
 			<OnEnter>
-						GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
-						GameTooltip:SetText(EMOTEBUTTONS_MAINHELP);
-						GameTooltip:Show();
-					</OnEnter>
+			GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+			GameTooltip:SetText(EMOTEBUTTONS_MAINHELP);
+			GameTooltip:Show();
+			</OnEnter>
 			<OnLeave>
-						GameTooltip:Hide();
-					</OnLeave>
+			GameTooltip:Hide();
+			</OnLeave>
 			<OnEvent>
-						EmoteButtons_LoadedVars();
-					</OnEvent>
+			EmoteButtons_LoadedVars();
+			</OnEvent>
 		</Scripts>
 	</Button>
 	<EditBox name="EmoteButtons_EditBox" inherits="ChatFrameEditBoxTemplate" parent="UIParent" hidden="true">
 		<Scripts>
 			<OnLoad>
 
-					</OnLoad>
+			</OnLoad>
 		</Scripts>
 	</EditBox>
 </Ui>

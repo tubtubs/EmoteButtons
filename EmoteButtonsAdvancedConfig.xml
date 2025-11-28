@@ -1,8 +1,8 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Include file="EmoteButtonsAdvancedConfig.lua"/>
 	<!-- Advanced Config-->
-    <!-- Slider with the value shown, virtual, saved from TargetButtons -->
-    <Slider name="EBSliderTemp" inherits="OptionsSliderTemplate" virtual="true">
+	<!-- Slider with the value shown, virtual, saved from TargetButtons -->
+	<Slider name="EBSliderTemp" inherits="OptionsSliderTemplate" virtual="true">
 		<Layers>
 			<Layer level="ARTWORK">
 				<FontString name="$parentTitle" text ="LOL" inherits="GameFontNormal">
@@ -270,22 +270,6 @@
                    </OnClick>
 				</Scripts>
 			</Button>
-			<!---
-			<Button name="$parent_ProfileSaveButton" text="Save Profile" inherits="EmoteButtons_OptionButton_Template">
-				<Anchors>
-					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileCreateButton">
-						<Offset>
-							<AbsDimension x="0" y="-20"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-					SaveProfile()
-                   </OnClick>
-				</Scripts>
-			</Button>
-			-->
 			<Button name="$parent_Close" inherits="UIPanelCloseButton">
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
@@ -400,7 +384,6 @@
 					</EdgeSize>
 				</Backdrop>
 			</Frame>
-
 			<ScrollFrame name="$parent_ScrollFrame" inherits="UIPanelScrollFrameTemplate">
 				<Size>
 					<AbsDimension x="300" y="480"/>
@@ -569,7 +552,6 @@
 					</EdgeSize>
 				</Backdrop>
 			</Frame>
-
 			<ScrollFrame name="$parent_ScrollFrame" inherits="UIPanelScrollFrameTemplate">
 				<Size>
 					<AbsDimension x="300" y="480"/>

@@ -2,32 +2,30 @@
 	<Include file="Icons\Abilities.lua"/>
 	<Include file="Icons\Achievements.lua"/>
 	<Include file="Icons\Consumables.lua"/>
-    <Include file="Icons\Equipment.lua"/>
+	<Include file="Icons\Equipment.lua"/>
 	<Include file="Icons\Misc.lua"/>
 	<Include file="Icons\Spells.lua"/>
 	<Include file="Icons\Trades.lua"/>
 	<Include file="Icons\Weapons.lua"/>
-    <Script file="IconPicker.lua"/>
-    <Script file="IconPicker_localisation.lua"/>
+	<Script file="IconPicker.lua"/>
+	<Script file="IconPicker_localisation.lua"/>
 
-    <CheckButton name="IconPickerCategoryTemplate" virtual="true">
-        <NormalTexture file="Interface\Buttons\UI-Panel-Button-Up">
-            <TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
-        </NormalTexture>
-        <PushedTexture file="Interface\Buttons\UI-Panel-Button-Down">
-            <TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
-        </PushedTexture>
-        <DisabledTexture file="Interface\Buttons\UI-Panel-Button-Disabled">
-            <TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
-        </DisabledTexture>
-        <HighlightTexture file="Interface\Buttons\UI-Panel-Button-Highlight" alphaMode="ADD">
-            <TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
-        </HighlightTexture>
-
-        <HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
-        <CheckedTexture alphaMode="ADD" file="Interface\Buttons\CheckButtonHilight"/>  
-    </CheckButton>
-
+	<CheckButton name="IconPickerCategoryTemplate" virtual="true">
+		<NormalTexture file="Interface\Buttons\UI-Panel-Button-Up">
+			<TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
+		</NormalTexture>
+		<PushedTexture file="Interface\Buttons\UI-Panel-Button-Down">
+			<TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
+		</PushedTexture>
+		<DisabledTexture file="Interface\Buttons\UI-Panel-Button-Disabled">
+			<TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
+		</DisabledTexture>
+		<HighlightTexture file="Interface\Buttons\UI-Panel-Button-Highlight" alphaMode="ADD">
+			<TexCoords left="0" right="0.625" top="0" bottom="0.6875" />
+		</HighlightTexture>
+		<HighlightTexture alphaMode="ADD" file="Interface\Buttons\ButtonHilight-Square"/>
+		<CheckedTexture alphaMode="ADD" file="Interface\Buttons\CheckButtonHilight"/>
+	</CheckButton>
 
 	<CheckButton name="IconPickerTemplate" virtual="true">
 		<Size>
@@ -81,7 +79,7 @@
 	<CheckButton name="IconPickerButtonTemplate" inherits="IconPickerTemplate" virtual="true">
 		<Scripts>
 			<OnClick>
-				IconPickerButton_OnClick();	
+			IconPickerButton_OnClick();	
 			</OnClick>
 		</Scripts>
 	</CheckButton>
@@ -216,14 +214,13 @@
 					IconPickerOkayButton_Update();
 					</OnTextChanged>
 					<OnEnterPressed>
-						if ( IconPickerOkayButton:IsEnabled() ~= 0 ) then
-							IconPickerOkayButton_OnClick();
-						end
+					if ( IconPickerOkayButton:IsEnabled() ~= 0 ) then
+						IconPickerOkayButton_OnClick();
+					end
 					</OnEnterPressed>
 				</Scripts>
 				<FontString inherits="ChatFontNormal"/>
 			</EditBox>
-			
 			<Button name="IconPickerRandomButton" text="Random" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="60" y="20" />
@@ -235,248 +232,238 @@
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
-                   <OnClick>
+				<Scripts>
+					<OnClick>
 					IconPickerRandomIconButton()
                    </OnClick>
-               </Scripts>
-            </Button>
-
-            <CheckButton name="IconPickerAbilities" inherits="IconPickerCategoryTemplate">
-                <Size>
+				</Scripts>
+			</Button>
+			<CheckButton name="IconPickerAbilities" inherits="IconPickerCategoryTemplate">
+				<Size>
 					<AbsDimension x="52" y="22"/>
 				</Size>
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="$parentName" text="Abilities" justifyH="LEFT" inherits="GameFontHighlight">
-                            <Anchors>
-                                <Anchor point="CENTER" relativeTo="$parent" />
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-		        </Layers>
-                <Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentName" text="Abilities" justifyH="LEFT" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Anchors>
 					<Anchor point="TOPLEFT">
 						<Offset>
 							<AbsDimension x="15" y="-82"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-               <Scripts>
+				<Scripts>
 					<OnShow>
                        UIDropDownMenu_Initialize(self, IconPickerAbilitiesDropDown_OnShow);
                    </OnShow>
-                   <OnClick>
+					<OnClick>
                        IconPickerAbilities_OnClick();
                    </OnClick>
-               </Scripts>
-            </CheckButton>
-
-            <CheckButton name="IconPickerAchievements"  inherits="IconPickerCategoryTemplate">
-                <Size>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="IconPickerAchievements"  inherits="IconPickerCategoryTemplate">
+				<Size>
 					<AbsDimension x="92" y="32"/>
 				</Size>
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="$parentName" text="Achievements" justifyH="LEFT" inherits="GameFontHighlight">
-                            <Anchors>
-                                <Anchor point="CENTER" relativeTo="$parent" />
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-		        </Layers>
-                <Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentName" text="Achievements" justifyH="LEFT" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="IconPickerAbilities">
 						<Offset>
 							<AbsDimension x="88" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-                <Scripts>
-                   <OnClick>
+				<Scripts>
+					<OnClick>
                        IconPickerAchievements_OnClick();
                    </OnClick>
-               </Scripts>
-            </CheckButton>
-
-            <CheckButton name="IconPickerConsumes" inherits="IconPickerCategoryTemplate">
-                <Size>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="IconPickerConsumes" inherits="IconPickerCategoryTemplate">
+				<Size>
 					<AbsDimension x="70" y="22"/>
 				</Size>
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="$parentName" text="Consumes"  justifyH="LEFT" inherits="GameFontHighlight">
-                            <Anchors>
-                                <Anchor point="CENTER" relativeTo="$parent" />
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-		        </Layers>
-                <Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentName" text="Consumes"  justifyH="LEFT" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="IconPickerAchievements">
 						<Offset>
 							<AbsDimension x="64" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-                <Scripts>
+				<Scripts>
 					<OnShow>
                        UIDropDownMenu_Initialize(self, IconPickerConsumesDropDown_OnShow);
                    </OnShow>
-                   <OnClick>
+					<OnClick>
                        IconPickerConsumes_OnClick();
                    </OnClick>
-               </Scripts>
-            </CheckButton>
-
-            <CheckButton name="IconPickerEquipment"  inherits="IconPickerCategoryTemplate">
-                <Size>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="IconPickerEquipment"  inherits="IconPickerCategoryTemplate">
+				<Size>
 					<AbsDimension x="86" y="22"/>
 				</Size>
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="$parentName" text="Equipment"  justifyH="LEFT" inherits="GameFontHighlight">
-                            <Anchors>
-                                <Anchor point="CENTER" relativeTo="$parent" />
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-		        </Layers>
-                <Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentName" text="Equipment"  justifyH="LEFT" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Anchors>
 					<Anchor point="BOTTOMLEFT" relativeTo="IconPickerAbilities">
 						<Offset>
 							<AbsDimension x="25" y="-30"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-                <Scripts>
+				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, IconPickerEquipmentDropDown_OnShow);
+					UIDropDownMenu_Initialize(self, IconPickerEquipmentDropDown_OnShow);
                    </OnShow>
-                   <OnClick>
-                       IconPickerEquipment_OnClick();
+					<OnClick>
+					IconPickerEquipment_OnClick();
                    </OnClick>
-               </Scripts>
-            </CheckButton>
-
-            <CheckButton name="IconPickerMisc"  inherits="IconPickerCategoryTemplate">
-                <Size>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="IconPickerMisc"  inherits="IconPickerCategoryTemplate">
+				<Size>
 					<AbsDimension x="44" y="32"/>
 				</Size>
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="$parentName" text="Misc"  justifyH="LEFT" inherits="GameFontHighlight">
-                            <Anchors>
-                                <Anchor point="CENTER" relativeTo="$parent" />
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-		        </Layers>
-                <Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentName" text="Misc"  justifyH="LEFT" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="IconPickerEquipment">
 						<Offset>
 							<AbsDimension x="44" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-                <Scripts>
-                   <OnClick>
-                       IconPickerMisc_OnClick();
+				<Scripts>
+					<OnClick>
+					IconPickerMisc_OnClick();
                    </OnClick>
-               </Scripts>
-            </CheckButton>
-
-            <CheckButton name="IconPickerSpells"  inherits="IconPickerCategoryTemplate">
-                <Size>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="IconPickerSpells"  inherits="IconPickerCategoryTemplate">
+				<Size>
 					<AbsDimension x="44" y="22"/>
 				</Size>
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="$parentName" text="Spells"  justifyH="LEFT" inherits="GameFontHighlight">
-                            <Anchors>
-                                <Anchor point="CENTER" relativeTo="$parent" />
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-		        </Layers>
-                <Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentName" text="Spells"  justifyH="LEFT" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="IconPickerMisc">
 						<Offset>
 							<AbsDimension x="44" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-                <Scripts>
+				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, IconPickerSpellsDropDown_OnShow);
+					UIDropDownMenu_Initialize(self, IconPickerSpellsDropDown_OnShow);
                    </OnShow>
-                   <OnClick>
-                       IconPickerSpells_OnClick();
+					<OnClick>
+					IconPickerSpells_OnClick();
                    </OnClick>
-               </Scripts>
-            </CheckButton>
-
-            <CheckButton name="IconPickerTrades"  inherits="IconPickerCategoryTemplate">
-                <Size>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="IconPickerTrades"  inherits="IconPickerCategoryTemplate">
+				<Size>
 					<AbsDimension x="44" y="22"/>
 				</Size>
-                <Layers>
-                  <Layer level="OVERLAY">
-                        <FontString name="$parentName" text="Trades" justifyH="LEFT" inherits="GameFontHighlight">
-                            <Anchors>
-                                <Anchor point="CENTER" relativeTo="$parent" />
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-		        </Layers>
-                <Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentName" text="Trades" justifyH="LEFT" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="IconPickerSpells">
 						<Offset>
 							<AbsDimension x="44" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-                <Scripts>
+				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, IconPickerTradesDropDown_OnShow);
+					UIDropDownMenu_Initialize(self, IconPickerTradesDropDown_OnShow);
                    </OnShow>
-                   <OnClick>
-                       IconPickerTrades_OnClick();
+					<OnClick>
+					IconPickerTrades_OnClick();
                    </OnClick>
-               </Scripts>
-            </CheckButton>
-            
-            <CheckButton name="IconPickerWeapons" inherits="IconPickerCategoryTemplate">
-                <Size>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="IconPickerWeapons" inherits="IconPickerCategoryTemplate">
+				<Size>
 					<AbsDimension x="64" y="22"/>
 				</Size>
-                <Layers>
-                    <Layer level="OVERLAY">
-                        <FontString name="$parentName" text="Weapons"  justifyH="LEFT" inherits="GameFontHighlight">
-                            <Anchors>
-                                <Anchor point="CENTER" relativeTo="$parent" />
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-		        </Layers>
-                <Anchors>
+				<Layers>
+					<Layer level="OVERLAY">
+						<FontString name="$parentName" text="Weapons"  justifyH="LEFT" inherits="GameFontHighlight">
+							<Anchors>
+								<Anchor point="CENTER" relativeTo="$parent" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="IconPickerConsumes">
 						<Offset>
 							<AbsDimension x="64" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
-                <Scripts>
+				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, IconPickerWeaponsDropDown_OnShow);
+					UIDropDownMenu_Initialize(self, IconPickerWeaponsDropDown_OnShow);
                    </OnShow>
-                   <OnClick>
-                       IconPickerWeapons_OnClick();
+					<OnClick>
+					IconPickerWeapons_OnClick();
                    </OnClick>
-               </Scripts>
-            </CheckButton>
-
-
+				</Scripts>
+			</CheckButton>
 			<ScrollFrame name="IconPickerScrollFrame" inherits="ClassTrainerListScrollFrameTemplate">
 				<Size>
 					<AbsDimension x="296" y="195"/>
@@ -490,7 +477,7 @@
 				</Anchors>
 				<Scripts>
 					<OnVerticalScroll>
-						FauxScrollFrame_OnVerticalScroll(ICON_ROW_HEIGHT, IconPickerFrame_Update);
+					FauxScrollFrame_OnVerticalScroll(ICON_ROW_HEIGHT, IconPickerFrame_Update);
 					</OnVerticalScroll>
 				</Scripts>
 			</ScrollFrame>
@@ -687,9 +674,8 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						this:GetParent():Hide();
-						<!-- IconPicker_Update(); -->
-						PlaySound("gsTitleOptionOK");
+					this:GetParent():Hide();
+					PlaySound("gsTitleOptionOK");
 					</OnClick>
 				</Scripts>
 			</Button>
@@ -706,26 +692,23 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						IconPickerOkayButton_OnClick();
-						PlaySound("gsTitleOptionOK");
+					IconPickerOkayButton_OnClick();
+					PlaySound("gsTitleOptionOK");
 					</OnClick>
 				</Scripts>
 			</Button>
 		</Frames>
 		<Scripts>
 			<OnShow>
-				tinsert(UISpecialFrames, "IconPickerFrame");
-				IconPickerFrame_OnShow();
+			tinsert(UISpecialFrames, "IconPickerFrame");
+			IconPickerFrame_OnShow();
 			</OnShow>
 			<OnHide>
-				IconPickerFrame_OnHide();
+			IconPickerFrame_OnHide();
 			</OnHide>
 			<OnMouseWheel>
-				return;
+			return;
 			</OnMouseWheel>
 		</Scripts>
 	</Frame>
-
-
-
 </Ui>
