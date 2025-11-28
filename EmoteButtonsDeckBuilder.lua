@@ -103,7 +103,7 @@ end
 
 --shouldn't actually take an argument
 function DeckBuilderFrame_UpdateActions(deck)
-	deck = DeckBuilderFrame.selectedIcon;
+	local deck = DeckBuilderFrame.selectedIcon;
 	if (deck == 0 ) then
 		d={}
 		emptyTxt = ""
@@ -445,6 +445,8 @@ function DeckBuilderFrame_RenameDeckButton_OnClick()
 				EmoteButtons_CloseOpenDecks();
 				EmoteButtons_ReOpenDecks();
 				DEFAULT_CHAT_FRAME:AddMessage("Deck rename success!");
+			--EB_CurrentActions[EmoteButtons_ConfigDeck][EmoteButtons_ConfigButton].tooltip = editBox:GetText();
+			--EmoteButtons_OpenDeckBuilder();
 		end
 		this:GetParent():Hide();
 	end

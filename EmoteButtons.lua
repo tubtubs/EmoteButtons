@@ -217,7 +217,7 @@ function EmoteButtons_Init()
 	UIErrorsFrame:AddMessage(EMOTEBUTTONS_INIT_TEXT, 1.0, 1.0, 1.0, 1.0, UIERRORS_HOLD_TIME);
 end
 
---ran on addon load
+--runs on addon load
 function EmoteButtons_LoadedVars()
 	EmoteButtons_WipeVars();
 	EB_CurrentActions = EmoteButtons_Vars.Profiles[EmoteButtons_Vars.PIndex].Decks
@@ -524,6 +524,7 @@ function EmoteButtons_FadeWing(wing)
 	end
 end
 
+--must be a better, more scaleable way to do this
 function EmoteButtons_ClickAction(framename)
 	local i;
 	local found = 0;
@@ -649,6 +650,7 @@ function EmoteButtons_ClickAction(framename)
 	end
 end
 
+--could be optimized?
 function EmoteButtons_ToggleDeck(deck, wing)
 	if wing=="Left" then
 		if EmoteButtons_LeftWing_Deck==deck then

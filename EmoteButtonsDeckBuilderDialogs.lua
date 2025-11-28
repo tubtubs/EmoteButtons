@@ -1,3 +1,5 @@
+
+--EMOTES MANAGER--
 NUM_EMOTES_SHOWN = 8;
 EMOTE_ROW_HEIGHT = 36;
 
@@ -114,8 +116,7 @@ function EmoteManagerSubmitButton_OnClick()
 	EB_EmotesManager:Hide();
 end
 
---DeckManager Functions
-
+--DECK MANAGER--
 NUM_DECKS_SHOWN = 8;
 function DeckManagerFrame_OnShow()
 	EB_EmotesManager:Hide();

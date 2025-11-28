@@ -3,6 +3,7 @@
 
     <!-- Some parts originally created by Quipper, using wowuides or handwritten-->
 	<!-- Virtual button, easy to use, made from wowuides code -->
+
 	<Button name="EmoteButtons_OptionButton_Template" virtual="true">
 		<Size>
 			<AbsDimension x="100" y="22" />

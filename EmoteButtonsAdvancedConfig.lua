@@ -153,7 +153,8 @@ function EmoteButtons_ProfileDuplicateDropDown_OnShow()
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick()
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 0, 0);
+	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 
+	EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 0, 0);
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()
