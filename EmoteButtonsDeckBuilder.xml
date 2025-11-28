@@ -1,9 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Include file="EmoteButtonsDeckBuilder.lua"/>
-
-    <!-- Some parts originally created by Quipper, using wowuides or handwritten-->
+	<!-- Some parts originally created by Quipper, using wowuides or handwritten-->
 	<!-- Virtual button, easy to use, made from wowuides code -->
-
 	<Button name="EmoteButtons_OptionButton_Template" virtual="true">
 		<Size>
 			<AbsDimension x="100" y="22" />
@@ -62,7 +60,6 @@
 			</Shadow>
 		</DisabledFont>
 	</Button>
-
 	<!-- Deck Builder -->
 	<CheckButton name="DeckBuilderTemplate" virtual="true">
 		<Size>

@@ -1,7 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<Include file="EmoteButtonsDeckBuilderDialogs.lua"/>
-    <Include file="EmoteList.lua"/>
-
+	<Include file="EmoteList.lua"/>
 	<Frame name="EmoteButtons_ChangeCMDFrame" frameStrata="DIALOG" toplevel="true" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="DeckBuilderFrame">
@@ -189,8 +188,7 @@
 			</OnShow>
 		</Scripts>
 	</Frame>
-
-    <!-- EmotesManager -->
+	<!-- EmotesManager -->
 	<CheckButton name="EmoteManagerTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="108" y="16"/>
@@ -455,9 +453,8 @@
 			</OnShow>
 		</Scripts>
 	</Frame>
-    <!-- End of EmotesManager -->
-
-    <!-- DeckManager -->
+	<!-- End of EmotesManager -->
+	<!-- DeckManager -->
 	<CheckButton name="DeckManagerTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="108" y="16"/>
@@ -809,5 +806,5 @@
 			</OnShow>
 		</Scripts>
 	</Frame>
-    <!-- End of DeckManager -->
+	<!-- End of DeckManager -->
 </Ui>
