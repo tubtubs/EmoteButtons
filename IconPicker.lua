@@ -18,19 +18,6 @@ IP_CATEGORY_SPELLS = 5
 IP_CATEGORY_TRADES = 6
 IP_CATEGORY_WEAPONS = 7
 
-IP_icons_abilties_categories = {
-    "Druid",
-    "Hunter",
-    "Mage",
-    "Misc",
-    "Mounts",
-    "Paladin",
-    "Rogue",
-    "Shaman",
-    "Warlock",
-    "Warrior"
-}
-
 IP_ABILITY_ICONS = {
     {
         icons = IP_icons_abilities_druid,
@@ -74,12 +61,6 @@ IP_ABILITY_ICONS = {
     }
 }
 
-IP_icons_consume_categories = {
-    "Drink",
-    "Food",
-    "Potions"
-}
-
 IP_CONSUME_ICONS = {
     {
         icons = IP_icons_consume_drinks,
@@ -93,21 +74,6 @@ IP_CONSUME_ICONS = {
         icons = IP_icons_consume_potions,
         size = IP_len_icons_consume_potions
     }
-}
-
-IP_icons_equipment_categories = {
-    "Belts",
-    "Boots",
-    "Bracers/Gloves",
-    "Capes",
-    "Chest",
-    "Headgear",
-    "Jewelry",
-    "Misc",
-    "Offhand",
-    "Pants",
-    "Shirts/Tabards",
-    "Shoulders",
 }
 
 IP_EQUIPMENT_ICONS = {
@@ -176,18 +142,6 @@ IP_MISC_ICONS = {
     }
 }
 
-IP_icons_spells_categories = {
-    "Arcane",
-    "Death Knight",
-    "Fire",
-    "Frost",
-    "Holy",
-    "Misc",
-    "Nature",
-    "Shadow",
-    "Shaman"
-}
-
 IP_SPELLS_ICONS = {
     {
         icons = IP_icons_spells_arcane,
@@ -225,23 +179,6 @@ IP_SPELLS_ICONS = {
         icons = IP_icons_spells_shaman,
         size = IP_len_icons_spells_shaman
     },
-}
-
-IP_icons_trades_categories = {
-    "Alchemy",
-    "Blacksmithing",
-    "Elementals",
-    "Enchanting",
-    "Engineering",
-    "First Aid",
-    "Fishing",
-    "Herbalism",
-    "Inscription",
-    "Jewelcrafting",
-    "Leatherworking",
-    "Mining",
-    "Misc",
-    "Tailoring"
 }
 
 IP_TRADE_ICONS = {
@@ -301,18 +238,6 @@ IP_TRADE_ICONS = {
         icons = IP_icons_trade_tailoring,
         size = IP_len_icons_trade_tailoring
     },
-}
-
-IP_icons_weapon_categories = {
-    "Axe",
-    "Dagger",
-    "Fist",
-    "Mace",
-    "Misc",
-    "Polearm",
-    "Ranged",
-    "Staff",
-    "Sword"
 }
 
 IP_WEAPON_ICONS = {
@@ -392,8 +317,7 @@ function IconPickerForceShow(icon,text,func,anchor)
         IconPickerFrame:SetPoint(anchor.Point,anchor.RelativeTo,
             anchor.RelativePoint,anchor.x,anchor.y);
     else    
-        IconPickerFrame:SetPoint("CENTER","UIParent",
-            "CENTER",0,0);
+        IconPickerFrame:SetPoint("CENTER","UIParent","CENTER",0,0);
     end
     if icon ~= "" then
         IconPickerFindIcon(icon);

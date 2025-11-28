@@ -203,12 +203,12 @@ function EmoteButtons_ResetProfile()
 		end
 	end
 	StaticPopupDialogs["EMOTEBUTTONS_RESET_PROFILE_CONFIRMATION"] = {
-	text = "Do you want to reset the current decks config in the profile " .. EmoteButtons_Vars.Profiles[index].Name .. "?",
+	text = "Do you want to reset the current decks config in the profile " .. EmoteButtons_Vars.Profiles[index].Name .. " to defaults?",
 	button1 = "Yes",
 	button2 = "No",
 	OnAccept = function()
-		EmoteButtons_Vars.Profiles[index].Decks = EMOTEBUTTONS_SE;
-		EB_CurrentActions = EMOTEBUTTONS_SE;
+		EmoteButtons_Vars.Profiles[index].Decks = EMOTEBUTTONS_T;
+		EB_CurrentActions = EmoteButtons_Vars.Profiles[index].Decks;
 		ReloadUI();
 	end,
 	timeout = 0,

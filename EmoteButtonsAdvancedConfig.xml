@@ -137,7 +137,7 @@
 					</OnValueChanged>
 				</Scripts>
 			</Slider>
-			<Button name="$parent_ImportProfileButton" text="Import Profile" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_ImportProfileButton" text="EMOTEBUTTONS_IMPORTPROFILE" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
 				</Size>
@@ -154,7 +154,7 @@
                    </OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parent_ExportProfileButton" text="Export Profile" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_ExportProfileButton" text="EMOTEBUTTONS_EXPORTPROFILE" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
 				</Size>
@@ -171,7 +171,7 @@
                    </OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parent_ResetPositionButton" text="Reset Main Button Position" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_ResetPositionButton" text="EMOTEBUTTONS_RESETPOSITION" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
 				</Size>
@@ -188,7 +188,7 @@
                    </OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parent_ResetProfileButton" text="Reset Current Profile" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_ResetProfileButton" text="EMOTEBUTTONS_RESETPROFILE" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
 				</Size>
@@ -205,7 +205,7 @@
                    </OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parent_ProfileSetDropdownButton" text="Set Profile" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_ProfileSetDropdownButton" text="EMOTEBUTTONS_SETPROFILE" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="CENTER" relativePoint="TOP">
 						<Offset>
@@ -222,7 +222,7 @@
                    </OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parent_ProfileDeleteDropdownButton" text="Delete Profile" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_ProfileDeleteDropdownButton" text="EMOTEBUTTONS_DELETEPROFILE" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileSetDropdownButton">
 						<Offset>
@@ -239,7 +239,7 @@
                    </OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parent_ProfileDuplicateDropdownButton" text="Duplicate Profile" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_ProfileDuplicateDropdownButton" text="EMOTEBUTTONS_DUPLICATEPROFILE" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileDeleteDropdownButton">
 						<Offset>
@@ -256,7 +256,7 @@
                    </OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parent_ProfileCreateButton" text="Create Profile" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_ProfileCreateButton" text="EMOTEBUTTONS_CREATEPROFILE" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileDuplicateDropdownButton">
 						<Offset>

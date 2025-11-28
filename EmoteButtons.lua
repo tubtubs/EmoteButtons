@@ -94,11 +94,7 @@ EB_CurrentActions = {} --Taking out of saved variables for easier reference
 -- chat inputs
 local function TextMenu(arg)
 	if arg == nil or arg == "" then
-		DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r This is help topic for |cFFFFFF00 /EmoteButtons or /EB.|r",1,1,1)
-		DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons deckbuilder|r - opens the deckbuilder.",1,1,1)
-		DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons options|r - opens the advanced config window.",1,1,1)		
-		DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetposition|r - resets position of the main button.",1,1,1)
-		DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetprofile|r - resets the current profile, and deck config to default.",1,1,1)
+		DEFAULT_CHAT_FRAME:AddMessage(EMOTEBUTTONS_SLASHHELP,1,1,1)
 	else
 		if arg == "resetposition" then
 			EmoteButtons_ResetPosition()
@@ -109,7 +105,7 @@ local function TextMenu(arg)
 		elseif arg == "deckbuilder" then
 			EmoteButtons_OpenDeckBuilder()
 		else
-			DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r unknown command",1,0.3,0.3);
+			DEFAULT_CHAT_FRAME:AddMessage(EMOTEBUTTONS_SLASHUNKNOWN,1,0.3,0.3);
 		end
 	end
 end

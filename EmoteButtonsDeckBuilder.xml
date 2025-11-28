@@ -67,7 +67,7 @@
 		</Size>
 		<Layers>
 			<Layer level="OVERLAY">
-				<FontString name="$parentName" text="Test" justifyH="LEFT" inherits="GameFontHighlightSmallOutline">
+				<FontString name="$parentName" text="EMOTEBUTTONS_TEST" justifyH="LEFT" inherits="GameFontHighlightSmallOutline">
 					<Size>
 						<AbsDimension x="300" y="16"/>
 					</Size>

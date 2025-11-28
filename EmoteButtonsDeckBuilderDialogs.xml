@@ -38,7 +38,7 @@
 					</Anchors>
 					<TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
 				</Texture>
-				<FontString name="$parentTitleString" font="GameFontNormal" text="Change Command">
+				<FontString name="$parentTitleString" font="GameFontNormal" text="EMOTEBUTTONS_SETCOMMAND">
 					<!--Window Title -->
 					<Size>
 						<AbsDimension x="140" y="0" />
@@ -147,7 +147,7 @@
 					</EditBox>
 				</ScrollChild>
 			</ScrollFrame>
-			<Button name="$parent_SubmitButton" text="Submit" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
 				</Size>
@@ -195,7 +195,7 @@
 		</Size>
 		<Layers>
 			<Layer level="OVERLAY">
-				<FontString name="$parentName" text="Test" justifyH="LEFT" inherits="GameFontHighlightSmallOutline">
+				<FontString name="$parentName" text="EMOTEBUTTONS_TEST" justifyH="LEFT" inherits="GameFontHighlightSmallOutline">
 					<Size>
 						<AbsDimension x="108" y="16"/>
 					</Size>
@@ -461,7 +461,7 @@
 		</Size>
 		<Layers>
 			<Layer level="OVERLAY">
-				<FontString name="$parentName" text="Test" justifyH="LEFT" inherits="GameFontHighlightSmallOutline">
+				<FontString name="$parentName" text="EMOTEBUTTONS_TEST" justifyH="LEFT" inherits="GameFontHighlightSmallOutline">
 					<Size>
 						<AbsDimension x="300" y="16"/>
 					</Size>
@@ -484,7 +484,7 @@
 		</Size>
 		<Layers>
 			<Layer level="OVERLAY">
-				<FontString name="$parentName" text="Test" justifyH="LEFT" inherits="GameFontHighlightSmallOutline">
+				<FontString name="$parentName" text="EMOTEBUTTONS_TEST" justifyH="LEFT" inherits="GameFontHighlightSmallOutline">
 					<Size>
 						<AbsDimension x="300" y="16"/>
 					</Size>
