@@ -1,6 +1,7 @@
 ## Interface: 11200
 ## Title: EmoteButtons
-## Author: QuippeR
+## Author: QuippeR, updated by |ccf3CE13Ftubtubs 
+## Version: 2.1
 ## Notes: A menu to access emotes and slash commands
 ## DefaultState: Enabled
 ## LoadOnDemand: 0

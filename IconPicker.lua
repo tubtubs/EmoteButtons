@@ -13,10 +13,10 @@ IP_CATEGORY_ABILITY = 1
 IP_CATEGORY_ACHIVEMENTS = 2
 IP_CATEGORY_CONSUME = 3
 IP_CATEGORY_EQUIPMENT = 4
-IP_CATEGORY_MISC = 5
-IP_CATEGORY_SPELLS = 6
-IP_CATEGORY_TRADES = 7
-IP_CATEGORY_WEAPONS = 8
+IP_CATEGORY_MISC = 8
+IP_CATEGORY_SPELLS = 5
+IP_CATEGORY_TRADES = 6
+IP_CATEGORY_WEAPONS = 7
 
 IP_icons_abilties_categories = {
     "Druid",
@@ -359,10 +359,10 @@ IP_ICONS = {
     IP_ACHIEVEMENT_ICONS,
     IP_CONSUME_ICONS,
     IP_EQUIPMENT_ICONS,
-    IP_MISC_ICONS,
     IP_SPELLS_ICONS,
     IP_TRADE_ICONS,
-    IP_WEAPON_ICONS
+    IP_WEAPON_ICONS,
+    IP_MISC_ICONS
 }
 
 NUM_CATEGORIES = 8
@@ -416,8 +416,15 @@ function IconPickerFindIcon(icon)
                     IP_SUBCATEGORY_SELECTED = j;
                     IconPickerFrame.selectedIcon=k;
                     found = k;
+                    break; --exit early, giving first result.
                 end
             end
+            if found ~= 0 then
+                break;
+            end
+        end
+        if found ~= 0 then
+            break;
         end
     end
     if (found ~= 0) then
@@ -432,8 +439,6 @@ function IconPickerFindIcon(icon)
 		IconPickerFrame.selectedIcon = found;
         IconPickerFrame_Update()
 		IconPickerScrollFrame:SetVerticalScroll(offset);
-        --DEFAULT_CHAT_FRAME:AddMessage(format("offset: %s",offset))
-
     else
         DEFAULT_CHAT_FRAME:AddMessage(format("Could not find %s",icon))
 	end

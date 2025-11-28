@@ -2,3 +2,16 @@
 
 30/10/2006
 initial version, 1.0
+
+28/11/2025
+updated, version 2.0
+Expanded left and right wings to be 8 buttons
+Added far left and far right wings (increases max buttons greatly)
+Added Emote, and Deck managers
+Added Icon picker dialog (uses expanded icon list)
+Added Deckbuilder (replaces original config window)
+Advanced Config Window
+-Importing/Exporting Profiles
+-Reset profile and position
+Macro Support
+All new layout, featuring 250+ emotes and slash commands, and macros

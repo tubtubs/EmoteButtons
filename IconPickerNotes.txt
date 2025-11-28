@@ -13,11 +13,9 @@ len_IP_icons_IP_icons_
 ICON PICKER TODO:
 Export Icon Lists [CHECK]
 -Inspect them... [CHECK]
-Design new Frame
+Design new Frame [CHECK]
 -dropdowns
 -Change frame size, so it better matches?
-Can I make a horizontal dropdown? Kinda doubt it, ngl.
-
 
 ICON PICKER FEATURES:
 -Icons from bag slots

@@ -6,31 +6,10 @@ Adds an expanding menu system that grants access to emotes, slash commands
 and macros. Supports profiles, and export and importing of profiles.
 Shift click a button, or type /eb for more options.
 
-CHANGELOG:
-Expanded left and right wings to be 8 buttons
-Added far left and far right wings (increases max buttons greatly)
-Added Emote, and Deck managers
-Added Icon picker dialog (uses expanded icon list)
-Added Deckbuilder (replaces original config window)
-Advanced Config Window
--Importing/Exporting Profiles
--Reset profile and position
-Macro Support
-All new layout, featuring 250+ emotes and slash commands, and macros
-
 TODO:
 ***Readme.md
 ***Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
-Clean up EmoteButtons.lua
--DeckBuilder.lua
--DeckBuilder.xml
---Include all the relevant code, and frames. Delete replaced old frames.
---Deprecate EmoteButtonsConfig.xml
-Make a 2nd reset, reset and default
-
-NOTE: Only seems to lag with larger deck sizes. (open wings)
-	--probably about how the deck lookup is handled, not fading
-	DEFAULT_CHAT_FRAME:AddMessage("TEST")
+Make a 2nd reset, empty and default
 ]]--
 
 
