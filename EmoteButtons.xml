@@ -22,8 +22,8 @@
 				</Texture>
 			</Layer>
 		</Layers>
-		<NormalTexture file="Interface\AddOns\EmoteButtons\EmoteButtons-ButtonBase.tga"/>
-		<HighlightTexture alphaMode="BLEND" file="Interface\AddOns\EmoteButtons\EmoteButtons-ButtonGlow.tga"/>
+		<NormalTexture file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-ButtonBase.tga"/>
+		<HighlightTexture alphaMode="BLEND" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-ButtonGlow.tga"/>
 	</Button>
 	<Button name="EmoteButtons_template" movable="false" hidden="true" virtual="true" inherits="EmoteButtons_temp_noscript">
 		<Scripts>

@@ -107,7 +107,6 @@ local function TextMenu(arg)
 		elseif arg == "options" then
 			EmoteButtons_AdvancedConfigFrame:Show();
 		elseif arg == "deckbuilder" then
-			--DeckBuilderFrame:Show();
 			EmoteButtons_OpenDeckBuilder()
 		else
 			DEFAULT_CHAT_FRAME:AddMessage("|cFF00FF00Emote Buttons:|r unknown command",1,0.3,0.3);
