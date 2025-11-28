@@ -9,13 +9,13 @@ function EmoteButtons_AddButton(deck, act, acttype, tip)
 end
 
 function EmoteButtons_ReloadDeck(deck)
-	if EmoteButtons_FarLeftWing_Deck==deck then
+	if EmoteButtons_Wings_Decks[4]==deck then
 		EmoteButtons_LoadDeck(deck, "FarLeft");
-	elseif EmoteButtons_FarRightWing_Deck==deck then
+	elseif EmoteButtons_Wings_Decks[5]==deck then
 		EmoteButtons_LoadDeck(deck, "FarRight");
-	elseif EmoteButtons_LeftWing_Deck==deck then
+	elseif EmoteButtons_Wings_Decks[2]==deck then
 		EmoteButtons_LoadDeck(deck, "Left");
-	elseif EmoteButtons_RightWing_Deck==deck then
+	elseif EmoteButtons_Wings_Decks[3]==deck then
 		EmoteButtons_LoadDeck(deck, "Right");
 	elseif EmoteButtons_FirstLevelName == deck then
 		EmoteButtons_LoadDeck(deck, "");

@@ -65,33 +65,36 @@ EmoteButtons_WingCount = 8;
 
 EmoteButtons_LeftWingCount = 8;
 EmoteButtons_LeftWing = 
-	{"EmoteButtons_10", "EmoteButtons_11", "EmoteButtons_12",
+	{"EmoteButtons_11", "EmoteButtons_12", "EmoteButtons_13",
 	 "EmoteButtons_14", "EmoteButtons_15", "EmoteButtons_16",
-	"EmoteButtons_18","EmoteButtons_19"};
-EmoteButtons_LeftWing_Deck = "#0";
+	"EmoteButtons_17","EmoteButtons_18"};
 
 EmoteButtons_FarLeftWingCount = 8;
 EmoteButtons_FarLeftWing = 
-	{"EmoteButtons_30", "EmoteButtons_31", "EmoteButtons_32",
+	{"EmoteButtons_31", "EmoteButtons_32", "EmoteButtons_33",
 	 "EmoteButtons_34", "EmoteButtons_35", "EmoteButtons_36",
-	"EmoteButtons_38","EmoteButtons_39"};
-EmoteButtons_FarLeftWing_Deck = "#0";
+	"EmoteButtons_37","EmoteButtons_38"};
 
 EmoteButtons_RightWingCount = 8;
 EmoteButtons_RightWing = 
-	{"EmoteButtons_20", "EmoteButtons_21", "EmoteButtons_22",
+	{"EmoteButtons_21", "EmoteButtons_22", "EmoteButtons_23",
 	 "EmoteButtons_24", "EmoteButtons_25", "EmoteButtons_26",
-	"EmoteButtons_28", "EmoteButtons_29"};
-EmoteButtons_RightWing_Deck = "#0";
+	"EmoteButtons_27", "EmoteButtons_28"};
 
 EmoteButtons_FarRightWingCount = 8;
 EmoteButtons_FarRightWing = 
-	{"EmoteButtons_40", "EmoteButtons_41", "EmoteButtons_42",
+	{"EmoteButtons_41", "EmoteButtons_42", "EmoteButtons_43",
 	 "EmoteButtons_44", "EmoteButtons_45", "EmoteButtons_46",
-	"EmoteButtons_48","EmoteButtons_49"};
-EmoteButtons_FarRightWing_Deck = "#0";
+	"EmoteButtons_47","EmoteButtons_48"};
+
+EmoteButtons_Wings = {"", "FarLeft","FarRight","FarLeft","FarRight"}
 
 EmoteButtons_FirstLevelName = "Main"; -- Still need this constant, it's special as first level.
+EmoteButtons_Wings_Decks = {EmoteButtons_FirstLevelName,
+							"#0", 	--Left
+							"#0",    --Right
+							"#0",  --FarLeft
+							"#0"} --FarRight
 
 --Levels of emotes shown (which wings, if any are open)
 EmoteButtons_Levels={["Main"]=false,["Left"]=false, ["Right"]=false,
@@ -166,21 +169,23 @@ function EmoteButtons_WipeVars()
 	table.sort(EmoteButtons_DeckList,sort_alphabetical);
 end
 
---potentially unused...
-function EmoteButtons_Reset()
-	EmoteButtons_LeftWing_Deck = "#0";
-	EmoteButtons_RightWing_Deck = "#0";
-	EmoteButtons_FarLeftWing_Deck = "#0";
-	EmoteButtons_FarRightWing_Deck = "#0";
-	EmoteButtons_ToggleFirstLevel();
-	EmoteButtons_WipeVars();
-end
-
 function EmoteButtons_ToggleWing(wing)
 	local i=0
 	local obj;
 	local wc=getglobal("EmoteButtons_"..wing.."Wing")
-	local deck = getglobal("EmoteButtons_"..wing.."Wing_Deck")
+	--local deck = getglobal("EmoteButtons_"..wing.."Wing_Deck")
+	if wing== "" then
+		deck = EmoteButtons_Wings_Decks[1]
+	elseif wing=="Left" then
+		deck = EmoteButtons_Wings_Decks[2]
+	elseif wing=="Right" then
+		deck = EmoteButtons_Wings_Decks[3]
+	elseif wing=="FarLeft" then
+		deck = EmoteButtons_Wings_Decks[4]
+	elseif wing=="FarRight" then
+		deck = EmoteButtons_Wings_Decks[5]
+	end
+
 	local lwc = getn(wc);
 	for i=1, lwc do
 		obj = getglobal(wc[i]);
@@ -194,7 +199,6 @@ function EmoteButtons_ToggleWing(wing)
 	--flip the flag on the way out
 	EmoteButtons_Levels[wing] = not EmoteButtons_Levels[wing]
 end
-
 
 function EmoteButtons_Init()
 	local i;
@@ -362,7 +366,7 @@ function ReArrangeLeftWing()
 	--left wing
 	real_size = 0
 	for i=1, getn(EmoteButtons_LeftWing) do
-		if (EB_CurrentActions[EmoteButtons_LeftWing_Deck][i]~=nil) then
+		if (EB_CurrentActions[EmoteButtons_Wings_Decks[2]][i]~=nil) then
 			real_size = real_size+1
 		else
 			break
@@ -497,25 +501,25 @@ function EmoteButtons_FadeWing(wing)
 	for i=1, wingC do
 		obj=getglobal(wingT[i]);
 		if (wing == "left") then
-			if (EB_CurrentActions[EmoteButtons_LeftWing_Deck][i]~=nil) then
+			if (EB_CurrentActions[EmoteButtons_Wings_Decks[2]][i]~=nil) then
 				FadeInFrame(obj, 0.1*i);
 			else
 				FadeOutFrame(obj, 0.1*i);
 			end
 		elseif (wing == "right") then
-			if (EB_CurrentActions[EmoteButtons_RightWing_Deck][i]~=nil) then
+			if (EB_CurrentActions[EmoteButtons_Wings_Decks[3]][i]~=nil) then
 				FadeInFrame(obj, 0.1*i);
 			else
 				FadeOutFrame(obj, 0.1*i);
 			end
 		elseif (wing == "farleft") then
-			if (EB_CurrentActions[EmoteButtons_FarLeftWing_Deck][i]~=nil) then
+			if (EB_CurrentActions[EmoteButtons_Wings_Decks[4]][i]~=nil) then
 				FadeInFrame(obj, 0.1*i);
 			else
 				FadeOutFrame(obj, 0.1*i);
 			end
 		elseif (wing == "farright") then
-			if (EB_CurrentActions[EmoteButtons_FarRightWing_Deck][i]~=nil) then
+			if (EB_CurrentActions[EmoteButtons_Wings_Decks[5]][i]~=nil) then
 				FadeInFrame(obj, 0.1*i);
 			else
 				FadeOutFrame(obj, 0.1*i);
@@ -524,128 +528,38 @@ function EmoteButtons_FadeWing(wing)
 	end
 end
 
---must be a better, more scaleable way to do this
 function EmoteButtons_ClickAction(framename)
-	local i;
-	local found = 0;
 	local action = "";
 	local tooltip = "";
+	local acttype=0;
 	local wing = "";
-
-	for i=1, EmoteButtons_FirstLevelCount do
-		if EmoteButtons_FirstLevel[i] == framename then
-			found = i;
-		end
-	end
-	if found~=0 then
-		action = EB_CurrentActions[EmoteButtons_FirstLevelName][found].action;
-		tooltip = EB_CurrentActions[EmoteButtons_FirstLevelName][found].tooltip;
-		acttype = EB_CurrentActions[EmoteButtons_FirstLevelName][found].type;
-		--generate wing dynamically instead of hard coding.
-		--Just the indexes of left/right sides, a little better
-		if found < 5 then
-			wing = "Left"
-		else
-			wing = "Right"
-		end
-	--configure
-		if IsShiftKeyDown() then
-			EmoteButtons_ConfigDeck = EmoteButtons_FirstLevelName;
-			EmoteButtons_ConfigButton = found;
-			EmoteButtons_OpenDeckBuilder();
-		elseif acttype==EBACTTYPE_DECK then
+	local f = tonumber(string.sub(framename,14,14))
+	local g = tonumber(string.sub(framename,15,15))
+	--step 1 find the responsible button
+	deck = EmoteButtons_Wings_Decks[f+1]
+	if IsShiftKeyDown() then
+		EmoteButtons_ConfigDeck = deck;
+		EmoteButtons_ConfigButton = g;
+		EmoteButtons_OpenDeckBuilder();
+	else
+		btn = EB_CurrentActions[deck][g];
+		action = btn.action;
+		tooltip = btn.tooltip;
+		acttype = btn.type;
+		if acttype==EBACTTYPE_DECK then
+			wing = EmoteButtons_Wings[f+1];
+			if wing == "" then
+				if g < 5 then
+					wing = "Left"
+				else
+					wing = "Right"
+				end
+			end
 			EmoteButtons_ToggleDeck(action, wing);
 		elseif acttype==EBACTTYPE_EMOTE then
 			EmoteButtons_DoEmote(action);
 		elseif acttype==EBACTTYPE_SLASHCMD then	
 			EmoteButtons_DoAction(action);
-		end
-	else
-		for i=1, EmoteButtons_LeftWingCount do
-			if EmoteButtons_LeftWing[i] == framename then
-				found = i;
-			end
-		end
-		if found~=0 then
-			action = EB_CurrentActions[EmoteButtons_LeftWing_Deck][found].action;		
-			acttype = EB_CurrentActions[EmoteButtons_LeftWing_Deck][found].type;		
-
-			if IsShiftKeyDown() then
-				EmoteButtons_ConfigDeck = EmoteButtons_LeftWing_Deck;
-				EmoteButtons_ConfigButton = found;
-				EmoteButtons_OpenDeckBuilder();
-			elseif acttype==EBACTTYPE_DECK then
-				EmoteButtons_ToggleDeck(action, "FarLeft");
-			elseif acttype==EBACTTYPE_EMOTE then
-				EmoteButtons_DoEmote(action);
-			elseif acttype==EBACTTYPE_SLASHCMD then	
-				EmoteButtons_DoAction(action);
-			end
-		else
-			for i=1, EmoteButtons_RightWingCount do
-				if EmoteButtons_RightWing[i] == framename then
-					found = i;
-				end
-			end
-			if found ~= 0 then
-				action = EB_CurrentActions[EmoteButtons_RightWing_Deck][found].action;		
-				acttype = EB_CurrentActions[EmoteButtons_RightWing_Deck][found].type;
-				if IsShiftKeyDown() then
-					EmoteButtons_ConfigDeck = EmoteButtons_RightWing_Deck;
-					EmoteButtons_ConfigButton = found;
-					EmoteButtons_OpenDeckBuilder();
-				elseif acttype==EBACTTYPE_DECK then
-					EmoteButtons_ToggleDeck(action, "FarRight");
-				elseif acttype==EBACTTYPE_EMOTE then
-					EmoteButtons_DoEmote(action);
-				elseif acttype==EBACTTYPE_SLASHCMD then	
-					EmoteButtons_DoAction(action);
-				end
-			else
-				for i=1, EmoteButtons_FarLeftWingCount do
-					if EmoteButtons_FarLeftWing[i] == framename then
-						found = i;
-					end
-				end
-				if found~=0 then
-					action = EB_CurrentActions[EmoteButtons_FarLeftWing_Deck][found].action;		
-					acttype = EB_CurrentActions[EmoteButtons_FarLeftWing_Deck][found].type;	
-
-					if IsShiftKeyDown() then
-						EmoteButtons_ConfigDeck = EmoteButtons_FarLeftWing_Deck;
-						EmoteButtons_ConfigButton = found;
-						EmoteButtons_OpenDeckBuilder();
-					elseif acttype==EBACTTYPE_DECK then
-						EmoteButtons_ToggleDeck(action, "FarLeft");
-					elseif acttype==EBACTTYPE_EMOTE then
-						EmoteButtons_DoEmote(action);
-					elseif acttype==EBACTTYPE_SLASHCMD then	
-						EmoteButtons_DoAction(action);
-					end		
-				else
-					for i=1, EmoteButtons_FarRightWingCount do
-						if EmoteButtons_FarRightWing[i] == framename then
-							found = i;
-						end		
-					end
-
-					if found~=0 then
-						action = EB_CurrentActions[EmoteButtons_FarRightWing_Deck][found].action;
-						acttype = EB_CurrentActions[EmoteButtons_FarRightWing_Deck][found].type;	
-					end
-					if IsShiftKeyDown() then
-						EmoteButtons_ConfigDeck = EmoteButtons_FarRightWing_Deck;
-						EmoteButtons_ConfigButton = found;
-						EmoteButtons_OpenDeckBuilder();
-					elseif acttype==EBACTTYPE_DECK then
-						EmoteButtons_ToggleDeck(action, "FarRight");
-					elseif acttype==EBACTTYPE_EMOTE then
-						EmoteButtons_DoEmote(action);
-					elseif acttype==EBACTTYPE_SLASHCMD then	
-						EmoteButtons_DoAction(action);
-					end		
-				end
-			end
 		end
 	end
 end
@@ -653,7 +567,7 @@ end
 --could be optimized?
 function EmoteButtons_ToggleDeck(deck, wing)
 	if wing=="Left" then
-		if EmoteButtons_LeftWing_Deck==deck then
+		if EmoteButtons_Wings_Decks[2]==deck then 
 			if(EmoteButtons_Levels["FarLeft"]) then
 				EmoteButtons_ToggleWing("FarLeft");
 			end
@@ -669,8 +583,9 @@ function EmoteButtons_ToggleDeck(deck, wing)
 				EmoteButtons_ToggleWing("Left");
 			end
 		end
+		EmoteButtons_Wings_Decks[2]=deck;
 	elseif wing=="Right" then
-		if EmoteButtons_RightWing_Deck==deck then
+		if EmoteButtons_Wings_Decks[3]==deck then
 			if(EmoteButtons_Levels["FarRight"]) then
 				EmoteButtons_ToggleWing("FarRight");
 			end
@@ -686,28 +601,34 @@ function EmoteButtons_ToggleDeck(deck, wing)
 				EmoteButtons_ToggleWing("Right");
 			end
 		end
+		EmoteButtons_Wings_Decks[3]=deck;
 	elseif wing=="FarLeft" then		
-		if EmoteButtons_FarLeftWing_Deck==deck then
+		if EmoteButtons_Wings_Decks[4]==deck then
 			EmoteButtons_ToggleWing("FarLeft");
 		else
 			EmoteButtons_LoadDeck(deck, wing);
 			if (EmoteButtons_Levels["FarLeft"]) then
 				EmoteButtons_FadeWing("farleft");
+				EmoteButtons_HideTooltip();
 			else
 				EmoteButtons_ToggleWing("FarLeft");
 			end
 		end	
+		EmoteButtons_Wings_Decks[4]=deck;
 	elseif wing=="FarRight" then		
-		if EmoteButtons_FarRightWing_Deck==deck then
+		if EmoteButtons_Wings_Decks[5]==deck then
 			EmoteButtons_ToggleWing("FarRight");
 		else
 			EmoteButtons_LoadDeck(deck, wing);
 			if (EmoteButtons_Levels["FarRight"]) then
 				EmoteButtons_FadeWing("farright");
+				EmoteButtons_HideTooltip();
+				DEFAULT_CHAT_FRAME:AddMessage("hls")
 			else
 				EmoteButtons_ToggleWing("FarRight");
 			end
-		end	
+		end
+		EmoteButtons_Wings_Decks[5]=deck;
 	end
 end
 
@@ -720,25 +641,25 @@ function EmoteButtons_LoadDeck(deck, wing)
 			getglobal(EmoteButtons_FirstLevel[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
 		end
 	elseif wing == "Left" then
-		EmoteButtons_LeftWing_Deck = deck
+		EmoteButtons_Wings_Decks[2] = deck
 		for i=1, getn( EB_CurrentActions[deck]) do
 			image = EB_CurrentActions[deck][i].image;
 			getglobal(EmoteButtons_LeftWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
 		end
 	elseif wing == "Right" then
-		EmoteButtons_RightWing_Deck = deck
+		EmoteButtons_Wings_Decks[3] = deck
 		for i=1, getn( EB_CurrentActions[deck]) do
 			image = EB_CurrentActions[deck][i].image;
 			getglobal(EmoteButtons_RightWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
 		end
 	elseif wing =="FarLeft" then
-		EmoteButtons_FarLeftWing_Deck = deck
+		EmoteButtons_Wings_Decks[4] = deck
 		for i=1, getn( EB_CurrentActions[deck]) do
 			image = EB_CurrentActions[deck][i].image;
 			getglobal(EmoteButtons_FarLeftWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
 		end
 	elseif wing =="FarRight" then
-		EmoteButtons_FarRightWing_Deck = deck
+		EmoteButtons_Wings_Decks[5] = deck
 		for i=1, getn( EB_CurrentActions[deck]) do
 			image = EB_CurrentActions[deck][i].image;
 			getglobal(EmoteButtons_FarRightWing[i].."_Icon"):SetTexture("Interface\\Icons\\"..image)
@@ -787,9 +708,9 @@ function EmoteButtons_ShowTooltip(framename)
 			end
 		end
 		if found~=0 then
-			tooltip = EB_CurrentActions[EmoteButtons_LeftWing_Deck][found].tooltip;
-			action = EB_CurrentActions[EmoteButtons_LeftWing_Deck][found].action;
-			acttype = EB_CurrentActions[EmoteButtons_LeftWing_Deck][found].type;
+			tooltip = EB_CurrentActions[EmoteButtons_Wings_Decks[2]][found].tooltip;
+			action = EB_CurrentActions[EmoteButtons_Wings_Decks[2]][found].action;
+			acttype = EB_CurrentActions[EmoteButtons_Wings_Decks[2]][found].type;
 			anchor = "ANCHOR_BOTTOMLEFT"
 			x = -30;
 		else
@@ -800,9 +721,9 @@ function EmoteButtons_ShowTooltip(framename)
 			end
 
 			if found ~=0 then
-				tooltip = EB_CurrentActions[EmoteButtons_RightWing_Deck][found].tooltip;
-				action = EB_CurrentActions[EmoteButtons_RightWing_Deck][found].action;
-				acttype = EB_CurrentActions[EmoteButtons_RightWing_Deck][found].type;
+				tooltip = EB_CurrentActions[EmoteButtons_Wings_Decks[3]][found].tooltip;
+				action = EB_CurrentActions[EmoteButtons_Wings_Decks[3]][found].action;
+				acttype = EB_CurrentActions[EmoteButtons_Wings_Decks[3]][found].type;
 				anchor = "ANCHOR_BOTTOMRIGHT"
 				x = 30;
 			else
@@ -814,9 +735,9 @@ function EmoteButtons_ShowTooltip(framename)
 				end
 				
 				if found ~=0 then
-					tooltip = EB_CurrentActions[EmoteButtons_FarLeftWing_Deck][found].tooltip;
-					action = EB_CurrentActions[EmoteButtons_FarLeftWing_Deck][found].action;
-					acttype = EB_CurrentActions[EmoteButtons_FarLeftWing_Deck][found].type;
+					tooltip = EB_CurrentActions[EmoteButtons_Wings_Decks[4]][found].tooltip;
+					action = EB_CurrentActions[EmoteButtons_Wings_Decks[4]][found].action;
+					acttype = EB_CurrentActions[EmoteButtons_Wings_Decks[4]][found].type;
 					anchor = "ANCHOR_BOTTOMLEFT"
 					x = -30;
 				else
@@ -827,9 +748,9 @@ function EmoteButtons_ShowTooltip(framename)
 					end
 					
 					if found ~=0 then
-						tooltip = EB_CurrentActions[EmoteButtons_FarRightWing_Deck][found].tooltip;
-						action = EB_CurrentActions[EmoteButtons_FarRightWing_Deck][found].action;
-						acttype = EB_CurrentActions[EmoteButtons_FarRightWing_Deck][found].type;
+						tooltip = EB_CurrentActions[EmoteButtons_Wings_Decks[5]][found].tooltip;
+						action = EB_CurrentActions[EmoteButtons_Wings_Decks[5]][found].action;
+						acttype = EB_CurrentActions[EmoteButtons_Wings_Decks[5]][found].type;
 						anchor = "ANCHOR_BOTTOMLEFT"
 						x = -30;
 					end
@@ -912,18 +833,18 @@ function EmoteButtons_CloseOpenDecks()
 		EmoteButtons_FirstLevelName == deck) then
 		EmoteButtons_ToggleFirstLevel();
 	elseif(EmoteButtons_Levels["FarLeft"] and 
-		EmoteButtons_FarLeftWing_Deck==deck) then 
+		EmoteButtons_Wings_Decks[4]==deck) then 
 		--EmoteButtons_ToggleWing("Left");
 		EmoteButtons_ToggleWing("FarLeft");
 	elseif (EmoteButtons_Levels["Left"] and 
-			EmoteButtons_LeftWing_Deck==deck) then 
+			EmoteButtons_Wings_Decks[2]==deck) then 
 		EmoteButtons_ToggleWing("Left");
 	elseif (EmoteButtons_Levels["FarRight"] and
-		EmoteButtons_FarRightWing_Deck==deck) then 
+		EmoteButtons_Wings_Decks[5]==deck) then 
 		--EmoteButtons_ToggleWing("Right");
 		EmoteButtons_ToggleWing("FarRight");
 	elseif (EmoteButtons_Levels["Right"] and
-			EmoteButtons_RightWing_Deck==deck) then
+			EmoteButtons_Wings_Decks[3]==deck) then
 		EmoteButtons_ToggleWing("Right");
 	end
 end

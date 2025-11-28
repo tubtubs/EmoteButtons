@@ -518,21 +518,9 @@ function IconPickerOkayButton_OnClick()
     icon = l[n]
 
     EB_CurrentActions[deck][button].image = icon
-	if EmoteButtons_FarLeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarLeft");
-	elseif EmoteButtons_FarRightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "FarRight");
-	elseif EmoteButtons_LeftWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Left");
-	elseif EmoteButtons_RightWing_Deck==deck then
-		EmoteButtons_LoadDeck(deck, "Right");
-	elseif EmoteButtons_FirstLevelName == deck then
-		EmoteButtons_LoadDeck(deck, "");
-	end
+    EmoteButtons_ReloadDeck(deck)
 	EB_CurrentActions[deck][button].tooltip = 	IconPickerEditBox:GetText();
-	if DeckBuilderFrame:IsShown() then
-		DeckBuilderFrame_UpdateActions();
-	end
+    DeckBuilderFrame_UpdateActions();
 	IconPickerFrame:Hide();
 end
 
