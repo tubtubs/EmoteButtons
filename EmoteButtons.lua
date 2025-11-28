@@ -21,7 +21,15 @@ All new layout, featuring 250+ emotes and slash commands, and macros
 TODO:
 ***Readme.md
 ***Clean up code, look into isolating icon picker into it's own addon. Will need wrapper functions.
+Clean up EmoteButtons.lua
+-DeckBuilder.lua
+-DeckBuilder.xml
+--Include all the relevant code, and frames. Delete replaced old frames.
+--Deprecate EmoteButtonsConfig.xml
 Make a 2nd reset, reset and default
+
+NOTE: Only seems to lag with larger deck sizes. (open wings)
+	--probably about how the deck lookup is handled, not fading
 	DEFAULT_CHAT_FRAME:AddMessage("TEST")
 ]]--
 
@@ -167,6 +175,26 @@ function EmoteButtons_Reset()
 	EmoteButtons_ToggleFirstLevel();
 	EmoteButtons_WipeVars();
 end
+
+function EmoteButtons_ToggleWing(wing)
+	local i=0
+	local obj;
+	local wc=getglobal("EmoteButtons_"..wing.."Wing")
+	local deck = getglobal("EmoteButtons_"..wing.."Wing_Deck")
+	local lwc = getn(wc);
+	for i=1, lwc do
+		obj = getglobal(wc[i]);
+		if (EmoteButtons_Levels[wing]) then
+			FadeOutFrame(obj, 0.1*i);
+		elseif (EB_CurrentActions[deck][i]~=nil and 
+		EB_CurrentActions[deck][i].action~=nil) then
+			FadeInFrame(obj,0.15*(lwc-i));
+		end
+	end
+	--flip the flag on the way out
+	EmoteButtons_Levels[wing] = not EmoteButtons_Levels[wing]
+end
+
 
 function EmoteButtons_Init()
 	local i;
@@ -449,25 +477,6 @@ function EmoteButtons_ToggleFirstLevel()
 		end
 	end
 	EmoteButtons_Levels["Main"] = not EmoteButtons_Levels["Main"]
-end
-
-function EmoteButtons_ToggleWing(wing)
-	local i=0
-	local obj;
-	local wc=getglobal("EmoteButtons_"..wing.."Wing")
-	local deck = getglobal("EmoteButtons_"..wing.."Wing_Deck")
-	local lwc = getn(wc);
-	for i=1, lwc do
-		obj = getglobal(wc[i]);
-		if (EmoteButtons_Levels[wing]) then
-			FadeOutFrame(obj, 0.1*i);
-		elseif (EB_CurrentActions[deck][i]~=nil and 
-		EB_CurrentActions[deck][i].action~=nil) then
-			FadeInFrame(obj,0.15*(lwc-i));
-		end
-	end
-	--flip the flag on the way out
-	EmoteButtons_Levels[wing] = not EmoteButtons_Levels[wing]
 end
 
 function EmoteButtons_FadeWing(wing)
@@ -873,6 +882,29 @@ function EmoteButtons_HideTooltip()
 	GameTooltip:Hide();
 end
 
+function EmoteButtons_OpenDeckBuilder()
+	DeckBuilderFrame:Show();
+	DeckBuilderFrame_ScrollToSelected();
+	IconPickerFrame:Hide();
+	EmoteButtons_ChangeCMDFrame:Hide(); 
+end
+
+--Rotation and size slider
+function EmoteButtons_SliderChanged(sender, units)
+	local val = "err";
+	if sender=="EmoteButtons_AdvancedConfigFrame_SetMainShift" then
+		val = EmoteButtons_AdvancedConfigFrame_SetMainShift:GetValue();
+		EmoteButtons_Vars.Main_Shift = val;
+		EmoteButtons_Vars.Wing_Shift = val;
+	else
+		val = EmoteButtons_AdvancedConfigFrame_SetMainSize:GetValue();
+		EmoteButtons_Vars.Main_Ratio = val;
+	end
+	getglobal(sender.."Value"):SetText(val..units);
+	EmoteButtons_ArrangeFrames();
+
+end
+
 function EmoteButtons_CloseOpenDecks()
 	local deck = EmoteButtons_ConfigDeck;
 	EmoteButtons_SaveOpenDecks();
@@ -881,6 +913,7 @@ function EmoteButtons_CloseOpenDecks()
 		EmoteButtons_ToggleFirstLevel();
 	elseif(EmoteButtons_Levels["FarLeft"] and 
 		EmoteButtons_FarLeftWing_Deck==deck) then 
+		--EmoteButtons_ToggleWing("Left");
 		EmoteButtons_ToggleWing("FarLeft");
 	elseif (EmoteButtons_Levels["Left"] and 
 			EmoteButtons_LeftWing_Deck==deck) then 

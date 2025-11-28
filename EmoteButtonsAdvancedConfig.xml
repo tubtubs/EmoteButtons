@@ -1,6 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <Script file="EmoteButtonsAdvancedConfig.lua"/>
-    <!-- Advanced Config-->
+	<Include file="EmoteButtonsAdvancedConfig.lua"/>
+	<!-- Advanced Config-->
     <!-- Slider with the value shown, virtual, saved from TargetButtons -->
     <Slider name="EBSliderTemp" inherits="OptionsSliderTemplate" virtual="true">
 		<Layers>
@@ -215,7 +215,7 @@
 				</Anchors>
 				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, EmoteButtons_AdvancedConfigFrame_ProfileSetDropDown_OnShow);
+                       UIDropDownMenu_Initialize(self, EmoteButtons_ProfileSetDropDown_OnShow);
                    </OnShow>
 					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick();
@@ -232,7 +232,7 @@
 				</Anchors>
 				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropDown_OnShow);
+                       UIDropDownMenu_Initialize(self, EmoteButtons_ProfileDeleteDropDown_OnShow);
                    </OnShow>
 					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick();
@@ -249,7 +249,7 @@
 				</Anchors>
 				<Scripts>
 					<OnShow>
-                       UIDropDownMenu_Initialize(self, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropDown_OnShow);
+                       UIDropDownMenu_Initialize(self, EmoteButtons_ProfileDuplicateDropDown_OnShow);
                    </OnShow>
 					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick();

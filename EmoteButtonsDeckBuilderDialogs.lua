@@ -269,7 +269,29 @@ function DeckManagerFrameDeckButton_OnClick()
 	DeckManagerFrame_Update();
 end 
 
---ChangeCMD Frame--
+function EmoteButtons_ChangeCMDFrame_OnShow()
+    DeckManagerFrame:Hide();
+	IconPickerFrame:Hide();
+    EB_EmotesManager:Hide();
+	local deck = EmoteButtons_ConfigDeck;
+	local button = EmoteButtons_ConfigButton;
+	len = getn(EB_CurrentActions[deck])
+	if len < button or EB_CurrentActions[deck][button].type ~= EBACTTYPE_SLASHCMD then
+		EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:SetText("");
+	elseif (EB_CurrentActions[deck][button].type == EBACTTYPE_SLASHCMD) then
+		act = EB_CurrentActions[deck][button].action
+		EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:SetText(act);
+	end
+end
+
+function EmoteButtons_ChangeCMDFrame_SubmitButton_Update()
+	txt = EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:GetText();
+	if string.len(txt) > 0 then
+		EmoteButtons_ChangeCMDFrame_SubmitButton:Enable();
+	else
+		EmoteButtons_ChangeCMDFrame_SubmitButton:Disable();
+	end
+end
 
 function EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick()
 	local deck = EmoteButtons_ConfigDeck;
@@ -289,25 +311,4 @@ function EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick()
 	end
 	EmoteButtons_ReloadDeck(deck);
 	EmoteButtons_ChangeCMDFrame:Hide();
-end
-
-function EmoteButtons_ChangeCMDFrame_OnShow()
-	local deck = EmoteButtons_ConfigDeck;
-	local button = EmoteButtons_ConfigButton;
-	len = getn(EB_CurrentActions[deck])
-	if len < button or EB_CurrentActions[deck][button].type ~= EBACTTYPE_SLASHCMD then
-		EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:SetText("");
-	elseif (EB_CurrentActions[deck][button].type == EBACTTYPE_SLASHCMD) then
-		act = EB_CurrentActions[deck][button].action
-		EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:SetText(act);
-	end
-end
-
-function EmoteButtons_ChangeCMDFrame_SubmitButton_Update()
-	txt = EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:GetText();
-	if string.len(txt) > 0 then
-		EmoteButtons_ChangeCMDFrame_SubmitButton:Enable();
-	else
-		EmoteButtons_ChangeCMDFrame_SubmitButton:Disable();
-	end
 end

@@ -482,8 +482,9 @@ function IconPickerFrame_OnShow()
 	end ]]--
     IconPickerUncheckAllCategories()
     IconPickerCheckSelectedCategory()
-	HideAllPopupsFrames()
+	EmoteButtons_HideAllPopups()
 	DeckManagerFrame:Hide();
+    EmoteButtons_ChangeCMDFrame:Hide();
 	EB_EmotesManager:Hide();
 end
 

@@ -1,5 +1,12 @@
---DeckBuilder functions
---Functions relating to Deck config and modification
+function EmoteButtons_AddButton(deck, act, acttype, tip)
+	EmoteButtons_CloseOpenDecks();
+	a = {action=act, type=acttype, 
+		 tooltip=tip, image=IconPickerRandomIcon()}
+	table.insert(EB_CurrentActions[deck], a);
+	DeckBuilderFrameButtons_Update();
+	DeckBuilderFrame_UpdateActions();
+	EmoteButtons_ReOpenDecks();
+end
 
 function EmoteButtons_ReloadDeck(deck)
 	if EmoteButtons_FarLeftWing_Deck==deck then
@@ -15,37 +22,16 @@ function EmoteButtons_ReloadDeck(deck)
 	end
 end
 
-function EmoteButtons_AddButton(deck, act, acttype, tip)
-	EmoteButtons_CloseOpenDecks();
-	a = {action=act, type=acttype, 
-		 tooltip=tip, image=IconPickerRandomIcon()}
-	table.insert(EB_CurrentActions[deck], a);
-	DeckBuilderFrameButtons_Update();
-	DeckBuilderFrame_UpdateActions();
-	EmoteButtons_ReOpenDecks();
-end
-
-function EmoteButtons_HideAllPopupsFrames()
-	StaticPopup_Hide ("EMOTEBUTTONS_CHANGECOMMAND")
+function EmoteButtons_HideAllPopups()
 	StaticPopup_Hide ("EMOTEBUTTONS_DELETE_DECK_CONFIRMATION")
-	StaticPopup_Hide ("EMOTEBUTTONS_CHANGETOOLTIP")
-	StaticPopup_Hide ("EMOTEBUTTONS_REEMOTEBUTTONS_SET_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_NEWDECK")
+	StaticPopup_Hide ("EMOTEBUTTONS_RENAMEDECK")
 	StaticPopup_Hide ("EMOTEBUTTONS_NEWPROFILE")
 	StaticPopup_Hide ("EMOTEBUTTONS_DUPLICATEPROFILE")
 	StaticPopup_Hide ("EMOTEBUTTONS_DELETE_PROFILE_CONFIRMATION")
+	StaticPopup_Hide ("EMOTEBUTTONS_RESET_PROFILE_CONFIRMATION")
 	StaticPopup_Hide ("EMOTEBUTTONS_SET_PROFILE_CONFIRMATION")
-	StaticPopup_Hide ("EMOTEBUTTONS_NEWDECK")
-	StaticPopup_Hide ("EMOTEBUTTONS_SET_PROFILE_CONFIRMATION")
-	StaticPopup_Hide ("EMOTEBUTTONS_RENAMEDECK")
 end
-
-function EmoteButtons_OpenDeckBuilder()
-	DeckBuilderFrame:Show();
-	DeckBuilderFrame_ScrollToSelected();
-	IconPickerFrame:Hide();
-	EmoteButtons_ChangeCMDFrame:Hide(); 
-end
-
 -- Deck Builder --
 
 function DeckBuilderFrame_ScrollToSelected()
@@ -76,7 +62,7 @@ function DeckBuilderFrame_OnShow()
 end
 
 function DeckBuilderFrame_OnHide()
-	EmoteButtons_HideAllPopupsFrames();
+	EmoteButtons_HideAllPopups();
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
@@ -95,7 +81,7 @@ function DeckBuilderFrameDeckActionButton_OnClick()
 	DeckManagerFrame:Hide();
 	IconPickerFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EmoteButtons_HideAllPopupsFrames();
+	EmoteButtons_HideAllPopups();
 	DeckBuilderFrameButtons_Update();
 	DeckBuilderFrame_Update();
 end
@@ -109,7 +95,7 @@ function DeckBuilderFrameDeckButton_OnClick()
 	DeckManagerFrame:Hide();
 	IconPickerFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EmoteButtons_HideAllPopupsFrames();
+	EmoteButtons_HideAllPopups();
 	DeckBuilderFrame_UpdateActions(found);
 	DeckBuilderFrameButtons_Update() 
 	DeckBuilderFrame_Update();
@@ -381,7 +367,7 @@ function DeckBuilderFrame_MoveUpButton_OnClick()
 	EmoteButtons_CloseOpenDecks();
 	EmoteButtons_ReOpenDecks();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EmoteButtons_HideAllPopupsFrames()
+	EmoteButtons_HideAllPopups()
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
@@ -401,7 +387,7 @@ function DeckBuilderFrame_MoveDownButton_OnClick()
 	EmoteButtons_CloseOpenDecks();
 	EmoteButtons_ReOpenDecks();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	EmoteButtons_HideAllPopupsFrames()
+	EmoteButtons_HideAllPopups()
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();

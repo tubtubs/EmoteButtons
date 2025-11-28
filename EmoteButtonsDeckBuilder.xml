@@ -1,7 +1,5 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-	<Include file="EmoteButtonsDeckBuilderDialogs.xml"/>
-    <Script file="EmoteButtonsDeckBuilder.lua"/>
-    <Script file="EmoteButtonsDeckBuilderDialogs.lua"/>
+	<Include file="EmoteButtonsDeckBuilder.lua"/>
 
     <!-- Some parts originally created by Quipper, using wowuides or handwritten-->
 	<!-- Virtual button, easy to use, made from wowuides code -->
