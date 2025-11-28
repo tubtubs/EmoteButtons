@@ -92,9 +92,9 @@ EmoteButtons_Wings = {"", "FarLeft","FarRight","FarLeft","FarRight"}
 EmoteButtons_FirstLevelName = "Main"; -- Still need this constant, it's special as first level.
 EmoteButtons_Wings_Decks = {EmoteButtons_FirstLevelName,
 							"#0", 	--Left
-							"#0",    --Right
-							"#0",  --FarLeft
-							"#0"} --FarRight
+							"#0",   --Right
+							"#0",  	--FarLeft
+							"#0"} 	--FarRight
 
 --Levels of emotes shown (which wings, if any are open)
 EmoteButtons_Levels={["Main"]=false,["Left"]=false, ["Right"]=false,
@@ -685,79 +685,36 @@ function EmoteButtons_ShowTooltip(framename)
 	local action = "";
 	local setup = EMOTEBUTTONS_SETTINGSWARN;
 	local fulltext = "";
-	for i=1, EmoteButtons_FirstLevelCount do
-		if EmoteButtons_FirstLevel[i] == framename then
-			found = i;
-		end
-	end
-	if found~=0 then
-		tooltip = EB_CurrentActions[EmoteButtons_FirstLevelName][found].tooltip;
-		action = EB_CurrentActions[EmoteButtons_FirstLevelName][found].action;
-		acttype = EB_CurrentActions[EmoteButtons_FirstLevelName][found].type;
-		if found>floor(EmoteButtons_FirstLevelCount/2) then
+
+	local f = tonumber(string.sub(framename,14,14))
+	local g = tonumber(string.sub(framename,15,15))
+	deck = EmoteButtons_Wings_Decks[f+1]
+	side = EmoteButtons_Wings[f+1]
+	if side == "" then
+		if g < 5 then
+			anchor = "ANCHOR_BOTTOMLEFT"
+			x = -30;
+		else
 			anchor = "ANCHOR_BOTTOMRIGHT"
 			x = 30;
-		else
-			anchor = "ANCHOR_BOTTOMLEFT"
-			x = -30;
 		end
-	else
-		for i=1, EmoteButtons_LeftWingCount do
-			if EmoteButtons_LeftWing[i] == framename then
-				found = i;
-			end
-		end
-		if found~=0 then
-			tooltip = EB_CurrentActions[EmoteButtons_Wings_Decks[2]][found].tooltip;
-			action = EB_CurrentActions[EmoteButtons_Wings_Decks[2]][found].action;
-			acttype = EB_CurrentActions[EmoteButtons_Wings_Decks[2]][found].type;
-			anchor = "ANCHOR_BOTTOMLEFT"
-			x = -30;
-		else
-			for i=1, EmoteButtons_RightWingCount do
-				if EmoteButtons_RightWing[i] == framename then
-					found = i;
-				end
-			end
-
-			if found ~=0 then
-				tooltip = EB_CurrentActions[EmoteButtons_Wings_Decks[3]][found].tooltip;
-				action = EB_CurrentActions[EmoteButtons_Wings_Decks[3]][found].action;
-				acttype = EB_CurrentActions[EmoteButtons_Wings_Decks[3]][found].type;
-				anchor = "ANCHOR_BOTTOMRIGHT"
-				x = 30;
-			else
-
-				for i=1, EmoteButtons_FarLeftWingCount do
-					if EmoteButtons_FarLeftWing[i] == framename then
-						found = i;
-					end
-				end
-				
-				if found ~=0 then
-					tooltip = EB_CurrentActions[EmoteButtons_Wings_Decks[4]][found].tooltip;
-					action = EB_CurrentActions[EmoteButtons_Wings_Decks[4]][found].action;
-					acttype = EB_CurrentActions[EmoteButtons_Wings_Decks[4]][found].type;
-					anchor = "ANCHOR_BOTTOMLEFT"
-					x = -30;
-				else
-					for i=1, EmoteButtons_FarRightWingCount do
-						if EmoteButtons_FarRightWing[i] == framename then
-							found = i;
-						end
-					end
-					
-					if found ~=0 then
-						tooltip = EB_CurrentActions[EmoteButtons_Wings_Decks[5]][found].tooltip;
-						action = EB_CurrentActions[EmoteButtons_Wings_Decks[5]][found].action;
-						acttype = EB_CurrentActions[EmoteButtons_Wings_Decks[5]][found].type;
-						anchor = "ANCHOR_BOTTOMLEFT"
-						x = -30;
-					end
-				end	
-			end	
-		end
+	elseif side=="Left" then
+		anchor = "ANCHOR_BOTTOMLEFT"
+		x = -30;
+	elseif side=="FarLeft" then
+		anchor = "ANCHOR_BOTTOMLEFT"
+		x = -30;
+	elseif side=="Right" then
+		anchor = "ANCHOR_BOTTOMRIGHT"
+		x = 30;
+	elseif side=="FarRight" then
+		anchor = "ANCHOR_BOTTOMRIGHT"
+		x = 30;
 	end
+	btn = EB_CurrentActions[deck][g];
+	action = btn.action;
+	tooltip = btn.tooltip;
+	acttype = btn.type;
 
 	if (acttype == EBACTTYPE_EMOTE) then
 		trg = UnitName("target");
@@ -771,15 +728,10 @@ function EmoteButtons_ShowTooltip(framename)
 			end
 		end
 		if (found ~= 0 and EB_EmoteList[found] and trg and trg ~= plr) then
-			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. trg;
 			action = format(EB_EmoteList[found].TargetEmoteText,trg)
-			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. format(EB_EmoteList[found].TargetEmoteText,trg);
 		else
-			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. "EMOTE";
 			action = EB_EmoteList[found].SelfEmoteText
-			--fulltext = "|cFFFFFFFF"..tooltip.."|n|r".. EB_EmoteList[found].SelfEmoteText;
 		end
-
 	end
 	--prioritizes showing a tooltip instead of CMD or emote text
 	if string.len(tooltip) == 0 then
