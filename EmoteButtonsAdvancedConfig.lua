@@ -213,7 +213,12 @@ function EmoteButtons_ResetProfile()
 	button1 = "Yes",
 	button2 = "No",
 	OnAccept = function()
-		EmoteButtons_Vars.Profiles[index].Decks = EMOTEBUTTONS_T;
+
+		if (EmoteButtons_Vars.PMode==EB_VANILLA) then
+			EmoteButtons_Vars.Profiles[index].Decks = EMOTEBUTTONS_VT;
+		elseif (EmoteButtons_Vars.PMode==EB_EXTENDED) then
+			EmoteButtons_Vars.Profiles[index].Decks = EMOTEBUTTONS_ET;
+		end
 		EB_CurrentActions = EmoteButtons_Vars.Profiles[index].Decks;
 		ReloadUI();
 	end,

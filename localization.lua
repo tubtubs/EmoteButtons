@@ -54,7 +54,7 @@ EMOTEBUTTONS_DELETEDECK = "Delete Deck"
 EMOTEBUTTONS_MOVEUP = "Move Up"
 EMOTEBUTTONS_MOVEDOWN = "Move Down"
 EMOTEBUTTONS_DELETEBUTTON = "Delete Button"
-EMOTEBUTTONS_INVALIDEMOTE = "Invalid emote...\nMay need to disable extended mode \nin advanced options, or check patches."
+EMOTEBUTTONS_INVALIDEMOTE = "Invalid emote...\nMay need to enable extended mode \nin advanced options, or change emote."
 
 --Advanced Config Strings
 EMOTEBUTTONS_ADVANCEDCONFIG = "Advanced Config"
