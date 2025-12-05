@@ -8,8 +8,6 @@ Shift click a button, or type /eb for more options.
 
 TODO:
 *Isolate IconPicker to its own Addon
-*Maybe add camp fire to Misc professions icons
-*Bleed and charge don't show tooltip when selecting someone
 ]]--
 
 
