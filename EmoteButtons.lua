@@ -9,6 +9,7 @@ Shift click a button, or type /eb for more options.
 TODO:
 *Isolate IconPicker to its own Addon
 *Maybe add camp fire to Misc professions icons
+*Bleed and charge don't show tooltip when selecting someone
 ]]--
 
 
@@ -89,6 +90,7 @@ EmoteButtons_ConfigButton = 0;
 EmoteButtons_DeckList={}
 
 EB_CurrentActions = {} --Taking out of saved variables for easier reference
+EB_EmoteList = {}
 
 -- chat inputs
 local function TextMenu(arg)
@@ -103,6 +105,10 @@ local function TextMenu(arg)
 			EmoteButtons_AdvancedConfigFrame:Show();
 		elseif arg == "deckbuilder" then
 			EmoteButtons_OpenDeckBuilder()
+		elseif arg=="mode extended" then
+			EmoteButtons_ExtendedMode()
+		elseif arg=="mode vanilla" then
+			EmoteButtons_VanillaMode()
 		else
 			DEFAULT_CHAT_FRAME:AddMessage(EMOTEBUTTONS_SLASHUNKNOWN,1,0.3,0.3);
 		end
@@ -117,33 +123,81 @@ local function sort_alphabetical(a, b)
 	return a < b
 end
 
+function EmoteButtons_VanillaMode()
+	EmoteButtons_Vars.PMode=EB_VANILLA
+	EB_EmoteList = EB_VanillaEmoteList;
+	DEFAULT_CHAT_FRAME:AddMessage("EmoteButtons changed to vanilla mode.")
+end
+
+function EmoteButtons_ExtendedMode()
+	EmoteButtons_Vars.PMode=EB_EXTENDED
+	EB_EmoteList = EB_ExtendedEmoteList;
+	DEFAULT_CHAT_FRAME:AddMessage("EmoteButtons changed to extended mode.")
+end
+
 function EmoteButtons_ResetPosition()
 	EmoteButtons_Main:ClearAllPoints()
 	EmoteButtons_Main:SetPoint("CENTER", UIParent ,"CENTER", 0, 0)
 end
 
 function EmoteButtons_WipeVars()
-	if not EmoteButtons_Vars then
-		EmoteButtons_Vars = {
-			Main_Ratio = 42,
-			Main_Shift = 0,
-			Wing_Shift = 0,
-			Profiles = EMOTEBUTTONS_PROFILES,
-			Profile=EMOTEBUTTONS_PROFILES[1].Name,
-			PIndex=1;
-		};
-	elseif not EmoteButtons_Vars.PIndex then --compatability for V1
-		EmoteButtons_Vars = {
-			Main_Ratio = 42,
-			Main_Shift = 0,
-			Wing_Shift = 0,
-			Profiles = EMOTEBUTTONS_PROFILES,
-			Profile=EMOTEBUTTONS_PROFILES[1].Name,
-			PIndex=1;
-		};
-		
+	r = GetRealmName()
+	find = 0
+	find = string.find(r,"Wallcraft")
+	if find==nil then
+		DEFAULT_CHAT_FRAME:AddMessage("EmoteButtons: Standard vanilla server detected...")
+		if not EmoteButtons_Vars then
+			EmoteButtons_Vars = {
+				Main_Ratio = 42,
+				Main_Shift = 0,
+				Wing_Shift = 0,
+				Profiles = EMOTEBUTTONS_PROFILES,
+				Profile=EMOTEBUTTONS_PROFILES[1].Name,
+				PMode=EB_VANILLA,
+				PIndex=1;
+			};
+		elseif not EmoteButtons_Vars.PMode then --compatability for V1
+			EmoteButtons_Vars = {
+				Main_Ratio = 42,
+				Main_Shift = 0,
+				Wing_Shift = 0,
+				Profiles = EMOTEBUTTONS_PROFILES,
+				Profile=EMOTEBUTTONS_PROFILES[1].Name,
+				PMode=EB_VANILLA,
+				PIndex=1;
+			};
+		end
+	else 
+		DEFAULT_CHAT_FRAME:AddMessage("EmoteButtons: Extended vanilla server detected...")
+		if not EmoteButtons_Vars then
+			EmoteButtons_Vars = {
+				Main_Ratio = 42,
+				Main_Shift = 0,
+				Wing_Shift = 0,
+				Profiles = EMOTEBUTTONS_PROFILES,
+				Profile=EMOTEBUTTONS_PROFILES[2].Name,
+				PMode=EB_EXTENDED,
+				PIndex=2;
+			};
+		elseif not EmoteButtons_Vars.PMode then --compatability for V1
+			EmoteButtons_Vars = {
+				Main_Ratio = 42,
+				Main_Shift = 0,
+				Wing_Shift = 0,
+				Profiles = EMOTEBUTTONS_PROFILES,
+				Profile=EMOTEBUTTONS_PROFILES[2].Name,
+				PMode=EB_EXTENDED,
+				PIndex=2;
+			};
+		end
 	end
 
+		
+	if (EmoteButtons_Vars.PMode==EB_VANILLA) then
+		EB_EmoteList = EB_VanillaEmoteList;
+	elseif (EmoteButtons_Vars.PMode==EB_EXTENDED) then
+		EB_EmoteList = EB_ExtendedEmoteList;
+	end
 	--populate deck list
 	EmoteButtons_DeckList = {}
 	for i, v in pairs(EB_CurrentActions) do
@@ -666,10 +720,14 @@ function EmoteButtons_ShowTooltip(framename)
 		end
 		if (found ~= 0 and EB_EmoteList[found] and trg and trg ~= plr) then
 			action = format(EB_EmoteList[found].TargetEmoteText,trg)
+		elseif(found==0) then
+			action = EMOTEBUTTONS_INVALIDEMOTE 
 		else
 			action = EB_EmoteList[found].SelfEmoteText
 		end
 		if string.len(action) == 0 and string.len(tooltip) == 0 then --some emotes have no text
+			action = EB_EmoteList[found].SelfEmoteText
+		elseif string.len(action) == 0 then
 			action = EB_EmoteList[found].Name;
 		end
 	end

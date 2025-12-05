@@ -1,4 +1,4 @@
-EB_EmoteList = {
+EB_ExtendedEmoteList = {
   {
     Name = "ABSENT",
     SelfEmoteText = "You look absent-minded.",

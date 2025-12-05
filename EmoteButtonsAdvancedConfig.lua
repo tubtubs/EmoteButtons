@@ -37,6 +37,12 @@ function EmoteButtons_DeleteProfile(index)
 end
 
 function EmoteButtons_AdvancedConfigFrame_OnShow()
+	if EmoteButtons_Vars.PMode==EB_VANILLA then
+		EmoteButtons_AdvancedConfigFrame_ExtendedModeCheckButton:SetChecked(0)
+	elseif EmoteButtons_Vars.PMode==EB_EXTENDED then
+		EmoteButtons_AdvancedConfigFrame_ExtendedModeCheckButton:SetChecked(1)
+	end
+
 	DeckBuilderFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
 	EmoteButtons_HideAllPopups()
@@ -319,4 +325,12 @@ function EmoteButtons_ExportProfile()
 							EmoteButtons_Vars.Profile)
 	EmoteButtons_ExportProfileFrame_ScrollFrame_ExportEditBox:SetText(TempDecks..TempProfile)
 	EmoteButtons_ExportProfileFrame:Show();
+end
+
+function EmoteButtons_AdvancedConfigFrame_ExtendedModeCheckButton_OnClick()
+	if EmoteButtons_Vars.PMode==EB_VANILLA then
+		EmoteButtons_ExtendedMode()
+	elseif EmoteButtons_Vars.PMode==EB_EXTENDED then
+		EmoteButtons_VanillaMode()
+	end
 end
