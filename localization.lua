@@ -25,7 +25,7 @@ EMOTEBUTTONS_MAINHELP		= "|cFFFFFFFF"..EMOTEBUTTONS_NAME.."|n|n|r".."Right-click
 
 EMOTEBUTTONS_SLASHHELP = [[|cFF00FF00Emote Buttons:|r This is help topic for |cFFFFFF00 /EmoteButtons or /EB.|r
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons deckbuilder|r - opens the deckbuilder.
-|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons mode extended |r - changes to extended mode (emote list)
+|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons mode extended |r - changes to extended mode (emote list). Extended mode is only works on servers that support extended emotes.
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons mode vanilla |r - changes to vanilla mode (emote list)
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons options|r - opens the advanced config window.
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetposition|r - resets position of the main button.
@@ -68,6 +68,7 @@ EMOTEBUTTONS_DELETEPROFILE = "Delete Profile"
 EMOTEBUTTONS_DUPLICATEPROFILE = "Duplicate Profile" 
 EMOTEBUTTONS_CREATEPROFILE = "Create Profile"
 EMOTEBUTTONS_EXTENDEDMODE = "Extended Mode (more emotes)"
+EMOTEBUTTONS_EXTENDEDMODETIP = "Only works on supported servers, use Default - Extended Profile with this enabled.\nIf emotes don't work, check patch installation and if this server supports it."
 
 --Modes
 EB_VANILLA = 1

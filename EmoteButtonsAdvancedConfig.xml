@@ -241,6 +241,14 @@
 					<OnClick>
 					EmoteButtons_AdvancedConfigFrame_ExtendedModeCheckButton_OnClick();
 					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_EXTENDEDMODETIP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</CheckButton>
 

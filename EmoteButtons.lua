@@ -143,7 +143,7 @@ function EmoteButtons_WipeVars()
 	find = 0
 	find = string.find(r,"Wallcraft")
 	if find==nil then
-		DEFAULT_CHAT_FRAME:AddMessage("EmoteButtons: Standard vanilla server detected...")
+		--DEFAULT_CHAT_FRAME:AddMessage("EmoteButtons: Standard vanilla server detected...")
 		if not EmoteButtons_Vars then
 			EmoteButtons_Vars = {
 				Main_Ratio = 42,
@@ -166,7 +166,7 @@ function EmoteButtons_WipeVars()
 			};
 		end
 	else 
-		DEFAULT_CHAT_FRAME:AddMessage("EmoteButtons: Extended vanilla server detected...")
+		--DEFAULT_CHAT_FRAME:AddMessage("EmoteButtons: Extended vanilla server detected...")
 		if not EmoteButtons_Vars then
 			EmoteButtons_Vars = {
 				Main_Ratio = 42,
