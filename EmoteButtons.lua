@@ -138,6 +138,7 @@ function EmoteButtons_ResetPosition()
 	EmoteButtons_Main:SetPoint("CENTER", UIParent ,"CENTER", 0, 0)
 end
 
+function EmoteButtons_ToggleFade()
 	EmoteButtons_Vars.DisableFade = not EmoteButtons_Vars.DisableFade; 
 end
 
