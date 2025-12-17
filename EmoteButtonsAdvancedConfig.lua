@@ -43,6 +43,12 @@ function EmoteButtons_AdvancedConfigFrame_OnShow()
 		EmoteButtons_AdvancedConfigFrame_ExtendedModeCheckButton:SetChecked(1)
 	end
 
+	if EmoteButtons_Vars.DisableFade==false then
+		EmoteButtons_AdvancedConfigFrame_DisableFadeCheckButton:SetChecked(1)
+	elseif EmoteButtons_Vars.DisableFade==true then
+		EmoteButtons_AdvancedConfigFrame_DisableFadeCheckButton:SetChecked(0)
+	end
+
 	DeckBuilderFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
 	EmoteButtons_HideAllPopups()

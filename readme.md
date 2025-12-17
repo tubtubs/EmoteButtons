@@ -10,7 +10,7 @@ Adds an expanding menu system that grants access to emotes, slash commands and m
 
 You can also use the [GitAddonsManager](https://gitlab.com/woblight/GitAddonsManager) to install this addon.
 
--If there are any further issues with installation, ensure that *VanillaStoryline.toc* is in the root folder. There should be no subdirectories. Eg: *C:\Games\WoW\Interface\Addons\EmoteButtons\EmoteButtons.toc*
+-If there are any further issues with installation, ensure that *EmoteButtons.toc* is in the root folder. There should be no subdirectories. Eg: *C:\Games\WoW\Interface\Addons\EmoteButtons\EmoteButtons.toc*
 
 # Expanded on QuippeR's work, now features:
 -Expanded left and right wings, up to 8 buttons

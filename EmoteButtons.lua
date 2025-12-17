@@ -138,6 +138,9 @@ function EmoteButtons_ResetPosition()
 	EmoteButtons_Main:SetPoint("CENTER", UIParent ,"CENTER", 0, 0)
 end
 
+	EmoteButtons_Vars.DisableFade = not EmoteButtons_Vars.DisableFade; 
+end
+
 function EmoteButtons_WipeVars()
 	r = GetRealmName()
 	find = 0
@@ -152,6 +155,7 @@ function EmoteButtons_WipeVars()
 				Profiles = EMOTEBUTTONS_PROFILES,
 				Profile=EMOTEBUTTONS_PROFILES[1].Name,
 				PMode=EB_VANILLA,
+				DisableFade=false,
 				PIndex=1;
 			};
 		elseif not EmoteButtons_Vars.PMode then --compatability for V1
@@ -162,6 +166,7 @@ function EmoteButtons_WipeVars()
 				Profiles = EMOTEBUTTONS_PROFILES,
 				Profile=EMOTEBUTTONS_PROFILES[1].Name,
 				PMode=EB_VANILLA,
+				DisableFade=false,
 				PIndex=1;
 			};
 		end
@@ -380,33 +385,43 @@ end
 
 --maybe should make local?
 function FadeOutFrame( frame, time )
-	local fadeInfo = {}
-	fadeInfo.mode = "OUT"
-	fadeInfo.timeToFade = time
-	fadeInfo.startAlpha = frame:GetAlpha()
-	fadeInfo.endAlpha = 0
-	fadeInfo.finishedFunc = FadeFinished
-	fadeInfo.finishedArg1 = frame
+		if (not EmoteButtons_Vars.DisableFade) then
+		local fadeInfo = {}
+		fadeInfo.mode = "OUT"
+		fadeInfo.timeToFade = time
+		fadeInfo.startAlpha = frame:GetAlpha()
+		fadeInfo.endAlpha = 0
+		fadeInfo.finishedFunc = FadeFinished
+		fadeInfo.finishedArg1 = frame
 
-	frame.fadeMode = "OUT"
-	UIFrameFade( frame, fadeInfo );
-	frame:EnableMouse( false );
+		frame.fadeMode = "OUT"
+		UIFrameFade( frame, fadeInfo );
+		frame:EnableMouse( false );
+	else 
+		frame:EnableMouse( false );
+		frame:Hide();
+	end
 end
 
 --maybe should make local?
 function FadeInFrame( frame, time )
-	local fadeInfo = {}
-	fadeInfo.mode = "IN"
-	fadeInfo.timeToFade = time
-	fadeInfo.startAlpha = 0
-	fadeInfo.endAlpha = 1
-	fadeInfo.finishedFunc = FadeFinished
-	fadeInfo.finishedArg1 = frame
+	if (not EmoteButtons_Vars.DisableFade) then 
+		local fadeInfo = {}
+		fadeInfo.mode = "IN"
+		fadeInfo.timeToFade = time
+		fadeInfo.startAlpha = 0
+		fadeInfo.endAlpha = 1
+		fadeInfo.finishedFunc = FadeFinished
+		fadeInfo.finishedArg1 = frame
 
-	frame.fadeMode = "IN"
-	UIFrameFade( frame, fadeInfo );
-	frame:Show();
-	frame:EnableMouse( true );
+		frame.fadeMode = "IN"
+		UIFrameFade( frame, fadeInfo );
+		frame:Show();
+		frame:EnableMouse( true );
+	else
+		frame:Show();
+		frame:EnableMouse( true );
+	end
 end
 
 function EmoteButtons_FadeIn(frame, time, alpha)

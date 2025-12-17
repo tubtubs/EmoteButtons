@@ -69,7 +69,8 @@ EMOTEBUTTONS_DUPLICATEPROFILE = "Duplicate Profile"
 EMOTEBUTTONS_CREATEPROFILE = "Create Profile"
 EMOTEBUTTONS_EXTENDEDMODE = "Extended Mode (more emotes)"
 EMOTEBUTTONS_EXTENDEDMODETIP = "Only works on supported servers, use Default - Extended Profile with this enabled.\nIf emotes don't work, check patch installation and if this server supports it."
-
+EMOTEBUTTONS_FADINGOPTION = "Disable Fading Buttons"
+EMOTEBUTTONS_FADINGOPTIONTIP = "If checked, disables the fading effects on buttons. Could improve performance."
 --Modes
 EB_VANILLA = 1
 EB_EXTENDED = 2

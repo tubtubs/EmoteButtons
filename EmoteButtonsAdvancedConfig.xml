@@ -109,6 +109,28 @@
 						</Offset>
 					</Shadow>
 				</FontString>
+				<FontString name="$parentFadingOption" font="GameFontNormal" text="EMOTEBUTTONS_FADINGOPTION">
+					<Size>
+						<AbsDimension x="140" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOP">
+							<Offset>
+								<AbsDimension x="210" y="-150" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="12" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
 			</Layer>
 		</Layers>
 		<Frames>
@@ -251,6 +273,28 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
+			<CheckButton name="$parent_DisableFadeCheckButton" inherits="OptionsCheckButtonTemplate" checked="true">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_ExtendedModeCheckButton">
+						<Offset>
+							<AbsDimension x="0" y="-20"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+					EmoteButtons_ToggleFade()
+					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_FADINGOPTIONTIP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</CheckButton>
 
 			<Button name="$parent_ProfileSetDropdownButton" text="EMOTEBUTTONS_SETPROFILE" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
@@ -378,7 +422,7 @@
 					</Anchors>
 					<TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
 				</Texture>
-				<FontString name="$parentTitleString" font="GameFontNormal" text="Export Profile">
+				<FontString name="$parentTitleString" font="GameFontNormal" text="EMOTEBUTTONS_EXPORTPROFILE">
 					<!--Window Title -->
 					<Size>
 						<AbsDimension x="140" y="0" />
@@ -546,7 +590,7 @@
 					</Anchors>
 					<TexCoords left="0.2" right="0.8" top="0" bottom="0.6" />
 				</Texture>
-				<FontString name="$parentTitleString" font="GameFontNormal" text="Import Profile">
+				<FontString name="$parentTitleString" font="GameFontNormal" text="EMOTEBUTTONS_IMPORTPROFILE">
 					<!--Window Title -->
 					<Size>
 						<AbsDimension x="140" y="0" />
@@ -652,7 +696,7 @@
 					</EditBox>
 				</ScrollChild>
 			</ScrollFrame>
-			<Button name="$parent_SubmitButton" text="Import Profile" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_IMPORTPROFILE" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
 				</Size>
