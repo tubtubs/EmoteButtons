@@ -44,9 +44,9 @@ function EmoteButtons_AdvancedConfigFrame_OnShow()
 	end
 
 	if EmoteButtons_Vars.DisableFade==false then
-		EmoteButtons_AdvancedConfigFrame_DisableFadeCheckButton:SetChecked(1)
-	elseif EmoteButtons_Vars.DisableFade==true then
 		EmoteButtons_AdvancedConfigFrame_DisableFadeCheckButton:SetChecked(0)
+	elseif EmoteButtons_Vars.DisableFade==true then
+		EmoteButtons_AdvancedConfigFrame_DisableFadeCheckButton:SetChecked(1)
 	end
 
 	DeckBuilderFrame:Hide();

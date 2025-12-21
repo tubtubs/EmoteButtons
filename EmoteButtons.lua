@@ -8,6 +8,7 @@ Shift click a button, or type /eb for more options.
 
 TODO:
 *Isolate IconPicker to its own Addon
+*Clean up DeckBuilder interface a bit
 ]]--
 
 
@@ -156,7 +157,7 @@ function EmoteButtons_WipeVars()
 				Profiles = EMOTEBUTTONS_PROFILES,
 				Profile=EMOTEBUTTONS_PROFILES[1].Name,
 				PMode=EB_VANILLA,
-				DisableFade=false,
+				DisableFade=true,
 				PIndex=1;
 			};
 		elseif not EmoteButtons_Vars.PMode then --compatability for V1
@@ -167,7 +168,7 @@ function EmoteButtons_WipeVars()
 				Profiles = EMOTEBUTTONS_PROFILES,
 				Profile=EMOTEBUTTONS_PROFILES[1].Name,
 				PMode=EB_VANILLA,
-				DisableFade=false,
+				DisableFade=true,
 				PIndex=1;
 			};
 		end
