@@ -231,6 +231,14 @@
 					<OnClick>
                        EmoteButtons_ResetPosition();
                    </OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_RESETPOSITIONTIP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<Button name="$parent_ResetProfileButton" text="EMOTEBUTTONS_RESETPROFILE" inherits="EmoteButtons_OptionButton_Template">
@@ -248,9 +256,16 @@
 					<OnClick>
                        EmoteButtons_ResetProfile();
                    </OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_RESETPROFILETIP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
-
 			<CheckButton name="$parent_ExtendedModeCheckButton" inherits="OptionsCheckButtonTemplate" checked="true">
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parent_ResetProfileButton">
@@ -295,7 +310,6 @@
 					</OnLeave>
 				</Scripts>
 			</CheckButton>
-
 			<Button name="$parent_ProfileSetDropdownButton" text="EMOTEBUTTONS_SETPROFILE" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="CENTER" relativePoint="TOP">
@@ -309,8 +323,17 @@
                        UIDropDownMenu_Initialize(self, EmoteButtons_ProfileSetDropDown_OnShow);
                    </OnShow>
 					<OnClick>
+					   GameTooltip:Hide();
                        EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick();
                    </OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_PROFILEDROPDOWNTIP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<Button name="$parent_ProfileDeleteDropdownButton" text="EMOTEBUTTONS_DELETEPROFILE" inherits="EmoteButtons_OptionButton_Template">
@@ -326,8 +349,17 @@
                        UIDropDownMenu_Initialize(self, EmoteButtons_ProfileDeleteDropDown_OnShow);
                    </OnShow>
 					<OnClick>
+					   GameTooltip:Hide();					
                        EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick();
                    </OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_PROFILEDROPDOWNTIP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<Button name="$parent_ProfileDuplicateDropdownButton" text="EMOTEBUTTONS_DUPLICATEPROFILE" inherits="EmoteButtons_OptionButton_Template">
@@ -343,8 +375,17 @@
                        UIDropDownMenu_Initialize(self, EmoteButtons_ProfileDuplicateDropDown_OnShow);
                    </OnShow>
 					<OnClick>
+					   GameTooltip:Hide();
                        EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick();
                    </OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_PROFILEDROPDOWNTIP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<Button name="$parent_ProfileCreateButton" text="EMOTEBUTTONS_CREATEPROFILE" inherits="EmoteButtons_OptionButton_Template">
@@ -359,6 +400,14 @@
 					<OnClick>
                        EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick();
                    </OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_NEWDECKTIP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<Button name="$parent_Close" inherits="UIPanelCloseButton">

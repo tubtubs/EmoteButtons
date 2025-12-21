@@ -1,4 +1,4 @@
--- Last update : 29/10/2006
+-- Last update : 2025/12/21
 
 -- <<--
 --	Global info
@@ -28,7 +28,7 @@ EMOTEBUTTONS_SLASHHELP = [[|cFF00FF00Emote Buttons:|r This is help topic for |cF
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons mode extended |r - changes to extended mode (emote list). Extended mode is only works on servers that support extended emotes.
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons mode vanilla |r - changes to vanilla mode (emote list)
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons options|r - opens the advanced config window.
-|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetposition|r - resets position of the main button.
+|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetposition|r - resets position of the main button to the middle of the screen.
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetprofile|r - resets the current profile to default.
 ]]
 
@@ -37,6 +37,7 @@ EMOTEBUTTONS_SLASHUNKNOWN = "|cFF00FF00Emote Buttons:|r unknown command"
 EMOTEBUTTONS_SUBMITBUTTON = "Submit"
 EMOTEBUTTONS_CANCELBUTTON = "Cancel"
 EMOTEBUTTONS_TEST = "ERROR"
+EMOTEBUTTONS_INVALIDEMOTE = "Invalid emote...\nMay need to enable extended mode \nin advanced options, or change emote."
 
 EMOTEBUTTONS_EMOTEMANAGER = "Emote Manager"
 EMOTEBUTTONS_DECKMANAGER = "Deck Manager"
@@ -44,17 +45,27 @@ EMOTEBUTTONS_DECKMANAGER = "Deck Manager"
 --Deck Builder Strings
 EMOTEBUTTONS_DECKBUILDER = "Deck Builder"
 EMOTEBUTTONS_SETEMOTE = "Set Emote"
+EMOTEBUTTONS_SETEMOTETIP = "Opens the emote manager, to select from a list"
 EMOTEBUTTONS_SETCOMMAND = "Set Command"
+EMOTEBUTTONS_SETCOMMANDTIP = "Can be simple slash command, or macro (experimental)"
 EMOTEBUTTONS_SETDECK = "Set Deck"
-EMOTEBUTTONS_SETLABEL = "Tooltip/Icon"
+EMOTEBUTTONS_SETDECKTIP = "Set the button to open a deck\n Opens over current deck in far right/far left wings"
+EMOTEBUTTONS_SETLABEL = "Change this button's tooltip/icon"
 EMOTEBUTTONS_NEWDECK = "New Deck"
-EMOTEBUTTONS_RENAMEDECK = "Rename Deck"
+EMOTEBUTTONS_NEWDECKTIP = "Creates an empty profile\n Reset the profile if you need the default layout" 
+EMOTEBUTTONS_RENAMEDECKTITLE = "Rename Deck"
+EMOTEBUTTONS_RENAMEDECK = "Rename Deck (%s)"
 EMOTEBUTTONS_ADDDECK = "Add Deck"
-EMOTEBUTTONS_DELETEDECK = "Delete Deck"
-EMOTEBUTTONS_MOVEUP = "Move Up"
-EMOTEBUTTONS_MOVEDOWN = "Move Down"
-EMOTEBUTTONS_DELETEBUTTON = "Delete Button"
-EMOTEBUTTONS_INVALIDEMOTE = "Invalid emote...\nMay need to enable extended mode \nin advanced options, or change emote."
+EMOTEBUTTONS_DELETEDECK = "Delete Deck (%s)"
+EMOTEBUTTONS_MOVEUP = "Move this button up"
+EMOTEBUTTONS_MOVEDOWN = "Move this button down"
+EMOTEBUTTONS_DELETEBUTTON = "Delete this button"
+EMOTEBUTTONS_DECKSTITLE = "Decks"
+EMOTEBUTTONS_BUTTONSTITLE = "Buttons"
+EMOTEBUTTONS_ACTIONSTITLE = "Customize Actions:"
+EMOTEBUTTONS_ACTIONSTITLEDISABLED = "Select a button first"
+EMOTEBUTTONS_ACTIONSTITLENODECK = "Select a deck first"
+EMOTEBUTTONS_DECKACTIONSTITLEMAIN = "Cannot rename, or delete the Main deck."
 
 --Advanced Config Strings
 EMOTEBUTTONS_ADVANCEDCONFIG = "Advanced Config"
@@ -62,7 +73,9 @@ EMOTEBUTTONS_NEWPROFILE = "New Profile"
 EMOTEBUTTONS_IMPORTPROFILE = "Import Profile"
 EMOTEBUTTONS_EXPORTPROFILE = "Export Profile"
 EMOTEBUTTONS_RESETPOSITION = "Reset Main Button Position"
+EMOTEBUTTONS_RESETPOSITIONTIP = "Places the main button in the middle of the screen"
 EMOTEBUTTONS_RESETPROFILE =  "Reset Current Profile"
+EMOTEBUTTONS_RESETPROFILETIP = "Resets current profile to defaults for your current mode"
 EMOTEBUTTONS_SETPROFILE = "Set Profile"
 EMOTEBUTTONS_DELETEPROFILE = "Delete Profile"
 EMOTEBUTTONS_DUPLICATEPROFILE = "Duplicate Profile" 
@@ -71,6 +84,7 @@ EMOTEBUTTONS_EXTENDEDMODE = "Extended Mode (more emotes)"
 EMOTEBUTTONS_EXTENDEDMODETIP = "Only works on supported servers, use Default - Extended Profile with this enabled.\nIf emotes don't work, check patch installation and if this server supports it."
 EMOTEBUTTONS_FADINGOPTION = "Disable Fading Buttons"
 EMOTEBUTTONS_FADINGOPTIONTIP = "If checked, disables the fading effects on buttons. Could improve performance."
+EMOTEBUTTONS_PROFILEDROPDOWNTIP = "Click to display profiles"
 --Modes
 EB_VANILLA = 1
 EB_EXTENDED = 2
@@ -86,14 +100,14 @@ EBACTTYPE_SLASHCMD = 2
 
 --Profile Data
 
---Empty
+--Empty profile
 EMOTEBUTTONS_MT = {
 	["Main"] = {
 		{action="/emotebuttons deckbuilder", type=EBACTTYPE_SLASHCMD, tooltip="Start building!",image="Ability_Rogue_Disguise"}
 	}
 }
 
---Default profile
+--Default profile (Extended Mode)
 EMOTEBUTTONS_ET = {
 	["Combat"]={
 	{action=[[Taunts]], type=0, tooltip="", image="Ability_Warrior_Rampage"},
@@ -615,6 +629,7 @@ EMOTEBUTTONS_ET = {
 	}
 }
 
+--Default profile (Vanilla mode)
 EMOTEBUTTONS_VT= {
 	["Combat"]={
 	{action=[[Taunts]], type=0, tooltip="", image="Ability_Warrior_Rampage"},

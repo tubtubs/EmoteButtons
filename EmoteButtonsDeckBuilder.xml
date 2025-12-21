@@ -60,7 +60,7 @@
 			</Shadow>
 		</DisabledFont>
 	</Button>
-	<!-- Deck Builder -->
+	<!-- Deck Builder Templates -->
 	<CheckButton name="DeckBuilderTemplate" virtual="true">
 		<Size>
 			<AbsDimension x="108" y="16"/>
@@ -155,6 +155,7 @@
 			</OnClick>
 		</Scripts>
 	</CheckButton>
+	<!-- Deck Builder -->
 	<Frame name="DeckBuilderFrame" frameStrata="HIGH" hidden="true">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="UIParent">
@@ -215,9 +216,98 @@
 						</Offset>
 					</Shadow>
 				</FontString>
+				<FontString name="$parentDecksTitle" font="GameFontNormal" text="EMOTEBUTTONS_DECKSTITLE">
+					<Size>
+						<AbsDimension x="140" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="0" y="-35" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
+				<FontString name="$parentButtonsTitle" font="GameFontNormal" text="EMOTEBUTTONS_BUTTONSTITLE">
+					<Size>
+						<AbsDimension x="140" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="135" y="-35" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
+				<FontString name="$parentActionsTitle" font="GameFontNormal" text="EMOTEBUTTONS_ACTIONSTITLE">
+					<Size>
+						<AbsDimension x="140" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="5" y="65" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
+				<FontString name="$parentDeckActionsTitle" font="GameFontNormal" text="EMOTEBUTTONS_TEST" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="240" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="BOTTOMLEFT">
+							<Offset>
+								<AbsDimension x="135" y="20" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
 			</Layer>
 		</Layers>
 		<Frames>
+			<!-- Deck Builder - Backdrop for Decks/Buttons selection -->
 			<Frame name="DeckBuilderFrameLayer2">
 				<Anchors>
 					<Anchor point="CENTER" relativeTo="$parent">
@@ -403,11 +493,19 @@
 					</Anchor>
 				</Anchors>
 			</CheckButton>
-			<Button name="$parent_DeleteDeckButton" text="EMOTEBUTTONS_DELETEDECK" inherits="EmoteButtons_OptionButton_Template">
+			<!--- Deck Texture Buttons -->
+			<Button name="$parent_DeleteDeckButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<NormalTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-GarbageCanOverflowing.tga"/>
+				<PushedTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-GarbageCanOverflowing.tga"/>
+				<DisabledTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-GarbageCanClosed.tga"/>
+				<HighlightTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-GarbageCanOverflowing.tga" alphaMode="ADD"/>
 				<Anchors>
-					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="RIGHT">
+					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="LEFT">
 						<Offset>
-							<AbsDimension x="-12" y="-90"/>
+							<AbsDimension x="86" y="-105"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -415,13 +513,28 @@
 					<OnClick>
 					DeckBuilderFrame_DeleteDeckButton_OnClick();
 					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(format(EMOTEBUTTONS_DELETEDECK,EmoteButtons_ConfigDeck));
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
-			<Button name="$parent_RenameDeckButton" text="EMOTEBUTTONS_RENAMEDECK" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_RenameDeckButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<NormalTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-EditName.tga"/>
+				<PushedTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-EditName.tga"/>
+				<DisabledTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-EditNameDisabled.tga"/>
+				<HighlightTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-EditName.tga" alphaMode="ADD"/>
 				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parent_DeleteDeckButton" relativePoint="LEFT">
+					<Anchor point="RIGHT" relativeTo="$parent_DeleteDeckButton" relativePoint="RIGHT">
 						<Offset>
-							<AbsDimension x="0" y="-20"/>
+							<AbsDimension x="38" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -429,13 +542,28 @@
 					<OnClick>
 					DeckBuilderFrame_RenameDeckButton_OnClick()
 					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(format(EMOTEBUTTONS_RENAMEDECK,EmoteButtons_ConfigDeck));
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
-			<Button name="$parent_AddDeckButton" text="EMOTEBUTTONS_ADDDECK" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_AddDeckButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<NormalTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\Add"/>
+				<PushedTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\Add"/>
+				<DisabledTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\Add"/>
+				<HighlightTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\Add" alphaMode="ADD"/>
 				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parent_DeleteDeckButton" relativePoint="LEFT">
+					<Anchor point="RIGHT" relativeTo="$parent_DeleteDeckButton" relativePoint="RIGHT">
 						<Offset>
-							<AbsDimension x="0" y="20"/>
+							<AbsDimension x="-38" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -443,41 +571,22 @@
 					<OnClick>
 					DeckBuilderFrame_AddDeckButton_OnClick();
 					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_NEWDECK);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
-			<Button name="$parent_DeleteActionButton" text="EMOTEBUTTONS_DELETEBUTTON" inherits="EmoteButtons_OptionButton_Template">
-				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parent_AddDeckButton" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="0" y="20"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						DeckBuilderFrame_DeleteActionButton_OnClick();
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parent_ChangeTooltipButton" text="EMOTEBUTTONS_SETLABEL" inherits="EmoteButtons_OptionButton_Template">
-				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parent_DeleteActionButton" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="0" y="20"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-					DeckBuilderFrame_ChangeTooltipButton_OnClick();
-					</OnClick>
-				</Scripts>
-			</Button>
+			<!-- Text Buttons -->
 			<Button name="$parent_ChangeDeckActionButton" text="EMOTEBUTTONS_SETDECK" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parent_ChangeTooltipButton" relativePoint="LEFT">
+					<Anchor point="RIGHT" relativeTo="$parent" relativePoint="RIGHT">
 						<Offset>
-							<AbsDimension x="0" y="20"/>
+							<AbsDimension x="-15" y="5"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -485,6 +594,14 @@
 					<OnClick>
 					DeckManagerFrame:Show();
 					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_SETDECKTIP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<Button name="$parent_ChangeEmoteActionButton" text="EMOTEBUTTONS_SETEMOTE" inherits="EmoteButtons_OptionButton_Template">
@@ -499,6 +616,14 @@
 					<OnClick>
 					EB_EmotesManager:Show();
 					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_SETEMOTETIP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<Button name="$parent_ChangeCMDActionButton" text="EMOTEBUTTONS_SETCOMMAND" inherits="EmoteButtons_OptionButton_Template">
@@ -513,13 +638,29 @@
 					<OnClick>
 					EmoteButtons_ChangeCMDFrame:Show();
 					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_SETCOMMANDTIP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
-			<Button name="$parent_MoveDownButton" text="EMOTEBUTTONS_MOVEDOWN" inherits="EmoteButtons_OptionButton_Template">
+			<!-- Texture Buttons -->
+			<Button name="$parent_MoveDownButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<NormalTexture inherits="GlueScrollBarButton" file="Interface\Buttons\UI-ScrollBar-ScrollDownButton-Up"/>
+				<PushedTexture inherits="GlueScrollBarButton" file="Interface\Buttons\UI-ScrollBar-ScrollDownButton-Down"/>
+				<DisabledTexture inherits="GlueScrollBarButton" file="Interface\Buttons\UI-ScrollBar-ScrollDownButton-Disabled"/>
+				<HighlightTexture inherits="GlueScrollBarButton" file="Interface\Buttons\UI-ScrollBar-ScrollDownButton-Highlight" alphaMode="ADD"/>
 				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parent_ChangeCMDActionButton" relativePoint="LEFT">
+					<Anchor point="LEFT" relativeTo="$parent_ChangeDeckActionButton" relativePoint="LEFT">
 						<Offset>
-							<AbsDimension x="0" y="20"/>
+							<AbsDimension x="-6" y="-50"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -527,9 +668,24 @@
 					<OnClick>
 					DeckBuilderFrame_MoveDownButton_OnClick()
 					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_MOVEDOWN);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
-			<Button name="$parent_MoveUpButton" text="EMOTEBUTTONS_MOVEUP" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_MoveUpButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<NormalTexture inherits="GlueScrollBarButton" file="Interface\Buttons\UI-ScrollBar-ScrollUpButton-Up"/>
+				<PushedTexture inherits="GlueScrollBarButton" file="Interface\Buttons\UI-ScrollBar-ScrollUpButton-Down"/>
+				<DisabledTexture inherits="GlueScrollBarButton" file="Interface\Buttons\UI-ScrollBar-ScrollUpButton-Disabled"/>
+				<HighlightTexture inherits="GlueScrollBarButton" file="Interface\Buttons\UI-ScrollBar-ScrollUpButton-Highlight" alphaMode="ADD"/>
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parent_MoveDownButton" relativePoint="LEFT">
 						<Offset>
@@ -541,6 +697,89 @@
 					<OnClick>
 					DeckBuilderFrame_MoveUpButton_OnClick()
 					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_MOVEUP);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parent_ChangeTooltipButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<NormalTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-EditName.tga"/>
+				<PushedTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-EditName.tga"/>
+				<DisabledTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-EditNameDisabled.tga"/>
+				<HighlightTexture inherits="GlueScrollBarButton" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-EditName.tga" alphaMode="ADD"/>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture name="$parent_Icon" file="Interface\Icons\Ability_Rogue_Disguise">
+							<Size>
+								<AbsDimension x="25" y="25"/>
+							</Size>
+							<Anchors>
+								<Anchor point="CENTER">
+									<Offset>
+										<AbsDimension x="0" y="0"/>
+									</Offset>
+								</Anchor>
+							</Anchors>
+							<TexCoords left="0.075" right="0.925" top="0.075" bottom="0.925"/>
+						</Texture>
+					</Layer>
+				</Layers>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_MoveDownButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="32" y="10"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+					DeckBuilderFrame_ChangeTooltipButton_OnClick();
+					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_SETLABEL);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
+				</Scripts>
+			</Button>
+			<Button name="$parent_DeleteActionButton">
+				<Size>
+					<AbsDimension x="32" y="32"/>
+				</Size>
+				<NormalTexture file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-GarbageCanOpen.tga"/>
+				<PushedTexture file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-GarbageCanOpen.tga"/>
+				<DisabledTexture  file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-GarbageCanClosed.tga"/>
+				<HighlightTexture file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-GarbageCanOpen.tga" alphaMode="ADD"/>
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parent_ChangeTooltipButton" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="41" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						DeckBuilderFrame_DeleteActionButton_OnClick();
+					</OnClick>
+					<OnEnter>
+					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
+					GameTooltip:SetText(EMOTEBUTTONS_DELETEBUTTON);
+					GameTooltip:Show();
+					</OnEnter>
+					<OnLeave>
+					GameTooltip:Hide();
+					</OnLeave>
 				</Scripts>
 			</Button>
 			<Button name="$parent_AdvancedConfig" text="EMOTEBUTTONS_ADVANCEDCONFIG" inherits="EmoteButtons_OptionButton_Template">

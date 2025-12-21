@@ -129,6 +129,7 @@ function DeckBuilderFrame_UpdateActions(deck)
 		buttontxt:SetText(txt);
 		buttonicon:SetTexture(IP_ICONPATH..d[i].image)
 		if ( i == DeckBuilderFrame.selectedAction  ) then
+			DeckBuilderFrame_ChangeTooltipButton_Icon:SetTexture(IP_ICONPATH..d[i].image)
 			button:SetChecked(1);
 		else
 			button:SetChecked(nil);
@@ -184,9 +185,16 @@ end
 function DeckBuilderFrameButtons_Update() 
 	d = DeckBuilderFrame.selectedIcon
 	if ( d~=0 and EmoteButtons_DeckList[d] ~= EmoteButtons_FirstLevelName) then
+		DeckBuilderFrameDeckActionsTitle:SetText("");
 		DeckBuilderFrame_DeleteDeckButton:Enable();
 		DeckBuilderFrame_RenameDeckButton:Enable();
+	elseif (d==0) then
+		DeckBuilderFrameActionsTitle:SetText(EMOTEBUTTONS_ACTIONSTITLENODECK);
+		DeckBuilderFrameDeckActionsTitle:SetText(EMOTEBUTTONS_ACTIONSTITLENODECK);
+		DeckBuilderFrame_DeleteDeckButton:Disable();
+		DeckBuilderFrame_RenameDeckButton:Disable();
 	else
+		DeckBuilderFrameDeckActionsTitle:SetText(EMOTEBUTTONS_DECKACTIONSTITLEMAIN);
 		DeckBuilderFrame_DeleteDeckButton:Disable();
 		DeckBuilderFrame_RenameDeckButton:Disable();
 	end
@@ -195,11 +203,14 @@ function DeckBuilderFrameButtons_Update()
 		DeckBuilderFrame_ChangeEmoteActionButton:Enable();
 		DeckBuilderFrame_ChangeCMDActionButton:Enable();
 		DeckBuilderFrame_ChangeDeckActionButton:Enable();
+		DeckBuilderFrameActionsTitle:SetText(EMOTEBUTTONS_ACTIONSTITLE);
+
 		deck = EmoteButtons_DeckList[d]
 		a = DeckBuilderFrame.selectedAction
 		if (EB_CurrentActions[deck][a]) then
 			DeckBuilderFrame_DeleteActionButton:Enable();
 			DeckBuilderFrame_ChangeTooltipButton:Enable();
+  			DeckBuilderFrame_ChangeTooltipButton_Icon:SetTexture(IP_ICONPATH..EB_CurrentActions[deck][a].image)
 			l = getn(EB_CurrentActions[deck])
 			--find first and last actions and disable move up or move down
 			if (l==1) then --if its just 1 element, totally un-needed
@@ -219,17 +230,22 @@ function DeckBuilderFrameButtons_Update()
 		else
 			DeckBuilderFrame_DeleteActionButton:Disable();
 			DeckBuilderFrame_ChangeTooltipButton:Disable();
+			DeckBuilderFrame_ChangeTooltipButton_Icon:SetTexture("")
 			DeckBuilderFrame_MoveDownButton:Disable();
 			DeckBuilderFrame_MoveUpButton:Disable();
 		end
 	else
 		DeckBuilderFrame_ChangeTooltipButton:Disable();
+		DeckBuilderFrame_ChangeTooltipButton_Icon:SetTexture("")
 		DeckBuilderFrame_ChangeDeckActionButton:Disable();
 		DeckBuilderFrame_ChangeEmoteActionButton:Disable();
 		DeckBuilderFrame_ChangeCMDActionButton:Disable();
 		DeckBuilderFrame_DeleteActionButton:Disable();
 		DeckBuilderFrame_MoveDownButton:Disable();
 		DeckBuilderFrame_MoveUpButton:Disable();
+		if (d~=0) then
+			DeckBuilderFrameActionsTitle:SetText(EMOTEBUTTONS_ACTIONSTITLEDISABLED);
+		end
 	end
 end
 
@@ -295,7 +311,15 @@ function DeckBuilderFrame_DeleteDeckButton_OnClick()
 			EB_CurrentActions[deck] = nil;
 			table.remove(EmoteButtons_DeckList, DeckBuilderFrame.selectedIcon);
 			--DeckBuilderFrame_OnShow();
-			ReloadUI()
+			if found == 1 then
+				ReloadUI()
+			else
+				DeckBuilderFrame.selectedAction = 0;
+				DeckBuilderFrame.selectedIcon = 0;
+				DeckBuilderFrame_Update();
+				DeckBuilderFrame_UpdateActions();
+				DeckBuilderFrameButtons_Update();
+			end
 		end,
 		timeout = 0,
 		whileDead = true,
@@ -451,7 +475,7 @@ function DeckBuilderFrame_RenameDeckButton_OnClick()
 		this:GetParent():Hide();
 	end
 	StaticPopupDialogs["EMOTEBUTTONS_RENAMEDECK"]={
-		text=TEXT(EMOTEBUTTONS_NEWDECK),
+		text=TEXT(EMOTEBUTTONS_RENAMEDECKTITLE),
 		button1=TEXT(ACCEPT),
 		button2=TEXT(CANCEL),
 		hasEditBox=1,
