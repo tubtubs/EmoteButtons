@@ -182,6 +182,7 @@ function EmoteButtons_WipeVars()
 				Profiles = EMOTEBUTTONS_PROFILES,
 				Profile=EMOTEBUTTONS_PROFILES[2].Name,
 				PMode=EB_EXTENDED,
+				DisableFade=true,
 				PIndex=2;
 			};
 		elseif not EmoteButtons_Vars.PMode then --compatability for V1
@@ -192,6 +193,7 @@ function EmoteButtons_WipeVars()
 				Profiles = EMOTEBUTTONS_PROFILES,
 				Profile=EMOTEBUTTONS_PROFILES[2].Name,
 				PMode=EB_EXTENDED,
+				DisableFade=true,
 				PIndex=2;
 			};
 		end
