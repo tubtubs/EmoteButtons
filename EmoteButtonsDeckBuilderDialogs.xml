@@ -150,19 +150,32 @@
 				</ScrollChild>
 			</ScrollFrame>
 			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
-				<Size>
-					<AbsDimension x="155" y="20" />
-				</Size>
+
 				<Anchors>
 					<Anchor point="CENTER" relativeTo="$parent">
 						<Offset>
-							<AbsDimension x="0" y="-85"/>
+							<AbsDimension x="-50" y="-85"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnClick>
 					EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick()
+                   </OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
+
+				<Anchors>
+					<Anchor point="RIGHT" relativeTo="$parent_SubmitButton">
+						<Offset>
+							<AbsDimension x="100" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+					EmoteButtons_ChangeCMDFrame:Hide();
                    </OnClick>
 				</Scripts>
 			</Button>
@@ -430,25 +443,12 @@
 					</Anchor>
 				</Anchors>
 			</CheckButton>
-			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
+
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="RIGHT">
 						<Offset>
 							<AbsDimension x="-12" y="-90"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						EmoteManagerSubmitButton_OnClick();
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
-				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parent_SubmitButton" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="-100" y="0"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -459,6 +459,21 @@
 					</OnClick>
 				</Scripts>
 			</Button>
+			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_CancelButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-100" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EmoteManagerSubmitButton_OnClick();
+					</OnClick>
+				</Scripts>
+			</Button>
+
 			<Button name="$parent_Close" inherits="UIPanelCloseButton">
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
@@ -811,7 +826,9 @@
 				</Anchors>
 			</CheckButton>
 
-			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
+
+			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
+
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="RIGHT">
 						<Offset>
@@ -821,13 +838,14 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						DeckManagerFrameSubmitButton_OnClick();
+						PlaySound("gsTitleOptionOK");
+						DeckManagerFrame:Hide();
 					</OnClick>
 				</Scripts>
 			</Button>
-			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parent_SubmitButton" relativePoint="LEFT">
+					<Anchor point="LEFT" relativeTo="$parent_CancelButton" relativePoint="LEFT">
 						<Offset>
 							<AbsDimension x="-100" y="0"/>
 						</Offset>
@@ -835,8 +853,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						PlaySound("gsTitleOptionOK");
-						DeckManagerFrame:Hide();
+						DeckManagerFrameSubmitButton_OnClick();
 					</OnClick>
 				</Scripts>
 			</Button>
