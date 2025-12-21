@@ -282,6 +282,28 @@
 						</Offset>
 					</Shadow>
 				</FontString>
+				<FontString name="$parentActionsTitle2" font="GameFontNormal" text="EMOTEBUTTONS_BUTTONOPTIONSTITLE">
+					<Size>
+						<AbsDimension x="140" y="0" />
+					</Size>
+					<Anchors>
+						<Anchor point="RIGHT">
+							<Offset>
+								<AbsDimension x="5" y="-15" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+					<FontHeight>
+						<AbsValue val="14" />
+					</FontHeight>
+					<Color r="1" g="0.8196079" b="0" />
+					<Shadow>
+						<Color r="0" g="0" b="0" />
+						<Offset>
+							<AbsDimension x="1" y="-1" />
+						</Offset>
+					</Shadow>
+				</FontString>
 				<FontString name="$parentDeckActionsTitle" font="GameFontNormal" text="EMOTEBUTTONS_TEST" justifyH="LEFT">
 					<Size>
 						<AbsDimension x="240" y="0" />
@@ -660,7 +682,7 @@
 				<Anchors>
 					<Anchor point="LEFT" relativeTo="$parent_ChangeDeckActionButton" relativePoint="LEFT">
 						<Offset>
-							<AbsDimension x="-6" y="-50"/>
+							<AbsDimension x="-6" y="-60"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
@@ -823,7 +845,6 @@
 				DeckBuilderFrame_OnShow();
 			</OnShow>
 			<OnHide>
-				PlaySound("igCharacterInfoClose");
 				DeckBuilderFrame_OnHide();
 			</OnHide>
 		</Scripts>
