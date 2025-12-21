@@ -229,6 +229,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
+						PlaySound("igCharacterInfoOpen");
                        EmoteButtons_ResetPosition();
                    </OnClick>
 					<OnEnter>
@@ -298,6 +299,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
+					PlaySound("igCharacterInfoOpen");
 					EmoteButtons_ToggleFade()
 					</OnClick>
 					<OnEnter>
@@ -430,8 +432,11 @@
 		</Frames>
 		<Scripts>
 			<OnShow>
-				EmoteButtons_AdvancedConfigFrame_OnShow();
+			EmoteButtons_AdvancedConfigFrame_OnShow();
 			</OnShow>
+			<OnHide>
+			PlaySound("igCharacterInfoClose");
+			</OnHide>
 		</Scripts>
 	</Frame>
 	<Frame name="EmoteButtons_ExportProfileFrame" frameStrata="DIALOG"  toplevel="true" hidden="true">
@@ -578,6 +583,23 @@
 					</EditBox>
 				</ScrollChild>
 			</ScrollFrame>
+			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
+				<Size>
+					<AbsDimension x="155" y="20" />
+				</Size>
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="0" y="-260"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						EmoteButtons_ExportProfileFrame:Hide();
+                   </OnClick>
+				</Scripts>
+			</Button>
 			<Button name="$parent_Close" inherits="UIPanelCloseButton">
 				<Anchors>
 					<Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
@@ -600,6 +622,9 @@
 			<OnShow>
 
 			</OnShow>
+			<OnHide>
+			PlaySound("igCharacterInfoClose");
+			</OnHide>
 		</Scripts>
 	</Frame>
 	<Frame name="EmoteButtons_ImportProfileFrame" frameStrata="DIALOG" toplevel="true" hidden="true">
@@ -745,7 +770,7 @@
 					</EditBox>
 				</ScrollChild>
 			</ScrollFrame>
-			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_IMPORTPROFILE" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
 				<Size>
 					<AbsDimension x="155" y="20" />
 				</Size>
@@ -758,7 +783,7 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-                       EmoteButtons_ImportProfileFrame_SubmitButton_OnClick();
+					EmoteButtons_ImportProfileFrame_SubmitButton_OnClick();
                    </OnClick>
 				</Scripts>
 			</Button>
@@ -772,18 +797,21 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-						EmoteButtons_ImportProfileFrame:Hide();
+					EmoteButtons_ImportProfileFrame:Hide();
 					</OnClick>
 				</Scripts>
 			</Button>
 		</Frames>
 		<Scripts>
 			<OnLoad>             
-				tinsert(UISpecialFrames, "EmoteButtons_ImportProfileFrame");
+			tinsert(UISpecialFrames, "EmoteButtons_ImportProfileFrame");
 			</OnLoad>
 			<OnShow>
-
+			PlaySound("igCharacterInfoOpen");
 			</OnShow>
+			<OnHide>
+			PlaySound("igCharacterInfoClose");
+			</OnHide>
 		</Scripts>
 	</Frame>
 	<!-- End of Advanced Config-->

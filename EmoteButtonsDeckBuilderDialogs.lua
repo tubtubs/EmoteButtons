@@ -119,6 +119,7 @@ end
 --DECK MANAGER--
 NUM_DECKS_SHOWN = 8;
 function DeckManagerFrame_OnShow()
+	PlaySound("igCharacterInfoOpen");
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
@@ -129,7 +130,6 @@ function DeckManagerFrame_OnShow()
 	if len < button or EB_CurrentActions[deck][button].type ~= EBACTTYPE_DECK then
 		DeckManagerFrame.selectedIcon = 0;
 		DeckManagerFrame_DeckScrollFrame:SetVerticalScroll(0);
-		PlaySound("igCharacterInfoOpen");
 		for i=1,  8 do
 				button = getglobal("DeckManagerFrame_DeckActionButton"..i);
 				buttontxt = getglobal("DeckManagerFrame_DeckActionButton"..i.."Name");
@@ -270,6 +270,7 @@ function DeckManagerFrameDeckButton_OnClick()
 end 
 
 function EmoteButtons_ChangeCMDFrame_OnShow()
+	PlaySound("igCharacterInfoOpen");
     DeckManagerFrame:Hide();
 	IconPickerFrame:Hide();
     EB_EmotesManager:Hide();
@@ -294,6 +295,7 @@ function EmoteButtons_ChangeCMDFrame_SubmitButton_Update()
 end
 
 function EmoteButtons_ChangeCMDFrame_SubmitButton_OnClick()
+	PlaySound("igChatScrollUp");
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	act = EmoteButtons_ChangeCMDFrame_ScrollFrame_CMDEditBox:GetText();

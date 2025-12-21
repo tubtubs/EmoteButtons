@@ -51,7 +51,6 @@ function DeckBuilderFrame_ScrollToSelected()
 	else
 		DeckBuilderFrame_DeckScrollFrame:SetVerticalScroll(1)
 	end -- only scroll if its past the first page, not worth it otherwise.
-	PlaySound("igCharacterInfoOpen");
 	DeckBuilderFrame_Update();
 	DeckBuilderFrame_UpdateActions();
 	DeckBuilderFrameButtons_Update() 
@@ -59,6 +58,7 @@ end
 
 function DeckBuilderFrame_OnShow()
 	EmoteButtons_AdvancedConfigFrame:Hide();
+	PlaySound("igCharacterInfoOpen");
 end
 
 function DeckBuilderFrame_OnHide()
@@ -67,9 +67,11 @@ function DeckBuilderFrame_OnHide()
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
+	PlaySound("igCharacterInfoClose");
 end
 
 function DeckBuilderFrameDeckActionButton_OnClick()
+	PlaySound("gsTitleOptionOK");
 	if DeckBuilderFrame.selectedIcon ~= 0 then
 		DeckBuilderFrame.selectedAction =  this:GetID()
 		EmoteButtons_ConfigButton = this:GetID()
@@ -87,6 +89,7 @@ function DeckBuilderFrameDeckActionButton_OnClick()
 end
 
 function DeckBuilderFrameDeckButton_OnClick()
+	PlaySound("gsTitleOptionOK");
 	DeckBuilderFrame.selectedIcon =  this:GetID() + (FauxScrollFrame_GetOffset(DeckBuilderFrame_DeckScrollFrame));
 	found = DeckBuilderFrame.selectedIcon;
 	DeckBuilderFrame.selectedAction = 0;
@@ -250,6 +253,7 @@ function DeckBuilderFrameButtons_Update()
 end
 
 function DeckBuilderFrame_DeleteActionButton_OnClick()
+	PlaySound("igCharacterInfoClose");
 	EmoteButtons_CloseOpenDecks();
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
@@ -378,6 +382,7 @@ function DeckBuilderFrame_AddDeckButton_OnClick()
 end
 
 function DeckBuilderFrame_MoveUpButton_OnClick()
+	PlaySound("igCharacterInfoOpen");
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	temp = EB_CurrentActions[deck][button-1]
@@ -398,6 +403,7 @@ function DeckBuilderFrame_MoveUpButton_OnClick()
 end
 
 function DeckBuilderFrame_MoveDownButton_OnClick()
+	PlaySound("igCharacterInfoOpen");
 	local deck = EmoteButtons_ConfigDeck;
 	local button = EmoteButtons_ConfigButton;
 	temp = EB_CurrentActions[deck][button+1]

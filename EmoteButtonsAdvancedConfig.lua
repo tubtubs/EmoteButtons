@@ -79,6 +79,7 @@ function EmoteButtons_ProfileSetDropDown_OnShow()
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick()
+	PlaySound("igCharacterInfoOpen");
 	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, 0, 0);
 end
 
@@ -100,6 +101,7 @@ function EmoteButtons_ProfileDeleteDropDown_OnShow()
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick()
+	PlaySound("igCharacterInfoOpen");
 	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, 0, 0);
 end
 
@@ -167,9 +169,11 @@ end
 function EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick()
 	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 
 	EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 0, 0);
+	PlaySound("igCharacterInfoOpen");
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()
+	PlaySound("igCharacterInfoOpen");
 	local accept = function()
 			local editBox=getglobal(this:GetParent():GetName().."EditBox");
 			local newProfile = editBox:GetText();
@@ -208,6 +212,7 @@ function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()
 end
 
 function EmoteButtons_ResetProfile()
+	PlaySound("igCharacterInfoOpen");
 	index = 0;
 	for i=1, getn(EmoteButtons_Vars.Profiles) do
 		if EmoteButtons_Vars.Profiles[i].Name==EmoteButtons_Vars.Profile then
@@ -237,6 +242,7 @@ function EmoteButtons_ResetProfile()
 end
 
 function EmoteButtons_ImportProfileFrame_SubmitButton_OnClick()
+	PlaySound("igCharacterInfoOpen");
 	l = EmoteButtons_ImportProfileFrame_ScrollFrame_ImportEditBox:GetText();
 	f = loadstring(l);
 	a,b = f();
@@ -300,6 +306,8 @@ end
 --
 
 function EmoteButtons_ExportProfile()
+	PlaySound("igCharacterInfoOpen");
+
 	--Load Decks for export.
 	TempDecks = "return {\n"
 
@@ -339,6 +347,7 @@ function EmoteButtons_ExportProfile()
 end
 
 function EmoteButtons_AdvancedConfigFrame_ExtendedModeCheckButton_OnClick()
+	PlaySound("igCharacterInfoOpen");
 	if EmoteButtons_Vars.PMode==EB_VANILLA then
 		EmoteButtons_ExtendedMode()
 	elseif EmoteButtons_Vars.PMode==EB_EXTENDED then

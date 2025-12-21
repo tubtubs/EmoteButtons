@@ -188,6 +188,9 @@
 			<OnShow>
 
 			</OnShow>
+			<OnHide>
+			PlaySound("gsTitleOptionOK");
+			</OnHide>
 		</Scripts>
 	</Frame>
 	<!-- EmotesManager -->
@@ -225,12 +228,12 @@
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="DeckBuilderFrame">
 				<Offset>
-					<AbsDimension x="0" y="-210"/>
+					<AbsDimension x="0" y="-220"/>
 				</Offset>
 			</Anchor>
 		</Anchors>
 		<Size>
-			<AbsDimension x="600" y="180" />
+			<AbsDimension x="480" y="200" />
 		</Size>
 		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<BackgroundInsets>
@@ -282,28 +285,53 @@
 					</Shadow>
 				</FontString>
 			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="EB_EmotesManagerFrameLayer2">
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="0" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="475" y="150" />
+				</Size>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="8" right="9" top="6" bottom="8" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+			<Layers>
 			<Layer>
-				<FontString name="$parent_SelectedEmote" inherits="GameFontWhite" text="EMOTEBUTTONS_TEST" justifyH="LEFT">
+				<FontString name="EB_EmotesManager_SelectedEmote" inherits="GameFontWhite" text="EMOTEBUTTONS_TEST" justifyH="LEFT">
 					<Anchors>
 						<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
 							<Offset>
-								<AbsDimension x="140" y="-35"/>
+								<AbsDimension x="140" y="-10"/>
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parent_PreviewEmote1" inherits="GameFontWhite" text="EMOTEBUTTONS_TEST" justifyH="LEFT">
+				<FontString name="EB_EmotesManager_PreviewEmote1" inherits="GameFontWhite" text="EMOTEBUTTONS_TEST" justifyH="LEFT">
 					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="$parent_SelectedEmote" relativePoint="TOPLEFT">
+						<Anchor point="TOPLEFT" relativeTo="EB_EmotesManager_SelectedEmote" relativePoint="TOPLEFT">
 							<Offset>
 								<AbsDimension x="0" y="-16"/>
 							</Offset>
 						</Anchor>
 					</Anchors>
 				</FontString>
-				<FontString name="$parent_PreviewEmote2" inherits="GameFontWhite" text="EMOTEBUTTONS_TEST" justifyH="LEFT">
+				<FontString name="EB_EmotesManager_PreviewEmote2" inherits="GameFontWhite" text="EMOTEBUTTONS_TEST" justifyH="LEFT">
 					<Anchors>
-						<Anchor point="TOPLEFT" relativeTo="$parent_PreviewEmote1" relativePoint="TOPLEFT">
+						<Anchor point="TOPLEFT" relativeTo="EB_EmotesManager_PreviewEmote1" relativePoint="TOPLEFT">
 							<Offset>
 								<AbsDimension x="0" y="-16"/>
 							</Offset>
@@ -312,7 +340,7 @@
 				</FontString>
 			</Layer>
 		</Layers>
-		<Frames>
+			</Frame>
 			<ScrollFrame name="$parent_ScrollFrame" inherits="ClassTrainerListScrollFrameTemplate">
 				<Size>
 					<AbsDimension x="134" y="125"/>
@@ -402,31 +430,32 @@
 					</Anchor>
 				</Anchors>
 			</CheckButton>
-			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="RIGHT">
 						<Offset>
-							<AbsDimension x="-12" y="-80"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						EB_EmotesManager:Hide();
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
-				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parent_CancelButton" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="-110" y="0"/>
+							<AbsDimension x="-12" y="-90"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnClick>
 						EmoteManagerSubmitButton_OnClick();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_SubmitButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-100" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("gsTitleOptionOK");
+						EB_EmotesManager:Hide();
 					</OnClick>
 				</Scripts>
 			</Button>
@@ -443,6 +472,7 @@
 						tinsert(UISpecialFrames, "EB_EmotesManager");
 					</OnLoad>
 					<OnClick>
+						PlaySound("gsTitleOptionOK");
 						EB_EmotesManager:Hide();
 						<!-- EmoteButtons_HideSelector(); -->
 					</OnClick>
@@ -535,12 +565,12 @@
 			<Anchor point="CENTER" relativeTo="DeckBuilderFrame">
 				<!-- TODO -->
 				<Offset>
-					<AbsDimension x="0" y="-210"/>
+					<AbsDimension x="0" y="-220"/>
 				</Offset>
 			</Anchor>
 		</Anchors>
 		<Size>
-			<AbsDimension x="600" y="180" />
+			<AbsDimension x="480" y="200" />
 		</Size>
 		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
 			<BackgroundInsets>
@@ -594,6 +624,30 @@
 			</Layer>
 		</Layers>
 		<Frames>
+			<Frame name="DeckManagerFrameLayer2">
+				<Anchors>
+					<Anchor point="CENTER" relativeTo="$parent">
+						<Offset>
+							<AbsDimension x="-0" y="-0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Size>
+					<AbsDimension x="475" y="150" />
+				</Size>
+				<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\GLUES\COMMON\TextPanel-Border" tile="true">
+					<BackgroundInsets>
+						<AbsInset left="8" right="9" top="6" bottom="8" />
+					</BackgroundInsets>
+					<TileSize>
+						<AbsValue val="32" />
+					</TileSize>
+					<EdgeSize>
+						<AbsValue val="32" />
+					</EdgeSize>
+				</Backdrop>
+			</Frame>
+
 			<ScrollFrame name="$parent_DeckScrollFrame" inherits="ClassTrainerListScrollFrameTemplate">
 				<Size>
 					<AbsDimension x="134" y="125"/>
@@ -756,31 +810,33 @@
 					</Anchor>
 				</Anchors>
 			</CheckButton>
-			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
+
+			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="RIGHT">
 						<Offset>
-							<AbsDimension x="-12" y="-80"/>
-						</Offset>
-					</Anchor>
-				</Anchors>
-				<Scripts>
-					<OnClick>
-						DeckManagerFrame:Hide();
-					</OnClick>
-				</Scripts>
-			</Button>
-			<Button name="$parent_SubmitButton" text="EMOTEBUTTONS_SUBMITBUTTON" inherits="EmoteButtons_OptionButton_Template">
-				<Anchors>
-					<Anchor point="LEFT" relativeTo="$parent_CancelButton" relativePoint="LEFT">
-						<Offset>
-							<AbsDimension x="0" y="20"/>
+							<AbsDimension x="-12" y="-90"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
 					<OnClick>
 						DeckManagerFrameSubmitButton_OnClick();
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parent_CancelButton" text="EMOTEBUTTONS_CANCELBUTTON" inherits="EmoteButtons_OptionButton_Template">
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="$parent_SubmitButton" relativePoint="LEFT">
+						<Offset>
+							<AbsDimension x="-100" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						PlaySound("gsTitleOptionOK");
+						DeckManagerFrame:Hide();
 					</OnClick>
 				</Scripts>
 			</Button>
@@ -797,6 +853,7 @@
 						tinsert(UISpecialFrames, "DeckManagerFrame");
 					</OnLoad>
 					<OnClick>
+						PlaySound("gsTitleOptionOK");
 						DeckManagerFrame:Hide();
 					</OnClick>
 				</Scripts>

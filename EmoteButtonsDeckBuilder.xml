@@ -795,6 +795,7 @@
 				</Size>
 				<Scripts>
 					<OnClick>
+						PlaySound("igCharacterInfoOpen");
 						EmoteButtons_AdvancedConfigFrame:Show();
 					</OnClick>
 				</Scripts>
@@ -822,6 +823,7 @@
 				DeckBuilderFrame_OnShow();
 			</OnShow>
 			<OnHide>
+				PlaySound("igCharacterInfoClose");
 				DeckBuilderFrame_OnHide();
 			</OnHide>
 		</Scripts>
