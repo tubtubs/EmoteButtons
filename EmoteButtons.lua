@@ -8,7 +8,6 @@ Shift click a button, or type /eb for more options.
 
 TODO:
 *Isolate IconPicker to its own Addon
-*Clean up DeckBuilder interface a bit
 ]]--
 
 
@@ -247,19 +246,19 @@ end
 function EmoteButtons_Init()
 	local i;
 	for i = 1, EmoteButtons_FirstLevelCount do
-		CreateFrame("Button", EmoteButtons_FirstLevel[i], EmoteButtons_Main, "EmoteButtons_template");
+		CreateFrame("CheckButton", EmoteButtons_FirstLevel[i], EmoteButtons_Main, "EmoteButtons_template");
 	end
 	for i = 1, EmoteButtons_LeftWingCount do
-		CreateFrame("Button", EmoteButtons_LeftWing[i], EmoteButtons_Main, "EmoteButtons_template");
+		CreateFrame("CheckButton", EmoteButtons_LeftWing[i], EmoteButtons_Main, "EmoteButtons_template");
 	end
 	for i = 1, EmoteButtons_RightWingCount do
-		CreateFrame("Button", EmoteButtons_RightWing[i], EmoteButtons_Main, "EmoteButtons_template");
+		CreateFrame("CheckButton", EmoteButtons_RightWing[i], EmoteButtons_Main, "EmoteButtons_template");
 	end
 	for i = 1, EmoteButtons_FarLeftWingCount do
-		CreateFrame("Button", EmoteButtons_FarLeftWing[i], EmoteButtons_Main, "EmoteButtons_template");
+		CreateFrame("CheckButton", EmoteButtons_FarLeftWing[i], EmoteButtons_Main, "EmoteButtons_template");
 	end
 	for i = 1, EmoteButtons_FarRightWingCount do
-		CreateFrame("Button", EmoteButtons_FarRightWing[i], EmoteButtons_Main, "EmoteButtons_template");
+		CreateFrame("CheckButton", EmoteButtons_FarRightWing[i], EmoteButtons_Main, "EmoteButtons_template");
 	end
 
 	UIErrorsFrame:AddMessage(EMOTEBUTTONS_INIT_TEXT, 1.0, 1.0, 1.0, 1.0, UIERRORS_HOLD_TIME);
@@ -483,6 +482,7 @@ function EmoteButtons_ToggleFirstLevel()
 		obj = getglobal(EmoteButtons_FirstLevel[i]);
 		if EmoteButtons_Levels["Main"] then
 			FadeOutFrame(obj,0.1*i);
+			obj:SetChecked(0)
 		else
 			image = EB_CurrentActions[EmoteButtons_FirstLevelName][i].image;
 			getglobal(EmoteButtons_FirstLevel[i].."_Icon"):SetTexture(IP_ICONPATH..image);
@@ -546,6 +546,8 @@ function EmoteButtons_ClickAction(framename)
 	local g = tonumber(string.sub(framename,15,15))
 	--step 1 find the responsible button
 	deck = EmoteButtons_Wings_Decks[f+1]
+	emotebtns , emotebtn = EmoteButtons_GetActionButton(f,g);
+	
 	if IsShiftKeyDown() then
 		EmoteButtons_ConfigDeck = deck;
 		EmoteButtons_ConfigButton = g;
@@ -563,13 +565,66 @@ function EmoteButtons_ClickAction(framename)
 				else
 					wing = "Right"
 				end
+				pre = 0
+				if (emotebtn:GetChecked()) then
+					pre=1
+				end
+				EmoteButtons_ResetCheckMain(emotebtns,wing)
+				emotebtn:SetChecked(pre)
+			else
+				pre = 0
+				if (emotebtn:GetChecked()) then
+					pre=1
+				end
+				EmoteButtons_ResetCheck(emotebtns)
+				emotebtn:SetChecked(pre)
 			end
 			EmoteButtons_ToggleDeck(action, wing);
 		elseif acttype==EBACTTYPE_EMOTE then
 			EmoteButtons_DoEmote(action);
+			emotebtn:SetChecked(0)
 		elseif acttype==EBACTTYPE_SLASHCMD then	
 			EmoteButtons_DoAction(action);
+			emotebtn:SetChecked(0)
 		end
+	end
+end
+
+function EmoteButtons_GetActionButton(f,g)
+	if (f==0) then --main
+		return EmoteButtons_FirstLevel, getglobal(EmoteButtons_FirstLevel[g])
+	elseif (f==1) then -- Left
+		return EmoteButtons_LeftWing, getglobal(EmoteButtons_LeftWing[g])
+	elseif (f==2) then -- Right
+		return EmoteButtons_RightWing, getglobal(EmoteButtons_RightWing[g])
+	elseif (f==3) then -- Far Left
+		return EmoteButtons_FarLeftWing, getglobal(EmoteButtons_FarLeftWing[g])
+	elseif (f==4) then -- Far Right
+		return EmoteButtons_FarRightWing, getglobal(EmoteButtons_FarRightWing[g])
+	end
+end
+
+function EmoteButtons_ResetCheckMain(frames,wing)
+	a=0
+	l=0
+	if wing == "Left" then
+		a=1
+		l=4
+	else
+		a=5
+		l=8
+	end
+	--l = getn(frames)
+	for i=a, l do
+		getglobal(frames[i]):SetChecked(0)
+	end
+end
+
+
+function EmoteButtons_ResetCheck(frames)
+	l = getn(frames)
+	for i=1, l do
+		getglobal(frames[i]):SetChecked(0)
 	end
 end
 
@@ -580,9 +635,11 @@ function EmoteButtons_ToggleDeck(deck, wing)
 			if(EmoteButtons_Levels["FarLeft"]) then
 				EmoteButtons_ToggleWing("FarLeft");
 			end
+			EmoteButtons_ResetCheck(EmoteButtons_LeftWing)
 			EmoteButtons_ToggleWing("Left");
 		else
 			EmoteButtons_LoadDeck(deck, wing); 
+			EmoteButtons_ResetCheck(EmoteButtons_LeftWing)
 			if (EmoteButtons_Levels["Left"]) then
 				if(EmoteButtons_Levels["FarLeft"]) then
 					EmoteButtons_ToggleWing("FarLeft");
@@ -598,9 +655,11 @@ function EmoteButtons_ToggleDeck(deck, wing)
 			if(EmoteButtons_Levels["FarRight"]) then
 				EmoteButtons_ToggleWing("FarRight");
 			end
+			EmoteButtons_ResetCheck(EmoteButtons_RightWing)
 			EmoteButtons_ToggleWing("Right");
 		else
 			EmoteButtons_LoadDeck(deck, wing);
+			EmoteButtons_ResetCheck(EmoteButtons_RightWing)
 			if (EmoteButtons_Levels["Right"]) then
 				if(EmoteButtons_Levels["FarRight"]) then
 					EmoteButtons_ToggleWing("FarRight");

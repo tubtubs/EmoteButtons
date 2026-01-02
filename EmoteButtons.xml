@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 	<Script file="localization.lua"/>
 	<Script file="EmoteButtons.lua"/>
-	<Button name="EmoteButtons_temp_noscript" toplevel="true" virtual="true">
+	<CheckButton name="EmoteButtons_temp_noscript" toplevel="true" virtual="true">
 		<Size>
 			<AbsDimension x="42" y="42"/>
 		</Size>
@@ -22,10 +22,11 @@
 				</Texture>
 			</Layer>
 		</Layers>
+		<CheckedTexture file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-ButtonHigh.tga" />
 		<NormalTexture file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-ButtonBase.tga"/>
 		<HighlightTexture alphaMode="BLEND" file="Interface\AddOns\EmoteButtons\Assets\EmoteButtons-ButtonGlow.tga"/>
-	</Button>
-	<Button name="EmoteButtons_template" movable="false" hidden="true" virtual="true" inherits="EmoteButtons_temp_noscript">
+	</CheckButton>
+	<CheckButton name="EmoteButtons_template" movable="false" hidden="true" virtual="true" inherits="EmoteButtons_temp_noscript">
 		<Scripts>
 			<OnClick>
 			EmoteButtons_ClickAction(this:GetName());
@@ -37,7 +38,7 @@
 			EmoteButtons_HideTooltip();
 			</OnLeave>
 		</Scripts>
-	</Button>
+	</CheckButton>
 	<Button name="EmoteButtons_Main" parent="UIParent" toplevel="true" movable="true" inherits="EmoteButtons_temp_noscript">
 		<Anchors>
 			<Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER">

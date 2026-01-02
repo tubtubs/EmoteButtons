@@ -15,3 +15,7 @@ Advanced Config Window
 -Reset profile and position
 Macro Support
 All new layout, featuring 250+ emotes and slash commands, and macros
+
+02/01/2026
+updated, version 2.01
+Added green border to buttons that open decks, when open
