@@ -1,4 +1,7 @@
-# EmoteButtons
+# EmoteButtonsV2
+https://www.youtube.com/watch?v=xhVF_IQUatE
+[![EmoteButtonsV2](http://img.youtube.com/vi/xhVF_IQUatE/0.jpg)](http://www.youtube.com/watch?v=xhVF_IQUatE "Video Title")
+https://www.youtube.com/watch?v=
 Based on an addon by QuippeR (originally released ~2006)
 Adds an expanding menu system that grants access to emotes, slash commands and macros. Supports profiles, and export and importing of profiles. Shift click a button, or type /eb for more options.
 This addon supports and expanded set of emotes, and icons up to wrath of the lich king. There is an icon patch to support standard vanilla servers, however a deck layout with only the standard emotes will be loaded unless playing on a supported server.
@@ -8,7 +11,7 @@ This addon supports and expanded set of emotes, and icons up to wrath of the lic
 2. Unzip the download into your Interface/Addons folder in your WoW directory. Eg: *C:\Games\WoW\Interface\Addons*
 3. Rename the folder from *EmoteButtons-master* to *EmoteButtons*
 4. Restart WoW and enable the addon from the character selection screen. Ensure your addon memory cap is set to 0 (no limit) as well.
-5. If you're playing on a standard vanilla server, you will need the icon patch. [Download](https://files.catbox.moe/i1c0mq.zip), and move Patch-I.mpq to your Data folder. Eg: C:\Games\WoW\Data
+5. If you're playing on a standard vanilla server, you will need the icon patch. [Download](https://files.catbox.moe/i1c0mq.zip), and move Patch-I.mpq to your Data folder. Eg: *C:\Games\WoW\Data*
 
 You can also use the [GitAddonsManager](https://gitlab.com/woblight/GitAddonsManager) to install this addon, but it will not install the icon patch.
 
