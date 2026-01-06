@@ -1,7 +1,5 @@
 # EmoteButtonsV2
-https://www.youtube.com/watch?v=xhVF_IQUatE
 [![EmoteButtonsV2](http://img.youtube.com/vi/xhVF_IQUatE/0.jpg)](http://www.youtube.com/watch?v=xhVF_IQUatE "Video Title")
-https://www.youtube.com/watch?v=
 Based on an addon by QuippeR (originally released ~2006)
 Adds an expanding menu system that grants access to emotes, slash commands and macros. Supports profiles, and export and importing of profiles. Shift click a button, or type /eb for more options.
 This addon supports an expanded set of emotes, and icons up to wrath of the lich king. There is an icon patch to support standard vanilla servers, however a deck layout with only the standard emotes will be loaded unless playing on a supported server.
