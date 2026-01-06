@@ -552,6 +552,7 @@ function EmoteButtons_ClickAction(framename)
 		EmoteButtons_ConfigDeck = deck;
 		EmoteButtons_ConfigButton = g;
 		EmoteButtons_OpenDeckBuilder();
+		emotebtn:SetChecked(0)
 	else
 		btn = EB_CurrentActions[deck][g];
 		action = btn.action;
