@@ -260,7 +260,7 @@
 						</Offset>
 					</Shadow>
 				</FontString>
-				<FontString name="$parentActionsTitle" font="GameFontNormal" text="EMOTEBUTTONS_ACTIONSTITLE">
+				<FontString name="$parentActionsTitle" font="GameFontNormalSmall" text="EMOTEBUTTONS_ACTIONSTITLE">
 					<Size>
 						<AbsDimension x="140" y="0" />
 					</Size>
@@ -272,7 +272,7 @@
 						</Anchor>
 					</Anchors>
 					<FontHeight>
-						<AbsValue val="14" />
+						<AbsValue val="12" />
 					</FontHeight>
 					<Color r="1" g="0.8196079" b="0" />
 					<Shadow>
@@ -282,7 +282,7 @@
 						</Offset>
 					</Shadow>
 				</FontString>
-				<FontString name="$parentActionsTitle2" font="GameFontNormal" text="EMOTEBUTTONS_BUTTONOPTIONSTITLE">
+				<FontString name="$parentActionsTitle2" font="GameFontNormalSmall" text="EMOTEBUTTONS_BUTTONOPTIONSTITLE">
 					<Size>
 						<AbsDimension x="140" y="0" />
 					</Size>

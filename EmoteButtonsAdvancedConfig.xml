@@ -86,7 +86,7 @@
 						</Offset>
 					</Shadow>
 				</FontString>
-				<FontString name="$parentExtendedModeString" font="GameFontNormal" text="EMOTEBUTTONS_EXTENDEDMODE">
+				<FontString name="$parentExtendedModeString" font="GameFontNormalSmall" text="EMOTEBUTTONS_EXTENDEDMODE">
 					<!--Extended Mode -->
 					<Size>
 						<AbsDimension x="140" y="0" />
@@ -109,7 +109,7 @@
 						</Offset>
 					</Shadow>
 				</FontString>
-				<FontString name="$parentFadingOption" font="GameFontNormal" text="EMOTEBUTTONS_FADINGOPTION">
+				<FontString name="$parentFadingOption" font="GameFontNormalSmall" text="EMOTEBUTTONS_FADINGOPTION">
 					<Size>
 						<AbsDimension x="140" y="0" />
 					</Size>
