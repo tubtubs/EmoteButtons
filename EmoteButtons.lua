@@ -197,15 +197,15 @@ function EmoteButtons_WipeVars()
 			};
 		end
 	end
-
-		
+			
 	if (EmoteButtons_Vars.PMode==EB_VANILLA) then
 		EB_EmoteList = EB_VanillaEmoteList;
 	elseif (EmoteButtons_Vars.PMode==EB_EXTENDED) then
 		EB_EmoteList = EB_ExtendedEmoteList;
 	end
 	--populate deck list
-	EmoteButtons_DeckList = {}
+	EB_CurrentActions = EmoteButtons_Vars.Profiles[EmoteButtons_Vars.PIndex].Decks
+
 	for i, v in pairs(EB_CurrentActions) do
 		table.insert(EmoteButtons_DeckList,i)
 	end
@@ -267,7 +267,6 @@ end
 --runs on addon load
 function EmoteButtons_LoadedVars()
 	EmoteButtons_WipeVars();
-	EB_CurrentActions = EmoteButtons_Vars.Profiles[EmoteButtons_Vars.PIndex].Decks
 	EmoteButtons_AdvancedConfigFrame_SetMainShift:SetValue(EmoteButtons_Vars.Main_Shift);
 	EmoteButtons_AdvancedConfigFrame_SetMainSize:SetValue(EmoteButtons_Vars.Main_Ratio);
 	EmoteButtons_ArrangeFrames();

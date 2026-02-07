@@ -221,7 +221,7 @@
 				</Scripts>
 				<FontString inherits="ChatFontNormal"/>
 			</EditBox>
-			<Button name="IconPickerRandomButton" text="ICONPICKER_RANDOM" inherits="EmoteButtons_OptionButton_Template">
+			<Button name="IconPickerRandomButton" text="ICONPICKER_RANDOM" inherits="UIPanelButtonTemplate">
 				<Size>
 					<AbsDimension x="60" y="20" />
 				</Size>
