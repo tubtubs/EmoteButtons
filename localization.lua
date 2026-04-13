@@ -30,6 +30,7 @@ EMOTEBUTTONS_SLASHHELP = [[|cFF00FF00Emote Buttons:|r This is help topic for |cF
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons options|r - opens the advanced config window.
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetposition|r - resets position of the main button to the middle of the screen.
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetprofile|r - resets the current profile to default.
+|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons minimap {show/hide}|r - show or hide the minimap button.
 ]]
 
 
@@ -76,6 +77,7 @@ EMOTEBUTTONS_ADVANCEDCONFIG = "Advanced Config"
 EMOTEBUTTONS_NEWPROFILE = "New Profile"
 EMOTEBUTTONS_IMPORTPROFILE = "Import Profile"
 EMOTEBUTTONS_EXPORTPROFILE = "Export Profile"
+EMOTEBUTTONS_MINIMAPTOGGLE = "Show Minimap Button"
 EMOTEBUTTONS_RESETPOSITION = "Reset Button Position"
 EMOTEBUTTONS_RESETPOSITIONTIP = "Places the main button in the middle of the screen"
 EMOTEBUTTONS_RESETPROFILE =  "Reset Current Profile"

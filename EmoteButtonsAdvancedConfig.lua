@@ -49,6 +49,12 @@ function EmoteButtons_AdvancedConfigFrame_OnShow()
 		EmoteButtons_AdvancedConfigFrame_DisableFadeCheckButton:SetChecked(1)
 	end
 
+	if EmoteButtons_Icon.hide then
+		EmoteButtons_AdvancedConfigFrame_MinimapToggleButton:SetChecked(0)
+	else
+		EmoteButtons_AdvancedConfigFrame_MinimapToggleButton:SetChecked(1)
+	end
+
 	DeckBuilderFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
 	EmoteButtons_HideAllPopups()
@@ -280,6 +286,14 @@ function EmoteButtons_ExportProfile()
 							EmoteButtons_Vars.Profile)
 	EmoteButtons_ExportProfileFrame_ScrollFrame_ExportEditBox:SetText(TempDecks..TempProfile)
 	EmoteButtons_ExportProfileFrame:Show();
+end
+
+function EmoteButtons_AdvancedConfigFrame_MinimapToggleButton_OnClick()
+	if EmoteButtons_Icon.hide then
+		EmoteButtons_ShowMinimap()
+	else
+		EmoteButtons_HideMinimap()
+	end
 end
 
 function EmoteButtons_AdvancedConfigFrame_ExtendedModeCheckButton_OnClick()

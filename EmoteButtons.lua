@@ -111,6 +111,10 @@ local function TextMenu(arg)
 			EmoteButtons_ExtendedMode()
 		elseif arg=="mode vanilla" then
 			EmoteButtons_VanillaMode()
+		elseif arg=="minimap hide" then
+			EmoteButtons_HideMinimap()
+		elseif arg=="minimap show" then
+			EmoteButtons_ShowMinimap()
 		else
 			DEFAULT_CHAT_FRAME:AddMessage(EMOTEBUTTONS_SLASHUNKNOWN,1,0.3,0.3);
 		end
@@ -123,6 +127,21 @@ SLASH_EMOTEBUTTONS2 = '/EB'
 
 local function sort_alphabetical(a, b)
 	return a < b
+end
+
+function EmoteButtons_HideMinimap()
+	EmoteButtons_Icon.hide = true
+	libIcon:Hide("EmoteButtons icon")
+end
+
+function EmoteButtons_ShowMinimap()
+	EmoteButtons_Icon.hide = false
+	if (libIcon:GetMinimapButton("EmoteButtons icon")) then
+		libIcon:Show("EmoteButtons icon")
+	else
+		EB_MinimapIconRegister()
+		EB_Minimap_DewdropRegister()
+	end
 end
 
 function EmoteButtons_VanillaMode()
@@ -285,31 +304,35 @@ function EB_MinimapIconRegister()
 			hide = false
 		}
 	end
-	local iconData = libData:NewDataObject("MorphHelper icon data", {
-        OnClick = function()
-            if EB_Minimap_Dewdrop:IsOpen() then
-                EB_Minimap_Dewdrop:Close();
-            else
-                EB_Minimap_Dewdrop:Open(this);
-            end
-        end,
-        OnTooltipShow = function(tooltip)
-            tooltip:SetText(EMOTEBUTTONS_NAMEVERSION);
-        end,
-        icon = "Interface\\Icons\\Ability_Rogue_Disguise"
-    });
+	if not EmoteButtons_Icon.hide then
+		local iconData = libData:NewDataObject("MorphHelper icon data", {
+			OnClick = function()
+				if EB_Minimap_Dewdrop:IsOpen() then
+					EB_Minimap_Dewdrop:Close();
+				else
+					EB_Minimap_Dewdrop:Open(this);
+				end
+			end,
+			OnTooltipShow = function(tooltip)
+				tooltip:SetText(EMOTEBUTTONS_NAMEVERSION);
+			end,
+			icon = "Interface\\Icons\\Ability_Rogue_Disguise"
+		});
 
-    libIcon:Register("EmoteButtons icon", iconData, EmoteButtons_Icon);
+		libIcon:Register("EmoteButtons icon", iconData, EmoteButtons_Icon);
+	end
 end
 
 function EB_Minimap_DewdropRegister()
-	EB_Minimap_Dewdrop:Register(libIcon:GetMinimapButton("EmoteButtons icon"), --Bound Frame
-		'point', function(parent) --Point
-			return "TOP", "BOTTOM"
-		end,
-		'children', function(level, value) EB_Minimap_DewdropGen() end,
-		'dontHook', true
-	)
+	if not EmoteButtons_Icon.hide then
+		EB_Minimap_Dewdrop:Register(libIcon:GetMinimapButton("EmoteButtons icon"), --Bound Frame
+			'point', function(parent) --Point
+				return "TOP", "BOTTOM"
+			end,
+			'children', function(level, value) EB_Minimap_DewdropGen() end,
+			'dontHook', true
+		)
+	end
 end
 
 function EB_Minimap_DewdropGen()
