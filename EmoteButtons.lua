@@ -31,7 +31,9 @@ Shift click a button to get to the options.
 --------------------------------------------------------------
 --      Don't change code unless you know what you do!      --
 --------------------------------------------------------------
-
+local libIcon = LibStub("LibDBIcon-1.0");
+local libData = LibStub("LibDataBroker-1.1");
+EB_Profiles_Dewdrop = AceLibrary("Dewdrop-2.0");
 
 EmoteButtons_FirstLevel =
 	{"EmoteButtons_01", "EmoteButtons_02", "EmoteButtons_03", "EmoteButtons_04",
@@ -270,6 +272,86 @@ function EmoteButtons_LoadedVars()
 	EmoteButtons_AdvancedConfigFrame_SetMainShift:SetValue(EmoteButtons_Vars.Main_Shift);
 	EmoteButtons_AdvancedConfigFrame_SetMainSize:SetValue(EmoteButtons_Vars.Main_Ratio);
 	EmoteButtons_ArrangeFrames();
+	--EB_MinimapIconRegister()
+	EB_Profiles_DewdropRegister()
+	--EB_Delete_DewdropRegister()
+end
+
+function EB_Profiles_DewdropRegister()
+	EB_Profiles_Dewdrop:Register(EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) EB_ProfilesDewDropGen(EB_PROFILE_SET) end,
+		'dontHook', true
+	)
+	EB_Profiles_Dewdrop:Register(EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) EB_ProfilesDewDropGen(EB_PROFILE_DELETE) end,
+		'dontHook', true
+	)
+	EB_Profiles_Dewdrop:Register(EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) EB_ProfilesDewDropGen(EB_PROFILE_DUPLICATE) end,
+		'dontHook', true
+	)
+end
+
+function EB_ProfilesDewDropGen(mode)
+
+    for i,j in ipairs(EmoteButtons_Vars.Profiles) do
+        chk = false
+        if EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile then
+            chk=true;
+        end
+        if mode == EB_PROFILE_SET then
+            EB_Profiles_Dewdrop:AddLine(
+                'text', j.Name,
+                'textR', 1,
+                'textG', 0.82,
+                'textB', 0,
+                'func', EmoteButtons_SetProfile,
+                'arg1', i,
+                'notCheckable', false,
+                'checked', chk
+            )
+        elseif mode == EB_PROFILE_DELETE and not chk then
+            EB_Profiles_Dewdrop:AddLine(
+                'text', j.Name,
+                'textR', 1,
+                'textG', 0.82,
+                'textB', 0,
+                'func', EmoteButtons_DeleteProfile,
+                'arg1', i,
+                'notCheckable', false,
+                'checked', chk
+            )
+		elseif mode == EB_PROFILE_DUPLICATE then
+            EB_Profiles_Dewdrop:AddLine(
+                'text', j.Name,
+                'textR', 1,
+                'textG', 0.82,
+                'textB', 0,
+                'func', EmoteButtons_DuplicateProfile,
+                'arg1', i,
+                'notCheckable', false,
+                'checked', chk
+            )
+        end
+    end
+
+    EB_Profiles_Dewdrop:AddLine(
+        'text' , "Close Menu",
+        'textR', 0,
+        'textG', 1,
+        'textB', 1,
+        'func' , function() EB_Profiles_Dewdrop:Close() end,
+        'notCheckable', true
+    )
 end
 
 function EmoteButtons_ArrangeFrames()

@@ -321,12 +321,9 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnShow>
-                       UIDropDownMenu_Initialize(self, EmoteButtons_ProfileSetDropDown_OnShow);
-                   </OnShow>
 					<OnClick>
 					   GameTooltip:Hide();
-                       EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick();
+                       EmoteButtons_ToggleProfileDropdown();
                    </OnClick>
 					<OnEnter>
 					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
@@ -342,17 +339,14 @@
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileSetDropdownButton">
 						<Offset>
-							<AbsDimension x="0" y="-30"/>
+							<AbsDimension x="0" y="-20"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnShow>
-                       UIDropDownMenu_Initialize(self, EmoteButtons_ProfileDeleteDropDown_OnShow);
-                   </OnShow>
 					<OnClick>
 					   GameTooltip:Hide();					
-                       EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick();
+                       EmoteButtons_ToggleProfileDropdown();
                    </OnClick>
 					<OnEnter>
 					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");
@@ -368,17 +362,14 @@
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativeTo="$parent_ProfileDeleteDropdownButton">
 						<Offset>
-							<AbsDimension x="0" y="-30"/>
+							<AbsDimension x="0" y="-20"/>
 						</Offset>
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnShow>
-                       UIDropDownMenu_Initialize(self, EmoteButtons_ProfileDuplicateDropDown_OnShow);
-                   </OnShow>
 					<OnClick>
 					   GameTooltip:Hide();
-                       EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick();
+                       EmoteButtons_ToggleProfileDropdown();
                    </OnClick>
 					<OnEnter>
 					GameTooltip:SetOwner(this, "ANCHOR_BOTTOMRIGHT");

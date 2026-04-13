@@ -78,9 +78,10 @@ function EmoteButtons_ProfileSetDropDown_OnShow()
 	end
 end
 
-function EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick()
+function EmoteButtons_ToggleProfileDropdown()
 	PlaySound("igCharacterInfoOpen");
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, 0, 0);
+	EB_Profiles_Dewdrop:Close();
+	EB_Profiles_Dewdrop:Open(this);
 end
 
 function EmoteButtons_ProfileDeleteDropDown_OnShow()
@@ -98,11 +99,6 @@ function EmoteButtons_ProfileDeleteDropDown_OnShow()
 			UIDropDownMenu_AddButton(info);
 		end
 	end
-end
-
-function EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick()
-	PlaySound("igCharacterInfoOpen");
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, 0, 0);
 end
 
 function EmoteButtons_DuplicateProfile(index)
@@ -164,12 +160,6 @@ function EmoteButtons_ProfileDuplicateDropDown_OnShow()
 		end
 		UIDropDownMenu_AddButton(info);
 	end
-end
-
-function EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick()
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 
-	EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 0, 0);
-	PlaySound("igCharacterInfoOpen");
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()

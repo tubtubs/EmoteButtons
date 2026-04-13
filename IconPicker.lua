@@ -1,3 +1,5 @@
+local IP_Dewdrop = AceLibrary("Dewdrop-2.0");
+
 
 NUM_ICONS_SHOWN = 20;
 NUM_ICONS_PER_ROW = 5;
