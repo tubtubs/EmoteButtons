@@ -5,7 +5,7 @@
 -- -->>
 
 EMOTEBUTTONS_NAME		= "EmoteButtons";
-EMOTEBUTTONS_VERSION		= "2.02";
+EMOTEBUTTONS_VERSION		= "2.03";
 
 EMOTEBUTTONS_NAMEVERSION	= EMOTEBUTTONS_NAME.." v"..EMOTEBUTTONS_VERSION;
 
@@ -30,7 +30,10 @@ EMOTEBUTTONS_SLASHHELP = [[|cFF00FF00Emote Buttons:|r This is help topic for |cF
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons options|r - opens the advanced config window.
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetposition|r - resets position of the main button to the middle of the screen.
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetprofile|r - resets the current profile to default.
+|cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons minimap {show/hide}|r - show or hide the minimap button.
 ]]
+
+
 
 EMOTEBUTTONS_SLASHUNKNOWN = "|cFF00FF00Emote Buttons:|r unknown command"
 
@@ -69,12 +72,12 @@ EMOTEBUTTONS_DECKACTIONSTITLEMAIN = "Cannot rename, or delete the Main deck."
 EMOTEBUTTONS_BUTTONOPTIONSTITLE = "Button Options:"
 EMOTEBUTTONS_BUTTONOPTIONSTITLEDISABLED = "Set an action first."
 
-
 --Advanced Config Strings
 EMOTEBUTTONS_ADVANCEDCONFIG = "Advanced Config"
 EMOTEBUTTONS_NEWPROFILE = "New Profile"
 EMOTEBUTTONS_IMPORTPROFILE = "Import Profile"
 EMOTEBUTTONS_EXPORTPROFILE = "Export Profile"
+EMOTEBUTTONS_MINIMAPTOGGLE = "Show Minimap Button"
 EMOTEBUTTONS_RESETPOSITION = "Reset Button Position"
 EMOTEBUTTONS_RESETPOSITIONTIP = "Places the main button in the middle of the screen"
 EMOTEBUTTONS_RESETPROFILE =  "Reset Current Profile"
@@ -88,6 +91,13 @@ EMOTEBUTTONS_EXTENDEDMODETIP = "Only works on supported servers, use Default - E
 EMOTEBUTTONS_FADINGOPTION = "Disable Fading Buttons"
 EMOTEBUTTONS_FADINGOPTIONTIP = "If checked, disables the fading effects on buttons. Could improve performance."
 EMOTEBUTTONS_PROFILEDROPDOWNTIP = "Click to display profiles"
+
+--Minimap Button
+EMOTEBUTTONS_MINIMAP_RESETBUTTON = "Reset Button Position"
+EMOTEBUTTONS_MINIMAP_ADVANCEDCONFIG = "Open " .. EMOTEBUTTONS_ADVANCEDCONFIG
+EMOTEBUTTONS_MINIMAP_DECKBUILDER = "Open " .. EMOTEBUTTONS_DECKBUILDER
+
+
 --Modes
 EB_VANILLA = 1
 EB_EXTENDED = 2
@@ -96,6 +106,11 @@ EB_EXTENDED = 2
 EBACTTYPE_DECK = 0
 EBACTTYPE_EMOTE = 1
 EBACTTYPE_SLASHCMD = 2
+
+--Profile Dropdown Modes
+EB_PROFILE_SET = 0
+EB_PROFILE_DELETE = 1
+EB_PROFILE_DUPLICATE = 2
 
 --type=EBACTTYPE_DECK,
 --type=EBACTTYPE_EMOTE,

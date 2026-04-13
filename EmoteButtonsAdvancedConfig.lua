@@ -49,6 +49,12 @@ function EmoteButtons_AdvancedConfigFrame_OnShow()
 		EmoteButtons_AdvancedConfigFrame_DisableFadeCheckButton:SetChecked(1)
 	end
 
+	if EmoteButtons_Icon.hide then
+		EmoteButtons_AdvancedConfigFrame_MinimapToggleButton:SetChecked(0)
+	else
+		EmoteButtons_AdvancedConfigFrame_MinimapToggleButton:SetChecked(1)
+	end
+
 	DeckBuilderFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
 	EmoteButtons_HideAllPopups()
@@ -61,48 +67,10 @@ end
 
 --Did this onshow, instead of load since my variables weren't loaded on time for on load.
 --Might just need to change when the AddonLoaded event is called?
-function EmoteButtons_ProfileSetDropDown_OnShow()
-	for i=1, getn(EmoteButtons_Vars.Profiles) do
-		info = {};
-		info.text       = EmoteButtons_Vars.Profiles[i].Name;
-		info.value      = i;
-		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
-			info.checked =true;
-		else
-			info.checked=false;
-		end
-		info.func =  function() 
-			EmoteButtons_SetProfile(this.value) 
-		end
-		UIDropDownMenu_AddButton(info);
-	end
-end
-
-function EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton_OnClick()
+function EmoteButtons_ToggleProfileDropdown()
 	PlaySound("igCharacterInfoOpen");
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, 0, 0);
-end
-
-function EmoteButtons_ProfileDeleteDropDown_OnShow()
-	for i=1, getn(EmoteButtons_Vars.Profiles) do
-		info = {};
-		info.text       = EmoteButtons_Vars.Profiles[i].Name;
-		info.value      = i;
-		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
-			info.checked =true;
-		else -- only add if its not currently in use...
-			info.checked=false;
-			info.func =  function() 
-				EmoteButtons_DeleteProfile(this.value) 
-			end
-			UIDropDownMenu_AddButton(info);
-		end
-	end
-end
-
-function EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton_OnClick()
-	PlaySound("igCharacterInfoOpen");
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, 0, 0);
+	EB_Profiles_Dewdrop:Close();
+	EB_Profiles_Dewdrop:Open(this);
 end
 
 function EmoteButtons_DuplicateProfile(index)
@@ -147,29 +115,6 @@ function EmoteButtons_DuplicateProfile(index)
 	};
 	StaticPopup_Show("EMOTEBUTTONS_DUPLICATEPROFILE");
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_DUPLICATEPROFILE")):GetName().."EditBox"):SetText("");
-end
-
-function EmoteButtons_ProfileDuplicateDropDown_OnShow()
-	for i=1, getn(EmoteButtons_Vars.Profiles) do
-		info = {};
-		info.text       = EmoteButtons_Vars.Profiles[i].Name;
-		info.value      = i;
-		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
-			info.checked =true;
-		else
-			info.checked=false;
-		end
-		info.func =  function() 
-			EmoteButtons_DuplicateProfile(this.value) 
-		end
-		UIDropDownMenu_AddButton(info);
-	end
-end
-
-function EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton_OnClick()
-	ToggleDropDownMenu(1, nil, EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 
-	EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, 0, 0);
-	PlaySound("igCharacterInfoOpen");
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()
@@ -302,9 +247,6 @@ function EmoteButtons_ImportProfileFrame_SubmitButton_OnClick()
 	EmoteButtons_ImportProfileFrame:Hide();
 end
 
----How do I want it to look on export? Like valid lua table probably.
---
-
 function EmoteButtons_ExportProfile()
 	PlaySound("igCharacterInfoOpen");
 
@@ -344,6 +286,14 @@ function EmoteButtons_ExportProfile()
 							EmoteButtons_Vars.Profile)
 	EmoteButtons_ExportProfileFrame_ScrollFrame_ExportEditBox:SetText(TempDecks..TempProfile)
 	EmoteButtons_ExportProfileFrame:Show();
+end
+
+function EmoteButtons_AdvancedConfigFrame_MinimapToggleButton_OnClick()
+	if EmoteButtons_Icon.hide then
+		EmoteButtons_ShowMinimap()
+	else
+		EmoteButtons_HideMinimap()
+	end
 end
 
 function EmoteButtons_AdvancedConfigFrame_ExtendedModeCheckButton_OnClick()

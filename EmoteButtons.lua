@@ -31,6 +31,10 @@ Shift click a button to get to the options.
 --------------------------------------------------------------
 --      Don't change code unless you know what you do!      --
 --------------------------------------------------------------
+local libIcon = LibStub("LibDBIcon-1.0");
+local libData = LibStub("LibDataBroker-1.1");
+EB_Profiles_Dewdrop = AceLibrary("Dewdrop-2.0");
+local EB_Minimap_Dewdrop = AceLibrary("Dewdrop-2.0");
 
 
 EmoteButtons_FirstLevel =
@@ -93,7 +97,9 @@ EB_EmoteList = {}
 -- chat inputs
 local function TextMenu(arg)
 	if arg == nil or arg == "" then
-		DEFAULT_CHAT_FRAME:AddMessage(EMOTEBUTTONS_SLASHHELP,1,1,1)
+		for w in string.gfind(EMOTEBUTTONS_SLASHHELP, "([^\r\n]+)") do
+            DEFAULT_CHAT_FRAME:AddMessage(w,1,1,1)
+        end
 	else
 		if arg == "resetposition" then
 			EmoteButtons_ResetPosition()
@@ -107,6 +113,10 @@ local function TextMenu(arg)
 			EmoteButtons_ExtendedMode()
 		elseif arg=="mode vanilla" then
 			EmoteButtons_VanillaMode()
+		elseif arg=="minimap hide" then
+			EmoteButtons_HideMinimap()
+		elseif arg=="minimap show" then
+			EmoteButtons_ShowMinimap()
 		else
 			DEFAULT_CHAT_FRAME:AddMessage(EMOTEBUTTONS_SLASHUNKNOWN,1,0.3,0.3);
 		end
@@ -119,6 +129,21 @@ SLASH_EMOTEBUTTONS2 = '/EB'
 
 local function sort_alphabetical(a, b)
 	return a < b
+end
+
+function EmoteButtons_HideMinimap()
+	EmoteButtons_Icon.hide = true
+	libIcon:Hide("EmoteButtons icon")
+end
+
+function EmoteButtons_ShowMinimap()
+	EmoteButtons_Icon.hide = false
+	if (libIcon:GetMinimapButton("EmoteButtons icon")) then
+		libIcon:Show("EmoteButtons icon")
+	else
+		EB_MinimapIconRegister()
+		EB_Minimap_DewdropRegister()
+	end
 end
 
 function EmoteButtons_VanillaMode()
@@ -270,6 +295,167 @@ function EmoteButtons_LoadedVars()
 	EmoteButtons_AdvancedConfigFrame_SetMainShift:SetValue(EmoteButtons_Vars.Main_Shift);
 	EmoteButtons_AdvancedConfigFrame_SetMainSize:SetValue(EmoteButtons_Vars.Main_Ratio);
 	EmoteButtons_ArrangeFrames();
+	EB_MinimapIconRegister()
+	EB_Minimap_DewdropRegister()
+	EB_Profiles_DewdropRegister()
+end
+
+function EB_MinimapIconRegister()
+	if EmoteButtons_Icon == nil then
+		EmoteButtons_Icon = {
+			hide = false
+		}
+	end
+	if not EmoteButtons_Icon.hide then
+		local iconData = libData:NewDataObject("MorphHelper icon data", {
+			OnClick = function()
+				if EB_Minimap_Dewdrop:IsOpen() then
+					EB_Minimap_Dewdrop:Close();
+				else
+					EB_Minimap_Dewdrop:Open(this);
+				end
+			end,
+			OnTooltipShow = function(tooltip)
+				tooltip:SetText(EMOTEBUTTONS_NAMEVERSION);
+			end,
+			icon = "Interface\\Icons\\Ability_Rogue_Disguise"
+		});
+
+		libIcon:Register("EmoteButtons icon", iconData, EmoteButtons_Icon);
+	end
+end
+
+function EB_Minimap_DewdropRegister()
+	if not EmoteButtons_Icon.hide then
+		EB_Minimap_Dewdrop:Register(libIcon:GetMinimapButton("EmoteButtons icon"), --Bound Frame
+			'point', function(parent) --Point
+				return "TOP", "BOTTOM"
+			end,
+			'children', function(level, value) EB_Minimap_DewdropGen() end,
+			'dontHook', true
+		)
+	end
+end
+
+function EB_Minimap_DewdropGen()
+	EB_Minimap_Dewdrop:AddLine(
+		'text', EMOTEBUTTONS_MINIMAP_RESETBUTTON,
+		'textR', 1,
+		'textG', 0.82,
+		'textB', 0,
+		'func', function()
+			EmoteButtons_ResetPosition()
+			EB_Minimap_Dewdrop:Close() end,
+		'notCheckable', true,
+		'checked', false
+	)
+	EB_Minimap_Dewdrop:AddLine(
+		'text', EMOTEBUTTONS_MINIMAP_DECKBUILDER,
+		'textR', 1,
+		'textG', 0.82,
+		'textB', 0,
+		'func', function() 
+			EmoteButtons_OpenDeckBuilder()
+			EB_Minimap_Dewdrop:Close() end,
+		'notCheckable', true,
+		'checked', false
+	)
+	EB_Minimap_Dewdrop:AddLine(
+		'text', EMOTEBUTTONS_MINIMAP_ADVANCEDCONFIG,
+		'textR', 1,
+		'textG', 0.82,
+		'textB', 0,
+		'func', function() 
+			EmoteButtons_AdvancedConfigFrame:Show()
+			EB_Minimap_Dewdrop:Close() end,
+		'notCheckable', true,
+		'checked', false
+	)
+	EB_Minimap_Dewdrop:AddLine(
+        'text' , "Close Menu",
+        'textR', 0,
+        'textG', 1,
+        'textB', 1,
+        'func' , function() EB_Minimap_Dewdrop:Close() end,
+        'notCheckable', true
+    )
+end
+
+function EB_Profiles_DewdropRegister()
+	EB_Profiles_Dewdrop:Register(EmoteButtons_AdvancedConfigFrame_ProfileSetDropdownButton, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) EB_ProfilesDewDropGen(EB_PROFILE_SET) end,
+		'dontHook', true
+	)
+	EB_Profiles_Dewdrop:Register(EmoteButtons_AdvancedConfigFrame_ProfileDeleteDropdownButton, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) EB_ProfilesDewDropGen(EB_PROFILE_DELETE) end,
+		'dontHook', true
+	)
+	EB_Profiles_Dewdrop:Register(EmoteButtons_AdvancedConfigFrame_ProfileDuplicateDropdownButton, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) EB_ProfilesDewDropGen(EB_PROFILE_DUPLICATE) end,
+		'dontHook', true
+	)
+end
+
+function EB_ProfilesDewDropGen(mode)
+
+    for i,j in ipairs(EmoteButtons_Vars.Profiles) do
+        chk = false
+        if EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile then
+            chk=true;
+        end
+        if mode == EB_PROFILE_SET then
+            EB_Profiles_Dewdrop:AddLine(
+                'text', j.Name,
+                'textR', 1,
+                'textG', 0.82,
+                'textB', 0,
+                'func', EmoteButtons_SetProfile,
+                'arg1', i,
+                'notCheckable', false,
+                'checked', chk
+            )
+        elseif mode == EB_PROFILE_DELETE and not chk then
+            EB_Profiles_Dewdrop:AddLine(
+                'text', j.Name,
+                'textR', 1,
+                'textG', 0.82,
+                'textB', 0,
+                'func', EmoteButtons_DeleteProfile,
+                'arg1', i,
+                'notCheckable', false,
+                'checked', chk
+            )
+		elseif mode == EB_PROFILE_DUPLICATE then
+            EB_Profiles_Dewdrop:AddLine(
+                'text', j.Name,
+                'textR', 1,
+                'textG', 0.82,
+                'textB', 0,
+                'func', EmoteButtons_DuplicateProfile,
+                'arg1', i,
+                'notCheckable', false,
+                'checked', chk
+            )
+        end
+    end
+
+    EB_Profiles_Dewdrop:AddLine(
+        'text' , "Close Menu",
+        'textR', 0,
+        'textG', 1,
+        'textB', 1,
+        'func' , function() EB_Profiles_Dewdrop:Close() end,
+        'notCheckable', true
+    )
 end
 
 function EmoteButtons_ArrangeFrames()

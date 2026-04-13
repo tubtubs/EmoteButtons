@@ -71,9 +71,9 @@
 			GameTooltip:Hide();
 			</OnLeave>
 			<OnEvent>
-				if arg1 == "EmoteButtons" then
-					EmoteButtons_LoadedVars();
-				end
+			if arg1 == "EmoteButtons" then
+				EmoteButtons_LoadedVars();
+			end
 			</OnEvent>
 		</Scripts>
 	</Button>

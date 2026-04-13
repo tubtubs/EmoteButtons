@@ -62,12 +62,12 @@ function DeckBuilderFrame_OnShow()
 end
 
 function DeckBuilderFrame_OnHide()
+	PlaySound("igCharacterInfoClose");
 	EmoteButtons_HideAllPopups();
 	EB_EmotesManager:Hide();
 	IconPickerFrame:Hide();
 	DeckManagerFrame:Hide();
 	EmoteButtons_ChangeCMDFrame:Hide();
-	PlaySound("igCharacterInfoClose");
 end
 
 function DeckBuilderFrameDeckActionButton_OnClick()

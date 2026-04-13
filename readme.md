@@ -23,3 +23,4 @@ You can also use the [GitAddonsManager](https://gitlab.com/woblight/GitAddonsMan
 -Advanced config, featuring importing/exporting profiles
 -Macro support
 -All new layout, featuring 250+ emotes, slash commands, and macros
+-Ace Minimap Icon and Dropdowns (2.03) 

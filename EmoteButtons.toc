@@ -1,11 +1,19 @@
 ## Interface: 11200
 ## Title: EmoteButtons
 ## Author: QuippeR, updated by |ccf3CE13Ftubtubs 
-## Version: 2.02
+## Version: 2.03
 ## Notes: A menu to access emotes and slash commands
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
-## SavedVariables: EmoteButtons_Vars
+## SavedVariablesPerCharacter: EmoteButtons_Vars, EmoteButtons_Icon
+libs\AceLibrary.lua
+libs\Dewdrop-2.0.lua
+libs\LibStub.lua
+libs\AceCore-3.0.lua
+libs\AceHook-3.0.lua
+libs\CallbackHandler-1.0.lua
+libs\LibDataBroker-1.1.lua
+libs\LibDBIcon-1.0.lua
 EmoteButtons.xml
 EmoteButtonsDeckBuilder.xml
 EmoteButtonsAdvancedConfig.xml
