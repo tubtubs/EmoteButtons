@@ -97,7 +97,9 @@ EB_EmoteList = {}
 -- chat inputs
 local function TextMenu(arg)
 	if arg == nil or arg == "" then
-		DEFAULT_CHAT_FRAME:AddMessage(EMOTEBUTTONS_SLASHHELP,1,1,1)
+		for w in string.gfind(EMOTEBUTTONS_SLASHHELP, "([^\r\n]+)") do
+            DEFAULT_CHAT_FRAME:AddMessage(w,1,1,1)
+        end
 	else
 		if arg == "resetposition" then
 			EmoteButtons_ResetPosition()
