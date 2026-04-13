@@ -5,7 +5,7 @@
 ## Notes: A menu to access emotes and slash commands
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
-## SavedVariables: EmoteButtons_Vars
+## SavedVariables: EmoteButtons_Vars, EmoteButtons_Icon
 libs\AceLibrary.lua
 libs\Dewdrop-2.0.lua
 libs\LibStub.lua

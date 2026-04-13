@@ -34,6 +34,8 @@ Shift click a button to get to the options.
 local libIcon = LibStub("LibDBIcon-1.0");
 local libData = LibStub("LibDataBroker-1.1");
 EB_Profiles_Dewdrop = AceLibrary("Dewdrop-2.0");
+local EB_Minimap_Dewdrop = AceLibrary("Dewdrop-2.0");
+
 
 EmoteButtons_FirstLevel =
 	{"EmoteButtons_01", "EmoteButtons_02", "EmoteButtons_03", "EmoteButtons_04",
@@ -272,9 +274,86 @@ function EmoteButtons_LoadedVars()
 	EmoteButtons_AdvancedConfigFrame_SetMainShift:SetValue(EmoteButtons_Vars.Main_Shift);
 	EmoteButtons_AdvancedConfigFrame_SetMainSize:SetValue(EmoteButtons_Vars.Main_Ratio);
 	EmoteButtons_ArrangeFrames();
-	--EB_MinimapIconRegister()
+	EB_MinimapIconRegister()
+	EB_Minimap_DewdropRegister()
 	EB_Profiles_DewdropRegister()
-	--EB_Delete_DewdropRegister()
+end
+
+function EB_MinimapIconRegister()
+	if EmoteButtons_Icon == nil then
+		EmoteButtons_Icon = {
+			hide = false
+		}
+	end
+	local iconData = libData:NewDataObject("MorphHelper icon data", {
+        OnClick = function()
+            if EB_Minimap_Dewdrop:IsOpen() then
+                EB_Minimap_Dewdrop:Close();
+            else
+                EB_Minimap_Dewdrop:Open(this);
+            end
+        end,
+        OnTooltipShow = function(tooltip)
+            tooltip:SetText(EMOTEBUTTONS_NAMEVERSION);
+        end,
+        icon = "Interface\\Icons\\Ability_Rogue_Disguise"
+    });
+
+    libIcon:Register("EmoteButtons icon", iconData, EmoteButtons_Icon);
+end
+
+function EB_Minimap_DewdropRegister()
+	EB_Minimap_Dewdrop:Register(libIcon:GetMinimapButton("EmoteButtons icon"), --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) EB_Minimap_DewdropGen() end,
+		'dontHook', true
+	)
+end
+
+function EB_Minimap_DewdropGen()
+	EB_Minimap_Dewdrop:AddLine(
+		'text', EMOTEBUTTONS_MINIMAP_RESETBUTTON,
+		'textR', 1,
+		'textG', 0.82,
+		'textB', 0,
+		'func', function()
+			EmoteButtons_ResetPosition()
+			EB_Minimap_Dewdrop:Close() end,
+		'notCheckable', true,
+		'checked', false
+	)
+	EB_Minimap_Dewdrop:AddLine(
+		'text', EMOTEBUTTONS_MINIMAP_DECKBUILDER,
+		'textR', 1,
+		'textG', 0.82,
+		'textB', 0,
+		'func', function() 
+			EmoteButtons_OpenDeckBuilder()
+			EB_Minimap_Dewdrop:Close() end,
+		'notCheckable', true,
+		'checked', false
+	)
+	EB_Minimap_Dewdrop:AddLine(
+		'text', EMOTEBUTTONS_MINIMAP_ADVANCEDCONFIG,
+		'textR', 1,
+		'textG', 0.82,
+		'textB', 0,
+		'func', function() 
+			EmoteButtons_AdvancedConfigFrame:Show()
+			EB_Minimap_Dewdrop:Close() end,
+		'notCheckable', true,
+		'checked', false
+	)
+	EB_Minimap_Dewdrop:AddLine(
+        'text' , "Close Menu",
+        'textR', 0,
+        'textG', 1,
+        'textB', 1,
+        'func' , function() EB_Minimap_Dewdrop:Close() end,
+        'notCheckable', true
+    )
 end
 
 function EB_Profiles_DewdropRegister()

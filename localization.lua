@@ -32,6 +32,8 @@ EMOTEBUTTONS_SLASHHELP = [[|cFF00FF00Emote Buttons:|r This is help topic for |cF
 |cFF00FF00Emote Buttons:|r |cFFFFFF00 /EmoteButtons resetprofile|r - resets the current profile to default.
 ]]
 
+
+
 EMOTEBUTTONS_SLASHUNKNOWN = "|cFF00FF00Emote Buttons:|r unknown command"
 
 EMOTEBUTTONS_SUBMITBUTTON = "Submit"
@@ -69,7 +71,6 @@ EMOTEBUTTONS_DECKACTIONSTITLEMAIN = "Cannot rename, or delete the Main deck."
 EMOTEBUTTONS_BUTTONOPTIONSTITLE = "Button Options:"
 EMOTEBUTTONS_BUTTONOPTIONSTITLEDISABLED = "Set an action first."
 
-
 --Advanced Config Strings
 EMOTEBUTTONS_ADVANCEDCONFIG = "Advanced Config"
 EMOTEBUTTONS_NEWPROFILE = "New Profile"
@@ -88,6 +89,13 @@ EMOTEBUTTONS_EXTENDEDMODETIP = "Only works on supported servers, use Default - E
 EMOTEBUTTONS_FADINGOPTION = "Disable Fading Buttons"
 EMOTEBUTTONS_FADINGOPTIONTIP = "If checked, disables the fading effects on buttons. Could improve performance."
 EMOTEBUTTONS_PROFILEDROPDOWNTIP = "Click to display profiles"
+
+--Minimap Button
+EMOTEBUTTONS_MINIMAP_RESETBUTTON = "Reset Button Position"
+EMOTEBUTTONS_MINIMAP_ADVANCEDCONFIG = "Open " .. EMOTEBUTTONS_ADVANCEDCONFIG
+EMOTEBUTTONS_MINIMAP_DECKBUILDER = "Open " .. EMOTEBUTTONS_DECKBUILDER
+
+
 --Modes
 EB_VANILLA = 1
 EB_EXTENDED = 2
