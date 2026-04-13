@@ -240,7 +240,7 @@
 			</Button>
 			<CheckButton name="IconPickerAbilities" inherits="IconPickerCategoryTemplate">
 				<Size>
-					<AbsDimension x="52" y="22"/>
+					<AbsDimension x="52" y="32"/>
 				</Size>
 				<Layers>
 					<Layer level="OVERLAY">
@@ -259,11 +259,8 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnShow>
-                       UIDropDownMenu_Initialize(self, IconPickerAbilitiesDropDown_OnShow);
-                   </OnShow>
 					<OnClick>
-                       IconPickerAbilities_OnClick();
+						IconPicker_CategoryDropdown();
                    </OnClick>
 				</Scripts>
 			</CheckButton>
@@ -289,13 +286,14 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
-                       IconPickerAchievements_OnClick();
+						PlaySound("igCharacterInfoOpen");
+                        IconPickerAchievements_OnClick();
                    </OnClick>
 				</Scripts>
 			</CheckButton>
 			<CheckButton name="IconPickerConsumes" inherits="IconPickerCategoryTemplate">
 				<Size>
-					<AbsDimension x="70" y="22"/>
+					<AbsDimension x="70" y="32"/>
 				</Size>
 				<Layers>
 					<Layer level="OVERLAY">
@@ -314,17 +312,14 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnShow>
-                       UIDropDownMenu_Initialize(self, IconPickerConsumesDropDown_OnShow);
-                   </OnShow>
 					<OnClick>
-                       IconPickerConsumes_OnClick();
+                       IconPicker_CategoryDropdown();
                    </OnClick>
 				</Scripts>
 			</CheckButton>
 			<CheckButton name="IconPickerEquipment"  inherits="IconPickerCategoryTemplate">
 				<Size>
-					<AbsDimension x="86" y="22"/>
+					<AbsDimension x="86" y="32"/>
 				</Size>
 				<Layers>
 					<Layer level="OVERLAY">
@@ -343,11 +338,8 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnShow>
-					UIDropDownMenu_Initialize(self, IconPickerEquipmentDropDown_OnShow);
-                   </OnShow>
 					<OnClick>
-					IconPickerEquipment_OnClick();
+					IconPicker_CategoryDropdown();
                    </OnClick>
 				</Scripts>
 			</CheckButton>
@@ -373,13 +365,14 @@
 				</Anchors>
 				<Scripts>
 					<OnClick>
+					PlaySound("igCharacterInfoOpen");
 					IconPickerMisc_OnClick();
                    </OnClick>
 				</Scripts>
 			</CheckButton>
 			<CheckButton name="IconPickerSpells"  inherits="IconPickerCategoryTemplate">
 				<Size>
-					<AbsDimension x="44" y="22"/>
+					<AbsDimension x="44" y="32"/>
 				</Size>
 				<Layers>
 					<Layer level="OVERLAY">
@@ -398,17 +391,14 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnShow>
-					UIDropDownMenu_Initialize(self, IconPickerSpellsDropDown_OnShow);
-                   </OnShow>
 					<OnClick>
-					IconPickerSpells_OnClick();
+					IconPicker_CategoryDropdown();
                    </OnClick>
 				</Scripts>
 			</CheckButton>
 			<CheckButton name="IconPickerTrades"  inherits="IconPickerCategoryTemplate">
 				<Size>
-					<AbsDimension x="44" y="22"/>
+					<AbsDimension x="44" y="32"/>
 				</Size>
 				<Layers>
 					<Layer level="OVERLAY">
@@ -427,17 +417,14 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnShow>
-					UIDropDownMenu_Initialize(self, IconPickerTradesDropDown_OnShow);
-                   </OnShow>
 					<OnClick>
-					IconPickerTrades_OnClick();
+					IconPicker_CategoryDropdown();
                    </OnClick>
 				</Scripts>
 			</CheckButton>
 			<CheckButton name="IconPickerWeapons" inherits="IconPickerCategoryTemplate">
 				<Size>
-					<AbsDimension x="64" y="22"/>
+					<AbsDimension x="64" y="32"/>
 				</Size>
 				<Layers>
 					<Layer level="OVERLAY">
@@ -456,11 +443,8 @@
 					</Anchor>
 				</Anchors>
 				<Scripts>
-					<OnShow>
-					UIDropDownMenu_Initialize(self, IconPickerWeaponsDropDown_OnShow);
-                   </OnShow>
 					<OnClick>
-					IconPickerWeapons_OnClick();
+					IconPicker_CategoryDropdown();
                    </OnClick>
 				</Scripts>
 			</CheckButton>
@@ -699,6 +683,9 @@
 			</Button>
 		</Frames>
 		<Scripts>
+			<OnLoad>
+			this:RegisterEvent("ADDON_LOADED");
+			</OnLoad>
 			<OnShow>
 			tinsert(UISpecialFrames, "IconPickerFrame");
 			IconPickerFrame_OnShow();
@@ -709,6 +696,11 @@
 			<OnMouseWheel>
 			return;
 			</OnMouseWheel>
+			<OnEvent>
+				if arg1 == "EmoteButtons" then
+					IconPicker_OnLoad();
+				end
+			</OnEvent>
 		</Scripts>
 	</Frame>
 </Ui>

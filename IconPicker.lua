@@ -1,6 +1,3 @@
-local IP_Dewdrop = AceLibrary("Dewdrop-2.0");
-
-
 NUM_ICONS_SHOWN = 20;
 NUM_ICONS_PER_ROW = 5;
 NUM_ICON_ROWS = 4;
@@ -297,6 +294,111 @@ IP_ICONPATH = "Interface\\Icons\\"
 NUM_CATEGORIES = 8
 OKAY_FUNC = ""
 
+local IP_Dewdrop = AceLibrary("Dewdrop-2.0");
+
+--OnLoad
+function IconPicker_OnLoad()
+    IconPicker_DewdropRegister()
+end
+
+function IconPicker_DewdropRegister()
+	IP_Dewdrop:Register(IconPickerAbilities, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) IconPicker_ProfilesDewDropGen(IP_CATEGORY_ABILITY, IP_icons_abilties_categories) end,
+		'dontHook', true
+	)
+    IP_Dewdrop:Register(IconPickerConsumes, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) IconPicker_ProfilesDewDropGen(IP_CATEGORY_CONSUME, IP_icons_consume_categories) end,
+		'dontHook', true
+	)
+	IP_Dewdrop:Register(IconPickerEquipment, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) IconPicker_ProfilesDewDropGen(IP_CATEGORY_EQUIPMENT, IP_icons_equipment_categories) end,
+		'dontHook', true
+	)
+	IP_Dewdrop:Register(IconPickerSpells, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) IconPicker_ProfilesDewDropGen(IP_CATEGORY_SPELLS, IP_icons_spells_categories) end,
+		'dontHook', true
+	)
+	IP_Dewdrop:Register(IconPickerTrades, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) IconPicker_ProfilesDewDropGen(IP_CATEGORY_TRADES, IP_icons_trades_categories) end,
+		'dontHook', true
+	)
+	IP_Dewdrop:Register(IconPickerWeapons, --Bound Frame
+		'point', function(parent) --Point
+			return "TOP", "BOTTOM"
+		end,
+		'children', function(level, value) IconPicker_ProfilesDewDropGen(IP_CATEGORY_WEAPONS, IP_icons_weapon_categories) end,
+		'dontHook', true
+	)
+end
+
+function IconPicker_CategoryDropdown()
+    IconPickerUncheckAllCategories()
+    IconPickerCheckSelectedCategory()
+	PlaySound("igCharacterInfoOpen");
+	IP_Dewdrop:Close();
+	IP_Dewdrop:Open(this);
+end
+
+function IconPicker_SetCategory(cat, subcat)
+    PlaySound("igCharacterInfoOpen");
+    IP_CATEGORY_SELECTED = cat;
+    IP_SUBCATEGORY_SELECTED = subcat;	
+    IconPickerUncheckAllCategories()
+    IconPickerCheckSelectedCategory()
+    IconPickerScrollFrame:SetVerticalScroll(0);
+    IconPickerFrame.selectedIcon=0;
+    IconPickerOkayButton_Update()
+    IconPickerFrame_Update();
+    IP_Dewdrop:Close()
+end
+
+function IconPicker_ProfilesDewDropGen(category, t)
+    for i,j in ipairs(t) do
+        chk = false
+        if IP_CATEGORY_SELECTED == category and IP_SUBCATEGORY_SELECTED == i then
+            chk=true;
+        end
+        IP_Dewdrop:AddLine(
+                'text', j,
+                'textR', 1,
+                'textG', 0.82,
+                'textB', 0,
+                'func', IconPicker_SetCategory,
+                'arg1', category,
+                'arg2', i,
+                'notCheckable', false,
+                'checked', chk
+            )
+    end
+
+    IP_Dewdrop:AddLine(
+        'text' , "Close Menu",
+        'textR', 0,
+        'textG', 1,
+        'textB', 1,
+        'func' , function() 
+            EB_Profiles_Dewdrop:Close()
+            PlaySound("igCharacterInfoClose");
+        end,
+        'notCheckable', true
+    )
+end
+
 --Can be called externally to get random icon
 --Truncated tho, has path removed.
 function IconPickerRandomIcon()
@@ -496,39 +598,6 @@ function IconPickerCheckSelectedCategory()
     end
 end
 
-function IconPickerAbilitiesDropDown_OnShow()
-	for i=1, getn(IP_icons_abilties_categories) do
-		info = {};
-		info.text       = IP_icons_abilties_categories[i];
-		info.value      = i;
-        IconPickerAbilities.checked = false;
-		if (IP_CATEGORY_SELECTED == IP_CATEGORY_ABILITY
-            and IP_SUBCATEGORY_SELECTED == i) then
-			info.checked =true;
-		else
-			info.checked=false;
-		end
-		info.func =  function() 
-
-            IP_CATEGORY_SELECTED = IP_CATEGORY_ABILITY;
-            IP_SUBCATEGORY_SELECTED = this.value;
-            IconPickerUncheckAllCategories()
-            IconPickerCheckSelectedCategory()
-            IconPickerScrollFrame:SetVerticalScroll(0);
-            IconPickerFrame.selectedIcon =0;
-            IconPickerOkayButton_Update()
-            IconPickerFrame_Update();
-		end
-		UIDropDownMenu_AddButton(info);
-	end
-end
-
-function IconPickerAbilities_OnClick()
-	ToggleDropDownMenu(1, nil, IconPickerAbilities, IconPickerAbilities, 0, 0);
-    IconPickerUncheckAllCategories()
-    IconPickerCheckSelectedCategory()
-end
-
 function IconPickerAchievements_OnClick()
     IP_CATEGORY_SELECTED = IP_CATEGORY_ACHIVEMENTS;
     IP_SUBCATEGORY_SELECTED = 1;
@@ -541,68 +610,6 @@ function IconPickerAchievements_OnClick()
     CloseDropDownMenus()
 end
 
-function IconPickerConsumesDropDown_OnShow()
-    for i=1, getn(IP_icons_consume_categories) do
-		info = {};
-		info.text       = IP_icons_consume_categories[i];
-		info.value      = i;
-		if (IP_CATEGORY_SELECTED == IP_CATEGORY_CONSUME
-            and IP_SUBCATEGORY_SELECTED == i) then
-			info.checked =true;
-		else
-			info.checked=false;
-		end
-		info.func =  function() 
-            IP_CATEGORY_SELECTED = IP_CATEGORY_CONSUME;
-            IP_SUBCATEGORY_SELECTED = this.value;	
-            IconPickerUncheckAllCategories()
-            IconPickerCheckSelectedCategory()
-            IconPickerScrollFrame:SetVerticalScroll(0);
-            IconPickerFrame.selectedIcon =0;
-            IconPickerOkayButton_Update()
-            IconPickerFrame_Update();
-		end
-		UIDropDownMenu_AddButton(info);
-	end
-end
-
-function  IconPickerConsumes_OnClick()
-	ToggleDropDownMenu(1, nil, IconPickerConsumes, IconPickerConsumes, 0, 0);
-    IconPickerUncheckAllCategories()
-    IconPickerCheckSelectedCategory()
-end
-
-function IconPickerEquipmentDropDown_OnShow()
-    for i=1, getn(IP_icons_equipment_categories) do
-		info = {};
-		info.text       = IP_icons_equipment_categories[i];
-		info.value      = i;
-		if (IP_CATEGORY_SELECTED == IP_CATEGORY_EQUIPMENT
-            and IP_SUBCATEGORY_SELECTED == i) then
-			info.checked =true;
-		else
-			info.checked=false;
-		end
-		info.func =  function() 
-            IP_CATEGORY_SELECTED = IP_CATEGORY_EQUIPMENT;
-            IP_SUBCATEGORY_SELECTED = this.value;	
-            IconPickerUncheckAllCategories()
-            IconPickerCheckSelectedCategory()
-            IconPickerScrollFrame:SetVerticalScroll(0);
-            IconPickerFrame.selectedIcon =0;
-            IconPickerOkayButton_Update()
-            IconPickerFrame_Update();
-		end
-		UIDropDownMenu_AddButton(info);
-	end
-end
-
-function  IconPickerEquipment_OnClick()
-    ToggleDropDownMenu(1, nil, IconPickerEquipment, IconPickerEquipment, 0, 0);
-        IconPickerUncheckAllCategories()
-        IconPickerCheckSelectedCategory()
-end
-
 function IconPickerMisc_OnClick()
     IP_CATEGORY_SELECTED = IP_CATEGORY_MISC;
     IP_SUBCATEGORY_SELECTED = 1;
@@ -613,97 +620,4 @@ function IconPickerMisc_OnClick()
     IconPickerOkayButton_Update()
     IconPickerFrame_Update();
     CloseDropDownMenus()
-end
-
-function IconPickerSpellsDropDown_OnShow()
-    for i=1, getn(IP_icons_spells_categories) do
-		info = {};
-		info.text       = IP_icons_spells_categories[i];
-		info.value      = i;
-		if (IP_CATEGORY_SELECTED == IP_CATEGORY_SPELLS
-            and IP_SUBCATEGORY_SELECTED == i) then
-			info.checked =true;
-		else
-			info.checked=false;
-		end
-		info.func =  function() 
-            IP_CATEGORY_SELECTED = IP_CATEGORY_SPELLS;
-            IP_SUBCATEGORY_SELECTED = this.value;	
-            IconPickerUncheckAllCategories()
-            IconPickerCheckSelectedCategory()
-            IconPickerScrollFrame:SetVerticalScroll(0);
-            IconPickerFrame.selectedIcon =0;
-            IconPickerOkayButton_Update()
-            IconPickerFrame_Update();
-		end
-		UIDropDownMenu_AddButton(info);
-	end
-end
-
-function IconPickerSpells_OnClick()
-    ToggleDropDownMenu(1, nil, IconPickerSpells, IconPickerSpells, 0, 0);
-    IconPickerUncheckAllCategories()
-    IconPickerCheckSelectedCategory()
-end
-
-function IconPickerTradesDropDown_OnShow()
-    for i=1, getn(IP_icons_trades_categories) do
-		info = {};
-		info.text       = IP_icons_trades_categories[i];
-		info.value      = i;
-		if (IP_CATEGORY_SELECTED == IP_CATEGORY_TRADES
-            and IP_SUBCATEGORY_SELECTED == i) then
-			info.checked =true;
-		else
-			info.checked=false;
-		end
-		info.func =  function() 
-            IP_CATEGORY_SELECTED = IP_CATEGORY_TRADES;
-            IP_SUBCATEGORY_SELECTED = this.value;
-            IconPickerUncheckAllCategories()
-            IconPickerCheckSelectedCategory()
-            IconPickerScrollFrame:SetVerticalScroll(0);
-            IconPickerFrame.selectedIcon =0;
-            IconPickerOkayButton_Update()
-            IconPickerFrame_Update();
-		end
-		UIDropDownMenu_AddButton(info);
-	end
-end
-
-function IconPickerTrades_OnClick()
-    ToggleDropDownMenu(1, nil, IconPickerTrades, IconPickerTrades, 0, 0);
-    IconPickerUncheckAllCategories()
-    IconPickerCheckSelectedCategory()
-end
-
-function IconPickerWeaponsDropDown_OnShow()
-    for i=1, getn(IP_icons_weapon_categories) do
-		info = {};
-		info.text       = IP_icons_weapon_categories[i];
-		info.value      = i;
-		if (IP_CATEGORY_SELECTED == IP_CATEGORY_WEAPONS
-            and IP_SUBCATEGORY_SELECTED == i) then
-			info.checked =true;
-		else
-			info.checked=false;
-		end
-		info.func =  function() 
-            IP_CATEGORY_SELECTED = IP_CATEGORY_WEAPONS;
-            IP_SUBCATEGORY_SELECTED = this.value;	
-            IconPickerUncheckAllCategories()
-            IconPickerCheckSelectedCategory()
-            IconPickerScrollFrame:SetVerticalScroll(0);
-            IconPickerFrame.selectedIcon =0;
-            IconPickerOkayButton_Update()
-            IconPickerFrame_Update();
-		end
-		UIDropDownMenu_AddButton(info);
-	end
-end
-
-function IconPickerWeapons_OnClick() 
-    ToggleDropDownMenu(1, nil, IconPickerWeapons, IconPickerWeapons, 0, 0);
-    IconPickerUncheckAllCategories()
-    IconPickerCheckSelectedCategory()
 end
