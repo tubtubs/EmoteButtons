@@ -61,44 +61,10 @@ end
 
 --Did this onshow, instead of load since my variables weren't loaded on time for on load.
 --Might just need to change when the AddonLoaded event is called?
-function EmoteButtons_ProfileSetDropDown_OnShow()
-	for i=1, getn(EmoteButtons_Vars.Profiles) do
-		info = {};
-		info.text       = EmoteButtons_Vars.Profiles[i].Name;
-		info.value      = i;
-		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
-			info.checked =true;
-		else
-			info.checked=false;
-		end
-		info.func =  function() 
-			EmoteButtons_SetProfile(this.value) 
-		end
-		UIDropDownMenu_AddButton(info);
-	end
-end
-
 function EmoteButtons_ToggleProfileDropdown()
 	PlaySound("igCharacterInfoOpen");
 	EB_Profiles_Dewdrop:Close();
 	EB_Profiles_Dewdrop:Open(this);
-end
-
-function EmoteButtons_ProfileDeleteDropDown_OnShow()
-	for i=1, getn(EmoteButtons_Vars.Profiles) do
-		info = {};
-		info.text       = EmoteButtons_Vars.Profiles[i].Name;
-		info.value      = i;
-		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
-			info.checked =true;
-		else -- only add if its not currently in use...
-			info.checked=false;
-			info.func =  function() 
-				EmoteButtons_DeleteProfile(this.value) 
-			end
-			UIDropDownMenu_AddButton(info);
-		end
-	end
 end
 
 function EmoteButtons_DuplicateProfile(index)
@@ -143,23 +109,6 @@ function EmoteButtons_DuplicateProfile(index)
 	};
 	StaticPopup_Show("EMOTEBUTTONS_DUPLICATEPROFILE");
 	getglobal(getglobal(StaticPopup_Visible("EMOTEBUTTONS_DUPLICATEPROFILE")):GetName().."EditBox"):SetText("");
-end
-
-function EmoteButtons_ProfileDuplicateDropDown_OnShow()
-	for i=1, getn(EmoteButtons_Vars.Profiles) do
-		info = {};
-		info.text       = EmoteButtons_Vars.Profiles[i].Name;
-		info.value      = i;
-		if (EmoteButtons_Vars.Profiles[i].Name == EmoteButtons_Vars.Profile) then
-			info.checked =true;
-		else
-			info.checked=false;
-		end
-		info.func =  function() 
-			EmoteButtons_DuplicateProfile(this.value) 
-		end
-		UIDropDownMenu_AddButton(info);
-	end
 end
 
 function EmoteButtons_AdvancedConfigFrame_ProfileCreateButton_OnClick()
@@ -291,9 +240,6 @@ function EmoteButtons_ImportProfileFrame_SubmitButton_OnClick()
 	end
 	EmoteButtons_ImportProfileFrame:Hide();
 end
-
----How do I want it to look on export? Like valid lua table probably.
---
 
 function EmoteButtons_ExportProfile()
 	PlaySound("igCharacterInfoOpen");
