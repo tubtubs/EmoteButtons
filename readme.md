@@ -10,19 +10,19 @@ This addon supports an expanded set of emotes, and icons up to wrath of the lich
 1. Click the Code button to the upper right hand corner and select download or click [here](https://github.com/tubtubs/EmoteButtons/archive/refs/heads/master.zip).
 2. Unzip the download into your Interface/Addons folder in your WoW directory. Eg: *C:\Games\WoW\Interface\Addons*
 3. Rename the folder from *EmoteButtons-master* to *EmoteButtons*
-4. Restart WoW and enable the addon from the character selection screen. Ensure your addon memory cap is set to 0 (no limit) as well.
+4. Restart WoW and enable the addon from the character selection screen. Ensure your addon memory cap is set to 0 (no limit) or a high number like 256.
 5. If you're playing on a standard vanilla server, you will need the icon patch. [Download](https://files.catbox.moe/i1c0mq.zip), and move Patch-I.mpq to your Data folder. Eg: *C:\Games\WoW\Data*
 
 You can also use the [GitAddonsManager](https://gitlab.com/woblight/GitAddonsManager) to install this addon, but it will not install the icon patch.
 
--If there are any further issues with installation, ensure that *EmoteButtons.toc* is in the root folder. There should be no subdirectories. Eg: *C:\Games\WoW\Interface\Addons\EmoteButtons\EmoteButtons.toc*
+* If there are any further issues with installation, ensure that *EmoteButtons.toc* is in the root folder. There should be no subdirectories. Eg: *C:\Games\WoW\Interface\Addons\EmoteButtons\EmoteButtons.toc*
 
 # Expanded on QuippeR's work, now features:
 * Expanded left and right wings, up to 8 buttons
 * Added an additional far left and far right wing
-* Added sophisticated DeckBuilder, allowing fully customization of buttons
+* Added sophisticated DeckBuilder, allowing full customization of buttons
 * All new icon picker, featuring an expanded set of icons
 * Advanced config, featuring importing/exporting profiles
 * Macro support
-* All new layout, featuring 250+ emotes, slash commands, and macros
+* Custom default layout, featuring 250+ emotes, slash commands, and example macros
 * Ace Minimap Icon and Dropdowns (2.03) 
