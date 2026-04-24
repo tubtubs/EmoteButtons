@@ -1,5 +1,7 @@
 # EmoteButtonsV2
 [![EmoteButtonsV2](http://img.youtube.com/vi/xhVF_IQUatE/0.jpg)](http://www.youtube.com/watch?v=xhVF_IQUatE "Video Title")
+
+
 Based on an addon by QuippeR (originally released ~2006)
 Adds an expanding menu system that grants access to emotes, slash commands and macros. Supports profiles, and export and importing of profiles. Shift click a button, or type /eb for more options.
 This addon supports an expanded set of emotes, and icons up to wrath of the lich king. There is an icon patch to support standard vanilla servers, however a deck layout with only the standard emotes will be loaded unless playing on a supported server.
@@ -16,11 +18,11 @@ You can also use the [GitAddonsManager](https://gitlab.com/woblight/GitAddonsMan
 -If there are any further issues with installation, ensure that *EmoteButtons.toc* is in the root folder. There should be no subdirectories. Eg: *C:\Games\WoW\Interface\Addons\EmoteButtons\EmoteButtons.toc*
 
 # Expanded on QuippeR's work, now features:
--Expanded left and right wings, up to 8 buttons
--Added an additional far left and far right wing
--Added sophisticated DeckBuilder, allowing fully customization of buttons
--All new icon picker, featuring an expanded set of icons
--Advanced config, featuring importing/exporting profiles
--Macro support
--All new layout, featuring 250+ emotes, slash commands, and macros
--Ace Minimap Icon and Dropdowns (2.03) 
+* Expanded left and right wings, up to 8 buttons
+* Added an additional far left and far right wing
+* Added sophisticated DeckBuilder, allowing fully customization of buttons
+* All new icon picker, featuring an expanded set of icons
+* Advanced config, featuring importing/exporting profiles
+* Macro support
+* All new layout, featuring 250+ emotes, slash commands, and macros
+* Ace Minimap Icon and Dropdowns (2.03) 
