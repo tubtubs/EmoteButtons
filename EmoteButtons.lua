@@ -307,7 +307,7 @@ function EB_MinimapIconRegister()
 		}
 	end
 	if not EmoteButtons_Icon.hide then
-		local iconData = libData:NewDataObject("MorphHelper icon data", {
+		local iconData = libData:NewDataObject("EmoteButtons icon data", {
 			OnClick = function()
 				if EB_Minimap_Dewdrop:IsOpen() then
 					EB_Minimap_Dewdrop:Close();
